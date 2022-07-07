@@ -12,7 +12,8 @@
 ## Friend Request
 | Name | Type | Unique | Optional |
 |---|---|---|---|
-| user | relates to users | no | no |
+| to user | relates to users | no | no |
+| from user | relates to users | no | no |
 
 ## Concerts
 | Name | Type | Unique | Optional |
