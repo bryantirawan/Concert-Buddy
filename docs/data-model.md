@@ -7,6 +7,12 @@
 | contact info | str | no | no |
 | location | str | no | no |
 | payment info | str? int? | no | yes? |
+| friends | str | no | yes |
+
+## Friend Request
+| Name | Type | Unique | Optional |
+|---|---|---|---|
+| user | relates to users | no | no |
 
 ## Concerts
 | Name | Type | Unique | Optional |
