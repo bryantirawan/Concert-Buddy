@@ -18,16 +18,22 @@ def poll():
     while True:
         print('Buddy poller polling for data')
         try:
-            url = "http://inventory-api:8000/api/automobiles/"
+            url = "http://concerts-api:8000/api/concerts/"
             response = requests.get(url)
             content = json.loads(response.content)
-            for automobile in content ["autos"]:
-                AutomobileVO.objects.update_or_create(
-                    import_href=automobile["href"],
+            #print(content)
+            for concert in content ["concerts"]:
+                print("test")
+                ConcertVO.objects.update_or_create(
+                    import_href=concert["href"],
                     defaults={
-                        "vin": automobile["vin"],
-                        "sold": automobile["sold"]
-                    },
+                        "name": concert["name"],
+                        "venue": concert["venue"],
+                        "city": concert["city"],
+                        #"date": concert["date"],
+                        "artist": concert["artist"],
+                        "concert_id": concert["concert_id"],
+                                            },
                 )
         except Exception as e:
             print(e, file=sys.stderr)

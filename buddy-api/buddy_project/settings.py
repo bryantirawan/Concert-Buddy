@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-@g(j5bsd!ffj)6w1d_!cr-y&%q!oy5ym*&zyt8e@a-%+(q50s8
 DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "concerts-api"]
+AUTH_USER_MODEL = 'buddy_rest.User'
 
 
 # Application definition
