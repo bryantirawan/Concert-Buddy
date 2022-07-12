@@ -25,13 +25,16 @@ SECRET_KEY = 'django-insecure-cuz9(9!2f!9*(u(sb^$)_z&s)*3u!zxs5x=q)k*c@5s786=0n6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost", "concerts-api"
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'concerts_rest.apps.ConcertsRestConfig',
+    "corsheaders",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

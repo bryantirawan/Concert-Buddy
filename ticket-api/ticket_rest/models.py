@@ -1,3 +1,4 @@
+from email.errors import BoundaryError
 from django.db import models
 
 
@@ -26,6 +27,9 @@ class Ticket(models.Model):
     concert = models.ForeignKey(ConcertVO,
         related_name="tickets",
         on_delete=models.PROTECT)
-    user = models.ForeignKey(UserVO,
+    seller = models.ForeignKey(UserVO,
         related_name="tickets",
+        on_delete=models.PROTECT)
+    buyer = models.ForeignKey(UserVO,
+        related_name="tickets", null=True,
         on_delete=models.PROTECT)

@@ -25,13 +25,14 @@ SECRET_KEY = 'django-insecure-@g(j5bsd!ffj)6w1d_!cr-y&%q!oy5ym*&zyt8e@a-%+(q50s8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "concerts-api"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'buddy_rest.apps.BuddyRestConfig',
+    "corsheaders",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+CRONJOBS = [
+    ("* * * * *", "buddy-api.poll.poll"),
+]
+
+
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -25,12 +25,16 @@ SECRET_KEY = 'django-insecure-5*hx^4)j2@4j)agns72xx@l)yeb7g9d4gf8(y(hr)c&qvbv(m3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+    "concerts-api",
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'ticket_rest.apps.TicketRestConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -48,6 +53,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CRONJOBS = [
+    ("* * * * *", "ticket-api.poll.poll"),
 ]
 
 ROOT_URLCONF = 'ticket_project.urls'
