@@ -1,3 +1,31 @@
 from django.db import models
 
-# Create your models here.
+
+class ConcertVO(models.Model):
+    import_href = models.CharField(max_length=200, unique=True)
+    name = models.CharField(max_length=200)
+    venue = models.CharField(max_length=200)
+    city = models.CharField(max_length=100)
+    date = models.DateField()
+    artist = models.CharField(max_length=100)
+    concert_id = models.CharField(max_length=100)
+
+
+class UserVO(models.Model):
+    import_href = models.CharField(max_length=200, unique=True)
+    email = models.EmailField(unique=True)
+
+
+class Ticket(models.Model):
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    section = models.CharField(max_length=20)
+    row = models.CharField(max_length=20)
+    seat = models.CharField(max_length=20)
+    sold = models.BooleanField(default=False)
+    picture_url = models.URLField()
+    concert = models.ForeignKey(ConcertVO,
+        related_name="tickets",
+        on_delete=models.PROTECT)
+    user = models.ForeignKey(UserVO,
+        related_name="tickets",
+        on_delete=models.PROTECT)

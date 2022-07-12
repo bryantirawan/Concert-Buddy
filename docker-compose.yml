@@ -66,33 +66,33 @@ services:
         DATABASE_URL: postgres://ticket-api:password@database:5432/ticket-api
         WAIT_HOSTS: database:5432
         WAIT_TIMEOUT: 240
-    # tickets-poller:
-    #   build:
-    #     context: ./tickets-api/poll
-    #     dockerfile: ./Dockerfile.dev
-    #   volumes:
-    #     - ./tickets/poll:/app
-    #     - ./tickets/api/tickets_project:/app/tickets_project
-    #     - ./tickets/api/tickets_rest:/app/tickets_rest
-    #   depends_on:
-    #     - database
-    #     - tickets-api
-    #   environment:
-    #     DATABASE_URL: postgres://tickets:password@database:5432/tickets
-    #     WAIT_HOSTS: database:5432,tickets-api:8000
-    #     WAIT_TIMEOUT: 240
-    # buddy-poller:
-    #   build:
-    #     context: ./buddy/poll
-    #     dockerfile: ./Dockerfile.dev
-    #   volumes:
-    #     - ./buddy/poll:/app
-    #     - ./buddy/api/buddy_project:/app/buddy_project
-    #     - ./buddy/api/buddy_rest:/app/buddy_rest
-    #   depends_on:
-    #     - database
-    #     - buddy-api
-    #   environment:
-    #     DATABASE_URL: postgres://buddy:password@database:5432/buddy
-    #     WAIT_HOSTS: database:5432,buddy-api:8000
-    #     WAIT_TIMEOUT: 240
+    tickets-poller:
+      build:
+        context: ./ticket-api/poll
+        dockerfile: ./Dockerfile.dev
+      volumes:
+        - ./ticket-api/poll:/app
+        - ./ticket-api/ticket_project:/app/ticket_project
+        - ./ticket-api/ticket_rest:/app/ticket_rest
+      depends_on:
+        - database
+        - ticket-api
+      environment:
+        DATABASE_URL: postgres://ticket-api:password@database:5432/ticket-api
+        WAIT_HOSTS: database:5432,ticket-api:8000
+        WAIT_TIMEOUT: 240
+    buddy-poller:
+      build:
+        context: ./buddy-api/poll
+        dockerfile: ./Dockerfile.dev
+      volumes:
+        - ./buddy-api/poll:/app
+        - ./buddy-api/buddy_project:/app/buddy_project
+        - ./buddy-api/buddy_rest:/app/buddy_rest
+      depends_on:
+        - database
+        - buddy-api
+      environment:
+        DATABASE_URL: postgres://buddy-api:password@database:5432/buddy-api
+        WAIT_HOSTS: database:5432,buddy-api:8000
+        WAIT_TIMEOUT: 240
