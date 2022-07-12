@@ -25,11 +25,11 @@ class Ticket(models.Model):
     sold = models.BooleanField(default=False)
     picture_url = models.URLField()
     concert = models.ForeignKey(ConcertVO,
-        related_name="tickets",
+        related_name="concert_tickets",
         on_delete=models.PROTECT)
     seller = models.ForeignKey(UserVO,
-        related_name="tickets",
+        related_name="seller_tickets",
         on_delete=models.PROTECT)
     buyer = models.ForeignKey(UserVO,
-        related_name="tickets", null=True,
+        related_name="buyer_tickets", null=True,
         on_delete=models.PROTECT)
