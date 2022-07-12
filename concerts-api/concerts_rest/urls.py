@@ -6,7 +6,7 @@ from .views import (
 
 urlpatterns = [
     path(
-        "concerts/",
+        "api/concerts/",
         api_concerts,
         name="api_concerts",
     ),

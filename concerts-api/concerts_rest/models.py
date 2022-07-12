@@ -6,7 +6,7 @@ class Concert(models.Model):
     name = models.CharField(max_length=200)
     venue = models.CharField(max_length=200)
     city = models.CharField(max_length=100)
-    date = models.DateField()
+    date = models.DateTimeField()
     artist = models.CharField(max_length=100)
     concert_id = models.CharField(max_length=100)
     venue_id = models.CharField(max_length=100)
