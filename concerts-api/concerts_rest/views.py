@@ -3,6 +3,10 @@ from django.views.decorators.http import require_http_methods
 from .models import Concert
 from django.http import JsonResponse
 
+from .encoders import ( ConcertEncoder,)
+from .models import Concert
+
+
 @require_http_methods(["GET", "POST"])
 def api_concerts(request):
     if request.method == "GET":
