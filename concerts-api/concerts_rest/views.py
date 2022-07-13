@@ -7,6 +7,7 @@ from .encoders import ( ConcertEncoder,)
 from .models import Concert
 
 
+
 @require_http_methods(["GET", "POST"])
 def api_concerts(request):
     if request.method == "GET":

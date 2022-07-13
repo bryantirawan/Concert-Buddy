@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@g(j5bsd!ffj)6w1d_!cr-y&%q!oy5ym*&zyt8e@a-%+(q50s8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "concerts-api"]
+ALLOWED_HOSTS = ["localhost", "concerts-api", "buddy-api"]
 AUTH_USER_MODEL = 'buddy_rest.User'
 
 

@@ -21,20 +21,21 @@ def poll():
             url = "http://concerts-api:8000/api/concerts/"
             response = requests.get(url)
             content = json.loads(response.content)
-            #print(content)
+            print(content)
             for concert in content ["concerts"]:
                 print("test")
                 ConcertVO.objects.update_or_create(
-                    import_href=concert["href"],
+                   # import_href=concert["href"],
                     defaults={
                         "name": concert["name"],
                         "venue": concert["venue"],
                         "city": concert["city"],
-                        #"date": concert["date"],
+                        "date": concert["date"],
                         "artist": concert["artist"],
                         "concert_id": concert["concert_id"],
                                             },
                 )
+                print("success?")
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(30)
