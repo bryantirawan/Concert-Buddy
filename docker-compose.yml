@@ -20,7 +20,7 @@ services:
         - postgres-data:/var/lib/postgresql/data
         - ./db:/docker-entrypoint-initdb.d
       environment:
-          - POSTGRES_MULTIPLE_DATABASES=concerts-api,buddy-api,ticket-api
+          - POSTGRES_MULTIPLE_DATABASES=concerts,buddy,ticket
           - POSTGRES_PASSWORD=test-databases
       ports:
           - 15432:5432
@@ -35,7 +35,7 @@ services:
       depends_on:
         - database
       environment:
-        DATABASE_URL: postgres://concerts-api:password@database:5432/concerts-api
+        DATABASE_URL: postgres://concerts:password@database:5432/concerts
         WAIT_HOSTS: database:5432
         WAIT_TIMEOUT: 240
     buddy-api:
@@ -49,7 +49,7 @@ services:
       depends_on:
         - database
       environment:
-        DATABASE_URL: postgres://buddy-api:password@database:5432/buddy-api
+        DATABASE_URL: postgres://buddy:password@database:5432/buddy
         WAIT_HOSTS: database:5432
         WAIT_TIMEOUT: 240
     ticket-api:
@@ -63,7 +63,7 @@ services:
       depends_on:
         - database
       environment:
-        DATABASE_URL: postgres://ticket-api:password@database:5432/ticket-api
+        DATABASE_URL: postgres://ticket:password@database:5432/ticket
         WAIT_HOSTS: database:5432
         WAIT_TIMEOUT: 240
     tickets-poller:
@@ -78,7 +78,7 @@ services:
         - database
         - ticket-api
       environment:
-        DATABASE_URL: postgres://ticket-api:password@database:5432/ticket-api
+        DATABASE_URL: postgres://ticket:password@database:5432/ticket
         WAIT_HOSTS: database:5432,ticket-api:8000
         WAIT_TIMEOUT: 240
     buddy-poller:
@@ -93,6 +93,6 @@ services:
         - database
         - buddy-api
       environment:
-        DATABASE_URL: postgres://buddy-api:password@database:5432/buddy-api
+        DATABASE_URL: postgres://buddy:password@database:5432/buddy
         WAIT_HOSTS: database:5432,buddy-api:8000
         WAIT_TIMEOUT: 240
