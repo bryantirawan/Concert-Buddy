@@ -14,5 +14,3 @@ class ConcertVO(models.Model):
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     concert = models.ManyToManyField(ConcertVO)
-
-

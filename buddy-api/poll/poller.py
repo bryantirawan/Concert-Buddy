@@ -17,11 +17,15 @@ from buddy_rest.models import ConcertVO
 def poll():
     while True:
         print('Buddy poller polling for data')
+        url = "http://concerts-api:8000/api/concerts/"
+        response = requests.get(url)
+        content = json.loads(response.content)
+        print(content)
         try:
-            url = "http://concerts-api:8000/api/concerts/"
+            url = "http://concerts-api:8000/concerts/"
             response = requests.get(url)
             content = json.loads(response.content)
-            #print(content)
+            print(content)
             for concert in content ["concerts"]:
                 print("test")
                 ConcertVO.objects.update_or_create(

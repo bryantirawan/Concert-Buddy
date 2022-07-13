@@ -12,6 +12,5 @@ class ConcertEncoder(ModelEncoder):
         "concert_id",
         "venue_id",
         "artist_id",
-      
-    ]
 
+    ]
