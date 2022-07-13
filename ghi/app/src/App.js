@@ -6,22 +6,18 @@ import axios from 'axios';
 
 
 function App() {
-  axios.get('http://localhost:8080/api/selectconcerts/')
-    .then(console.log)
   return (
-    <h1>hi</h1>
-    // <BrowserRouter>
-    //   <div className="container">
-    //     <Routes>
-    //       <Route path="/" element={<MainPage />} />
-    //     </Routes>
-    //     <Routes>
-    //       <Route path="/selectconcerts/" element={<Concerts />} />
-    //     </Routes>
-    //   </div>
-    // </BrowserRouter>
+    <BrowserRouter>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/selectconcerts/" element={<Concerts />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
+
 
 
 
