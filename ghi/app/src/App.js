@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import MainPage from './MainPage';
+import Concerts from './selectconcert';
+import axios from 'axios';
+
+
 
 function App() {
+  axios.get('http://localhost:8080/api/selectconcerts/')
+    .then(console.log)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <h1>hi</h1>
+    // <BrowserRouter>
+    //   <div className="container">
+    //     <Routes>
+    //       <Route path="/" element={<MainPage />} />
+    //     </Routes>
+    //     <Routes>
+    //       <Route path="/selectconcerts/" element={<Concerts />} />
+    //     </Routes>
+    //   </div>
+    // </BrowserRouter>
   );
 }
+
+
 
 export default App;
