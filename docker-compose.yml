@@ -96,3 +96,18 @@ services:
         DATABASE_URL: postgres://buddy:password@database:5432/buddy
         WAIT_HOSTS: database:5432,buddy-api:8000
         WAIT_TIMEOUT: 240
+    tickets-user-poller:
+      build:
+        context: ./ticket-api/userpoll
+        dockerfile: ./Dockerfile.dev
+      volumes:
+        - ./ticket-api/userpoll:/app
+        - ./ticket-api/ticket_project:/app/ticket_project
+        - ./ticket-api/ticket_rest:/app/ticket_rest
+      depends_on:
+        - database
+        - ticket-api
+      environment:
+        DATABASE_URL: postgres://ticket:password@database:5432/ticket
+        WAIT_HOSTS: database:5432,ticket-api:8000
+        WAIT_TIMEOUT: 240

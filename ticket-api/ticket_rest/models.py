@@ -15,6 +15,8 @@ class ConcertVO(models.Model):
 class UserVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True)
     email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=200, null=True)
+    last_name = models.CharField(max_length=200, null=True)
 
 
 class Ticket(models.Model):
