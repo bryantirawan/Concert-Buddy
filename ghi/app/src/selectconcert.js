@@ -2,33 +2,49 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'; 
 
-//const [useState] = React; 
-
 const fetchConcert = () => {
     return axios.get('http://localhost:8080/api/selectconcerts/')
     .then(res => {
-        console.log(res);
+        console.log(res)
         return res 
     })
 }
 
-
+const getFullConcertName = (concert) => { 
+    return `Artist: ${concert.artist.name} Venue: ${concert.venue.name} Date: ${concert.eventDate}`;
+}
 
 
 export default function Concerts() {
-    const [concerts, setConcerts] = useState(0); 
+    const [concerts, setConcerts] = useState([]); 
 
+    useEffect( () => {
+
+        const fetchConcert = async () => {
+            const concertResponse = await fetch('http://localhost:8080/api/selectconcerts/'); 
+            const concertData = await concertResponse.json();
+            setConcerts(concertData.setlist);
+        }
+        fetchConcert()
+    }, []
+    );
+    
     return (
         <>
         <div>
             <p>
             Hi
             </p>
-            <button onClick = {() => {
-                fetchConcert();
-            }}>Fetch concert 
+            <button onClick = {() => {fetchConcert();}}>Fetch concert</button>
+            {concerts.map((concert, idx) => (
+                <div key={idx}>
+                <p>
+                    {getFullConcertName(concert)}
+                </p>
+                </div>
+            )) 
+            }
 
-            </button>
         </div>
         
         </>
