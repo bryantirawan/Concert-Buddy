@@ -106,3 +106,4 @@ def api_get_tickets(request):
             encoder = TicketDetailEncoder,
             safe=False,
         )
+

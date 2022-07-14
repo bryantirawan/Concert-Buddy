@@ -28,6 +28,7 @@ class UserVOEncoder(ModelEncoder):
 class TicketEncoder(ModelEncoder):
     model = Ticket
     properties = [
+        "id",
         "price",
         "section",
         "row",
@@ -47,6 +48,7 @@ class TicketEncoder(ModelEncoder):
 class TicketDetailEncoder(ModelEncoder):
     model = Ticket
     properties = [
+        "id",
         "price",
         "section",
         "row",
