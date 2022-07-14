@@ -6,6 +6,8 @@ import axios from 'axios';
 
 
 function App() {
+  axios.get('http://localhost:8080/api/selectconcerts/')
+    .then(console.log)
   return (
     <BrowserRouter>
       <div className="container">
@@ -17,7 +19,6 @@ function App() {
     </BrowserRouter>
   );
 }
-
 
 
 

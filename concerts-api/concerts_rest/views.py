@@ -3,8 +3,7 @@ from django.views.decorators.http import require_http_methods
 from .models import Concert
 from django.http import JsonResponse
 
-from .encoders import ( ConcertEncoder,)
-from .models import Concert
+from .encoders import ( ConcertEncoder)
 
 
 @require_http_methods(["GET", "POST"])

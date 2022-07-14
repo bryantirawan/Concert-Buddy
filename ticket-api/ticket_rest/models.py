@@ -11,12 +11,18 @@ class ConcertVO(models.Model):
     artist = models.CharField(max_length=100)
     concert_id = models.CharField(max_length=100)
 
+    def __str__(self):
+        return f"Concert: {self.name}, Venue: {self.venue}, City: {self.city}"
+
 
 class UserVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True)
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=200, null=True)
     last_name = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return str(self.email)
 
 
 class Ticket(models.Model):
@@ -35,3 +41,6 @@ class Ticket(models.Model):
     buyer = models.ForeignKey(UserVO,
         related_name="buyer_tickets", null=True,
         on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f"{self.concert}, Sold by {self.seller} for ${self.price}"
