@@ -5,7 +5,7 @@ from django.shortcuts import render
 from .encoders import ConcertVOEncoder, TicketEncoder, UserVOEncoder, TicketDetailEncoder
 from django.views.decorators.http import require_http_methods
 import requests
-from .models import Ticket
+from .models import ConcertVO, Ticket
 
 
 #Get request of all concerts
@@ -63,6 +63,10 @@ def api_get_concert_by_artist(request, pk):
     )
 
 # will have to add more to this part
+# i think ConcertVO part might have to be an API call?
+# since we are not saving all ConcertVO instances ...
+# how will a seller be able to choose a concert from ConcertVO when
+# we are not saving them? Api likely
 @require_http_methods(["GET", "POST"])
 def api_get_tickets(request):
     if request.method == "GET":
@@ -73,6 +77,10 @@ def api_get_tickets(request):
             )
     else:
         content = json.loads(request.body)
+
+
+
+
         ticket = Ticket.objects.create(**content)
         return JsonResponse(
             ticket,
