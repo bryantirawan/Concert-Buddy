@@ -107,3 +107,47 @@ def api_get_tickets(request):
             safe=False,
         )
 
+
+@require_http_methods(["GET","PUT","DELETE"])
+def api_update_tickets(request, pk):
+    if request.method == "GET":
+        try:
+            tickets = Ticket.objects.get(id=pk)
+            return JsonResponse(
+                tickets,
+                encoder=TicketEncoder,
+                safe=False
+            )
+        except Ticket.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+    elif request.method == "DELETE":
+        try:
+            tickets = Ticket.objects.get(id=pk)
+            tickets.delete()
+            return JsonResponse(
+                tickets,
+                encoder=TicketEncoder,
+                safe=False,
+            )
+        except Ticket.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"})
+    elif request.method == "PUT":
+        try:
+            tickets = Ticket.objects.get(id=pk)
+
+
+            setattr(tickets, "sold", True)
+            #setattr(tickets, "buyer", True)
+
+            tickets.save()
+            return JsonResponse(
+                tickets,
+                encoder=TicketEncoder,
+                safe=False,
+            )
+        except Ticket.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
