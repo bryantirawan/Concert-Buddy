@@ -10,9 +10,13 @@ class ConcertVO(models.Model):
     artist = models.CharField(max_length=100)
     concert_id = models.CharField(max_length=100)
 
+    def __str__(self):
+        return f"Concert: {self.name}, Venue: {self.venue}, City: {self.city}"
+
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     concert = models.ManyToManyField(ConcertVO)
 
-
+    def __str__(self):
+        return str(self.email)
