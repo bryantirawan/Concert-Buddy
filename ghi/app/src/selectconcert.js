@@ -17,17 +17,24 @@ const getFullConcertName = (concert) => {
 
 export default function Concerts() {
     const [concerts, setConcerts] = useState([]); 
+    const [city, setCity] = useState('');
 
     useEffect( () => {
 
         const fetchConcert = async () => {
-            const concertResponse = await fetch('http://localhost:8080/api/selectconcerts/'); 
+            const concertResponse = await fetch('http://localhost:8080/api/selectconcertsforcity/'); 
             const concertData = await concertResponse.json();
             setConcerts(concertData.setlist);
         }
         fetchConcert()
     }, []
     );
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('city', city)
+        //city.clear()
+    }
     
     return (
         <>
@@ -36,14 +43,23 @@ export default function Concerts() {
             Hi
             </p>
             <button onClick = {() => {fetchConcert();}}>Fetch concert</button>
-            {concerts.map((concert, idx) => (
+            <form onSubmit={handleSubmit}>
+                <label>City:  </label>
+                <input type="text" value={city} required onChange={(e) => {setCity(e.target.value)}} /> 
+                <input type="submit" value="Fetch concerts for city"/>
+            </form>
+
+
+
+
+          {concerts.map((concert, idx) => (
                 <div key={idx}>
                 <p>
                     {getFullConcertName(concert)}
                 </p>
                 </div>
             )) 
-            }
+            } 
 
         </div>
         
