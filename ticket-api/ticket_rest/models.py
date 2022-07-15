@@ -9,7 +9,6 @@ ADDRESS_CHOICES = (
     ('S', 'Shipping'),
 )
 
-
 class ConcertVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True)
     name = models.CharField(max_length=200)
