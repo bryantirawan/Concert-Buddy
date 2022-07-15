@@ -65,7 +65,6 @@ export default function Concerts() {
                     <td>{concert.eventDate}</td>
                     <td>
                         <form action={`http://localhost:8100/api/add/${concert.id}/`} method="POST">
-                        
                         <button>        
                         Save concert to concert model in concert microservice
                         </button>
