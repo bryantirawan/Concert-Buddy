@@ -2,11 +2,11 @@ import email
 import json
 from struct import pack_into
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .encoders import ConcertVOEncoder, TicketEncoder, UserVOEncoder, TicketDetailEncoder
 from django.views.decorators.http import require_http_methods
 import requests
-from .models import ConcertVO, Ticket, UserVO
+from .models import ConcertVO, OrderItem, Ticket, UserVO
 
 
 #Get request of all concerts
@@ -151,3 +151,13 @@ def api_update_tickets(request, pk):
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response
+
+# go back to 18 min in part 2 to incorporate user
+def add_to_cart(request, id):
+    ticket = get_object_or_404(Ticket, id=id)
+    order_item = OrderItem.objects.create(ticket=ticket)
+    pass
+
+def remove_from_cart(request, id):
+    ticket = get_object_or_404(Ticket, id)
+    pass
