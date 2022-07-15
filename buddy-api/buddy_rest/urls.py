@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import (
-    api_select_concert, api_select_concert_for_city
+    api_select_concert, api_select_concert_for_city,
     api_users
 )
 
