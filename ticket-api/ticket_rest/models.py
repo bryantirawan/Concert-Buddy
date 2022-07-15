@@ -4,7 +4,6 @@ from django.db import models
 
 class ConcertVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True)
-    name = models.CharField(max_length=200)
     venue = models.CharField(max_length=200)
     city = models.CharField(max_length=100)
     date = models.DateTimeField()
@@ -12,7 +11,7 @@ class ConcertVO(models.Model):
     concert_id = models.CharField(max_length=100)
 
     def __str__(self):
-        return f"Concert: {self.name}, Venue: {self.venue}, City: {self.city}"
+        return f"Venue: {self.venue}, Artist: {self.artist}, City: {self.city}"
 
 
 class UserVO(models.Model):
