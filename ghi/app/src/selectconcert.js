@@ -22,7 +22,7 @@ export default function Concerts() {
     useEffect( () => {
 
         const fetchConcert = async () => {
-            const concertResponse = await fetch('http://localhost:8080/api/selectconcertsforcity/'); 
+            const concertResponse = await fetch('http://localhost:8080/api/selectconcerts/'); 
             const concertData = await concertResponse.json();
             setConcerts(concertData.setlist);
         }
