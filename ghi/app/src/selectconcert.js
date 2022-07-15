@@ -1,9 +1,5 @@
 import React, {useEffect, useState} from 'react'; 
 
-const getFullConcertName = (concert) => {
-    return `Artist: ${concert.artist.name} Venue: ${concert.venue.name} Date: ${concert.eventDate}`;
-}
-
 export default function Concerts() {
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
@@ -18,6 +14,10 @@ export default function Concerts() {
         fetchConcert()
     }, []
     );
+
+    const current = new Date();
+    const date = `${current.getDate()}-${('0' + (current.getMonth()+1)).slice(-2)}-${current.getFullYear()}`;
+
 
     const handleLocationSubmit = (e) => {
         e.preventDefault();
@@ -49,11 +49,15 @@ export default function Concerts() {
             const fetchConcert = async () => {
                 const concertResponse = await fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`);
                 const concertData = await concertResponse.json() 
-                console.log(concertData)
+                console.log('setlist', concertData.concerts.setlist)
                 setConcerts(concertData.concerts.setlist) 
             }
             fetchConcert()
 
+    }
+
+    const addConcert = (e) => {
+        return 'hi'
     }
 
     return (
@@ -72,23 +76,28 @@ export default function Concerts() {
                 <input type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} />
                 <input type="submit" value="Fetch concerts by artist"/>
             </form>
-
-           {concerts.map((concert) => (
-                <div>
-                <p>
-                    {getFullConcertName(concert)}
-                </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Artist</th>
+                        <th>Venue</th>
+                        <th>Date</th>
+                        <th>Save Concert</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                    {concerts.filter(concert => date <= concert.eventDate).map((concert, idx) => (
+                        <tr key={idx}>
+                            <td>{concert.artist.name}</td>
+                            <td>{concert.venue.name}</td>
+                            <td>{concert.eventDate}</td>
+                            <td><button action={`http://localhost:8080/api/add/${concert.id}/`} method="POST">Save concert to concert model in concert microservice</button></td>
+                        </tr>
+                    ))
+                    }
+                </tbody>
+            </table>
                 </div>
-            )) 
-            }  
-
-        </div>
-
-        </>
+            </>
     )
-
 }
-
-
-
-

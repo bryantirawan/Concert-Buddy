@@ -2,7 +2,6 @@ from django.db import models
 
 
 class Concert(models.Model):
-    name = models.CharField(max_length=200)
     venue = models.CharField(max_length=200)
     city = models.CharField(max_length=100)
     date = models.DateTimeField(null=True)
@@ -12,4 +11,4 @@ class Concert(models.Model):
     artist_id = models.CharField(max_length=100)
 
     def __str__(self):
-        return f"Concert: {self.name}, Venue: {self.venue}, City: {self.city}"
+        return f"Artist: {self.artist}, Venue: {self.venue}, City: {self.city}, Date: {self.date}"
