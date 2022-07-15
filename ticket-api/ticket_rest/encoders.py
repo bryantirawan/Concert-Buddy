@@ -28,6 +28,7 @@ class UserVOEncoder(ModelEncoder):
 class TicketEncoder(ModelEncoder):
     model = Ticket
     properties = [
+        "id",
         "price",
         "section",
         "row",
@@ -40,13 +41,14 @@ class TicketEncoder(ModelEncoder):
     ]
     encoders = {
         "concert": ConcertVOEncoder(),
-        "seller": UserVO(),
-        "buyer": UserVO(),
+        "seller": UserVOEncoder(),
+        "buyer": UserVOEncoder(),
     }
 
 class TicketDetailEncoder(ModelEncoder):
     model = Ticket
     properties = [
+        "id",
         "price",
         "section",
         "row",
@@ -59,6 +61,6 @@ class TicketDetailEncoder(ModelEncoder):
     ]
     encoders = {
         "concert": ConcertVOEncoder(),
-        "seller": UserVO(),
-        "buyer": UserVO(),
+        "seller": UserVOEncoder(),
+        "buyer": UserVOEncoder(),
     }
