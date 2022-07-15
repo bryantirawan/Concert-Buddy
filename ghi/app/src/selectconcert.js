@@ -1,14 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-
-const fetchConcert = () => {
-    return axios.get('http://localhost:8080/api/selectconcerts/')
-    .then(res => {
-        console.log(res)
-        return res
-    })
-}
+import React, {useEffect, useState} from 'react'; 
 
 const getFullConcertName = (concert) => {
     return `Artist: ${concert.artist.name} Venue: ${concert.venue.name} Date: ${concert.eventDate}`;
@@ -18,10 +8,20 @@ export default function Concerts() {
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
 
+    useEffect( () => {
+        const fetchConcert = async () => {
+            const concertResponse = await fetch(`http://localhost:8080/api/selectconcerts`); 
+            const concertData = await concertResponse.json();
+            setConcerts(concertData.setlist);
+        }
+        fetchConcert()
+    }, []
+    );
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        const city_new = city.split(' ')
-        let final_city = city_new[0]
+        const city_new = city.split(' ') 
+        let final_city = city_new[0] 
         for (let i = 1; i < city_new.length; i++) {
             final_city += '%20'
             final_city += city_new[i]
@@ -29,11 +29,11 @@ export default function Concerts() {
 
             const fetchConcert = async () => {
                 const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=1`);
-                const concertData = await concertResponse.json();
-                console.log(concertData)
-                setConcerts(concertData.setlist);
+                const concertData = await concertResponse.json() 
+                setConcerts(concertData.concerts.setlist) 
             }
             fetchConcert()
+
     }
 
     return (
@@ -42,22 +42,20 @@ export default function Concerts() {
             <p>
             Hi
             </p>
-            <button onClick = {() => {fetchConcert();}}>Fetch concert</button>
             <form onSubmit={handleSubmit}>
                 <label>City:  </label>
                 <input type="text" value={city} required onChange={(e) => {setCity(e.target.value)}} />
                 <input type="submit" value="Fetch concerts for city"/>
             </form>
 
-
-          {/* {concerts.map((concert, idx) => (
-                <div key={idx}>
+           {concerts.map((concert) => (
+                <div>
                 <p>
                     {getFullConcertName(concert)}
                 </p>
                 </div>
-            ))
-            } */}
+            )) 
+            }  
 
         </div>
 
@@ -66,24 +64,6 @@ export default function Concerts() {
 
 }
 
-// function Concerts(){
-//     let r = axios.get('http://localhost:8080/api/selectconcerts/')
-//         .then(console.log)
-//     return (
-//         <div>
-//         <tbody>
-//        {this.state.salerecords.map(salerecord => {
-//         return (
-//           <tr key={salerecord.id}>
-//             <td>{salerecord.saleperson.name}</td>
-//             <td>{salerecord.saleperson.number}</td>
-//             <td>{salerecord.customer.name}</td>
-//             <td>{salerecord.price}</td>
-//             <td>{salerecord.automobile.vin}</td>
-//           </tr>
-//         )
-//        })}
-//       </tbody>
-//         </div>
-//     )
-// }
+
+
+
