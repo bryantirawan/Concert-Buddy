@@ -1,4 +1,3 @@
-import axios from "axios";
 
 function MainPage() {
   // console.log(axios.get('http://buddy-api:8000/api/selectconcerts'))

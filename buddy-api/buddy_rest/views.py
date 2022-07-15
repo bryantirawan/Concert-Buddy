@@ -32,13 +32,8 @@ def api_select_concert(request):
 
 @require_http_methods(["GET", "POST"])
 def api_select_concert_for_city(request, location, page):
-    # page = '&p=1'
-    #search = #localstatecity
-    #split = search.split()
-    #location = "%20".join(split)
     # location = 'San%20Francisco'
     # page = '&p=1'
-
 
     url = 'https://api.setlist.fm/rest/1.0/search/setlists?cityName='
     headers = {

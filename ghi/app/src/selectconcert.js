@@ -5,7 +5,7 @@ import axios from 'axios';
 const fetchConcert = () => {
     return axios.get('http://localhost:8080/api/selectconcerts/')
     .then(res => {
-        // console.log(res)
+        console.log(res)
         return res
     })
 }
@@ -18,12 +18,9 @@ export default function Concerts() {
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('city', city)
         const city_new = city.split(' ')
-        console.log(city_new[0])
         let final_city = city_new[0]
         for (let i = 1; i < city_new.length; i++) {
             final_city += '%20'
@@ -53,9 +50,7 @@ export default function Concerts() {
             </form>
 
 
-
-{/*
-          {concerts.map((concert, idx) => (
+          {/* {concerts.map((concert, idx) => (
                 <div key={idx}>
                 <p>
                     {getFullConcertName(concert)}
@@ -70,13 +65,6 @@ export default function Concerts() {
     )
 
 }
-
-
-
-
-
-
-
 
 // function Concerts(){
 //     let r = axios.get('http://localhost:8080/api/selectconcerts/')
