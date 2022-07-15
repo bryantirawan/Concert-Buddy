@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
@@ -20,7 +21,7 @@ def api_users(request):
 @require_http_methods(["GET"])
 def api_select_concert(request):
     url = 'https://api.setlist.fm/rest/1.0/search/setlists?cityName=San%20Francisco&p=1'
-    headers = { 
+    headers = {
         "x-api-key": "1Lw-KTV9OFozLe7JpUeAyOdJHJH9HeVWNn2B",
         "Accept": "application/json"}
 

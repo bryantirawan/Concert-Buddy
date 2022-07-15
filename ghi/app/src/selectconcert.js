@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react'; 
 
-const getFullConcertName = (concert) => { 
+const getFullConcertName = (concert) => {
     return `Artist: ${concert.artist.name} Venue: ${concert.venue.name} Date: ${concert.eventDate}`;
 }
 
-
 export default function Concerts() {
-    const [concerts, setConcerts] = useState([]); 
+    const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
 
     useEffect( () => {
@@ -36,7 +35,7 @@ export default function Concerts() {
             fetchConcert()
 
     }
-    
+
     return (
         <>
         <div>
@@ -45,7 +44,7 @@ export default function Concerts() {
             </p>
             <form onSubmit={handleSubmit}>
                 <label>City:  </label>
-                <input type="text" value={city} required onChange={(e) => {setCity(e.target.value)}} /> 
+                <input type="text" value={city} required onChange={(e) => {setCity(e.target.value)}} />
                 <input type="submit" value="Fetch concerts for city"/>
             </form>
 
@@ -59,7 +58,7 @@ export default function Concerts() {
             }  
 
         </div>
-        
+
         </>
     )
 
