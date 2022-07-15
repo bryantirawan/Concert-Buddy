@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
-// import Concerts from './selectconcert';
+import Concerts from './selectconcert';
 import axios from 'axios';
 
 
@@ -13,7 +13,7 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          {/* <Route path="/selectconcerts/" element={<Concerts />} /> */}
+          <Route path="/selectconcerts/" element={<Concerts />} /> 
         </Routes>
       </div>
     </BrowserRouter>
