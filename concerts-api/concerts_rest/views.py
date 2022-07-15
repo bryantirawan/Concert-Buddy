@@ -31,7 +31,7 @@ def log_concert(request, concertdict):
     } 
     
     setlists = requests.get(f"{url}{setlist_path}", headers=header).json() 
-    
+    print('setlist trying to be saved', setlists)
     concertdict = {} 
     concertdict['venue'] = setlists['venue']['name']
     concertdict['city'] = setlists['venue']['city']['name']

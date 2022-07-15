@@ -37,10 +37,6 @@ export default function Concerts() {
 
     }
 
-    const addConcert = (e) => {
-        return 'hi'
-    }
-
     return (
         <>
         <div>
@@ -67,7 +63,14 @@ export default function Concerts() {
                     <td>{concert.artist.name}</td>  
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate}</td>
-                    <td><button action={`http://localhost:8080/api/add/${concert.id}/`} method="POST">Save concert to concert model in concert microservice</button></td>
+                    <td>
+                        <form action={`http://localhost:8100/api/add/${concert.id}/`} method="POST">
+                        
+                        <button>        
+                        Save concert to concert model in concert microservice
+                        </button>
+                        </form> 
+                    </td>
                 </tr>
             )) 
             }  
