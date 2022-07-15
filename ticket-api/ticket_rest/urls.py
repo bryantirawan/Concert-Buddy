@@ -20,7 +20,7 @@ urlpatterns = [
         name="api_get_concert_by_location"
     ),
     path(
-        "concerts/<str:pk>/",
+        "concerts/artist/<str:pk>/",
         api_get_concert_by_artist,
         name="api_get_concert_by_artist"
     ),

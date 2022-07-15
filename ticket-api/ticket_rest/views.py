@@ -53,15 +53,15 @@ def api_get_concert_by_location(request, pk):
 # also will think about consolidating this code to use as a function instead of repeating
 @require_http_methods(["GET"])
 def api_get_concert_by_artist(request, pk):
-    artist_name = 'The%20Mother%20Hips'
-    url = 'https://api.setlist.fm/rest/1.0/search/artists?artistName='+ artist_name
+    # artist_name = 'The%20Mother%20Hips'
+    url = 'https://api.setlist.fm/rest/1.0/search/setlists?artistName='+ pk
     headers = {
         "x-api-key": "1Lw-KTV9OFozLe7JpUeAyOdJHJH9HeVWNn2B",
         "Accept": "application/json"}
-    concert = requests.get(url, headers=headers).json()
+    concerts = requests.get(url, headers=headers).json()
 
     return JsonResponse(
-        {"concert": concert}
+        {"concerts": concerts}
     )
 
 # will have to add more to this part
