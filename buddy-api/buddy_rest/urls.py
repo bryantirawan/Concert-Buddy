@@ -17,7 +17,7 @@ urlpatterns = [
         name="api_select_concerts"
     ),
     path(
-        "selectconcertsforcity/",
+        "selectconcertsforcity/<str:location>/<str:page>/",
         api_select_concert_for_city,
         name="api_select_concert_for_city"
     )

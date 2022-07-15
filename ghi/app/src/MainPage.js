@@ -1,7 +1,7 @@
 import axios from "axios";
 
 function MainPage() {
-  console.log(axios.get('http://buddy-api:8000/api/selectconcerts'))
+  // console.log(axios.get('http://buddy-api:8000/api/selectconcerts'))
   return (
     <div className="px-4 py-5 my-5 text-center">
       <h1 className="display-5 fw-bold">Concert Buddy</h1>
