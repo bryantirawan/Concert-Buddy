@@ -56,7 +56,6 @@ class Ticket(models.Model):
 #linking the order and the item itself
 class OrderItem(models.Model):
     user = models.ForeignKey(UserVO, on_delete=models.CASCADE, null=True)
-    ordered = models.BooleanField(default=False)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
 
     def get_final_price(self):
@@ -69,7 +68,6 @@ class Order(models.Model):
     tickets = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
-    ordered = models.BooleanField(default=False)
     shipping_address = models.ForeignKey(
         'Address', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
     billing_address = models.ForeignKey(

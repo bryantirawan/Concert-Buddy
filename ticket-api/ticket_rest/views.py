@@ -7,6 +7,12 @@ from .encoders import ConcertVOEncoder, TicketEncoder, UserVOEncoder, TicketDeta
 from django.views.decorators.http import require_http_methods
 import requests
 from .models import ConcertVO, OrderItem, Ticket, UserVO
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from .serializers import TicketSerializer
+from rest_framework.generics import (
+    ListAPIView, RetrieveAPIView, CreateAPIView,
+    UpdateAPIView, DestroyAPIView
+)
 
 
 #Get request of all concerts
@@ -161,3 +167,9 @@ def add_to_cart(request, id):
 def remove_from_cart(request, id):
     ticket = get_object_or_404(Ticket, id)
     pass
+
+
+class ItemListView(ListAPIView):
+    permission_classes = (AllowAny,)
+    serializer_class = TicketSerializer
+    queryset = Ticket.objects.all()
