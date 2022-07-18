@@ -48,21 +48,3 @@ def api_select_concert_for_city(request, location, page):
 
 
 
-
-# @require_http_methods(["GET"])
-# def api_select_concert_for_city(request, search):
-#     page = '&p=1'
-#     search = search
-#     split = search.split()
-#     location = "%20".join(split)
-    
-#     url = 'https://api.setlist.fm/rest/1.0/search/setlists?cityName='+ location + page
-#     headers = {
-#         "x-api-key": "1Lw-KTV9OFozLe7JpUeAyOdJHJH9HeVWNn2B",
-#         "Accept": "application/json"}
-
-#     concerts = requests.get(url, headers=headers).json()
-
-#     return JsonResponse(
-#         {"concerts": concerts}
-#     )

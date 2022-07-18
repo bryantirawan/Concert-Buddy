@@ -22,13 +22,12 @@ def poll():
             url = "http://concerts-api:8000/api/concerts/"
             response = requests.get(url)
             content = json.loads(response.content)
-            #print('content', content)
+            print('content', content)
             for concert in content["concerts"]:
                 print(concert)
                 ConcertVO.objects.update_or_create(
                     import_href=concert["import_href"],
                     defaults={
-                        "name": concert["name"],
                         "venue": concert["venue"],
                         "city": concert["city"],
                         "date": concert["date"],

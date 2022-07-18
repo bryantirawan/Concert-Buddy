@@ -1,15 +1,4 @@
 
-// const getFullConcertName = (concert) => {
-//     const current = new Date();
-//     const date = `${current.getDate()}-${('0' + (current.getMonth()+1)).slice(-2)}-${current.getFullYear()}`;
-//     if (date<=concert.eventDate){
-//     return `Artist: ${concert.artist.name}  Venue: ${concert.venue.name} Date: ${concert.eventDate} }`;
-//     }
-// }
-
-
-import React, {useEffect, useState} from 'react'; 
-
 export default function Concerts() {
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
@@ -25,6 +14,10 @@ export default function Concerts() {
         fetchConcert()
     }, []
     );
+
+    const current = new Date();
+    const date = `${current.getDate()}-${('0' + (current.getMonth()+1)).slice(-2)}-${current.getFullYear()}`;
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -67,35 +60,27 @@ export default function Concerts() {
         </tr>
     </thead>
         <tbody>
-        {/* {(date<=concerts.eventDate) && concerts.map((concert,idx) => ( */}
         {concerts.filter(concert => date<=concert.eventDate).map((concert,idx) => (
-             
                 <tr key={idx}>
                     <td>{concert.artist.name}</td>  
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate}</td>
-                    <td><button> save</button></td>
+                    <td>
+                        <form action={`http://localhost:8100/api/add/${concert.id}/`} method="POST">
+                        
+                        <button>        
+                        Save concert to concert model in concert microservice
+                        </button>
+                        </form> 
+                    </td>
                 </tr>
             )) 
             }  
         </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
+    </table>
         </div>
 
         </>
     )
 
 }
-
-
-
