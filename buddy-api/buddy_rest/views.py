@@ -43,6 +43,18 @@ def api_select_concert_for_city(request, location, page):
         {"concerts": concerts}
     )
 
+@require_http_methods(["GET"])
+def api_get_concert_by_artist(request, pk):
+    # artist_name = 'The%20Mother%20Hips'
+    url = 'https://api.setlist.fm/rest/1.0/search/setlists?artistName='+ pk
+    headers = {
+        "x-api-key": "1Lw-KTV9OFozLe7JpUeAyOdJHJH9HeVWNn2B",
+        "Accept": "application/json"}
+    concerts = requests.get(url, headers=headers).json()
+
+    return JsonResponse(
+        {"concerts": concerts}
+    )
 
 
 
