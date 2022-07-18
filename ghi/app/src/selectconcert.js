@@ -56,10 +56,6 @@ export default function Concerts() {
 
     }
 
-    const addConcert = (e) => {
-        return 'hi'
-    }
-
     return (
         <>
         <div>
@@ -76,28 +72,35 @@ export default function Concerts() {
                 <input type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} />
                 <input type="submit" value="Fetch concerts by artist"/>
             </form>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Artist</th>
-                        <th>Venue</th>
-                        <th>Date</th>
-                        <th>Save Concert</th>
-                    </tr>
-                </thead>
-                    <tbody>
-                    {concerts.filter(concert => date <= concert.eventDate).map((concert, idx) => (
-                        <tr key={idx}>
-                            <td>{concert.artist.name}</td>
-                            <td>{concert.venue.name}</td>
-                            <td>{concert.eventDate}</td>
-                            <td><button action={`http://localhost:8080/api/add/${concert.id}/`} method="POST">Save concert to concert model in concert microservice</button></td>
-                        </tr>
-                    ))
-                    }
-                </tbody>
-            </table>
-                </div>
-            </>
+        </div>
+    <table>
+    <thead>
+        <tr>
+            <th>Artist</th>
+            <th>Venue</th>
+            <th>Date</th>
+            <th>Save Concert</th>
+        </tr>
+    </thead>
+        <tbody>
+        {concerts.filter(concert => date<=concert.eventDate).map((concert,idx) => (
+                <tr key={idx}>
+                    <td>{concert.artist.name}</td>  
+                    <td>{concert.venue.name}</td>
+                    <td>{concert.eventDate}</td>
+                    <td>
+                        <form action={`http://localhost:8100/api/add/${concert.id}/`} method="POST">
+                        
+                        <button>        
+                        Save concert to concert model in concert microservice
+                        </button>
+                        </form> 
+                    </td>
+                </tr>
+            )) 
+            }  
+        </tbody>
+    </table>
+    </>
     )
 }

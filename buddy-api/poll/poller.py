@@ -17,27 +17,21 @@ from buddy_rest.models import ConcertVO
 def poll():
     while True:
         print('Buddy poller polling for data')
-        url = "http://concerts-api:8000/api/concerts/"
-        response = requests.get(url)
-        content = json.loads(response.content)
-        print(content)
         try:
-            url = "http://concerts-api:8000/concerts/"
+            url = "http://concerts-api:8000/api/concerts/"
             response = requests.get(url)
             content = json.loads(response.content)
-            #print('content', content)
+            print('content', content)
             for concert in content["concerts"]:
-                print(concert)
                 ConcertVO.objects.update_or_create(
                     import_href=concert["import_href"],
                     defaults={
-                        "name": concert["name"],
                         "venue": concert["venue"],
                         "city": concert["city"],
                         "date": concert["date"],
                         "artist": concert["artist"],
                         "concert_id": concert["concert_id"],
-                                            },
+                    },
                 )
         except Exception as e:
             print(e, file=sys.stderr)
