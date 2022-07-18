@@ -1,9 +1,8 @@
+import React, {useEffect, useState} from 'react'; 
 
 export default function Concerts() {
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
-    const current = new Date();
-    const date = `${current.getDate()}-${('0' + (current.getMonth()+1)).slice(-2)}-${current.getFullYear()}`;
 
     useEffect( () => {
         const fetchConcert = async () => {
@@ -37,7 +36,6 @@ export default function Concerts() {
             fetchConcert()
 
     }
- 
 
     return (
         <>
