@@ -58,11 +58,16 @@ def api_get_concert_by_artist(request, pk):
     headers = {
         "x-api-key": "1Lw-KTV9OFozLe7JpUeAyOdJHJH9HeVWNn2B",
         "Accept": "application/json"}
-    concerts = requests.get(url, headers=headers).json()
-
+    try:
+        concerts = requests.get(url, headers=headers).json()
+    except:
+        return JsonResponse(
+            {"error": "Invalid Search"},
+            status=400,
+        )
     return JsonResponse(
-        {"concerts": concerts}
-    )
+            {"concerts": concerts}
+        )
 
 # will have to add more to this part
 # i think ConcertVO part might have to be an API call?

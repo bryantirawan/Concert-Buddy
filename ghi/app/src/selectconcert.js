@@ -49,8 +49,8 @@ export default function Concerts() {
             const fetchConcert = async () => {
                 const concertResponse = await fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`);
                 const concertData = await concertResponse.json() 
-                console.log('setlist', concertData.concerts.setlist)
-                setConcerts(concertData.concerts.setlist) 
+                console.log(concertData)
+                setConcerts(concertData.error) 
             }
             fetchConcert()
 
