@@ -68,7 +68,7 @@ export default function Concerts() {
                 <input type="submit" value="Fetch concerts for city"/>
             </form>
             <form onSubmit={handleArtistSubmit}>
-                <label>City:  </label>
+                <label>Artist:  </label>
                 <input type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} />
                 <input type="submit" value="Fetch concerts by artist"/>
             </form>
