@@ -1,4 +1,4 @@
-from models import User
+from buddy_rest.models import User
 from rest_framework import serializers, routers, viewsets 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken

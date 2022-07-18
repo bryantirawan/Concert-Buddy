@@ -19,5 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/", include("buddy_rest.urls")),
+    path('user/', include(('buddy_project.routers', 'buddy_project'), namespace='buddy_project-api')),
 
 ]
