@@ -62,8 +62,8 @@ def api_get_concert_by_artist(request, pk):
         concerts = requests.get(url, headers=headers).json()
     except:
         return JsonResponse(
-            {"error": "Invalid Search"},
-            status=400,
+            {"message": "invalid search request"},
+            status=400
         )
     return JsonResponse(
             {"concerts": concerts}

@@ -27,15 +27,25 @@ export default function Concerts() {
             final_city += '%20'
             final_city += city_new[i]
         }
-
-            const fetchConcert = async () => {
-                const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=1`);
-                const concertData = await concertResponse.json()
-                console.log(concertData)
-                setConcerts(concertData.concerts.setlist) 
+        fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=1`).then((concertResponse) => {
+            if(concertResponse.ok) {
+                return concertResponse.json();
             }
-            fetchConcert()
-
+            throw new Error('Invalid Search Request');
+        })
+        .then((concertData) => {
+            setConcerts(concertData.concerts.setlist);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+            // const fetchConcert = async () => {
+            //     const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=1`);
+            //     const concertData = await concertResponse.json()
+            //     console.log(concertData)
+            //     setConcerts(concertData.concerts.setlist)
+            // }
+            // fetchConcert()
     }
     const handleArtistSubmit = (e) => {
         e.preventDefault();
@@ -45,18 +55,29 @@ export default function Concerts() {
             final_artist += '%20'
             final_artist += artist_new[i]
         }
-
-            const fetchConcert = async () => {
-                const concertResponse = await fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`);
-                const concertData = await concertResponse.json() 
-                console.log(concertData)
-                setConcerts(concertData.error) 
+        fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`).then((concertResponse) => {
+            if(concertResponse.ok) {
+                return concertResponse.json();
             }
-            fetchConcert()
+            throw new Error('Invalid Search Request');
+        })
+        .then((concertData) => {
+            setConcerts(concertData.concerts.setlist);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
+            // const fetchConcert = async () => {
+            //     const concertResponse = await fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`);
+            //     const concertData = await concertResponse.json() 
+            //     console.log(concertData)
+            //     setConcerts(concertData.concerts.setlist) 
+            // }
+            // fetchConcert()
 
     }
     
-
     return (
         <>
         <div>
@@ -74,7 +95,8 @@ export default function Concerts() {
                 <input type="submit" value="Fetch concerts by artist"/>
             </form>
         </div>
-    <table>
+    {concerts !== undefined ?
+    (<table>
     <thead>
         <tr>
             <th>Artist</th>
@@ -98,9 +120,11 @@ export default function Concerts() {
                     </td>
                 </tr>
             )) 
-            }  
+        }  
         </tbody>
-    </table>
+    </table>) : 
+    (<p>Invalid Search Request</p>)
+    }
     </>
     )
 }
