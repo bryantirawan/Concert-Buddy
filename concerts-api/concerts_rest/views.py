@@ -16,6 +16,17 @@ def api_concerts(request):
     else:
         return "Create POST REQUEST VIEW"
 
+        
+@require_http_methods(["GET"])
+def api_concert(request, pk):
+    concert = Concert.objects.get(concert_id=pk)
+    return JsonResponse(
+        concert,
+        encoder=ConcertEncoder,
+        safe=False,
+    )
+
+
 def format_date(date):
     proper_date = date.split("-") 
     #proper_date_list = [MM, DD, YEAR] 

@@ -81,6 +81,9 @@ export default function Concerts() {
                 } 
                 setConcerts(concertData.concerts.setlist); 
             } 
+            else {
+                setConcerts(undefined)
+            }
             setCity('');
         })
         .catch((error) => {
