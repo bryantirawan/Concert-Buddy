@@ -4,6 +4,8 @@ import Nav from './Nav';
 
 import Concerts from './selectconcert';
 import axios from 'axios';
+import Navbar from './components/Navbar'
+import Home from './components/pages/Home';
 
 
 
@@ -11,15 +13,15 @@ function App() {
   axios.get('http://localhost:8080/api/selectconcerts/')
 
   return (
+    <>
     <BrowserRouter>
-        <Nav />
-      <div className="container">
+    <Navbar />
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/selectconcerts/" element={<Concerts />} /> 
+          <Route path="/" element={<Home />} />
+          <Route path="/selectconcerts/" element={<Concerts />} />
         </Routes>
-      </div>
     </BrowserRouter>
+    </>
   );
 }
 
