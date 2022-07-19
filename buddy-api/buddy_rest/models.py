@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 class ConcertVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True, null=True)
@@ -18,3 +18,4 @@ class User(AbstractUser):
 
     def __str__(self):
         return str(self.email)
+
