@@ -29,12 +29,20 @@ export default function Concerts() {
         }
         fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=1`).then((concertResponse) => {
             if(concertResponse.ok) {
-                return concertResponse.json();
+                return concertResponse.json();          
             }
             throw new Error('Invalid Search Request');
         })
         .then((concertData) => {
-            setConcerts(concertData.concerts.setlist);
+            if (concertData.concerts.setlist) {
+                for (let i in concertData.concerts.setlist){
+                    const dateParts = concertData.concerts.setlist[i].eventDate.split("-");
+                    const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+                    concertData.concerts.setlist[i].eventDate = dateObject
+
+                } 
+                setConcerts(concertData.concerts.setlist); 
+            } 
             setArtist('');
         })
         .catch((error) => {
@@ -64,7 +72,15 @@ export default function Concerts() {
             throw new Error('Invalid Search Request');
         })
         .then((concertData) => {
-            setConcerts(concertData.concerts.setlist);
+            if (concertData.concerts.setlist) {
+                for (let i in concertData.concerts.setlist){
+                    const dateParts = concertData.concerts.setlist[i].eventDate.split("-");
+                    const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+                    concertData.concerts.setlist[i].eventDate = dateObject
+
+                } 
+                setConcerts(concertData.concerts.setlist); 
+            } 
             setCity('');
         })
         .catch((error) => {
@@ -110,11 +126,11 @@ export default function Concerts() {
         </tr>
     </thead>
         <tbody>
-        {concerts.filter(concert => date<=concert.eventDate).map((concert,idx) => (
+        {concerts.filter(concert => ((concert.eventDate)) >= (Date.now())).map((concert,idx) => (
                 <tr key={idx}>
                     <td>{concert.artist.name}</td>  
                     <td>{concert.venue.name}</td>
-                    <td>{concert.eventDate}</td>
+                    <td>{concert.eventDate.toLocaleDateString()} </td> 
                     <td>
                         <form action={`http://localhost:8100/api/add/${concert.id}/`} method="POST">
                         <button>        
