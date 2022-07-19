@@ -36,12 +36,16 @@ def api_select_concert_for_city(request, location, page):
     headers = {
         "x-api-key": "1Lw-KTV9OFozLe7JpUeAyOdJHJH9HeVWNn2B",
         "Accept": "application/json"}
-        
-    concerts = requests.get(f'{url}{location}{page}', headers=headers).json()
-
+    try:
+        concerts = requests.get(url, headers=headers).json()
+    except:
+        return JsonResponse(
+            {"message": "invalid search request"},
+            status=400
+        )
     return JsonResponse(
-        {"concerts": concerts}
-    )
+            {"concerts": concerts}
+        )
 
 @require_http_methods(["GET"])
 def api_get_concert_by_artist(request, pk):
@@ -50,11 +54,16 @@ def api_get_concert_by_artist(request, pk):
     headers = {
         "x-api-key": "1Lw-KTV9OFozLe7JpUeAyOdJHJH9HeVWNn2B",
         "Accept": "application/json"}
-    concerts = requests.get(url, headers=headers).json()
-
+    try:
+        concerts = requests.get(url, headers=headers).json()
+    except:
+        return JsonResponse(
+            {"message": "invalid search request"},
+            status=400
+        )
     return JsonResponse(
-        {"concerts": concerts}
-    )
+            {"concerts": concerts}
+        )
 
 
 
