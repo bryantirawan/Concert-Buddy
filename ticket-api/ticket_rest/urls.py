@@ -1,6 +1,8 @@
 from django.urls import path
 
 from .views import (
+    AddToCartView,
+    ItemListView,
     api_get_concert_by_artist,
     api_get_concert_by_location,
     api_get_tickets,
@@ -33,6 +35,11 @@ urlpatterns = [
         "tickets/<int:pk>/",
         api_update_tickets,
         name="api_update_tickets"
+    ),
+    path(
+        'ticket-list/', ItemListView.as_view(), name='ticket-list'
+    ),
+    path(
+        'add-to-cart/', AddToCartView.as_view(), name='add-to-cart'
     )
 ]
-

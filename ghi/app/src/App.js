@@ -3,6 +3,7 @@ import MainPage from './MainPage';
 import Concerts from './selectconcert';
 import axios from 'axios';
 import TicketMarketplace from './containers/TicketList';
+import BaseLayout from "./containers/Layout";
 
 
 
@@ -16,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/selectconcerts/" element={<Concerts />} />
-          <Route path="/tickets/" element={<TicketMarketplace />} />
+          <Route path="tickets/" element={<TicketMarketplace />} />
         </Routes>
       </div>
     </BrowserRouter>

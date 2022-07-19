@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'; 
+import React, {useEffect, useState} from 'react';
 
 export default function Concerts() {
     const [concerts, setConcerts] = useState([]);
@@ -7,7 +7,8 @@ export default function Concerts() {
 
     useEffect( () => {
         const fetchConcert = async () => {
-            const concertResponse = await fetch(`http://localhost:8080/api/selectconcerts`); 
+            const concertResponse = await fetch(`http://localhost:8080/api/selectconcerts`);
+            console.log(concertResponse)
             const concertData = await concertResponse.json();
             setConcerts(concertData.setlist);
         }
@@ -21,8 +22,8 @@ export default function Concerts() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const city_new = city.split(' ') 
-        let final_city = city_new[0] 
+        const city_new = city.split(' ')
+        let final_city = city_new[0]
         for (let i = 1; i < city_new.length; i++) {
             final_city += '%20'
             final_city += city_new[i]
@@ -30,17 +31,17 @@ export default function Concerts() {
 
             const fetchConcert = async () => {
                 const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=1`);
-                const concertData = await concertResponse.json() 
+                const concertData = await concertResponse.json()
                 console.log('setlist', concertData.concerts.setlist)
-                setConcerts(concertData.concerts.setlist) 
+                setConcerts(concertData.concerts.setlist)
             }
             fetchConcert()
 
     }
     const handleArtistSubmit = (e) => {
         e.preventDefault();
-        const artist_new = artist.split(' ') 
-        let final_artist = artist_new[0] 
+        const artist_new = artist.split(' ')
+        let final_artist = artist_new[0]
         for (let i = 1; i < artist_new.length; i++) {
             final_artist += '%20'
             final_artist += artist_new[i]
@@ -48,14 +49,14 @@ export default function Concerts() {
 
             const fetchConcert = async () => {
                 const concertResponse = await fetch(`http://localhost:8080/api/concerts/artist/${final_artist}/`);
-                const concertData = await concertResponse.json() 
+                const concertData = await concertResponse.json()
                 console.log('setlist', concertData.concerts.setlist)
-                setConcerts(concertData.concerts.setlist) 
+                setConcerts(concertData.concerts.setlist)
             }
             fetchConcert()
 
     }
-    
+
 
     return (
         <>
@@ -85,19 +86,19 @@ export default function Concerts() {
         <tbody>
         {concerts.filter(concert => date<=concert.eventDate).map((concert,idx) => (
                 <tr key={idx}>
-                    <td>{concert.artist.name}</td>  
+                    <td>{concert.artist.name}</td>
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate}</td>
                     <td>
                         <form action={`http://localhost:8100/api/add/${concert.id}/`} method="POST">
-                        <button>        
+                        <button>
                         Save concert to concert model in concert microservice
                         </button>
-                        </form> 
+                        </form>
                     </td>
                 </tr>
-            )) 
-            }  
+            ))
+            }
         </tbody>
     </table>
         </div>

@@ -6,13 +6,59 @@ from django.shortcuts import render, get_object_or_404
 from .encoders import ConcertVOEncoder, TicketEncoder, UserVOEncoder, TicketDetailEncoder
 from django.views.decorators.http import require_http_methods
 import requests
-from .models import ConcertVO, OrderItem, Ticket, UserVO
+from .models import ConcertVO, Order, OrderItem, Ticket, UserVO
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .serializers import TicketSerializer
 from rest_framework.generics import (
     ListAPIView, RetrieveAPIView, CreateAPIView,
     UpdateAPIView, DestroyAPIView
 )
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.views import APIView
+
+class ItemListView(ListAPIView):
+    permission_classes = (AllowAny,)
+    serializer_class = TicketSerializer
+    queryset = Ticket.objects.all()
+
+class AddToCartView(APIView):
+    def post(self, request, *args, **kwargs):
+        id = request.data.get('id', None)
+        if id is None:
+            return Response({"message": "Invalid request"}, status=HTTP_400_BAD_REQUEST)
+
+        item = get_object_or_404(Ticket, id=id)
+        order_item_qs = OrderItem.objects.filter(
+            item=item,
+            user=request.user,
+            ordered=False
+        )
+        if order_item_qs.exists():
+            order_item = order_item_qs.first()
+            order_item.quantity += 1
+            order_item.save()
+        else:
+            order_item = OrderItem.objects.create(
+                item=item,
+                user=request.user,
+                ordered=False
+            )
+            order_item.save()
+
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+        if order_qs.exists():
+            order = order_qs[0]
+            if not order.items.filter(item__id=order_item.id).exists():
+                order.items.add(order_item)
+                return Response(status=HTTP_200_OK)
+
+        else:
+            ordered_date = timezone.now()
+            order = Order.objects.create(
+                user=request.user, ordered_date=ordered_date)
+            order.items.add(order_item)
+            return Response(status=HTTP_200_OK)
 
 
 #Get request of all concerts
@@ -167,9 +213,3 @@ def add_to_cart(request, id):
 def remove_from_cart(request, id):
     ticket = get_object_or_404(Ticket, id)
     pass
-
-
-class ItemListView(ListAPIView):
-    permission_classes = (AllowAny,)
-    serializer_class = TicketSerializer
-    queryset = Ticket.objects.all()

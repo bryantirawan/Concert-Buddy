@@ -1,9 +1,5 @@
 from django_countries.serializer_fields import CountryField
 from rest_framework import serializers
-from core.models import (
-    Address, Item, Order, OrderItem, Coupon, Variation, ItemVariation,
-    Payment
-)
 from .models import Ticket
 
 class StringSerializer(serializers.StringRelatedField):
@@ -11,8 +7,8 @@ class StringSerializer(serializers.StringRelatedField):
         return value
 
 class TicketSerializer(serializers.ModelSerializer):
-    category = serializers.SerializerMethodField()
-    label = serializers.SerializerMethodField()
+    # category = serializers.SerializerMethodField()
+    # label = serializers.SerializerMethodField()
 
     class Meta:
         model = Ticket
@@ -28,10 +24,8 @@ class TicketSerializer(serializers.ModelSerializer):
             'seller'
         )
 
-    def get_category(self, obj):
-        return obj.get_category_display()
+    # def get_category(self, obj):
+    #     return obj.get_category_display()
 
-    def get_label(self, obj):
-        return obj.get_label_display()
-
-
+    # def get_label(self, obj):
+    #     return obj.get_label_display()

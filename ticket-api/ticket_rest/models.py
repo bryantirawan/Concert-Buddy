@@ -2,6 +2,7 @@ from email.errors import BoundaryError
 from django.conf import settings
 from django.db import models
 from django.shortcuts import reverse
+from django_countries.fields import CountryField
 
 
 ADDRESS_CHOICES = (
@@ -84,6 +85,6 @@ class Address(models.Model):
     user = models.ForeignKey(UserVO, on_delete=models.CASCADE)
     street_address = models.CharField(max_length=100)
     apartment_address = models.CharField(max_length=100)
-    country = models.CharField(default="USA", max_length=3)
+    country = CountryField(multiple=False)
     zip = models.CharField(max_length=100)
     address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
