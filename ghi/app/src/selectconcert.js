@@ -35,9 +35,11 @@ export default function Concerts() {
         })
         .then((concertData) => {
             setConcerts(concertData.concerts.setlist);
+            setArtist('');
         })
         .catch((error) => {
             console.log(error);
+            setConcerts(undefined);
         });
             // const fetchConcert = async () => {
             //     const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=1`);
@@ -63,9 +65,11 @@ export default function Concerts() {
         })
         .then((concertData) => {
             setConcerts(concertData.concerts.setlist);
+            setCity('');
         })
         .catch((error) => {
             console.log(error);
+            setConcerts(undefined);
         });
 
             // const fetchConcert = async () => {
