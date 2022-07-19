@@ -1,16 +1,66 @@
 
+import React, {useState, useEffect, useRef} from "react";
+import Carousel from 'react-bootstrap/Carousel';
+import { Link } from 'react-router-dom'
+import { Container } from "react-bootstrap";
+
+
+
+const data = [
+  // {
+  //  image: require('./Images/header-bg.jpg'),
+  //  caption:"Find Friends & Book Concerts Anywhere",
+  //  description:" ",
+  //  comment:" "
+  // }
+  //  {
+  //   image:require(''),
+  //   caption:"",
+  //   description:" ",
+  //   comment:""
+  //  },
+  //  {
+  //   image:require(''),
+  //   caption:"",
+  //   description:" ",
+  //   comment:""
+  //  }
+]
+
 function MainPage() {
-  // console.log(axios.get('http://buddy-api:8000/api/selectconcerts'))
-  return (
-    <div className="px-4 py-5 my-5 text-center">
-      <h1 className="display-5 fw-bold">Concert Buddy</h1>
-      <div className="col-lg-6 mx-auto">
-        <p className="lead mb-4">
-          The premiere solution for aconcert buddy management
-        </p>
-      </div>
-    </div>
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
+
+  return (<>
+    <Container className="p-0 background-image" fluid={true}>
+    <Carousel activeIndex={index} onSelect={handleSelect}>
+       {data.map((slide, i) => {
+        return (
+          <Carousel.Item key={i}>
+            <img
+              className="d-block w-100"
+              src={slide.image}
+              alt="slider image"
+              />
+            <Carousel.Caption>
+              <h3>{slide.caption}</h3>
+              <p>{slide.description}</p>
+              <p>{slide.comment}</p>
+              <Link to={'/models'}>
+                <button className="btn btn-light"> Find Friends</button>
+              </Link>
+              <button className="btn btn-light"> Buy Tickets</button>
+            </Carousel.Caption>
+          </Carousel.Item>
+        )
+      })}
+    </Carousel>
+    </Container>
+
+    </>
   );
 }
-
 export default MainPage;
