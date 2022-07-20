@@ -1,5 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Toggle from '../Toggle';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 function SearchToSellTickets() {
     const [concerts, setConcerts] = useState([]);
@@ -119,10 +124,12 @@ function SearchToSellTickets() {
 
     return (
         <>
-        <div className='selltickets'>  
 
+        <div className='selltickets'>
+        <div>
             <Toggle onChange={(e) => setToggled(e.target.checked)} />
             <p>  Search by {toggled ? "City ": "Artist "}</p>
+
             <div className='entry'>
                 { toggled ?
             <form onSubmit={handleLocationSubmit}>
@@ -139,9 +146,14 @@ function SearchToSellTickets() {
             }
         </div>
         <p></p>
+
+
+
         <div>
+        </div>
     {concerts !== undefined ?
     (
+
     <table>
     <thead>
 
@@ -154,6 +166,7 @@ function SearchToSellTickets() {
         </tr>
     </thead>
         <tbody>
+
         {concerts.filter(concert => ((concert.eventDate)) >= (Date.now())).map((concert,idx) => (
                 <tr key={idx}>
                     <td>{concert.artist.name}</td>
@@ -173,7 +186,9 @@ function SearchToSellTickets() {
     </table>) :
     (<p>Invalid Search Request</p>)
     }
+
     </div>
+
     </div>
     </>
     )
