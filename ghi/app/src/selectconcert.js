@@ -56,7 +56,7 @@ export default function Concerts() {
 
     }
     
-
+    console.log('concerts: ', concerts)
     return (
         <>
         <div>

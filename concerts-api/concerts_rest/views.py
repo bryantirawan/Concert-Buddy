@@ -55,6 +55,7 @@ def log_concert(request, concertdict):
             )
         
     Concert_save.save() #save instance to Concert model 
+    Concert_save.user.add(request.user)
 
 
     
