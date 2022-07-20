@@ -5,8 +5,9 @@ from .models import ConcertVO, UserVO, Ticket
 class ConcertVOEncoder(ModelEncoder):
     model = ConcertVO
     properties = [
+        "id",
         "import_href",
-        "name",
+       # "name",
         "venue",
         "city",
         "date",

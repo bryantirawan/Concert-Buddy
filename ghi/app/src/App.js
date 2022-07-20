@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/selectconcerts/" element={<Concerts />} />
           <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
-
+          <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
         </Routes>
     </BrowserRouter>
     </>

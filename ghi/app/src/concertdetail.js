@@ -29,6 +29,9 @@ export default function ConcertDetail() {
     let { concert_id } = useParams();
 
     const [data, setData] = useState({});
+    const [concerts, setConcerts] = useState([]);
+    const [tickets, setTickets] = useState([]);
+
   
     //useEffect( () => {
      //   const fetchConcert = async () => {
@@ -41,16 +44,35 @@ export default function ConcertDetail() {
     // );
 
 
+
+   
     useEffect(() => {
         const fetchConcertDetail = async () => {
             const concertResponse = await fetch(`http://localhost:8100/api/concert/${concert_id}`)
             const concertData = await concertResponse.json();
+            const ticketResponse = await fetch(`http://localhost:8090/api/concerttickets/${concertData.id}`)
+            const ticketData = await ticketResponse.json();
+            setTickets(ticketData);
+            console.log(ticketData)
             setData(concertData);
             console.log(concertData)
         }
         fetchConcertDetail()
     }, []
     );
+
+
+  //   useEffect(() => {
+  //     const fetchTickets = async () => {
+  //         const ticketResponse = await fetch(`http://localhost:8090/api/concerttickets/${concertData.id}`)
+  //         const ticketData = await ticketResponse.json();
+  //         setTickets(ticketData);
+  //         console.log(ticketData)
+  //     }
+  //     fetchTickets()
+  // }, []
+  // );
+
     // useEffect(() => {
     //     fetch(`http://localhost:8100/api/concert/${concert_id}`, {})
     //       .then((res) => res.json())
@@ -84,20 +106,58 @@ export default function ConcertDetail() {
           
 
 
-
+{/* 
 
               <div>
           <button className="btn btn-primary btn-lg btn-block" onClick={() => openInNewTab('https://google.com')}>
            Buy
           </button>
         </div>
+<div> ##List of Tickets available for concert</div> */}
 
-        <div>
+
+<table>
+    <thead>
+
+        <br></br>
+        <tr>
+             <th>Price</th>
+            <th>Section</th>
+            <th>Row</th>
+            <th>Seat</th> 
+            <th>Buy</th> 
+
+        </tr>
+    </thead>
+        <tbody>
+        {/* {concerts.filter(concert => ((concert.eventDate)) >= (Date.now())).map((concert,idx) => ( */}
+          {tickets && tickets.map((ticket,idx) => (
+            // return (
+
+                <tr key={idx}>
+                    <td>{ticket.price}</td>
+                    <td>{ticket.section}</td>
+                    <td>{ticket.row} </td>
+                    <td>{ticket.seat} </td>
+                    <td>
+                    <button className="btn btn-primary btn-lg btn-block" onClick={() => openInNewTab('https://google.com')}>
+           Buy
+          </button>
+                    </td>
+                </tr>
+            ))
+        }
+      
+        </tbody>
+    </table> 
+
+
+        {/* <div>
           <button className="btn btn-primary btn-lg btn-block" onClick={() => openInNewTab('https://google.com')}>
         Sell
           </button>
         </div>
-                
+                 */}
              
            
             </>
