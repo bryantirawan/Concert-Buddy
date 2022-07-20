@@ -35,6 +35,15 @@ def api_concerts(request):
         return "Create POST REQUEST VIEW"
 
 @require_http_methods(["GET"])
+def api_concert(request, pk):
+    concert = Concert.objects.get(concert_id=pk)
+    return JsonResponse(
+        concert,
+        encoder=ConcertEncoder,
+        safe=False,
+    )
+
+@require_http_methods(["GET"])
 def api_select_concert(request):
     url = 'https://api.setlist.fm/rest/1.0/search/setlists?cityName=San%20Francisco&p=1'
     headers = {

@@ -7,6 +7,7 @@ from .views import (
     api_get_concert_by_artist,
     log_concert, 
     api_concerts,
+    api_concert,
 )
 
 urlpatterns = [
@@ -30,10 +31,18 @@ urlpatterns = [
         api_get_concert_by_artist,
         name="api_get_concert_by_artist"
     ),
-    path('add/<str:concertdict>/', log_concert, name='log_concert'),
+    path('add/<str:concertdict>/', 
+        log_concert, 
+        name='log_concert'
+    ),
     path(
         "concerts/",
         api_concerts,
         name="api_concerts",
+    ),
+    path(
+        "concert/<str:pk>/", 
+        api_concert, 
+        name="api_concert",
     ),
     ]
