@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Concert(models.Model):
@@ -12,3 +13,8 @@ class Concert(models.Model):
 
     def __str__(self):
         return f"Artist: {self.artist}, Venue: {self.venue}, City: {self.city}, Date: {self.date}"
+
+    def get_api_url(self):
+        print("red")
+        return reverse("api_concert", kwargs={"pk": self.pk})
+

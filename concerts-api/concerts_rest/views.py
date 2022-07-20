@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 from .models import Concert
 from django.http import JsonResponse
@@ -66,11 +67,16 @@ def log_concert(request, concertdict):
             )
         
     Concert_save.save() #save instance to Concert model 
-    return JsonResponse(
-            {"concerts": Concert_save},
-            encoder=ConcertEncoder,
-        )
 
+#
+#
+#
+#  Fix before production
+#
+#
+    return redirect('http://localhost:3000/concertdetail/'+concertdict['id'])
+
+  
     
     #Concert_save.user.add(request.user) #assign user to Concert just saved (many to many needs to be created before assigned)
         
