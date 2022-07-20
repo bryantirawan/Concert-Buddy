@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 from .models import Concert
 from django.http import JsonResponse
@@ -15,6 +16,17 @@ def api_concerts(request):
         )
     else:
         return "Create POST REQUEST VIEW"
+
+        
+@require_http_methods(["GET"])
+def api_concert(request, pk):
+    concert = Concert.objects.get(concert_id=pk)
+    return JsonResponse(
+        concert,
+        encoder=ConcertEncoder,
+        safe=False,
+    )
+
 
 def format_date(date):
     proper_date = date.split("-") 
@@ -57,7 +69,15 @@ def log_concert(request, concertdict):
     Concert_save.save() #save instance to Concert model 
     Concert_save.user.add(request.user)
 
+#
+#
+#
+#  Fix before production
+#
+#
+    return redirect('http://localhost:3000/concertdetail/'+concertdict['id'])
 
+  
     
     #Concert_save.user.add(request.user) #assign user to Concert just saved (many to many needs to be created before assigned)
         
