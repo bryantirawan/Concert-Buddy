@@ -1,5 +1,7 @@
 from django.db import models
 
+# deleting
+
 
 class Concert(models.Model):
     venue = models.CharField(max_length=200)
