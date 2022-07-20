@@ -81,21 +81,6 @@ services:
         DATABASE_URL: postgres://ticket:password@database:5432/ticket
         WAIT_HOSTS: database:5432,ticket-api:8000
         WAIT_TIMEOUT: 240
-    buddy-poller:
-      build:
-        context: ./buddy-api/poll
-        dockerfile: ./Dockerfile.dev
-      volumes:
-        - ./buddy-api/poll:/app
-        - ./buddy-api/buddy_project:/app/buddy_project
-        - ./buddy-api/buddy_rest:/app/buddy_rest
-      depends_on:
-        - database
-        - buddy-api
-      environment:
-        DATABASE_URL: postgres://buddy:password@database:5432/buddy
-        WAIT_HOSTS: database:5432,buddy-api:8000
-        WAIT_TIMEOUT: 240
     tickets-user-poller:
       build:
         context: ./ticket-api/userpoll
