@@ -22,8 +22,8 @@ function Nav() {
 
               <li>  
 
-              <NavLink className="nav-link" aria-current="page" to="/">
-                  Page 2
+              <NavLink className="nav-link" aria-current="page" to="/concertdetail/">
+                  Concert Detail
                 </NavLink>
 
 
