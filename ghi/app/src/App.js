@@ -18,15 +18,10 @@ function App() {
     <BrowserRouter>
     <Navbar />
         <Routes>
-<<<<<<< HEAD
-          <Route path="/" element={<MainPage />} />
-          <Route path="/selectconcerts/" element={<Concerts />} /> 
-          <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} /> 
-
-=======
           <Route path="/" element={<Home />} />
           <Route path="/selectconcerts/" element={<Concerts />} />
->>>>>>> main
+          <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
+
         </Routes>
     </BrowserRouter>
     </>
