@@ -51,13 +51,6 @@ export default function Concerts() {
             console.log(error);
             setConcerts(undefined);
         });
-            // const fetchConcert = async () => {
-            //     const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=1`);
-            //     const concertData = await concertResponse.json()
-            //     console.log(concertData)
-            //     setConcerts(concertData.concerts.setlist)
-            // }
-            // fetchConcert()
     }
     const handleArtistSubmit = (e) => {
         e.preventDefault();
@@ -92,18 +85,6 @@ export default function Concerts() {
             console.log(error);
             setConcerts(undefined);
         });
-
-
-
-
-            // const fetchConcert = async () => {
-            //     const concertResponse = await fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`);
-            //     const concertData = await concertResponse.json()
-            //     console.log(concertData)
-            //     setConcerts(concertData.concerts.setlist)
-            // }
-            // fetchConcert()
-
     }
 
     const handleKeypress = e => {
