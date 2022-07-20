@@ -22,7 +22,6 @@ def poll():
             url = "http://buddy-api:8000/api/concerts/"
             response = requests.get(url)
             content = json.loads(response.content)
-            print('content', content)
             for concert in content["concerts"]:
                 print(concert)
                 ConcertVO.objects.update_or_create(

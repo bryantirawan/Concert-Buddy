@@ -24,20 +24,6 @@ services:
           - POSTGRES_PASSWORD=test-databases
       ports:
           - 15432:5432
-    concerts-api:
-      build:
-        context: ./concerts-api
-        dockerfile: ./Dockerfile.dev
-      ports:
-        - "8100:8000"
-      volumes:
-        - ./concerts-api:/app
-      depends_on:
-        - database
-      environment:
-        DATABASE_URL: postgres://concerts:password@database:5432/concerts
-        WAIT_HOSTS: database:5432
-        WAIT_TIMEOUT: 240
     buddy-api:
       build:
         context: ./buddy-api
