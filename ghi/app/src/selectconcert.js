@@ -140,7 +140,7 @@ export default function Concerts() {
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
                     <td>
-                        <form action={`http://localhost:8100/api/add/${concert.id}/`} method="POST">
+                        <form action={`http://localhost:8080/api/add/${concert.id}/`} method="POST">
                         <button>
                         Save concert to concert model in concert microservice
                         </button>

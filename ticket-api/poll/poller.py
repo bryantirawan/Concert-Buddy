@@ -19,7 +19,7 @@ def poll():
     while True:
         print('Ticket poller polling for data')
         try:
-            url = "http://concerts-api:8000/api/concerts/"
+            url = "http://buddy-api:8000/api/concerts/"
             response = requests.get(url)
             content = json.loads(response.content)
             print('content', content)

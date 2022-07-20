@@ -43,7 +43,7 @@ export default function ConcertDetail() {
 
     useEffect(() => {
         const fetchConcertDetail = async () => {
-            const concertResponse = await fetch(`http://localhost:8100/api/concert/${concert_id}`)
+            const concertResponse = await fetch(`http://localhost:8080/api/concert/${concert_id}`)
             const concertData = await concertResponse.json();
             setData(concertData);
             console.log(concertData)
