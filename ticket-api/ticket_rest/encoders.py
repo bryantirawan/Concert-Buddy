@@ -7,7 +7,10 @@ class ConcertVOEncoder(ModelEncoder):
     properties = [
         "id",
         "import_href",
+<<<<<<< HEAD
        # "name",
+=======
+>>>>>>> main
         "venue",
         "city",
         "date",
