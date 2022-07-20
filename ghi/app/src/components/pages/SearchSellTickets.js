@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import Toggle from './components/Toggle';
+import Toggle from '../Toggle';
 
-export default function Concerts() {
+function SearchToSellTickets() {
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
@@ -119,7 +119,8 @@ export default function Concerts() {
 
     return (
         <>
-        <div className='selectconcerts'>
+        <div className='selltickets'>  
+
             <Toggle onChange={(e) => setToggled(e.target.checked)} />
             <p>  Search by {toggled ? "City ": "Artist "}</p>
             <div className='entry'>
@@ -176,4 +177,6 @@ export default function Concerts() {
     </div>
     </>
     )
+
 }
+export default SearchToSellTickets

@@ -3,12 +3,12 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 
 import ConcertDetail from './concertdetail';
-import Concerts from './selectconcert';
+import Concerts from './components/selectconcert';
 import axios from 'axios';
 import Navbar from './components/Navbar'
 import Home from './components/pages/Home';
 import SellTicketForm from './components/pages/SellTicket';
-
+import SearchToSellTickets from './components/pages/SearchSellTickets';
 
 
 function App() {
@@ -22,8 +22,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/selectconcerts/" element={<Concerts />} />
           <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
+          <Route path="/selltickets" element={<SearchToSellTickets />} />
           <Route path="/tickets" element={<SellTicketForm />} />
-
         </Routes>
     </BrowserRouter>
     </>

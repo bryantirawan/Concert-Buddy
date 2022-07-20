@@ -1,3 +1,5 @@
+
+
 /* .background-image {
   background-image: url(./Images/header-bg.jpg);
   background-size: cover;
@@ -68,13 +70,17 @@
   font-size: 3rem;
 }
 
-.services {
-  /* background-image: url('/images/img-2.jpg'); */
+.selltickets {
+  background-image: url('Images/img-11.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: black;
-  font-size: 100px;
+  color: white;
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
 }
 
 .products {
@@ -96,6 +102,7 @@
 }
 
 .selectconcerts {
+  background-image: url('Images/img-12.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
