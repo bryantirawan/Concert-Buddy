@@ -6,7 +6,6 @@ class ConcertVOEncoder(ModelEncoder):
     model = ConcertVO
     properties = [
         "import_href",
-        "name",
         "venue",
         "city",
         "date",

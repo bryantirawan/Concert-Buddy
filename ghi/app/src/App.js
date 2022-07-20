@@ -7,6 +7,7 @@ import Concerts from './selectconcert';
 import axios from 'axios';
 import Navbar from './components/Navbar'
 import Home from './components/pages/Home';
+import SellTicketForm from './components/pages/SellTicket';
 
 
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/selectconcerts/" element={<Concerts />} />
           <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
+          <Route path="/tickets" element={<SellTicketForm />} />
 
         </Routes>
     </BrowserRouter>
