@@ -32,7 +32,7 @@ def api_select_concert(request):
 
 @require_http_methods(["GET"])
 def api_select_concert_for_city(request, location, page):
-    url = 'https://api.setlist.fm/rest/1.0/search/setlists?cityName='
+    url = 'https://api.setlist.fm/rest/1.0/search/setlists?cityName='+ location + page
     headers = {
         "x-api-key": "1Lw-KTV9OFozLe7JpUeAyOdJHJH9HeVWNn2B",
         "Accept": "application/json"}
