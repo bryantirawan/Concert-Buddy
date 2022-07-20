@@ -66,7 +66,10 @@ def log_concert(request, concertdict):
             )
         
     Concert_save.save() #save instance to Concert model 
-
+    return JsonResponse(
+            {"concerts": Concert_save},
+            encoder=ConcertEncoder,
+        )
 
     
     #Concert_save.user.add(request.user) #assign user to Concert just saved (many to many needs to be created before assigned)
