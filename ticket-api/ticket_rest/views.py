@@ -90,6 +90,7 @@ def api_get_tickets(request):
             )
     else:
         content = json.loads(request.body)
+        print(content)
         try:
             concert = ConcertVO.objects.get(concert_id=content["concert"])
             content["concert"] = concert

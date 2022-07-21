@@ -31,6 +31,7 @@ export default function ConcertDetail() {
     const [data, setData] = useState({});
     const [concerts, setConcerts] = useState([]);
     const [tickets, setTickets] = useState([]);
+    //const [sell, setSell] = useState();
 
   
     //useEffect( () => {
@@ -106,20 +107,14 @@ export default function ConcertDetail() {
           
 
 
-{/* 
-
-              <div>
-          <button className="btn btn-primary btn-lg btn-block" onClick={() => openInNewTab('https://google.com')}>
-           Buy
-          </button>
-        </div>
-<div> ##List of Tickets available for concert</div> */}
-
+        <Link to={`/tickets/${concert_id}`} activeClassName="current"><button className="btn btn-primary btn-lg btn-block"type="button">
+          Sell
+     </button></Link>
+      
 
 <table>
     <thead>
 
-        <br></br>
         <tr>
              <th>Price</th>
             <th>Section</th>
@@ -130,9 +125,7 @@ export default function ConcertDetail() {
         </tr>
     </thead>
         <tbody>
-        {/* {concerts.filter(concert => ((concert.eventDate)) >= (Date.now())).map((concert,idx) => ( */}
           {tickets && tickets.map((ticket,idx) => (
-            // return (
 
                 <tr key={idx}>
                     <td>{ticket.price}</td>
@@ -140,7 +133,8 @@ export default function ConcertDetail() {
                     <td>{ticket.row} </td>
                     <td>{ticket.seat} </td>
                     <td>
-                    <button className="btn btn-primary btn-lg btn-block" onClick={() => openInNewTab('https://google.com')}>
+                    {/* <button className="btn btn-primary btn-lg btn-block" onClick={() => openInNewTab('https://google.com')}> */}
+                    <button className="btn btn-primary btn-lg btn-block" >
            Buy
           </button>
                     </td>
@@ -152,46 +146,11 @@ export default function ConcertDetail() {
     </table> 
 
 
-        {/* <div>
-          <button className="btn btn-primary btn-lg btn-block" onClick={() => openInNewTab('https://google.com')}>
-        Sell
-          </button>
-        </div>
-                 */}
-             
+        
            
             </>
           
         </>
       );
     };
-//}
-
-    {/* useEffect( () => {
-            const fetchConcertDetail = async () => {
-                const concertResponse = await fetch(`http://localhost:8100/api/concert/${concert_id}`); 
-                
-                //const concertData = await concertResponse.json();
-                .then((res) => res.json())
-                .then((response) => {
-                  setConcert(response);
-                }
-
-                //console.log(concertData)
-                //return(concertData);
-//                setConcerts(concertData.setlist);
-            }
-            fetchConcertDetail()
-        });
-     */}
-    {/* /</>const handleLocationSubmit = (e) => { */}
-    //     e.preventDefault();
-
-        // ).then((concertResponse) => {
-        //     if(concertResponse.ok) {
-        //         return concertResponse.json();          
-        //     }
-        //     throw new Error('Invalid Concert');
-        // })
-
 
