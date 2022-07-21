@@ -27,7 +27,7 @@ function App() {
             </PrivateRoute>
             }
           />
-          <Route path="/fellowusers/" element={<Fellowusersgoingtoconcert />} /> 
+          <Route path="/fellowusers/:concert_id" element={<Fellowusersgoingtoconcert />} /> 
           <Route path="/selectconcerts/" element={<Concerts />} /> 
           <Route path="/login/" element={<LoginPage />} /> 
           <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
