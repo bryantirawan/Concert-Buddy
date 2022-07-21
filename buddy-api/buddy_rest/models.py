@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 
 class ConcertVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True, null=True)
@@ -15,6 +15,7 @@ class ConcertVO(models.Model):
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     concert = models.ManyToManyField(ConcertVO)
+    objects = UserManager()
 
     def __str__(self):
         return str(self.email)

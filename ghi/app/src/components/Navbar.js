@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import AuthContext from '../context/AuthContext';
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -23,8 +24,9 @@ function Navbar() {
   }, []);
 
   window.addEventListener('resize', showButton);
-
+  let {user, logoutUser} = useContext(AuthContext)
   return (
+
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
@@ -59,6 +61,14 @@ function Navbar() {
                 Sell Tickets
               </Link>
             </li>
+            <li>
+                {user ? (
+                  <Link className="nav-link" aria-current="page" to="/userconcerts/">
+                 User's Concerts
+                </Link>
+                ): (<p>hi</p>)}
+              </li>
+
 
             <li>
               <Link
@@ -71,6 +81,7 @@ function Navbar() {
             </li>
           </ul>
           {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+          {user && <p>Hello {user.username}</p>}
         </div>
       </nav>
     </>

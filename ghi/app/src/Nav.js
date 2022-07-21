@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
+import React, {useContext} from 'react'
+import AuthContext from "./context/AuthContext";
 
 function Nav() {
+  let {user, logoutUser} = useContext(AuthContext)
   return (
     <header>
       <nav className="navbar navbar-expand-lg navbar-dark bg-success">
@@ -20,33 +23,38 @@ function Nav() {
                 </NavLink>
               </li>
 
-              <li>  
+              <li>
 
               <NavLink className="nav-link" aria-current="page" to="/concertdetail/">
                   Concert Detail
+                  </NavLink>
+                {user ? (
+                  <p className="nav-link" onClick={logoutUser}>Logout</p>
+                ): (
+                  <NavLink className="nav-link" aria-current="page" to="/login/">
+                 Login
                 </NavLink>
-
-
-              
+                )}
+              </li>
+              <li>
+                {user ? (
+                  <NavLink className="nav-link" aria-current="page" to="/userconcerts/">
+                 User's Concerts
+                </NavLink>
+                ): (<p>hi</p>)}
               </li>
               <li className="nav-item">
-      
-              
+
                 <NavLink className="nav-link" aria-current="page" to="/">
                   Page 3
                 </NavLink>
-              
-             
-                
+
+
               </li>
-              <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/">
-                  Page 4
-                </NavLink>
-             
-            
-              </li>
+
             </ul>
+            {user && <p>Hello {user.username}</p>}
+
           </div>
         </div>
       </nav>
