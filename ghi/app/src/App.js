@@ -40,7 +40,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/selectconcerts/" element={<Concerts />} />
           <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
-          <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
+          <Route path="/tickets/:concert_id" element={<SellTicketForm />} />
           <Route path="/selltickets" element={<SearchToSellTickets />} />
           <Route path="/tickets" element={<SellTicketForm />} />
         </Routes>
