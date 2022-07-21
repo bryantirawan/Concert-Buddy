@@ -9,7 +9,7 @@ import Navbar from './components/Navbar'
 import Home from './components/pages/Home';
 import SellTicketForm from './components/pages/SellTicket';
 import SearchToSellTickets from './components/pages/SearchSellTickets';
-
+import Fellowusersgoingtoconcert from './components/fellowusersgoingtoconcert';
 
 function App() {
   return (
@@ -27,9 +27,9 @@ function App() {
             </PrivateRoute>
             }
           />
+          <Route path="/fellowusers/" element={<Fellowusersgoingtoconcert />} /> 
           <Route path="/selectconcerts/" element={<Concerts />} /> 
           <Route path="/login/" element={<LoginPage />} /> 
-          <Route path="/selectconcerts/" element={<Concerts />} />
           <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
           <Route path="/tickets/:concert_id" element={<SellTicketForm />} />
           <Route path="/selltickets" element={<SearchToSellTickets />} />

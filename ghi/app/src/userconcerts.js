@@ -30,7 +30,7 @@ export default function Userconcerts() {
     const date = `${current.getDate()}-${('0' + (current.getMonth()+1)).slice(-2)}-${current.getFullYear()}`;
 
 
-
+    console.log('userconcerts', userconcerts)
     return (
     <>
     <table>

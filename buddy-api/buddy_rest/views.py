@@ -19,8 +19,9 @@ def format_date(date):
     return proper_date[2] + "-" + proper_date[1] + "-" + proper_date[0] 
 
 
+#not really important 
 @api_view(["GET"])
-#@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def api_get_user_concerts(request, pk):
     one_user = User.objects.get(id=pk) 
     user_concerts = one_user.concert.all()
@@ -44,6 +45,28 @@ def api_get_user_concerts_withoutpk(request):
         },
         encoder=ConcertEncoder
         )
+
+@require_http_methods(["GET"])
+def api_get_fellow_concert_users(request, pk):
+    one_concert = Concert.objects.get(concert_id=pk)
+    fellow_users = one_concert.fellow_user.values()
+    return JsonResponse(
+        {
+            'users': list(fellow_users),
+        }
+    )
+
+
+@require_http_methods(["GET"])
+def api_concert(request, pk):
+    concert = Concert.objects.get(concert_id=pk)
+    return JsonResponse(
+        concert,
+        encoder=ConcertEncoder,
+        safe=False,
+    )
+
+
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -84,14 +107,7 @@ def api_concerts(request):
     else:
         return "Create POST REQUEST VIEW"
 
-@require_http_methods(["GET"])
-def api_concert(request, pk):
-    concert = Concert.objects.get(concert_id=pk)
-    return JsonResponse(
-        concert,
-        encoder=ConcertEncoder,
-        safe=False,
-    )
+
 
 @require_http_methods(["GET"])
 def api_select_concert(request):
@@ -175,9 +191,14 @@ def log_concert(request, concertdict):
             )
         
     Concert_save.save() #save instance to Concert model 
+    Concert_save.fellow_user.add(request.user) #assign user to Concert just saved (many to many needs to be created before assigned)
+
+    User_save = request.user 
+    User_save.concert.add(Concert_save)
+
     return redirect('http://localhost:3000/concertdetail/'+concertdict['id'])
 
     
-    #Concert_save.user.add(request.user) #assign user to Concert just saved (many to many needs to be created before assigned)
+
 
 

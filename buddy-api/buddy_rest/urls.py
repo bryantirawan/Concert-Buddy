@@ -14,7 +14,8 @@ from .views import (
     api_concert,
     api_get_user_concerts_withoutpk,  
     MyTokenObtainPairView, 
-    api_get_user_concerts
+    api_get_user_concerts,
+    api_get_fellow_concert_users
 )
 
 urlpatterns = [
@@ -51,6 +52,11 @@ urlpatterns = [
         "concert/<str:pk>/", 
         api_concert, 
         name="api_concert",
+    ),
+    path(
+        "concertfellowusers/<str:pk>/", 
+        api_get_fellow_concert_users, 
+        name="api_get_fellow_concert_users",
     ),
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

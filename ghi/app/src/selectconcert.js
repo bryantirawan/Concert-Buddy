@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'; 
 
-export default function Concerts() {
+export default function ConcertsUseless() {
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
@@ -56,7 +56,6 @@ export default function Concerts() {
 
     }
     
-    console.log('concerts: ', concerts)
     return (
         <>
         <div>

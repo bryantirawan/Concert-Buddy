@@ -39,17 +39,12 @@ function Navbar() {
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li className='nav-item'>
-              <Link to='/buddy' className='nav-links' onClick={closeMobileMenu}>
-                Find a Buddy
-              </Link>
-            </li>
-            <li className='nav-item'>
               <Link
                 to='/selectconcerts/'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Buy Tickets
+                Find a Buddy
               </Link>
             </li>
             <li className='nav-item'>
@@ -64,9 +59,9 @@ function Navbar() {
             <li>  
                 {user ? (
                   <Link className="nav-links" aria-current="page" to="/userconcerts/">
-                 User's Concerts
+                 Concerts You're Going To
                 </Link>
-                ): (<p>hi</p>)}
+                ): (<></>)}
             </li>
             <li>  
                 {user ? (
@@ -82,12 +77,12 @@ function Navbar() {
               <Link
                 to='/sign-up'
                 className='nav-links-mobile'
-                onClick={closeMobileMenu}
-              >
+                onClick={closeMobileMenu}>
                 Sign Up
               </Link>
             </li>
           </ul>
+          {user && <p>Hello {user.username}</p>}
           {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
         </div>
       </nav>
