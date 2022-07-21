@@ -1,10 +1,12 @@
 from common.json import ModelEncoder
 import json 
-from .models import User, ConcertVO
+from .models import User, Concert
+
 
 class ConcertEncoder(ModelEncoder):
-    model = ConcertVO
+    model = Concert
     properties = [
+        "id",
         "venue",
         "city",
         "date",
@@ -23,15 +25,11 @@ class UserEncoder(ModelEncoder):
         "first_name", 
         "last_name", 
     ]
-
-    encoders = {
-        "concert": ConcertEncoder(),
-    }
-
-
+    # encoders = {
+    #     "concert": ConcertEncoder(),
+    # }
     def get_extra_data(self, o):
         return {
             'import_href': f'/api/users/{o.id}',
             'concert': o.concert.all()
         }
-

@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost",
-    "concerts-api",
+    "buddy-api",
 ]
 
 

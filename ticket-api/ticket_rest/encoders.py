@@ -44,6 +44,9 @@ class TicketEncoder(ModelEncoder):
         "seller": UserVOEncoder(),
         "buyer": UserVOEncoder(),
     }
+    
+    def get_extra_data(self, o):
+        return {"concert_id": o.concert.concert_id}
 
 class TicketDetailEncoder(ModelEncoder):
     model = Ticket

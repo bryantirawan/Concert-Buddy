@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-@g(j5bsd!ffj)6w1d_!cr-y&%q!oy5ym*&zyt8e@a-%+(q50s8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "concerts-api", "buddy-api"]
+ALLOWED_HOSTS = ["localhost", "buddy-api"]
 AUTH_USER_MODEL = 'buddy_rest.User'
 
 
@@ -96,7 +96,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

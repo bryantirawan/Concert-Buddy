@@ -24,16 +24,12 @@ function Nav() {
               </li>
 
               <li>
-
-              <NavLink className="nav-link" aria-current="page" to="/concertdetail/">
-                  Concert Detail
-                  </NavLink>
                 {user ? (
                   <p className="nav-link" onClick={logoutUser}>Logout</p>
                 ): (
                   <NavLink className="nav-link" aria-current="page" to="/login/">
                  Login
-                </NavLink>
+                 </NavLink>
                 )}
               </li>
               <li>
@@ -44,12 +40,9 @@ function Nav() {
                 ): (<p>hi</p>)}
               </li>
               <li className="nav-item">
-
                 <NavLink className="nav-link" aria-current="page" to="/">
                   Page 3
                 </NavLink>
-
-
               </li>
 
             </ul>

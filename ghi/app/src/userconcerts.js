@@ -2,8 +2,8 @@ import React, {useState, useEffect, useContext} from 'react'
 import AuthContext from './context/AuthContext'
 
 export default function Userconcerts() {
-    const [userconcerts, setUserCocnerts] = useState([])
-    const {authTokens} = useContext(AuthContext)
+    const [userconcerts, setUserConcerts] = useState([])
+    const {authTokens, logoutUser} = useContext(AuthContext)
     
     useEffect(() => {
         getUserConcerts()
@@ -19,17 +19,18 @@ export default function Userconcerts() {
             }
         })
         const data = await response.json()
-        setUserCocnerts(data.concerts)
+        if(response.status===200){        
+            setUserConcerts(data.concerts)
+        }else if(response.statusText === 'Unauthorized'){
+            logoutUser()
+        }
+
     }
-
-    console.log('userconcerts', userconcerts)
-
-
     const current = new Date();
     const date = `${current.getDate()}-${('0' + (current.getMonth()+1)).slice(-2)}-${current.getFullYear()}`;
 
 
-
+    console.log('userconcerts', userconcerts)
     return (
     <>
     <table>

@@ -17,8 +17,8 @@ export default function Concerts() {
     }, []
     );
 
-    const current = new Date();
-    const date = `${current.getDate()}-${('0' + (current.getMonth()+1)).slice(-2)}-${current.getFullYear()}`;
+    // const current = new Date();
+    // const date = `${current.getDate()}-${('0' + (current.getMonth()+1)).slice(-2)}-${current.getFullYear()}`;
 
 
     const handleLocationSubmit = (e) => {
@@ -109,7 +109,7 @@ export default function Concerts() {
     const handleKeypress = e => {
         //it triggers by pressing the enter key
       if (e.keyCode === 13) {
-        if (toggled == false) {
+        if (toggled === false) {
             handleArtistSubmit()
         } else {
         handleLocationSubmit();
@@ -141,17 +141,17 @@ export default function Concerts() {
         </div>
         <p></p>
         <div>
+            
     {concerts !== undefined ?
     (
+    <div>
     <table>
     <thead>
-
-        <br></br>
         <tr>
-            {/* <th>Artist</th>
+            <th>Artist</th>
             <th>Venue</th>
             <th>Date</th>
-            <th>Save Concert</th> */}
+            <th>Save Concert</th>
         </tr>
     </thead>
         <tbody>
@@ -161,9 +161,9 @@ export default function Concerts() {
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
                     <td>
-                        <form action={`http://localhost:8100/api/add/${concert.id}/`} method="POST">
+                        <form action={`http://localhost:8080/api/add/${concert.id}/`} method="POST">
                         <button>
-                        Save concert to concert model in concert microservice
+                        I'm going!
                         </button>
                         </form>
                     </td>
@@ -171,7 +171,9 @@ export default function Concerts() {
             ))
         }
         </tbody>
-    </table>) :
+    </table>
+    </div>
+    ) :
     (<p>Invalid Search Request</p>)
     }
     </div>

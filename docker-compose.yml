@@ -24,20 +24,6 @@ services:
           - POSTGRES_PASSWORD=test-databases
       ports:
           - 15432:5432
-    concerts-api:
-      build:
-        context: ./concerts-api
-        dockerfile: ./Dockerfile.dev
-      ports:
-        - "8100:8000"
-      volumes:
-        - ./concerts-api:/app
-      depends_on:
-        - database
-      environment:
-        DATABASE_URL: postgres://concerts:password@database:5432/concerts
-        WAIT_HOSTS: database:5432
-        WAIT_TIMEOUT: 240
     buddy-api:
       build:
         context: ./buddy-api
@@ -80,21 +66,6 @@ services:
       environment:
         DATABASE_URL: postgres://ticket:password@database:5432/ticket
         WAIT_HOSTS: database:5432,ticket-api:8000
-        WAIT_TIMEOUT: 240
-    buddy-poller:
-      build:
-        context: ./buddy-api/poll
-        dockerfile: ./Dockerfile.dev
-      volumes:
-        - ./buddy-api/poll:/app
-        - ./buddy-api/buddy_project:/app/buddy_project
-        - ./buddy-api/buddy_rest:/app/buddy_rest
-      depends_on:
-        - database
-        - buddy-api
-      environment:
-        DATABASE_URL: postgres://buddy:password@database:5432/buddy
-        WAIT_HOSTS: database:5432,buddy-api:8000
         WAIT_TIMEOUT: 240
     tickets-user-poller:
       build:

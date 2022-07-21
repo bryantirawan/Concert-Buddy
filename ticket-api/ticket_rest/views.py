@@ -90,6 +90,7 @@ def api_get_tickets(request):
             )
     else:
         content = json.loads(request.body)
+        print(content)
         try:
             concert = ConcertVO.objects.get(concert_id=content["concert"])
             content["concert"] = concert
@@ -158,12 +159,11 @@ def api_update_tickets(request, pk):
             response.status_code = 404
             return response
 @require_http_methods(["GET"])
-def api_tickets_by_concert(request, pk):
+def api_tickets_by_concert(request):
     if request.method == "GET":
         try:
-            tickets = Ticket.objects.filter(concert_id=pk)
+            tickets = Ticket.objects.all()
 
-            #tickets = Ticket.objects.filter(concert_id=pk)
             return JsonResponse(
                 tickets,
                 encoder=TicketEncoder,

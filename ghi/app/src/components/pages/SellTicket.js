@@ -1,4 +1,7 @@
 import React, {useEffect, useState } from 'react';
+import {
+  useParams
+} from "react-router-dom";
 
 function SellTicketForm() {
     const [price, setPrice] = useState('')
@@ -6,25 +9,79 @@ function SellTicketForm() {
     const [row, setRow] = useState('')
     const [seat, setSeat] = useState('')
     const [picture_url, setPicture] = useState('')
+    let { concert_id } = useParams();
+
+    
     // const [concert, setConcert] = useState('63b2f63f')
     // const [seller, setSeller] = useState('admin@admin.com')
     // const [buyer, setBuyer] = useState(null)
-    const concert = '63b2f63f'
-    const seller = 'admin@admin.com'
+    const concert =  concert_id
+    const seller = 'jpang1004@gmail.com'
     const buyer = null
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
         const form = {price, section, row, seat, picture_url, concert, seller, buyer}
+       const a = {
+          method: 'POST',
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form)
+         // body: JSON.stringify({price: price, section:section, concert:concert})
 
-        fetch(`http://localhost:8090/api/tickets/`, {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(form)
-        }) .then(() => {
-            console.log('Ticket Added')
-        })
+        }
+      console.log(a)
+        let res = await fetch(`http://localhost:8090/api/tickets/`, a) ;
+        //console.group(body)
+        //.then(() => {
+            console.log('Ticket Added');
+        //})
+
+        let resJson = await res.json();
+      if (res.status === 200) {
+        setPrice("");
+        setSection("");
+        setRow("");
+        setSeat("");
+        setPicture("");
+
+       
+      } else {
+        console.log(res.status);
+      }
+    } catch (err) {
+      console.log(err);
     }
+  }
+
+
+  // let handleSulbmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     let res = await fetch("https://httpbin.org/post", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         name: name,
+  //         email: email,
+  //         mobileNumber: mobileNumber,
+  //       }),
+  //     });
+  //     let resJson = await res.json();
+  //     if (res.status === 200) {
+  //       setName("");
+  //       setEmail("");
+  //       setMessage("User created successfully");
+  //     } else {
+  //       setMessage("Some error occured");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+
+
+    
 
 return (
     <>
