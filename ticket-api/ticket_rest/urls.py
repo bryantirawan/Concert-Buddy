@@ -36,7 +36,7 @@ urlpatterns = [
         name="api_update_tickets"
     ),
       path(
-        "concerttickets/<str:pk>/",
+        "concerttickets",
         api_tickets_by_concert,
         name="api_tickets_by_concert"
     ),

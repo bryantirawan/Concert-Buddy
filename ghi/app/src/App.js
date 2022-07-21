@@ -1,34 +1,41 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MainPage from './MainPage';
-import Nav from './Nav';
-
+import PrivateRoute from './utils/PrivateRoute'
+import LoginPage from './pages/LoginPage'
+import { AuthProvider } from './context/AuthContext'
+import Userconcerts from './userconcerts';
 import ConcertDetail from './concertdetail';
 import Concerts from './components/selectconcert';
-import axios from 'axios';
 import Navbar from './components/Navbar'
 import Home from './components/pages/Home';
 import SellTicketForm from './components/pages/SellTicket';
 import SearchToSellTickets from './components/pages/SearchSellTickets';
-
+import Fellowusersgoingtoconcert from './components/fellowusersgoingtoconcert';
 
 function App() {
-  axios.get('http://localhost:8080/api/selectconcerts/')
-
   return (
     <>
     <BrowserRouter>
-    <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/selectconcerts/" element={<Concerts />} />
+
+      <AuthProvider>
+        <Navbar />
+      <div className="container">
+          <Routes>
+          <Route path="/" element={<Home />} /> 
+          <Route path="/userconcerts/" element={
+            <PrivateRoute>
+              <Userconcerts />
+            </PrivateRoute>
+            }
+          />
+          <Route path="/fellowusers/" element={<Fellowusersgoingtoconcert />} /> 
+          <Route path="/selectconcerts/" element={<Concerts />} /> 
+          <Route path="/login/" element={<LoginPage />} /> 
           <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
-<<<<<<< HEAD
-          <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
-=======
+          <Route path="/tickets/:concert_id" element={<SellTicketForm />} />
           <Route path="/selltickets" element={<SearchToSellTickets />} />
-          <Route path="/tickets" element={<SellTicketForm />} />
->>>>>>> main
         </Routes>
+        </div>
+        </AuthProvider>
     </BrowserRouter>
     </>
   );
