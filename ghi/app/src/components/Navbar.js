@@ -3,7 +3,7 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import AuthContext from "../context/AuthContext";
 import './Navbar.css';
-import AuthContext from '../context/AuthContext';
+
 
 function Navbar() {
   let {user, logoutUser} = useContext(AuthContext)
@@ -26,7 +26,7 @@ function Navbar() {
   }, []);
 
   window.addEventListener('resize', showButton);
-  let {user, logoutUser} = useContext(AuthContext)
+
   return (
 
     <>
