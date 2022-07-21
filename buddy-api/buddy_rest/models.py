@@ -12,15 +12,15 @@ class Concert(models.Model):
     concert_id = models.CharField(max_length=100, unique=True)
     venue_id = models.CharField(max_length=100)
     artist_id = models.CharField(max_length=100)
-    fellow_user = models.ManyToManyField(USER_MODEL, related_name="concertsgoing")
+    fellow_user = models.ManyToManyField(USER_MODEL, related_name="concertsgoing", blank=True)
 
     def __str__(self):
         return f"Artist: {self.artist}, Venue: {self.venue}, City: {self.city}, Date: {self.date}"
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
-    concert = models.ManyToManyField(Concert)
-    objects = UserManager()
+    concert = models.ManyToManyField(Concert, blank=True)
+
 
     def __str__(self):
         return str(self.email)

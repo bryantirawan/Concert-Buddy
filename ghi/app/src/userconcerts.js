@@ -64,7 +64,7 @@ export default function Userconcerts() {
                     <td>{userconcert.concert_id}</td>
                     <td>
                     <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-primary btn-lg btn-block"type="button">
-          Users Going
+          Other Users Going
      </button></Link>
                     </td>
                     <td>
