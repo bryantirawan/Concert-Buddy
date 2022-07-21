@@ -7,6 +7,7 @@ from .encoders import ConcertVOEncoder, TicketEncoder, UserVOEncoder, TicketDeta
 from django.views.decorators.http import require_http_methods
 import requests
 from .models import ConcertVO, Ticket, UserVO
+#from concerts_rest.models import Concert
 
 
 #Get request of all concerts
@@ -151,6 +152,22 @@ def api_update_tickets(request, pk):
                 tickets,
                 encoder=TicketEncoder,
                 safe=False,
+            )
+        except Ticket.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+@require_http_methods(["GET"])
+def api_tickets_by_concert(request, pk):
+    if request.method == "GET":
+        try:
+            tickets = Ticket.objects.filter(concert_id=pk)
+
+            #tickets = Ticket.objects.filter(concert_id=pk)
+            return JsonResponse(
+                tickets,
+                encoder=TicketEncoder,
+                safe=False
             )
         except Ticket.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})

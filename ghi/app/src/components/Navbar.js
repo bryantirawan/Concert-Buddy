@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
+import AuthContext from "../context/AuthContext";
 import './Navbar.css';
 
 function Navbar() {
+  let {user, logoutUser} = useContext(AuthContext)
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -52,13 +54,29 @@ function Navbar() {
             </li>
             <li className='nav-item'>
               <Link
-                to='/tickets'
+                to='/selltickets'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
                 Sell Tickets
               </Link>
             </li>
+            <li>  
+                {user ? (
+                  <Link className="nav-links" aria-current="page" to="/userconcerts/">
+                 User's Concerts
+                </Link>
+                ): (<p>hi</p>)}
+            </li>
+            <li>  
+                {user ? (
+                  <p className="nav-links" onClick={logoutUser}>Logout</p>
+                ): (
+                  <Link className="nav-links" aria-current="page" to="/login/">
+                 Login
+                 </Link>
+                )}
+              </li>
 
             <li>
               <Link

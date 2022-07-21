@@ -1,4 +1,8 @@
 from django.urls import path
+from rest_framework_simplejwt import views as jwt_views
+from rest_framework_simplejwt.views import (
+    TokenRefreshView,
+)
 
 from .views import (
     api_select_concert, 
@@ -8,6 +12,9 @@ from .views import (
     log_concert, 
     api_concerts,
     api_concert,
+    api_get_user_concerts_withoutpk,  
+    MyTokenObtainPairView, 
+    api_get_user_concerts
 )
 
 urlpatterns = [
@@ -45,4 +52,14 @@ urlpatterns = [
         api_concert, 
         name="api_concert",
     ),
+    path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('userconcerts/<str:pk>/', api_get_user_concerts, name="api_get_user_concert_list"  ),
+    path('userconcerts/', api_get_user_concerts_withoutpk, name="api_get_user_concert_list_withoutpk"  )
     ]
+
+
+
+    # path('token/obtain/', jwt_views.TokenObtainPairView.as_view(), name='token_create'),  # override sjwt stock token
+    # path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    # path('user/create/', StaffUserCreate.as_view(), name="create_user"),

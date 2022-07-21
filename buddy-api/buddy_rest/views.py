@@ -2,15 +2,64 @@ import json
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
+from rest_framework.response import Response 
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .encoders import ( UserEncoder, ConcertEncoder)
 from .models import User, Concert
 import requests
 
+
 def format_date(date):
     proper_date = date.split("-") 
     #proper_date_list = [MM, DD, YEAR] 
     return proper_date[2] + "-" + proper_date[1] + "-" + proper_date[0] 
+
+
+@api_view(["GET"])
+#@permission_classes([IsAuthenticated])
+def api_get_user_concerts(request, pk):
+    one_user = User.objects.get(id=pk) 
+    user_concerts = one_user.concert.all()
+    return JsonResponse(
+        {   'user': one_user.id,
+            'concerts': user_concerts,
+        },
+        encoder=ConcertEncoder
+        )
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def api_get_user_concerts_withoutpk(request):
+    one_user = request.user
+    user_concerts = one_user.concert.all()
+    return JsonResponse(
+        {   'user': one_user.id,
+            'concerts': user_concerts,
+        },
+        encoder=ConcertEncoder
+        )
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['username'] = user.username
+        # ...
+
+        return token
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
 
 @require_http_methods(["GET", "POST"])
 def api_users(request):

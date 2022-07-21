@@ -5,6 +5,7 @@ from .views import (
     api_get_concert_by_location,
     api_get_tickets,
     api_list_concerts,
+    api_tickets_by_concert,
     api_update_tickets
 )
 
@@ -33,6 +34,11 @@ urlpatterns = [
         "tickets/<int:pk>/",
         api_update_tickets,
         name="api_update_tickets"
-    )
+    ),
+      path(
+        "concerttickets/<str:pk>/",
+        api_tickets_by_concert,
+        name="api_tickets_by_concert"
+    ),
 ]
 

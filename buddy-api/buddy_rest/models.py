@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 
 class Concert(models.Model):
     venue = models.CharField(max_length=200)
@@ -16,6 +16,7 @@ class Concert(models.Model):
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     concert = models.ManyToManyField(Concert)
+    objects = UserManager()
 
     def __str__(self):
         return str(self.email)
