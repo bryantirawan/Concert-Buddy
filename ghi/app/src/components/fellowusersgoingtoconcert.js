@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import {
+  useParams
+} from "react-router-dom";
+
 
 const Fellowusersgoingtoconcert = () => {
   const [fellowusers, setFellowUsers] = useState([])
+  const { concert_id } = useParams();
   
   useEffect( () => {
     getFellowUsers()
   }, [])
 
   const getFellowUsers = async() => {
-    const response = await fetch('http://localhost:8080/api/concertfellowusers/3bb2e04c/')
+    const response = await fetch(`http://localhost:8080/api/concertfellowusers/${concert_id}/`)
     const data = await response.json() 
     setFellowUsers(data.users);
   } 
