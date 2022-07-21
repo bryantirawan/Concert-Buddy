@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import React, {useContext} from 'react'
 import AuthContext from "./context/AuthContext";
-
+//
 function Nav() {
   let {user, logoutUser} = useContext(AuthContext)
   return (
