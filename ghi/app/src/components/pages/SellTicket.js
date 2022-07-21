@@ -16,7 +16,7 @@ function SellTicketForm() {
     // const [seller, setSeller] = useState('admin@admin.com')
     // const [buyer, setBuyer] = useState(null)
     const concert =  concert_id
-    const seller = 'jpang1004@gmail.com'
+    const seller = 'b@b.com'
     const buyer = null
 
     const handleSubmit = async (e) => {
