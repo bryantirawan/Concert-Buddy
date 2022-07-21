@@ -49,7 +49,7 @@ function Navbar() {
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Select Concerts
+                Buy Tickets
               </Link>
             </li>
             <li className='nav-item'>

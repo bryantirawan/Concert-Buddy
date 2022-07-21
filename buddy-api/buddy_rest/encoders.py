@@ -6,6 +6,7 @@ from .models import User, Concert
 class ConcertEncoder(ModelEncoder):
     model = Concert
     properties = [
+        "id",
         "venue",
         "city",
         "date",

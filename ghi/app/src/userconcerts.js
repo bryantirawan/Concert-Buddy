@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import AuthContext from './context/AuthContext'
 
 export default function Userconcerts() {
-    const [userconcerts, setUserCocnerts] = useState([])
+    const [userconcerts, setUserConcerts] = useState([])
     const {authTokens, logoutUser} = useContext(AuthContext)
     
     useEffect(() => {
@@ -20,7 +20,7 @@ export default function Userconcerts() {
         })
         const data = await response.json()
         if(response.status===200){        
-            setUserCocnerts(data.concerts)
+            setUserConcerts(data.concerts)
         }else if(response.statusText === 'Unauthorized'){
             logoutUser()
         }

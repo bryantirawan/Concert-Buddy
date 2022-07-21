@@ -31,8 +31,8 @@ function App() {
           <Route path="/login/" element={<LoginPage />} /> 
           <Route path="/selectconcerts/" element={<Concerts />} />
           <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
-          <Route path="/selltickets" element={<SearchToSellTickets />} />
           <Route path="/tickets/:concert_id" element={<SellTicketForm />} />
+          <Route path="/selltickets" element={<SearchToSellTickets />} />
         </Routes>
         </div>
         </AuthProvider>
