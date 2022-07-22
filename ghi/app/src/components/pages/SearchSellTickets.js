@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import Toggle from '../Toggle';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import { useContext } from 'react'
+import AuthContext from '../../context/AuthContext';
 
 function SearchToSellTickets() {
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
+    let {user} = useContext(AuthContext)
+    console.log('user from userContext', user)
 
     useEffect( () => {
         const fetchConcert = async () => {

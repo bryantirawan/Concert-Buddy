@@ -100,11 +100,11 @@ def api_get_tickets(request):
                 status=400
             )
         try:
-            seller = UserVO.objects.get(email=content["seller"])
+            seller = UserVO.objects.get(id=content["seller"])
             content["seller"] = seller
         except UserVO.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid user email"},
+                {"message": "Invalid user id"},
                 status=400
             )
         ticket = Ticket.objects.create(**content)

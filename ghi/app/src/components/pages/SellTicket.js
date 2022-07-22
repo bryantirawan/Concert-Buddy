@@ -1,7 +1,10 @@
 import React, {useEffect, useState } from 'react';
+import { useContext } from 'react'
+import AuthContext from '../../context/AuthContext';
 import {
   useParams
 } from "react-router-dom";
+
 
 function SellTicketForm() {
     const [price, setPrice] = useState('')
@@ -10,13 +13,15 @@ function SellTicketForm() {
     const [seat, setSeat] = useState('')
     const [picture_url, setPicture] = useState('')
     let { concert_id } = useParams();
+    let {user} = useContext(AuthContext) 
+
 
     
     // const [concert, setConcert] = useState('63b2f63f')
     // const [seller, setSeller] = useState('admin@admin.com')
     // const [buyer, setBuyer] = useState(null)
     const concert =  concert_id
-    const seller = 'jpang1004@gmail.com'
+    const seller = user.user_id
     const buyer = null
 
     const handleSubmit = async (e) => {
