@@ -55,13 +55,6 @@ function SearchToSellTickets() {
             console.log(error);
             setConcerts(undefined);
         });
-            // const fetchConcert = async () => {
-            //     const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=1`);
-            //     const concertData = await concertResponse.json()
-            //     console.log(concertData)
-            //     setConcerts(concertData.concerts.setlist)
-            // }
-            // fetchConcert()
     }
     const handleArtistSubmit = (e) => {
         e.preventDefault();
@@ -83,7 +76,6 @@ function SearchToSellTickets() {
                     const dateParts = concertData.concerts.setlist[i].eventDate.split("-");
                     const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
                     concertData.concerts.setlist[i].eventDate = dateObject
-
                 }
                 setConcerts(concertData.concerts.setlist);
             }
@@ -96,9 +88,6 @@ function SearchToSellTickets() {
             console.log(error);
             setConcerts(undefined);
         });
-
-
-
 
             // const fetchConcert = async () => {
             //     const concertResponse = await fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`);
@@ -156,7 +145,6 @@ function SearchToSellTickets() {
     <table>
     <thead>
 
-        <br></br>
         <tr>
             {/* <th>Artist</th>
             <th>Venue</th>
@@ -174,7 +162,7 @@ function SearchToSellTickets() {
                     <td>
                         <form action={`http://localhost:8080/api/add/${concert.id}/`} method="POST">
                         <button>
-                        Save concert to concert model in concert microservice
+                        Sell ticekt for this concert
                         </button>
                         </form>
                     </td>

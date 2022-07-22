@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import Toggle from './Toggle';
+import { useContext } from 'react'
+import AuthContext from '../context/AuthContext';
 
 export default function Concerts() {
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
+    let {user} = useContext(AuthContext) 
 
     useEffect( () => {
         const fetchConcert = async () => {
@@ -16,10 +19,6 @@ export default function Concerts() {
         fetchConcert()
     }, []
     );
-
-    // const current = new Date();
-    // const date = `${current.getDate()}-${('0' + (current.getMonth()+1)).slice(-2)}-${current.getFullYear()}`;
-
 
     const handleLocationSubmit = (e) => {
         e.preventDefault();
@@ -51,13 +50,6 @@ export default function Concerts() {
             console.log(error);
             setConcerts(undefined);
         });
-            // const fetchConcert = async () => {
-            //     const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=1`);
-            //     const concertData = await concertResponse.json()
-            //     console.log(concertData)
-            //     setConcerts(concertData.concerts.setlist)
-            // }
-            // fetchConcert()
     }
     const handleArtistSubmit = (e) => {
         e.preventDefault();
@@ -79,7 +71,6 @@ export default function Concerts() {
                     const dateParts = concertData.concerts.setlist[i].eventDate.split("-");
                     const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
                     concertData.concerts.setlist[i].eventDate = dateObject
-
                 }
                 setConcerts(concertData.concerts.setlist);
             }
@@ -93,9 +84,6 @@ export default function Concerts() {
             setConcerts(undefined);
         });
 
-
-
-
             // const fetchConcert = async () => {
             //     const concertResponse = await fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`);
             //     const concertData = await concertResponse.json()
@@ -104,6 +92,59 @@ export default function Concerts() {
             // }
             // fetchConcert()
 
+    }
+    const handleImGoingSubmit = (e, concert_id) => {
+        e.preventDefault();
+
+        const concertList = async () => {
+            #POST to Concert 
+            #PUT to User 
+
+            
+
+
+            const concertResponse = await fetch(`http://localhost:8080/buddy/concert/`);
+            const concertData = await concertResponse.json();
+            if (concertResponse.status===200){
+
+                //const form = {fellow_user}
+                const a = {
+                    method: 'PUT',
+                    headers: { "Content-Type": "application/json" },
+                    //body: JSON.stringify(form)
+                    }
+                    let res = await fetch(`http://localhost:8090/api/tickets/`, a) ;
+
+
+
+
+            }
+        }
+        concertList()
+        
+
+        // fetch(`http://localhost:8080/api/concerts`).then((concertResponse) => {
+        //     if(concertResponse.ok) {
+        //         return concertResponse.json();
+        //     }
+        //     throw new Error('Invalid Search Request');
+        // })
+        // .then((concertData) => {
+        //     if (concertData.concerts.setlist) {
+        //         for (let i in concertData.concerts.setlist){
+        //             const dateParts = concertData.concerts.setlist[i].eventDate.split("-");
+        //             const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+        //             concertData.concerts.setlist[i].eventDate = dateObject
+
+        //         }
+        //         setConcerts(concertData.concerts.setlist);
+        //     }
+        //     setArtist('');
+        // })
+        // .catch((error) => {
+        //     console.log(error);
+        //     setConcerts(undefined);
+        // });
     }
 
     const handleKeypress = e => {
@@ -160,8 +201,8 @@ export default function Concerts() {
                     <td>{concert.artist.name}</td>
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
-                    <td>
-                        <form action={`http://localhost:8080/api/add/${concert.id}/`} method="POST">
+                    <td> 
+                    <form onSubmit={handleImGoingSubmit} value={concert.id}>
                         <button>
                         I'm going!
                         </button>
