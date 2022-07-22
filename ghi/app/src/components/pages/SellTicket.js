@@ -11,12 +11,12 @@ function SellTicketForm() {
     const [picture_url, setPicture] = useState('')
     let { concert_id } = useParams();
 
-    
+
     // const [concert, setConcert] = useState('63b2f63f')
     // const [seller, setSeller] = useState('admin@admin.com')
     // const [buyer, setBuyer] = useState(null)
     const concert =  concert_id
-    const seller = 'jpang1004@gmail.com'
+    const seller = 'admin@admin.com'
     const buyer = null
 
     const handleSubmit = async (e) => {
@@ -45,7 +45,7 @@ function SellTicketForm() {
         setSeat("");
         setPicture("");
 
-       
+
       } else {
         console.log(res.status);
       }
@@ -81,7 +81,7 @@ function SellTicketForm() {
 
 
 
-    
+
 
 return (
     <>
