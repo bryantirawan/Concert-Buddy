@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import Toggle from '../Toggle';
+import { useContext } from 'react'
+import AuthContext from '../../context/AuthContext';
 
 function SearchToSellTickets() {
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
+    let {user} = useContext(AuthContext)
+    console.log('user from userContext', user)
 
     useEffect( () => {
         const fetchConcert = async () => {
@@ -119,10 +123,12 @@ function SearchToSellTickets() {
 
     return (
         <>
-        <div className='selltickets'>  
 
+        <div className='selltickets'>
+        <div>
             <Toggle onChange={(e) => setToggled(e.target.checked)} />
             <p>  Search by {toggled ? "City ": "Artist "}</p>
+
             <div className='entry'>
                 { toggled ?
             <form onSubmit={handleLocationSubmit}>
@@ -139,9 +145,14 @@ function SearchToSellTickets() {
             }
         </div>
         <p></p>
+
+
+
         <div>
+        </div>
     {concerts !== undefined ?
     (
+
     <table>
     <thead>
 
@@ -154,6 +165,7 @@ function SearchToSellTickets() {
         </tr>
     </thead>
         <tbody>
+
         {concerts.filter(concert => ((concert.eventDate)) >= (Date.now())).map((concert,idx) => (
                 <tr key={idx}>
                     <td>{concert.artist.name}</td>
@@ -173,7 +185,9 @@ function SearchToSellTickets() {
     </table>) :
     (<p>Invalid Search Request</p>)
     }
+
     </div>
+
     </div>
     </>
     )

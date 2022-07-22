@@ -23,7 +23,7 @@ function Nav() {
                 </NavLink>
               </li>
 
-              <li>  
+              <li>
                 {user ? (
                   <p className="nav-link" onClick={logoutUser}>Logout</p>
                 ): (
@@ -32,7 +32,7 @@ function Nav() {
                  </NavLink>
                 )}
               </li>
-              <li>  
+              <li>
                 {user ? (
                   <NavLink className="nav-link" aria-current="page" to="/userconcerts/">
                  User's Concerts
@@ -47,7 +47,7 @@ function Nav() {
 
             </ul>
             {user && <p>Hello {user.username}</p>}
-            
+
           </div>
         </div>
       </nav>
