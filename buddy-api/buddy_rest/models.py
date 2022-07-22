@@ -21,6 +21,5 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, null=True)
     concert = models.ManyToManyField(Concert, blank=True)
 
-
     def __str__(self):
         return str(self.email)

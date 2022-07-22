@@ -97,7 +97,13 @@ export default function Concerts() {
         e.preventDefault();
 
         const concertList = async () => {
-            const concertResponse = await fetch(`http://localhost:8080/api/concerts/${concert_id}`);
+            #POST to Concert 
+            #PUT to User 
+
+            
+
+
+            const concertResponse = await fetch(`http://localhost:8080/buddy/concert/`);
             const concertData = await concertResponse.json();
             if (concertResponse.status===200){
 
@@ -117,35 +123,28 @@ export default function Concerts() {
         concertList()
         
 
+        // fetch(`http://localhost:8080/api/concerts`).then((concertResponse) => {
+        //     if(concertResponse.ok) {
+        //         return concertResponse.json();
+        //     }
+        //     throw new Error('Invalid Search Request');
+        // })
+        // .then((concertData) => {
+        //     if (concertData.concerts.setlist) {
+        //         for (let i in concertData.concerts.setlist){
+        //             const dateParts = concertData.concerts.setlist[i].eventDate.split("-");
+        //             const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+        //             concertData.concerts.setlist[i].eventDate = dateObject
 
-
-
-
-
-
-
-        fetch(`http://localhost:8080/api/concerts`).then((concertResponse) => {
-            if(concertResponse.ok) {
-                return concertResponse.json();
-            }
-            throw new Error('Invalid Search Request');
-        })
-        .then((concertData) => {
-            if (concertData.concerts.setlist) {
-                for (let i in concertData.concerts.setlist){
-                    const dateParts = concertData.concerts.setlist[i].eventDate.split("-");
-                    const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
-                    concertData.concerts.setlist[i].eventDate = dateObject
-
-                }
-                setConcerts(concertData.concerts.setlist);
-            }
-            setArtist('');
-        })
-        .catch((error) => {
-            console.log(error);
-            setConcerts(undefined);
-        });
+        //         }
+        //         setConcerts(concertData.concerts.setlist);
+        //     }
+        //     setArtist('');
+        // })
+        // .catch((error) => {
+        //     console.log(error);
+        //     setConcerts(undefined);
+        // });
     }
 
     const handleKeypress = e => {

@@ -12,16 +12,20 @@ class ConcertViewSet(viewsets.ModelViewSet):
     
     def create(self, request, *args, **kwargs): 
         data = request.data 
-        new_concert = Concert.objects.create(
-            venue=data["venue"], 
-            city=data["city"],
-            date=data["date"],
-            artist=data["artist"],
-            concert_id=data["concert_id"],
-            venue_id=data["venue_id"],
-            artist_id=data["artist_id"]
-            )
-        
+
+        try: 
+            new_concert = Concert.objects.get(concert_id = data["concert_id"]) #check to see if Concert exists already 
+        except: 
+            new_concert = Concert(
+                venue=data["venue"], 
+                city=data["city"],
+                date=data["date"],
+                artist=data["artist"],
+                concert_id=data["concert_id"],
+                venue_id=data["venue_id"],
+                artist_id=data["artist_id"]
+                )
+            
         new_concert.save()
         for user in data["fellow_user"]:
             fellow_user_obj = User.objects.get(email=user["email"]) 
@@ -49,7 +53,11 @@ class UserViewSet(viewsets.ModelViewSet):
         
         serializer = UserSerializer(user_object) 
         return Response(serializer.data)
-            
+    
+
+
+
+
 
 
         
