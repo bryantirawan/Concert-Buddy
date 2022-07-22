@@ -12,6 +12,8 @@ class ConcertEncoder(ModelEncoder):
         "date",
         "artist",
         "concert_id",
+        "venue_id",
+        "artist_id",
     ]
 
     def get_extra_data(self, o):
@@ -27,9 +29,6 @@ class UserEncoder(ModelEncoder):
         "username",
         "id"
     ]
-    # encoders = {
-    #     "concert": ConcertEncoder(),
-    # }
     def get_extra_data(self, o):
         return {
             'import_href': f'/api/users/{o.id}'

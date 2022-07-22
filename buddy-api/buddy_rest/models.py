@@ -18,7 +18,7 @@ class Concert(models.Model):
         return f"Artist: {self.artist}, Venue: {self.venue}, City: {self.city}, Date: {self.date}"
 
 class User(AbstractUser):
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, null=True)
     concert = models.ManyToManyField(Concert, blank=True)
 
 

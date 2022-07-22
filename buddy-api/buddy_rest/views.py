@@ -57,14 +57,33 @@ def api_get_fellow_concert_users(request, pk):
     )
 
 
-@require_http_methods(["GET"])
+@require_http_methods(["GET", "PUT"])
 def api_concert(request, pk):
-    concert = Concert.objects.get(concert_id=pk)
-    return JsonResponse(
-        concert,
-        encoder=ConcertEncoder,
-        safe=False,
-    )
+    if request.method == "GET":
+        concert = Concert.objects.get(concert_id=pk)
+        return JsonResponse(
+            concert,
+            encoder=ConcertEncoder,
+            safe=False,
+        )
+    else: #PUT
+        try:
+            content = json.loads(request.body)
+            model = Concert.objects.get(id=pk)
+            props = ["fellow_user"]
+            for prop in props:
+                if prop in content:
+                    setattr(model, prop, content[prop])
+            model.save()
+            return JsonResponse(
+                model,
+                encoder=ConcertEncoder,
+                safe=False,
+            )
+        except Concert.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
 
 
 
@@ -104,8 +123,22 @@ def api_concerts(request):
             {"concerts": concerts},
             encoder=ConcertEncoder,
         )
-    else:
-        return "Create POST REQUEST VIEW"
+    else: #POST 
+        try:
+            content = json.loads(request.body)
+            concert = Concert.objects.create(**content)
+            return JsonResponse(
+                concert,
+                #encoder=ConcertEncoder, #need to figure out how to do this without encoders 
+                safe=False,
+            )
+        except:
+            response = JsonResponse(
+                {"message": "Could not create the concert"}
+            )
+            response.status_code = 400
+            return response
+
 
 
 
