@@ -1,5 +1,14 @@
 from email.errors import BoundaryError
 from django.db import models
+from django.shortcuts import reverse
+from django_countries.fields import CountryField
+
+
+
+ADDRESS_CHOICES = (
+    ('B', 'Billing'),
+    ('S', 'Shipping'),
+)
 
 
 class ConcertVO(models.Model):
@@ -43,3 +52,4 @@ class Ticket(models.Model):
 
     def __str__(self):
         return f"{self.concert}, Sold by {self.seller} for ${self.price}"
+
