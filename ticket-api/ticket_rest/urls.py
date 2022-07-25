@@ -1,8 +1,10 @@
 from django.urls import path
 
 from .views import (
+    api_get_addresses,
     api_get_concert_by_artist,
     api_get_concert_by_location,
+    api_get_orderitems,
     api_get_tickets,
     api_list_concerts,
     api_tickets_by_concert,
@@ -36,9 +38,18 @@ urlpatterns = [
         name="api_update_tickets"
     ),
       path(
-        "concerttickets",
+        "concerttickets/",
         api_tickets_by_concert,
         name="api_tickets_by_concert"
     ),
+    path(
+        "orderitems/",
+        api_get_orderitems,
+        name="api_get_orderitems"
+    ),
+    path(
+        "addresses/",
+        api_get_addresses,
+        name="api_get_addresses"
+    )
 ]
-

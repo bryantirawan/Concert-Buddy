@@ -8,7 +8,7 @@ export default function Concerts() {
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
-    let {user} = useContext(AuthContext) 
+    let {user} = useContext(AuthContext)
 
     useEffect( () => {
         const fetchConcert = async () => {
@@ -97,10 +97,10 @@ export default function Concerts() {
         e.preventDefault();
 
         const concertList = async () => {
-            #POST to Concert 
-            #PUT to User 
+            // #POST to Concert
+            // #PUT to User
 
-            
+
 
 
             const concertResponse = await fetch(`http://localhost:8080/buddy/concert/`);
@@ -121,7 +121,7 @@ export default function Concerts() {
             }
         }
         concertList()
-        
+
 
         // fetch(`http://localhost:8080/api/concerts`).then((concertResponse) => {
         //     if(concertResponse.ok) {
@@ -182,7 +182,7 @@ export default function Concerts() {
         </div>
         <p></p>
         <div>
-            
+
     {concerts !== undefined ?
     (
     <div>
@@ -201,7 +201,7 @@ export default function Concerts() {
                     <td>{concert.artist.name}</td>
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
-                    <td> 
+                    <td>
                     <form onSubmit={handleImGoingSubmit} value={concert.id}>
                         <button>
                         I'm going!
