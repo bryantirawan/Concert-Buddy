@@ -35,8 +35,6 @@ class ConcertViewSet(viewsets.ModelViewSet):
             user_object = User.objects.get(id=user["id"])  
             new_concert.fellow_user.add(fellow_user_obj)
 
-
-   
         concert_obj = Concert.objects.get(concert_id=data["concert_id"])
         user_object.concert.add(concert_obj)
 
@@ -52,6 +50,7 @@ class UserViewSet(viewsets.ModelViewSet):
         user = User.objects.all()
         return user 
     
+    #not actually used but in case you want to update via insomnia 
     def update(self, request, *args, **kwargs): 
         user_object = self.get_object()
 

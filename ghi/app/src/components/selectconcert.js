@@ -98,7 +98,7 @@ export default function Concerts() {
         return concertData 
     }
 
-    const addConcert = async (concID) => {
+    const addConcertandPutUser = async (concID) => {
             const concertToAdd = await fetchConcerttoAdd(concID)
             concertToAdd["fellow_user"] = [{
                 "id": user.user_id
@@ -121,33 +121,8 @@ export default function Concerts() {
 
     const handleImGoingSubmit = async (e, concID) => {
         e.preventDefault();
-      //POST to Concert 
-        addConcert(concID)
-
-        //PUT to User 
-        
-        // fetch(`http://localhost:8080/api/concerts`).then((concertResponse) => {
-        //     if(concertResponse.ok) {
-        //         return concertResponse.json();
-        //     }
-        //     throw new Error('Invalid Search Request');
-        // })
-        // .then((concertData) => {
-        //     if (concertData.concerts.setlist) {
-        //         for (let i in concertData.concerts.setlist){
-        //             const dateParts = concertData.concerts.setlist[i].eventDate.split("-");
-        //             const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
-        //             concertData.concerts.setlist[i].eventDate = dateObject
-
-        //         }
-        //         setConcerts(concertData.concerts.setlist);
-        //     }
-        //     setArtist('');
-        // })
-        // .catch((error) => {
-        //     console.log(error);
-        //     setConcerts(undefined);
-        // });
+      //POST to Concert and PUT to User all in one 
+      addConcertandPutUser(concID)
     }
 
     return (
