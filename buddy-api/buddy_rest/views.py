@@ -195,6 +195,8 @@ def log_concert(request, concertdict):
 
     User_save = request.user 
     User_save.concert.add(Concert_save)
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    print(request.user)
 
     return redirect('http://localhost:3000/concertdetail/'+concertdict['id'])
 
