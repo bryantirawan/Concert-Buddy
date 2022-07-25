@@ -7,14 +7,14 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function Concerts() {
-    
+
     let navigate = useNavigate()
 
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
-    let {user} = useContext(AuthContext)     
+    let {user} = useContext(AuthContext)
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
@@ -79,7 +79,7 @@ export default function Concerts() {
     const fetchConcerttoAdd = async (concID) => {
         const concertResponse = await fetch(`http://localhost:8080/api/add/${concID}/`);
         const concertData = await concertResponse.json()
-        return concertData 
+        return concertData
     }
 
     const addConcertandPutUser = async (concID) => {
@@ -105,7 +105,7 @@ export default function Concerts() {
 
     const handleImGoingSubmit = async (e, concID) => {
         e.preventDefault();
-      //POST to Concert and PUT to User all in one 
+      //POST to Concert and PUT to User all in one
       addConcertandPutUser(concID)
     }
 
@@ -127,7 +127,7 @@ export default function Concerts() {
         </div>
         <p></p>
         <div>
-            
+
     {concerts !== undefined ?
     (
     <div>
@@ -148,7 +148,7 @@ export default function Concerts() {
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
                     <td>{concert.id}</td>
-                    <td> 
+                    <td>
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
                         <button type="submit">
                         I'm going!

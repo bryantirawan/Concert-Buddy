@@ -13,10 +13,10 @@ function SellTicketForm() {
     const [seat, setSeat] = useState('')
     const [picture_url, setPicture] = useState('')
     let { concert_id } = useParams();
-    let {user} = useContext(AuthContext) 
+    let {user} = useContext(AuthContext)
 
 
-    
+
     // const [concert, setConcert] = useState('63b2f63f')
     // const [seller, setSeller] = useState('admin@admin.com')
     // const [buyer, setBuyer] = useState(null)
@@ -48,7 +48,7 @@ function SellTicketForm() {
         setSeat("");
         setPicture("");
 
-       
+
       } else {
         console.log(res.status);
       }
@@ -84,7 +84,7 @@ function SellTicketForm() {
 
 
 
-    
+
 
 return (
     <>
