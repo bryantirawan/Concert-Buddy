@@ -1,7 +1,10 @@
 import React, {useEffect, useState } from 'react';
+import { useContext } from 'react'
+import AuthContext from '../../context/AuthContext';
 import {
   useParams
 } from "react-router-dom";
+
 
 function SellTicketForm() {
     const [price, setPrice] = useState('')
@@ -10,13 +13,19 @@ function SellTicketForm() {
     const [seat, setSeat] = useState('')
     const [picture_url, setPicture] = useState('')
     let { concert_id } = useParams();
+    let {user} = useContext(AuthContext) 
+
 
     
     // const [concert, setConcert] = useState('63b2f63f')
     // const [seller, setSeller] = useState('admin@admin.com')
     // const [buyer, setBuyer] = useState(null)
     const concert =  concert_id
+<<<<<<< HEAD
     const seller = 'b@b.com'
+=======
+    const seller = user.user_id
+>>>>>>> main
     const buyer = null
 
     const handleSubmit = async (e) => {
@@ -27,8 +36,6 @@ function SellTicketForm() {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(form)
-         // body: JSON.stringify({price: price, section:section, concert:concert})
-
         }
       console.log(a)
         let res = await fetch(`http://localhost:8090/api/tickets/`, a) ;

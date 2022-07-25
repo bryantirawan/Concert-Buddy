@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import AuthContext from "../context/AuthContext";
 import './Navbar.css';
 
+
 function Navbar() {
   let {user, logoutUser} = useContext(AuthContext)
   const [click, setClick] = useState(false);
@@ -27,6 +28,7 @@ function Navbar() {
   window.addEventListener('resize', showButton);
 
   return (
+
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
@@ -56,14 +58,14 @@ function Navbar() {
                 Sell Tickets
               </Link>
             </li>
-            <li>  
+            <li>
                 {user ? (
                   <Link className="nav-links" aria-current="page" to="/userconcerts/">
                  Concerts You're Going To
                 </Link>
                 ): (<></>)}
             </li>
-            <li>  
+            <li>
                 {user ? (
                   <p className="nav-links" onClick={logoutUser}>Logout</p>
                 ): (
@@ -84,6 +86,7 @@ function Navbar() {
           </ul>
           {user && <p>Hello {user.username}</p>}
           {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+          {user && <p>Hello {user.username}</p>}
         </div>
       </nav>
     </>
