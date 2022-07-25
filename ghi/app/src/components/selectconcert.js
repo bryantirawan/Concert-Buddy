@@ -16,7 +16,7 @@ export default function Concerts() {
     const [toggled, setToggled] = useState(false);
     let {user} = useContext(AuthContext)     
 
-    const handleLocationSubmit = (e) => {
+    const handleLocationSubmit = async (e) => {
         e.preventDefault();
         const city_new = city.split(' ')
         let final_city = city_new[0]
@@ -24,30 +24,23 @@ export default function Concerts() {
             final_city += '%20'
             final_city += city_new[i]
         }
-        fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=1`).then((concertResponse) => {
-            if(concertResponse.ok) {
-                return concertResponse.json();
-            }
-            throw new Error('Invalid Search Request');
-        })
-        .then((concertData) => {
+        const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=1`)
+        if(concertResponse.ok) {
+            const concertData = await concertResponse.json();
             if (concertData.concerts.setlist) {
                 for (let i in concertData.concerts.setlist){
                     const dateParts = concertData.concerts.setlist[i].eventDate.split("-");
                     const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
                     concertData.concerts.setlist[i].eventDate = dateObject
-
                 }
                 setConcerts(concertData.concerts.setlist);
             }
-            setArtist('');
-        })
-        .catch((error) => {
-            console.log(error);
-            setConcerts(undefined);
-        });
+        } else {
+            console.error('concertData:', concertResponse);
+            setConcerts(undefined)
+        }
     }
-    const handleArtistSubmit = (e) => {
+    const handleArtistSubmit = async (e) => {
         e.preventDefault();
         const artist_new = artist.split(' ')
         let final_artist = artist_new[0]
@@ -55,13 +48,9 @@ export default function Concerts() {
             final_artist += '%20'
             final_artist += artist_new[i]
         }
-        fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`).then((concertResponse) => {
-            if(concertResponse.ok) {
-                return concertResponse.json();
-            }
-            throw new Error('Invalid Search Request');
-        })
-        .then((concertData) => {
+        const concertResponse = await fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`)
+        if(concertResponse.ok) {
+            const concertData = await concertResponse.json();
             if (concertData.concerts.setlist) {
                 for (let i in concertData.concerts.setlist){
                     const dateParts = concertData.concerts.setlist[i].eventDate.split("-");
@@ -70,15 +59,10 @@ export default function Concerts() {
                 }
                 setConcerts(concertData.concerts.setlist);
             }
-            else {
-                setConcerts(undefined)
-            }
-            setCity('');
-        })
-        .catch((error) => {
-            console.log(error);
-            setConcerts(undefined);
-        });
+        } else {
+            console.error('concertData:', concertResponse);
+            setConcerts(undefined)
+        }
     }
 
     const handleKeypress = e => {
@@ -185,3 +169,4 @@ export default function Concerts() {
     </>
     )
 }
+
