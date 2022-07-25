@@ -8,7 +8,7 @@ function SearchToSellTickets() {
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
-    let {user} = useContext(AuthContext) 
+    let {user} = useContext(AuthContext)
     console.log('user from userContext', user)
 
     useEffect( () => {
@@ -112,10 +112,12 @@ function SearchToSellTickets() {
 
     return (
         <>
-        <div className='selltickets'>  
 
+        <div className='selltickets'>
+        <div>
             <Toggle onChange={(e) => setToggled(e.target.checked)} />
             <p>  Search by {toggled ? "City ": "Artist "}</p>
+
             <div className='entry'>
                 { toggled ?
             <form onSubmit={handleLocationSubmit}>
@@ -132,9 +134,14 @@ function SearchToSellTickets() {
             }
         </div>
         <p></p>
+
+
+
         <div>
+        </div>
     {concerts !== undefined ?
     (
+
     <table>
     <thead>
 
@@ -146,6 +153,7 @@ function SearchToSellTickets() {
         </tr>
     </thead>
         <tbody>
+
         {concerts.filter(concert => ((concert.eventDate)) >= (Date.now())).map((concert,idx) => (
                 <tr key={idx}>
                     <td>{concert.artist.name}</td>
@@ -165,7 +173,9 @@ function SearchToSellTickets() {
     </table>) :
     (<p>Invalid Search Request</p>)
     }
+
     </div>
+
     </div>
     </>
     )
