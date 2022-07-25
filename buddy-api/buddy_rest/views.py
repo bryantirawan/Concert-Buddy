@@ -95,6 +95,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Add custom claims
         token['username'] = user.username
+        token['email'] = user.email
         # ...
 
         return token
@@ -190,7 +191,7 @@ def api_get_concert_by_artist(request, pk):
         )
 
 
-@require_http_methods(["POST"])
+@require_http_methods(["GET"])
 def log_concert(request, concertdict):
     url = 'https://api.setlist.fm/rest/1.0/'
     setlist_path = f'setlist/{concertdict}'
@@ -203,33 +204,38 @@ def log_concert(request, concertdict):
     print('setlist trying to be saved', setlists)
     concertdict = {} 
     concertdict['venue'] = setlists['venue']['name']
+    concertdict['venue_id'] = setlists['venue']['id']
+    concertdict['artist_id'] = setlists['artist']['mbid']
     concertdict['city'] = setlists['venue']['city']['name']
-    concertdict['eventDate'] = format_date(setlists['eventDate'])
+    concertdict['date'] = format_date(setlists['eventDate'])
     concertdict['artist'] = setlists['artist']['name']
-    concertdict['id'] = setlists['id'] 
-    concertdict['venueID'] = setlists['venue']['id']
-    concertdict['artistID'] = setlists['artist']['mbid']
+    concertdict['concert_id'] = setlists['id'] 
 
-    try: 
-        Concert_save = Concert.objects.get(concert_id = concertdict['id']) #check to see if Concert exists already 
-    except: 
-        Concert_save = Concert(
-            venue=concertdict['venue'], 
-            city=concertdict['city'], 
-            date=concertdict['eventDate'], 
-            artist=concertdict['artist'],
-            concert_id=concertdict['id'], 
-            venue_id=concertdict['venueID'],
-            artist_id=concertdict['artistID'], 
-            )
+    print('concertdict from log_concert', concertdict)
+    return JsonResponse(concertdict)
+
+
+
+    # try: 
+    #     Concert_save = Concert.objects.get(concert_id = concertdict['id']) #check to see if Concert exists already 
+    # except: 
+    #     Concert_save = Concert(
+    #         venue=concertdict['venue'], 
+    #         city=concertdict['city'], 
+    #         date=concertdict['eventDate'], 
+    #         artist=concertdict['artist'],
+    #         concert_id=concertdict['id'], 
+    #         venue_id=concertdict['venueID'],
+    #         artist_id=concertdict['artistID'], 
+    #         )
         
-    Concert_save.save() #save instance to Concert model 
-    Concert_save.fellow_user.add(request.user) #assign user to Concert just saved (many to many needs to be created before assigned)
+    # Concert_save.save() #save instance to Concert model 
+    # Concert_save.fellow_user.add(request.user) #assign user to Concert just saved (many to many needs to be created before assigned)
 
-    User_save = request.user 
-    User_save.concert.add(Concert_save)
+    # User_save = request.user 
+    # User_save.concert.add(Concert_save)
 
-    return redirect('http://localhost:3000/concertdetail/'+concertdict['id'])
+    # return redirect('http://localhost:3000/concertdetail/'+concertdict['id'])
 
     
 

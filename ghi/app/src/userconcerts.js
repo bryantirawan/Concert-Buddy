@@ -11,7 +11,7 @@ export default function Userconcerts() {
     const [userconcerts, setUserConcerts] = useState([])
     const {authTokens, logoutUser} = useContext(AuthContext)
     const { concert_id } = useParams();
-    console.log('concert_id', concert_id)
+
     
     useEffect(() => {
         getUserConcerts()

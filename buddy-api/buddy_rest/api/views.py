@@ -27,9 +27,19 @@ class ConcertViewSet(viewsets.ModelViewSet):
                 )
             
         new_concert.save()
+
+        user_object = ''
+
         for user in data["fellow_user"]:
-            fellow_user_obj = User.objects.get(email=user["email"]) 
+            fellow_user_obj = User.objects.get(id=user["id"])  
+            user_object = User.objects.get(id=user["id"])  
             new_concert.fellow_user.add(fellow_user_obj)
+
+
+   
+        concert_obj = Concert.objects.get(concert_id=data["concert_id"])
+        user_object.concert.add(concert_obj)
+
 
         serializer = ConcertSerializer(new_concert)
 
