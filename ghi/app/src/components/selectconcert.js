@@ -36,7 +36,7 @@ export default function Concerts() {
                 setConcerts(concertData.concerts.setlist);
             }
         } else {
-            console.error('concertData:', concertResponse);
+            console.error('concertResponse could not be fetched. Maybe setlist fm API is down', concertResponse);
             setConcerts(undefined)
         }
     }
@@ -60,7 +60,7 @@ export default function Concerts() {
                 setConcerts(concertData.concerts.setlist);
             }
         } else {
-            console.error('concertData:', concertResponse);
+            console.error('concertResponse could not be fetched. Maybe setlist fm API is down:', concertResponse);
             setConcerts(undefined)
         }
     }
@@ -137,7 +137,6 @@ export default function Concerts() {
             <th>Artist</th>
             <th>Venue</th>
             <th>Date</th>
-            <th>Concert ID</th>
             <th>Save Concert</th>
         </tr>
     </thead>
@@ -147,7 +146,6 @@ export default function Concerts() {
                     <td>{concert.artist.name}</td>
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
-                    <td>{concert.id}</td>
                     <td> 
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
                         <button type="submit">

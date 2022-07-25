@@ -60,7 +60,7 @@ export default function Userconcerts() {
                     <td>{userconcert.city}</td>
                     <td>{userconcert.date}</td>
                     <td>
-                    <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-primary btn-lg btn-block"type="button">
+                    <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button type="button">
           Other Users Going
      </button></Link>
                     </td>
