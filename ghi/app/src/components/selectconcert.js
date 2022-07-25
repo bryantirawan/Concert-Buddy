@@ -14,7 +14,10 @@ export default function Concerts() {
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
-    let {user} = useContext(AuthContext)     
+    let {user} = useContext(AuthContext)    
+
+
+    
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
@@ -112,6 +115,7 @@ export default function Concerts() {
     return (
         <>
         <div className='selectconcerts'>
+            <div>
             <Toggle onChange={(e) => setToggled(e.target.checked)} />
             <p>  Search by {toggled ? "City ": "Artist "}</p>
             <div className='entry'>
@@ -127,18 +131,19 @@ export default function Concerts() {
         </div>
         <p></p>
         <div>
-            
+        </div>
+
     {concerts !== undefined ?
     (
-    <div>
-    <table>
+    <table >
     <thead>
         <tr>
             <th>Artist</th>
             <th>Venue</th>
-            <th>Date</th>
-            <th>Concert ID</th>
-            <th>Save Concert</th>
+            <th>Date</th> 
+            {/* <th>Concert ID</th> */}
+            <th>           </th>
+            
         </tr>
     </thead>
         <tbody>
@@ -147,7 +152,7 @@ export default function Concerts() {
                     <td>{concert.artist.name}</td>
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
-                    <td>{concert.id}</td>
+                    {/* <td>{concert.id}</td> */}
                     <td> 
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
                         <button type="submit">
@@ -160,7 +165,6 @@ export default function Concerts() {
         }
         </tbody>
     </table>
-    </div>
     ) :
     (<p>Invalid Search Request</p>)
     }

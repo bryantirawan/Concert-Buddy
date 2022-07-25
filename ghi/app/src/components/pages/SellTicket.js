@@ -4,6 +4,8 @@ import AuthContext from '../../context/AuthContext';
 import {
   useParams
 } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 
 function SellTicketForm() {
@@ -14,6 +16,8 @@ function SellTicketForm() {
     const [picture_url, setPicture] = useState('')
     let { concert_id } = useParams();
     let {user} = useContext(AuthContext) 
+    let navigate = useNavigate()
+
 
 
     
@@ -21,12 +25,9 @@ function SellTicketForm() {
     // const [seller, setSeller] = useState('admin@admin.com')
     // const [buyer, setBuyer] = useState(null)
     const concert =  concert_id
-<<<<<<< HEAD
-    const seller = 'b@b.com'
-=======
     const seller = user.user_id
->>>>>>> main
     const buyer = null
+  
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,11 +47,13 @@ function SellTicketForm() {
 
         let resJson = await res.json();
       if (res.status === 200) {
-        setPrice("");
-        setSection("");
-        setRow("");
-        setSeat("");
-        setPicture("");
+        // setPrice("");
+        // setSection("");
+        // setRow("");
+        // setSeat("");
+        // setPicture("");
+        navigate(-1)
+
 
        
       } else {
@@ -60,6 +63,14 @@ function SellTicketForm() {
       console.log(err);
     }
   }
+
+
+//   if (res.status === 200){
+//     console.log('concert added successfully and user attached to fellow user now needs to redirect')
+//     navigate(`/concertdetail/${concID}`)
+// } else {
+//     alert('concert unable to be added')
+// }
 
 
   // let handleSulbmit = async (e) => {
@@ -140,7 +151,9 @@ return (
                     </div>
                   </div>
                   <button className="btn btn-lg btn-primary">Submit Listing</button>
+
                 </form>
+
               </div>
             </div>
           </div>

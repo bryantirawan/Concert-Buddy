@@ -232,15 +232,8 @@ def log_concert(request, concertdict):
     # Concert_save.save() #save instance to Concert model 
     # Concert_save.fellow_user.add(request.user) #assign user to Concert just saved (many to many needs to be created before assigned)
 
-<<<<<<< HEAD
-    User_save = request.user 
-    User_save.concert.add(Concert_save)
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    print(request.user)
-=======
     # User_save = request.user 
     # User_save.concert.add(Concert_save)
->>>>>>> main
 
     # return redirect('http://localhost:3000/concertdetail/'+concertdict['id'])
 
