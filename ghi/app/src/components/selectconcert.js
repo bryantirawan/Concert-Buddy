@@ -1,24 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState } from 'react';
 import Toggle from './Toggle';
 import { useContext } from 'react'
 import AuthContext from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
+
 
 export default function Concerts() {
+
+    let navigate = useNavigate()
+
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
     let {user} = useContext(AuthContext)
-
-    useEffect( () => {
-        const fetchConcert = async () => {
-            const concertResponse = await fetch(`http://localhost:8080/api/selectconcerts`);
-            const concertData = await concertResponse.json();
-            setConcerts(concertData.setlist);
-        }
-        fetchConcert()
-    }, []
-    );
 
     const handleLocationSubmit = (e) => {
         e.preventDefault();
@@ -83,68 +79,6 @@ export default function Concerts() {
             console.log(error);
             setConcerts(undefined);
         });
-
-            // const fetchConcert = async () => {
-            //     const concertResponse = await fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`);
-            //     const concertData = await concertResponse.json()
-            //     console.log(concertData)
-            //     setConcerts(concertData.concerts.setlist)
-            // }
-            // fetchConcert()
-
-    }
-    const handleImGoingSubmit = (e, concert_id) => {
-        e.preventDefault();
-
-        const concertList = async () => {
-            // #POST to Concert
-            // #PUT to User
-
-
-
-
-            const concertResponse = await fetch(`http://localhost:8080/buddy/concert/`);
-            const concertData = await concertResponse.json();
-            if (concertResponse.status===200){
-
-                //const form = {fellow_user}
-                const a = {
-                    method: 'PUT',
-                    headers: { "Content-Type": "application/json" },
-                    //body: JSON.stringify(form)
-                    }
-                    let res = await fetch(`http://localhost:8090/api/tickets/`, a) ;
-
-
-
-
-            }
-        }
-        concertList()
-
-
-        // fetch(`http://localhost:8080/api/concerts`).then((concertResponse) => {
-        //     if(concertResponse.ok) {
-        //         return concertResponse.json();
-        //     }
-        //     throw new Error('Invalid Search Request');
-        // })
-        // .then((concertData) => {
-        //     if (concertData.concerts.setlist) {
-        //         for (let i in concertData.concerts.setlist){
-        //             const dateParts = concertData.concerts.setlist[i].eventDate.split("-");
-        //             const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
-        //             concertData.concerts.setlist[i].eventDate = dateObject
-
-        //         }
-        //         setConcerts(concertData.concerts.setlist);
-        //     }
-        //     setArtist('');
-        // })
-        // .catch((error) => {
-        //     console.log(error);
-        //     setConcerts(undefined);
-        // });
     }
 
     const handleKeypress = e => {
@@ -158,7 +92,38 @@ export default function Concerts() {
       }
     };
 
+    const fetchConcerttoAdd = async (concID) => {
+        const concertResponse = await fetch(`http://localhost:8080/api/add/${concID}/`);
+        const concertData = await concertResponse.json()
+        return concertData
+    }
 
+    const addConcertandPutUser = async (concID) => {
+            const concertToAdd = await fetchConcerttoAdd(concID)
+            concertToAdd["fellow_user"] = [{
+                "id": user.user_id
+            }
+            ]
+            const jsonBody = {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(concertToAdd)
+            }
+
+            let res = await fetch(`http://localhost:8080/buddy/concert/`, jsonBody);
+            if (res.status === 200){
+                console.log('concert added successfully and user attached to fellow user now needs to redirect')
+                navigate(`/concertdetail/${concID}`)
+            } else {
+                alert('concert unable to be added')
+            }
+        }
+
+    const handleImGoingSubmit = async (e, concID) => {
+        e.preventDefault();
+      //POST to Concert and PUT to User all in one
+      addConcertandPutUser(concID)
+    }
 
     return (
         <>
@@ -168,15 +133,11 @@ export default function Concerts() {
             <div className='entry'>
                 { toggled ?
             <form onSubmit={handleLocationSubmit}>
-                {/* <label>City:  </label> */}
                 <input type="text" value={city} required onChange={(e) => {setCity(e.target.value)}} onKeyPress={handleKeypress}/>
-                {/* <input type="submit" value="Fetch concerts for city"/> */}
             </form>
             :
             <form onSubmit={handleArtistSubmit}>
-                {/* <label>Artist:  </label> */}
                 <input type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
-                {/* <input type="submit" value="Fetch concerts by artist"/> */}
             </form>
             }
         </div>
@@ -192,6 +153,7 @@ export default function Concerts() {
             <th>Artist</th>
             <th>Venue</th>
             <th>Date</th>
+            <th>Concert ID</th>
             <th>Save Concert</th>
         </tr>
     </thead>
@@ -201,12 +163,13 @@ export default function Concerts() {
                     <td>{concert.artist.name}</td>
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
+                    <td>{concert.id}</td>
                     <td>
-                    <form onSubmit={handleImGoingSubmit} value={concert.id}>
-                        <button>
+                    <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
+                        <button type="submit">
                         I'm going!
                         </button>
-                        </form>
+                    </form>
                     </td>
                 </tr>
             ))
