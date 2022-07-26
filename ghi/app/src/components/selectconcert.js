@@ -16,8 +16,15 @@ export default function Concerts() {
     const [toggled, setToggled] = useState(false);
     let {user} = useContext(AuthContext)
 
+
+
+
+
+
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
+
+
         const city_new = city.split(' ')
         let final_city = city_new[0]
         for (let i = 1; i < city_new.length; i++) {
@@ -34,14 +41,15 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+            } else {
+                console.error('concertData:', concertResponse);
+                setConcerts(undefined)
             }
-        } else {
-            console.error('concertData:', concertResponse);
-            setConcerts(undefined)
         }
     }
     const handleArtistSubmit = async (e) => {
         e.preventDefault();
+
         const artist_new = artist.split(' ')
         let final_artist = artist_new[0]
         for (let i = 1; i < artist_new.length; i++) {
@@ -58,10 +66,10 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+            } else {
+                console.error('concertData:', concertResponse);
+                setConcerts(undefined)
             }
-        } else {
-            console.error('concertData:', concertResponse);
-            setConcerts(undefined)
         }
     }
 
@@ -112,6 +120,7 @@ export default function Concerts() {
     return (
         <>
         <div className='selectconcerts'>
+            <div>
             <Toggle onChange={(e) => setToggled(e.target.checked)} />
             <p>  Search by {toggled ? "City ": "Artist "}</p>
             <div className='entry'>
@@ -127,27 +136,32 @@ export default function Concerts() {
         </div>
         <p></p>
         <div>
+        </div>
 
     {concerts !== undefined ?
     (
-    <div>
     <table>
     <thead>
         <tr>
             <th>Artist</th>
+            <th>City</th>
+
             <th>Venue</th>
             <th>Date</th>
-            <th>Concert ID</th>
-            <th>Save Concert</th>
+            {/* <th>Concert ID</th> */}
+            <th>           </th>
+
         </tr>
     </thead>
         <tbody>
         {concerts.filter(concert => ((concert.eventDate)) >= (Date.now())).map((concert,idx) => (
                 <tr key={idx}>
                     <td>{concert.artist.name}</td>
+                    <td>{concert.venue.city.name}</td>
+
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
-                    <td>{concert.id}</td>
+                    {/* <td>{concert.id}</td> */}
                     <td>
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
                         <button type="submit">
@@ -160,7 +174,6 @@ export default function Concerts() {
         }
         </tbody>
     </table>
-    </div>
     ) :
     (<p>Invalid Search Request</p>)
     }
@@ -169,4 +182,3 @@ export default function Concerts() {
     </>
     )
 }
-

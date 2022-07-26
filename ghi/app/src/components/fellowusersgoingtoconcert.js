@@ -22,16 +22,40 @@ const Fellowusersgoingtoconcert = () => {
 
   return (
     <>
-    <p>Other users going to the concert:</p>
+
+
+
+
+<table  className="table table-striped table-bordered ">
+    <thead>
+
+        <tr>
+             <th>Concert Buddies!</th>
+
+        </tr>
+    </thead>
+        <tbody>
+        {fellowusers.map((fellowuser,idx) => (
+                <tr key={idx}>
+                    <td>{fellowuser.email}</td>
+                </tr>
+            ))
+        }
+      
+        </tbody>
+    </table> 
+
+    {/* <p>Other users going to the concert:</p>
     <ul>
       {fellowusers.map((fellowuser,idx) => (
         <li key={idx}>
           {fellowuser.email}
+          
         </li>
       )
       )}
 
-    </ul>
+    </ul> */}
     </>
   )
 }
