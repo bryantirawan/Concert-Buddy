@@ -16,7 +16,6 @@ export default function Concerts() {
     const [toggled, setToggled] = useState(false);
     let {user} = useContext(AuthContext)    
 
-    let check=false
 
 
 
@@ -24,7 +23,7 @@ export default function Concerts() {
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
-        check = true
+
 
         const city_new = city.split(' ')
         let final_city = city_new[0]
@@ -42,15 +41,14 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+            } else {
+                console.error('concertData:', concertResponse);
+                setConcerts(undefined)
             }
-        } else {
-            console.error('concertData:', concertResponse);
-            setConcerts(undefined)
-        }
+        } 
     }
     const handleArtistSubmit = async (e) => {
         e.preventDefault();
-        check = true
 
         const artist_new = artist.split(' ')
         let final_artist = artist_new[0]
@@ -68,11 +66,11 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+            } else {
+                console.error('concertData:', concertResponse);
+                setConcerts(undefined)
             }
-        } else {
-            console.error('concertData:', concertResponse);
-            setConcerts(undefined)
-        }
+        } 
     }
 
     const handleKeypress = e => {
@@ -142,7 +140,7 @@ export default function Concerts() {
 
     {concerts !== undefined ?
     (
-    <table >
+    <table>
     <thead>
         <tr>
             <th>Artist</th>
