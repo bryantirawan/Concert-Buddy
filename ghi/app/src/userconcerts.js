@@ -39,7 +39,7 @@ export default function Userconcerts() {
 
     return (
     <>
-    <table>
+    <table className="table table-hover table-striped">
     <thead>
         <tr>
             <th>Artist</th>
@@ -52,20 +52,22 @@ export default function Userconcerts() {
     </thead>
         <tbody>
         {
-        //userconcerts.filter(userconcert => ((userconcert.date)) >= (Date.now())).map((userconcert,idx) => (
+        //userconcerts.filter(userconcert => ((userconcert.date)) >= 
+        //(Date.now())).map((userconcert,idx) => (
+            //new Date(data.date).toLocaleDateString('en-US'
             userconcerts.map((userconcert,idx) => (
                 <tr key={idx}>
                     <td>{userconcert.artist}</td>  
                     <td>{userconcert.venue}</td>
                     <td>{userconcert.city}</td>
-                    <td>{userconcert.date}</td>
+                    <td>{new Date(userconcert.date).toLocaleDateString('en-US')}</td>
                     <td>
-                    <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-primary btn-lg btn-block"type="button">
+                    <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-success"type="button">
           Other Users Going
      </button></Link>
                     </td>
                     <td>
-                        <button>        
+                        <button className="btn btn-primary">        
                         Buy
                         </button>
                     </td>

@@ -108,20 +108,65 @@ export default function ConcertDetail() {
           
             <>
             <h1>Concert Details</h1>
-              <h3>Venue:  {data.venue}</h3>
+              {/* <h3>Venue:  {data.venue}</h3>
               <h3>City:  {data.city}</h3>
               <h3>Date:  { new Date(data.date).toLocaleDateString('en-US')}</h3>
 
-              <h3>Artist:  {data.artist}</h3>
+              <h3>Artist:  {data.artist}</h3> */}
+          
+              <table className="table table-striped table-bordered ">
+
+              <thead>
+              </thead>
+<tbody>
+              <tr>
+        <th>Venue</th>
+        <td> {data.venue}</td>
+      
+    </tr>
+    <tr>
+        <th>City</th>
+        <td>{data.city}</td>
+       
+    </tr>
+    <tr>
+        <th>Date</th>
+        <td> { new Date(data.date).toLocaleDateString('en-US')}</td>
+       
+    </tr>
+
+    <tr>
+        <th>Artist</th>
+        <td>{data.artist}</td>
+       
+    </tr>
+
+    <tr>
+        {/* <th>
+                   <button className="btn btn-success btn-lg btn-block" >
+           Buy Tickets
+          </button>
+        </th> */}
+        <th>   <Link to={`/tickets/${concert_id}`} className="current btn-lg   btn-block   "><button className="btn btn-success btn-lg btn-block"type="button">
+          Sell Tickets
+     </button></Link> </th>
+
+     <td> </td>
+       
+    </tr>
+
+    </tbody>
+    </table>
+
           
 
 
-        <Link to={`/tickets/${concert_id}`} className="current"><button className="btn btn-primary btn-lg btn-block"type="button">
+        {/* <Link to={`/tickets/${concert_id}`} className="current btn-lg   btn-block   "><button className="btn btn-primary btn-lg btn-block"type="button">
           Sell
-     </button></Link>
+     </button></Link> */}
       
 
-<table>
+<table  className="table table-striped table-bordered ">
     <thead>
 
         <tr>
@@ -141,8 +186,10 @@ export default function ConcertDetail() {
                     <td>{ticket.section}</td>
                     <td>{ticket.row} </td>
                     <td>{ticket.seat} </td>
-                    <td>
+                    
                     {/* <button className="btn btn-primary btn-lg btn-block" onClick={() => openInNewTab('https://google.com')}> */}
+                    
+                    <td>
                     <button className="btn btn-primary btn-lg btn-block" >
            Buy
           </button>
