@@ -39,6 +39,7 @@ export default function Userconcerts() {
 
     return (
     <>
+    <div className="container">
     <table className="table table-hover table-striped">
     <thead>
         <tr>
@@ -76,7 +77,7 @@ export default function Userconcerts() {
             }  
         </tbody>
     </table>
-
+    </div>
     
     </>
 

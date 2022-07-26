@@ -17,13 +17,8 @@ export default function Concerts() {
     let {user} = useContext(AuthContext)    
 
 
-
-
-    
-
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
-
 
         const city_new = city.split(' ')
         let final_city = city_new[0]

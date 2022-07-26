@@ -18,7 +18,7 @@ function App() {
 
       <AuthProvider>
         <Navbar />
-      <div className="container">
+      
           <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/userconcerts/" element={
@@ -34,7 +34,7 @@ function App() {
           <Route path="/tickets/:concert_id" element={<SellTicketForm />} />
           <Route path="/selltickets" element={<SearchToSellTickets />} />
         </Routes>
-        </div>
+        
         </AuthProvider>
     </BrowserRouter>
     </>

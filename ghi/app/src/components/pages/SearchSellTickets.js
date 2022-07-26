@@ -43,11 +43,11 @@ function SearchToSellTickets() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+            } else {
+                console.error('concertData:', concertResponse);
+                setConcerts(undefined)
             }
-        } else {
-            console.error('concertData:', concertResponse);
-            setConcerts(undefined)
-        }
+        } 
     }
     const handleArtistSubmit = async (e) => {
         e.preventDefault();
@@ -67,11 +67,11 @@ function SearchToSellTickets() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+            } else {
+                console.error('concertData:', concertResponse);
+                setConcerts(undefined)
             }
-        } else {
-            console.error('concertData:', concertResponse);
-            setConcerts(undefined)
-        }
+        } 
     }
 
             // const fetchConcert = async () => {
