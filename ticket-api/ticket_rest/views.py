@@ -171,6 +171,11 @@ def api_get_orderitems(request):
         try:
             ticket = Ticket.objects.get(id=content["ticket"])
             content["ticket"] = ticket
+            setattr(ticket, "sold", True)
+            new_user = UserVO.objects.get(id=content["user"])
+            # content["user"] = new_user
+            setattr(ticket, "buyer", new_user)
+            ticket.save()
         except Ticket.DoesNotExist:
             return JsonResponse(
                 {"message": "Invalid concert id"},
@@ -184,7 +189,16 @@ def api_get_orderitems(request):
                 {"message": "Invalid user id"},
                 status=400
             )
+        try:
+            shipping_address = Address.objects.get(user=content["shipping_address"])
+            content["shipping_address"] = shipping_address
+        except Address.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid Address User"},
+                status=400
+            )
         order_item = OrderItem.objects.create(**content)
+
         return JsonResponse(
             order_item,
             encoder = OrderItemEncoder,

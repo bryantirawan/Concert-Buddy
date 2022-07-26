@@ -88,7 +88,7 @@ class OrderItemEncoder(ModelEncoder):
 class AddressEncoder(ModelEncoder):
     model = Address
     properties = [
-        "user"
+        "user",
         "street_address",
         "apartment_address",
         "country",
