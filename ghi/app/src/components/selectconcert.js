@@ -16,11 +16,16 @@ export default function Concerts() {
     const [toggled, setToggled] = useState(false);
     let {user} = useContext(AuthContext)    
 
+    let check=false
+
+
 
     
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
+        check = true
+
         const city_new = city.split(' ')
         let final_city = city_new[0]
         for (let i = 1; i < city_new.length; i++) {
@@ -45,6 +50,8 @@ export default function Concerts() {
     }
     const handleArtistSubmit = async (e) => {
         e.preventDefault();
+        check = true
+
         const artist_new = artist.split(' ')
         let final_artist = artist_new[0]
         for (let i = 1; i < artist_new.length; i++) {
@@ -139,6 +146,8 @@ export default function Concerts() {
     <thead>
         <tr>
             <th>Artist</th>
+            <th>City</th>
+
             <th>Venue</th>
             <th>Date</th> 
             {/* <th>Concert ID</th> */}
@@ -150,6 +159,8 @@ export default function Concerts() {
         {concerts.filter(concert => ((concert.eventDate)) >= (Date.now())).map((concert,idx) => (
                 <tr key={idx}>
                     <td>{concert.artist.name}</td>
+                    <td>{concert.venue.city.name}</td>
+
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
                     {/* <td>{concert.id}</td> */}
