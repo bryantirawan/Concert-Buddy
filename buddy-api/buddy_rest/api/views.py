@@ -1,4 +1,5 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions, status, serializers 
+from rest_framework.views import APIView
 from rest_framework.response import Response 
 from buddy_rest.models import Concert, User 
 from .serializer import ConcertSerializer, UserSerializer
@@ -63,10 +64,6 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = UserSerializer(user_object) 
         return Response(serializer.data)
     
-
-
-
-
 
 
         

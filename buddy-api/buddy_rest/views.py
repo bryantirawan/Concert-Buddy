@@ -3,10 +3,13 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
 from rest_framework.response import Response 
+from rest_framework import status, permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.views import APIView
+from rest_framework import viewsets, permissions, status, serializers 
 
 from .encoders import ( UserEncoder, ConcertEncoder)
 from .models import User, Concert
@@ -240,4 +243,39 @@ def log_concert(request, concertdict):
     
 
 
+
+class CreateUserSerializer(serializers.ModelSerializer):
+    """
+    Currently unused in preference of the below.
+    """
+    email = serializers.EmailField(
+        required=True
+    )
+    username = serializers.CharField()
+    password = serializers.CharField(min_length=8, write_only=True)
+
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        password = validated_data.pop('password', None)
+        instance = self.Meta.model(**validated_data)  # as long as the fields are the same, we can just use this
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+
+class UserCreate(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
+
+    def post(self, request, format='json'):
+        serializer = CreateUserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            if user:
+                json = serializer.data
+                return Response(json, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

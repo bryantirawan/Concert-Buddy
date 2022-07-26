@@ -5,6 +5,7 @@ from rest_framework_simplejwt.views import (
 )
 
 from .views import (
+    UserCreate,
     api_select_concert, 
     api_select_concert_for_city,
     api_users, 
@@ -57,6 +58,11 @@ urlpatterns = [
         "concertfellowusers/<str:pk>/", 
         api_get_fellow_concert_users, 
         name="api_get_fellow_concert_users",
+    ),
+    path(
+        "signup/", 
+        UserCreate.as_view(), 
+        name="signup",
     ),
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

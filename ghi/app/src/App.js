@@ -10,6 +10,7 @@ import Home from './components/pages/Home';
 import SellTicketForm from './components/pages/SellTicket';
 import SearchToSellTickets from './components/pages/SearchSellTickets';
 import Fellowusersgoingtoconcert from './components/fellowusersgoingtoconcert';
+import Signup from './pages/signup';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/fellowusers/:concert_id" element={<Fellowusersgoingtoconcert />} />
           <Route path="/selectconcerts/" element={<Concerts />} />
           <Route path="/login/" element={<LoginPage />} />
+          <Route path="/signup/" element={<Signup />} />
           <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
           <Route path="/tickets/:concert_id" element={<SellTicketForm />} />
           <Route path="/selltickets" element={<SearchToSellTickets />} />

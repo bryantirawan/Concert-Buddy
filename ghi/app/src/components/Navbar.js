@@ -63,7 +63,9 @@ function Navbar() {
                   <Link className="nav-links" aria-current="page" to="/userconcerts/">
                  Concerts You're Going To
                 </Link>
-                ): (<></>)}
+                ): (<Link className="nav-links" aria-current="page" to="/signup/">
+                Sign Up
+               </Link>)}
             </li>
             <li>
                 {user ? (
