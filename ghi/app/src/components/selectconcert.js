@@ -14,6 +14,7 @@ export default function Concerts() {
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
+    const [invalid, setInvalid] = useState(false);
     let {user} = useContext(AuthContext)    
 
 
@@ -36,9 +37,11 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+                setInvalid(false)
             } else {
                 console.error('concertData:', concertResponse);
-                setConcerts(undefined)
+                setInvalid(true)
+                setConcerts([])
             }
         } 
     }
@@ -61,9 +64,11 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+                setInvalid(false)
             } else {
                 console.error('concertData:', concertResponse);
-                setConcerts(undefined)
+                setInvalid(true)
+                setConcerts([])
             }
         } 
     }
@@ -115,6 +120,7 @@ export default function Concerts() {
     return (
         <>
         <div className='selectconcerts'>
+            <div className="container">
             <div>
             <Toggle onChange={(e) => setToggled(e.target.checked)} />
             <p>  Search by {toggled ? "City ": "Artist "}</p>
@@ -132,10 +138,14 @@ export default function Concerts() {
         <p></p>
         <div>
         </div>
+    
+    {invalid &&
+        <p>Invalid Search Request</p>
+    }
 
-    {concerts !== undefined ?
+    {concerts.length > 0 &&
     (
-    <table>
+    <table className="table table-dark table-hover table-striped">
     <thead>
         <tr>
             <th>Artist</th>
@@ -144,7 +154,6 @@ export default function Concerts() {
             <th>Venue</th>
             <th>Date</th> 
             {/* <th>Concert ID</th> */}
-            <th>           </th>
             
         </tr>
     </thead>
@@ -168,10 +177,9 @@ export default function Concerts() {
             ))
         }
         </tbody>
-    </table>
-    ) :
-    (<p>Invalid Search Request</p>)
+    </table>)
     }
+    </div>
     </div>
     </div>
     </>

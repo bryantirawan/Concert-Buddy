@@ -38,7 +38,6 @@ export default function Userconcerts() {
     const date = `${current.getDate()}-${('0' + (current.getMonth()+1)).slice(-2)}-${current.getFullYear()}`;
 
     return (
-    <>
     <div className="container">
     <table className="table table-hover table-striped">
     <thead>
@@ -79,16 +78,6 @@ export default function Userconcerts() {
     </table>
     </div>
     
-    </>
-
-
-
-
-
-
-
-
-
   )
 }
 
