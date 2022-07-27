@@ -120,7 +120,6 @@ export default function Concerts() {
     return (
         <>
         <div className='selectconcerts'>
-            <div className="container">
             <div>
             <Toggle onChange={(e) => setToggled(e.target.checked)} />
             <p>  Search by {toggled ? "City ": "Artist "}</p>
@@ -179,7 +178,6 @@ export default function Concerts() {
         </tbody>
     </table>)
     }
-    </div>
     </div>
     </div>
     </>

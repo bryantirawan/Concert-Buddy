@@ -45,6 +45,7 @@ function Navbar() {
                 to='/selectconcerts/'
                 className='nav-links'
                 onClick={closeMobileMenu}
+                reloadDocument
               >
                 Find a Buddy
               </Link>
