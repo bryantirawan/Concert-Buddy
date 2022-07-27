@@ -37,6 +37,7 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+                setArtist('');
                 setInvalid(false)
             } else {
                 console.error('concertData:', concertResponse);
@@ -64,6 +65,7 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+                setCity('')
                 setInvalid(false)
             } else {
                 console.error('concertData:', concertResponse);
@@ -133,10 +135,10 @@ export default function Concerts() {
                 <input type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
             </form>
             }
-        </div>
-        <p></p>
         <div>
+        <p></p>
         </div>
+        
     
     {invalid &&
         <p>Invalid Search Request</p>
@@ -144,7 +146,8 @@ export default function Concerts() {
 
     {concerts.length > 0 &&
     (
-    <table className="table table-dark table-hover table-striped">
+    
+    <table className="table table-dark table-striped">
     <thead>
         <tr>
             <th>Artist</th>
@@ -186,6 +189,7 @@ export default function Concerts() {
         </tbody>
     </table>)
     }
+    </div>
     </div>
     </div>
     </>
