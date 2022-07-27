@@ -63,9 +63,11 @@ export default function Userconcerts() {
      </button></Link>
                     </td>
                     <td>
+                        <form action={`http://localhost:3000/concertdetail/${userconcert.concert_id}`}>
                         <button className="btn btn-primary">        
                         Buy
                         </button>
+                        </form>
                     </td>
                 </tr>
             )) 

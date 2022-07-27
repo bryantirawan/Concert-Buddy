@@ -80,8 +80,6 @@ export default function ConcertDetail() {
 
       return (
         <>
-
-            <>
             <h1>Concert Details</h1>
               <table className="table table-striped table-bordered ">
               <thead>
@@ -120,8 +118,7 @@ export default function ConcertDetail() {
 
     </tbody>
     </table>
-
-<table  className="table table-striped table-bordered ">
+    {tickets ? (<table  className="table table-striped table-bordered ">
     <thead>
 
         <tr>
@@ -134,31 +131,23 @@ export default function ConcertDetail() {
         </tr>
     </thead>
         <tbody>
-          {tickets && tickets.map((ticket,idx) => (
-
+          {tickets.map((ticket,idx) => (
                 <tr key={idx}>
                     <td>{ticket.price}</td>
                     <td>{ticket.section}</td>
                     <td>{ticket.row} </td>
                     <td>{ticket.seat} </td>
-
                     <td>
-
-                    <button className="btn btn-primary btn-lg btn-block" onClick={(e) => submitAddtoCart(e, ticket.id)}>
-           Buy
-          </button>
+                        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => submitAddtoCart(e, ticket.id)}>
+                        Buy
+                        </button>
                     </td>
                 </tr>
             ))
         }
-
         </tbody>
     </table>
-
-
-
-
-            </>
+    ):(<p>Sorry no ticekts available</p>)}
 
         </>
       );
