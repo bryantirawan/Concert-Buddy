@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
+  Navigate,
     useParams
   } from "react-router-dom";
 import { useContext } from 'react'
@@ -27,7 +28,6 @@ export default function ConcertDetail() {
     const [data, setData] = useState({});
     const [concerts, setConcerts] = useState([]);
     const [tickets, setTickets] = useState([]);
-    const [ticket, setTicket] = useState()
     let {user} = useContext(AuthContext)
     //const [sell, setSell] = useState();
 
@@ -89,12 +89,13 @@ export default function ConcertDetail() {
     //       .catch((error) => console.log(error));
     //   }, [concert_id]);
 
-      const submitAddtoCart = async (e) => {
+      const submitAddtoCart = async (e, ticket) => {
         // e.preventDefault();
+
 
         const data = {
           user: user.user_id,
-          ticket: Number(ticket),
+          ticket: ticket,
           shipping_address: user.user_id,
           buyer_venmo: "testing"
         }
@@ -107,6 +108,8 @@ export default function ConcertDetail() {
         let res = await fetch(`http://localhost:8090/api/orderitems/`, submit);
         console.log(data)
         console.log('Submitted')
+
+        Navigate(`checkout/${ticket}`)
 
       }
 
@@ -195,10 +198,12 @@ export default function ConcertDetail() {
                     <td>{ticket.row} </td>
                     <td>{ticket.seat} </td>
 
+
                     {/* <button className="btn btn-primary btn-lg btn-block" onClick={() => openInNewTab('https://google.com')}> */}
 
                     <td>
-                    <button className="btn btn-primary btn-lg btn-block" onClick={(e, ticket) => {setTicket(ticket); submitAddtoCart(e)}}>
+
+                    <button className="btn btn-primary btn-lg btn-block" onClick={(e) => submitAddtoCart(e, ticket.id)}>
            Buy
           </button>
                     </td>

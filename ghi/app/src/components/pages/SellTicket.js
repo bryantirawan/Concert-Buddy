@@ -96,10 +96,6 @@ function SellTicketForm() {
   //   }
   // };
 
-
-
-
-
 return (
     <>
     <div className="my-5 container">

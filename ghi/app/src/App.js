@@ -34,7 +34,7 @@ function App() {
           <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
           <Route path="/tickets/:concert_id" element={<SellTicketForm />} />
           <Route path="/selltickets" element={<SearchToSellTickets />} />
-          {/* <Route path="/checkout" element={<TicketCheckout />} /> */}
+          <Route path="/checkout/:ticket_id" element={<TicketCheckout />} />
         </Routes>
         </div>
         </AuthProvider>

@@ -168,42 +168,73 @@ def api_get_orderitems(request):
     else:
         content = json.loads(request.body)
         print(content)
-        try:
-            ticket = Ticket.objects.get(id=content["ticket"])
-            content["ticket"] = ticket
-            setattr(ticket, "sold", True)
-            new_user = UserVO.objects.get(id=content["user"])
-            # content["user"] = new_user
-            setattr(ticket, "buyer", new_user)
-            ticket.save()
-        except Ticket.DoesNotExist:
+        ticket = Ticket.objects.get(id=content["ticket"])
+        if ticket.sold == True:
             return JsonResponse(
-                {"message": "Invalid concert id"},
-                status=400
+            {"message": "Ticket Already Sold"},
+            status=400
             )
-        try:
-            user = UserVO.objects.get(id=content["user"])
-            content["user"] = user
-        except UserVO.DoesNotExist:
-            return JsonResponse(
-                {"message": "Invalid user id"},
-                status=400
-            )
-        try:
-            shipping_address = Address.objects.get(user=content["shipping_address"])
-            content["shipping_address"] = shipping_address
-        except Address.DoesNotExist:
-            return JsonResponse(
-                {"message": "Invalid Address User"},
-                status=400
-            )
-        order_item = OrderItem.objects.create(**content)
+        else:
+            try:
+                ticket = Ticket.objects.get(id=content["ticket"])
+                content["ticket"] = ticket
+                setattr(ticket, "sold", True)
+                new_user = UserVO.objects.get(id=content["user"])
+                # content["user"] = new_user
+                setattr(ticket, "buyer", new_user)
+                ticket.save()
+            except Ticket.DoesNotExist:
+                return JsonResponse(
+                    {"message": "Invalid concert id"},
+                    status=400
+                )
+            try:
+                user = UserVO.objects.get(id=content["user"])
+                content["user"] = user
+            except UserVO.DoesNotExist:
+                return JsonResponse(
+                    {"message": "Invalid user id"},
+                    status=400
+                )
+            try:
+                # POST request to address model
 
-        return JsonResponse(
-            order_item,
-            encoder = OrderItemEncoder,
-            safe=False,
-        )
+                #     user_for_address = UserVO.objects.get(id=content["user"])
+                # except UserVO.DoesNotExist:
+                #     return JsonResponse(
+                #         {"message": "Invalid user id"},
+                #         status=400
+                #     )
+                try:
+                    shipping_address = Address.objects.get(user=content["shipping_address"])
+                except:
+                    Address.objects.update_or_create(
+                        user=content["user"],
+                        street_address=content["street_address"],
+                        apartment_address=content["apartment_address"],
+                        country=content["country"],
+                        zip=content["zip"]
+                    )
+                    shipping_address = Address.objects.get(user=content["shipping_address"])
+                content["shipping_address"] = shipping_address
+            except Address.DoesNotExist:
+                return JsonResponse(
+                    {"message": "Invalid Address User"},
+                    status=400
+                )
+
+            order_item = OrderItem.objects.create(
+                user=content["user"],
+                ticket=content["ticket"],
+                shipping_address=content["shipping_address"],
+                buyer_venmo=content["buyer_venmo"]
+            )
+
+            return JsonResponse(
+                order_item,
+                encoder = OrderItemEncoder,
+                safe=False,
+            )
 
 @require_http_methods(["GET", "POST"])
 def api_get_addresses(request):
