@@ -169,6 +169,13 @@ export default function Concerts() {
                         </button>
                     </form>
                     </td>
+                    <td>
+                    <form action={`http://localhost:3000/tickets/${concert.id}/`}>
+                        <button type="submit">
+                        Sell ticket
+                        </button>
+                    </form>
+                    </td>
                 </tr>
             ))
         }

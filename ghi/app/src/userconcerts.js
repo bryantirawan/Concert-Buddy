@@ -51,11 +51,7 @@ export default function Userconcerts() {
         </tr>
     </thead>
         <tbody>
-        {
-        //userconcerts.filter(userconcert => ((userconcert.date)) >= 
-        //(Date.now())).map((userconcert,idx) => (
-            //new Date(data.date).toLocaleDateString('en-US'
-            userconcerts.map((userconcert,idx) => (
+        {userconcerts.map((userconcert,idx) => (
                 <tr key={idx}>
                     <td>{userconcert.artist}</td>  
                     <td>{userconcert.venue}</td>

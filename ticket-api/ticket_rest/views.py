@@ -165,31 +165,76 @@ def api_get_orderitems(request):
             {"order_item": order_item},
             encoder=OrderItemEncoder,
             )
-    else:
+    else: #POST order item 
         content = json.loads(request.body)
         print(content)
-        try:
-            ticket = Ticket.objects.get(id=content["ticket"])
-            content["ticket"] = ticket
-        except Ticket.DoesNotExist:
+        ticket = Ticket.objects.get(id=content["ticket"])
+        if ticket.sold == True:
             return JsonResponse(
-                {"message": "Invalid concert id"},
-                status=400
+            {"message": "Ticket Already Sold"},
+            status=400
             )
-        try:
-            user = UserVO.objects.get(id=content["user"])
-            content["user"] = user
-        except UserVO.DoesNotExist:
+        else:
+            #assigning ticket to OrderItem and changing sold = True 
+            try:
+                ticket = Ticket.objects.get(id=content["ticket"])
+                content["ticket"] = ticket 
+                setattr(ticket, "sold", True)
+                new_user = UserVO.objects.get(id=content["user"])
+                setattr(ticket, "buyer", new_user)
+                ticket.save()
+            except Ticket.DoesNotExist:
+                return JsonResponse(
+                    {"message": "Invalid concert id"},
+                    status=400
+                )
+            #assigning user for OrderItem
+            try:
+                user = UserVO.objects.get(id=content["user"])
+                content["user"] = user
+            except UserVO.DoesNotExist:
+                return JsonResponse(
+                    {"message": "Invalid user id"},
+                    status=400
+                )
+            #assigning address for order item for OrderItem 
+            try:
+                try: #possibly existing shipping address and updates existing address whether it needs it or not 
+                    address_for_order_item = Address.objects.get(user=content["address_for_order_item"]) 
+                    setattr(address_for_order_item, "user", content["user"])
+                    setattr(address_for_order_item, "street_address", content["street_address"])
+                    setattr(address_for_order_item, "apartment_address", content["apartment_address"])
+                    setattr(address_for_order_item, "country", content["country"])
+                    setattr(address_for_order_item, "zip", content["zip"])
+                except: #no existing shipping address 
+                    Address.objects.update_or_create(
+                        user=content["user"],
+                        street_address=content["street_address"],
+                        apartment_address=content["apartment_address"],
+                        country=content["country"],
+                        zip=content["zip"]
+                    )
+                    address_for_order_item = Address.objects.get(user=content["address_for_order_item"])
+                content["address_for_order_item"] = address_for_order_item
+            except Address.DoesNotExist:
+                return JsonResponse(
+                    {"message": "Invalid Address User"},
+                    status=400
+                )
+           
+            
+
+            order_item = OrderItem.objects.create(
+                user=content["user"],
+                ticket=content["ticket"],
+                address_for_order_item=content["address_for_order_item"],
+                buyer_venmo=content["buyer_venmo"]
+            )
             return JsonResponse(
-                {"message": "Invalid user id"},
-                status=400
+                order_item,
+                encoder = OrderItemEncoder,
+                safe=False,
             )
-        order_item = OrderItem.objects.create(**content)
-        return JsonResponse(
-            order_item,
-            encoder = OrderItemEncoder,
-            safe=False,
-        )
 
 @require_http_methods(["GET", "POST"])
 def api_get_addresses(request):

@@ -5,6 +5,7 @@ import AuthContext from "../context/AuthContext";
 import './Navbar.css';
 
 
+
 function Navbar() {
   let {user, logoutUser} = useContext(AuthContext)
   const [click, setClick] = useState(false);
@@ -51,7 +52,7 @@ function Navbar() {
             </li>
             <li className='nav-item'>
               <Link
-                to='/selltickets'
+                to='/selectconcerts/'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
@@ -74,7 +75,6 @@ function Navbar() {
                  </Link>
                 )}
               </li>
-
             <li>
               <Link
                 to='/sign-up'
