@@ -15,19 +15,13 @@ function SellTicketForm() {
     const [seat, setSeat] = useState('')
     const [picture_url, setPicture] = useState('')
     let { concert_id } = useParams();
-    let {user} = useContext(AuthContext) 
+    let {user} = useContext(AuthContext)
     let navigate = useNavigate()
 
-
-
-    
-    // const [concert, setConcert] = useState('63b2f63f')
-    // const [seller, setSeller] = useState('admin@admin.com')
-    // const [buyer, setBuyer] = useState(null)
     const concert =  concert_id
     const seller = user.user_id
     const buyer = null
-  
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -39,28 +33,21 @@ function SellTicketForm() {
           body: JSON.stringify(form)
         }
       console.log(a)
-        let res = await fetch(`http://localhost:8090/api/tickets/`, a) ;
-        //console.group(body)
-        //.then(() => {
+        let res = await fetch(`http://localhost:8090/api/tickets/`, a);
             console.log('Ticket Added');
-        //})
+
 
         let resJson = await res.json();
       if (res.status === 200) {
-        // setPrice("");
-        // setSection("");
-        // setRow("");
-        // setSeat("");
-        // setPicture("");
-        navigate(-1)
-
-
-       
+        //eventually navigate to page tickets you are selling 
+        alert('Ticket successfully sold')
+        navigate('/')
       } else {
         console.log(res.status);
+        alert('Error processing ticket')
       }
     } catch (err) {
-      console.log(err);
+      console.log('error', err);
     }
   }
 
@@ -96,10 +83,6 @@ function SellTicketForm() {
   //     console.log(err);
   //   }
   // };
-
-
-
-    
 
 return (
     <>

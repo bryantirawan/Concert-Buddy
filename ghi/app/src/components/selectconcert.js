@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function Concerts() {
-    
+
     let navigate = useNavigate()
 
     const [concerts, setConcerts] = useState([]);
@@ -43,7 +43,7 @@ export default function Concerts() {
                 setInvalid(true)
                 setConcerts([])
             }
-        } 
+        }
     }
     const handleArtistSubmit = async (e) => {
         e.preventDefault();
@@ -70,7 +70,7 @@ export default function Concerts() {
                 setInvalid(true)
                 setConcerts([])
             }
-        } 
+        }
     }
 
     const handleKeypress = e => {
@@ -87,7 +87,7 @@ export default function Concerts() {
     const fetchConcerttoAdd = async (concID) => {
         const concertResponse = await fetch(`http://localhost:8080/api/add/${concID}/`);
         const concertData = await concertResponse.json()
-        return concertData 
+        return concertData
     }
 
     const addConcertandPutUser = async (concID) => {
@@ -113,7 +113,7 @@ export default function Concerts() {
 
     const handleImGoingSubmit = async (e, concID) => {
         e.preventDefault();
-      //POST to Concert and PUT to User all in one 
+      //POST to Concert and PUT to User all in one
       addConcertandPutUser(concID)
     }
 
@@ -151,9 +151,10 @@ export default function Concerts() {
             <th>City</th>
 
             <th>Venue</th>
-            <th>Date</th> 
+            <th>Date</th>
             {/* <th>Concert ID</th> */}
-            
+            <th>           </th>
+
         </tr>
     </thead>
         <tbody>
@@ -165,10 +166,17 @@ export default function Concerts() {
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
                     {/* <td>{concert.id}</td> */}
-                    <td> 
+                    <td>
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
                         <button type="submit">
                         I'm going!
+                        </button>
+                    </form>
+                    </td>
+                    <td>
+                    <form action={`http://localhost:3000/tickets/${concert.id}/`}>
+                        <button type="submit">
+                        Sell ticket
                         </button>
                     </form>
                     </td>
@@ -183,4 +191,3 @@ export default function Concerts() {
     </>
     )
 }
-
