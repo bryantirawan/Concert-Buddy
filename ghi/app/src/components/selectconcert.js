@@ -14,14 +14,6 @@ export default function Concerts() {
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
-<<<<<<< HEAD
-    let {user} = useContext(AuthContext)    
-
-    
-
-    const handleLocationSubmit = async (e) => {
-        e.preventDefault();
-=======
     let {user} = useContext(AuthContext)
 
 
@@ -32,7 +24,6 @@ export default function Concerts() {
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
 
->>>>>>> main
 
         const city_new = city.split(' ')
         let final_city = city_new[0]

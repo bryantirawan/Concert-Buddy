@@ -3,6 +3,12 @@ from rest_framework.response import Response
 from buddy_rest.models import Concert, User 
 from .serializer import ConcertSerializer, UserSerializer
 
+
+###
+
+from django.contrib.auth import get_user_model
+from rest_framework import generics
+
 class ConcertViewSet(viewsets.ModelViewSet): 
     serializer_class = ConcertSerializer 
 
@@ -62,6 +68,11 @@ class UserViewSet(viewsets.ModelViewSet):
         
         serializer = UserSerializer(user_object) 
         return Response(serializer.data)
+
+###
+class SignUpView(generics.CreateAPIView):
+        queryset = get_user_model().objects.all()
+        serializer_class = UserSerializer
     
 
 
