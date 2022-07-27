@@ -108,7 +108,7 @@ export default function ConcertDetail() {
         }
         </tbody>
     </table>
-    ):(<p>Sorry no ticekts available</p>)}
+    ):(<h1>Sorry no tickets available</h1>)}
 
         </>
       );
