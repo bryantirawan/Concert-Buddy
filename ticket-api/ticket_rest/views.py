@@ -175,9 +175,10 @@ def api_get_orderitems(request):
             status=400
             )
         else:
+            #assigning ticket to OrderItem and changing sold = True 
             try:
                 ticket = Ticket.objects.get(id=content["ticket"])
-                content["ticket"] = ticket
+                content["ticket"] = ticket 
                 setattr(ticket, "sold", True)
                 new_user = UserVO.objects.get(id=content["user"])
                 setattr(ticket, "buyer", new_user)
@@ -187,6 +188,7 @@ def api_get_orderitems(request):
                     {"message": "Invalid concert id"},
                     status=400
                 )
+            #assigning user for OrderItem
             try:
                 user = UserVO.objects.get(id=content["user"])
                 content["user"] = user
@@ -195,9 +197,9 @@ def api_get_orderitems(request):
                     {"message": "Invalid user id"},
                     status=400
                 )
+            #assigning address for order item for OrderItem 
             try:
-                # POST request to address model
-                try: #possibly existing shipping address
+                try: #possibly existing shipping address and updates existing address whether it needs it or not 
                     address_for_order_item = Address.objects.get(user=content["address_for_order_item"]) 
                     setattr(address_for_order_item, "user", content["user"])
                     setattr(address_for_order_item, "street_address", content["street_address"])
@@ -219,6 +221,8 @@ def api_get_orderitems(request):
                     {"message": "Invalid Address User"},
                     status=400
                 )
+           
+            
 
             order_item = OrderItem.objects.create(
                 user=content["user"],
@@ -226,7 +230,6 @@ def api_get_orderitems(request):
                 address_for_order_item=content["address_for_order_item"],
                 buyer_venmo=content["buyer_venmo"]
             )
-
             return JsonResponse(
                 order_item,
                 encoder = OrderItemEncoder,
