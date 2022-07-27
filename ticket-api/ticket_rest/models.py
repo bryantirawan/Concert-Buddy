@@ -1,5 +1,8 @@
 from email.errors import BoundaryError
 from django.db import models
+from django.shortcuts import reverse
+from django_countries.fields import CountryField
+
 
 
 class ConcertVO(models.Model):
@@ -43,3 +46,37 @@ class Ticket(models.Model):
 
     def __str__(self):
         return f"{self.concert}, Sold by {self.seller} for ${self.price}"
+
+class OrderItem(models.Model):
+    user = models.ForeignKey(UserVO, on_delete=models.CASCADE, null=True)
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
+
+    def get_final_price(self):
+        return self.ticket.price
+
+
+# shopping cart
+# have to add user model into this
+class Order(models.Model):
+    tickets = models.ManyToManyField(OrderItem)
+    order_date = models.DateTimeField(auto_now_add=True)
+    shipping_address = models.ForeignKey(
+        'Address', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
+    billing_address = models.ForeignKey(
+        'Address', related_name='billing_address', on_delete=models.SET_NULL, blank=True, null=True)
+    buyer_venmo = models.CharField(max_length=100)
+
+
+    def get_total(self):
+        total = 0
+        for order_item in self.items.all():
+            total += order_item.get_final_price()
+        return total
+
+
+class Address(models.Model):
+    user = models.ForeignKey(UserVO, on_delete=models.CASCADE)
+    street_address = models.CharField(max_length=100)
+    apartment_address = models.CharField(max_length=100, null=True)
+    country = models.CharField(max_length=2)
+    zip = models.CharField(max_length=100)

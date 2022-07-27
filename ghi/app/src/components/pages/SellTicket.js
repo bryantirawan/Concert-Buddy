@@ -15,19 +15,18 @@ function SellTicketForm() {
     const [seat, setSeat] = useState('')
     const [picture_url, setPicture] = useState('')
     let { concert_id } = useParams();
-    let {user} = useContext(AuthContext) 
+    let {user} = useContext(AuthContext)
     let navigate = useNavigate()
 
 
 
-    
     // const [concert, setConcert] = useState('63b2f63f')
     // const [seller, setSeller] = useState('admin@admin.com')
     // const [buyer, setBuyer] = useState(null)
     const concert =  concert_id
     const seller = user.user_id
     const buyer = null
-  
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,7 +54,7 @@ function SellTicketForm() {
         navigate(-1)
 
 
-       
+
       } else {
         console.log(res.status);
       }
@@ -99,7 +98,7 @@ function SellTicketForm() {
 
 
 
-    
+
 
 return (
     <>

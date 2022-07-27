@@ -7,19 +7,32 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function Concerts() {
-    
+
     let navigate = useNavigate()
 
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
+<<<<<<< HEAD
     let {user} = useContext(AuthContext)    
 
     
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
+=======
+    let {user} = useContext(AuthContext)
+
+
+
+
+
+
+    const handleLocationSubmit = async (e) => {
+        e.preventDefault();
+
+>>>>>>> main
 
         const city_new = city.split(' ')
         let final_city = city_new[0]
@@ -37,10 +50,10 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+            } else {
+                console.error('concertData:', concertResponse);
+                setConcerts(undefined)
             }
-        } else {
-            console.error('concertData:', concertResponse);
-            setConcerts(undefined)
         }
     }
     const handleArtistSubmit = async (e) => {
@@ -62,10 +75,10 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+            } else {
+                console.error('concertData:', concertResponse);
+                setConcerts(undefined)
             }
-        } else {
-            console.error('concertData:', concertResponse);
-            setConcerts(undefined)
         }
     }
 
@@ -83,7 +96,7 @@ export default function Concerts() {
     const fetchConcerttoAdd = async (concID) => {
         const concertResponse = await fetch(`http://localhost:8080/api/add/${concID}/`);
         const concertData = await concertResponse.json()
-        return concertData 
+        return concertData
     }
 
     const addConcertandPutUser = async (concID) => {
@@ -109,7 +122,7 @@ export default function Concerts() {
 
     const handleImGoingSubmit = async (e, concID) => {
         e.preventDefault();
-      //POST to Concert and PUT to User all in one 
+      //POST to Concert and PUT to User all in one
       addConcertandPutUser(concID)
     }
 
@@ -136,17 +149,17 @@ export default function Concerts() {
 
     {concerts !== undefined ?
     (
-    <table >
+    <table>
     <thead>
         <tr>
             <th>Artist</th>
             <th>City</th>
 
             <th>Venue</th>
-            <th>Date</th> 
+            <th>Date</th>
             {/* <th>Concert ID</th> */}
             <th>           </th>
-            
+
         </tr>
     </thead>
         <tbody>
@@ -158,7 +171,7 @@ export default function Concerts() {
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
                     {/* <td>{concert.id}</td> */}
-                    <td> 
+                    <td>
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
                         <button type="submit">
                         I'm going!
@@ -178,4 +191,3 @@ export default function Concerts() {
     </>
     )
 }
-

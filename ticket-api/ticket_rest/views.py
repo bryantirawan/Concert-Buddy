@@ -1,22 +1,17 @@
 import email
+from email.headerregistry import Address
 import json
 from struct import pack_into
 from django.http import JsonResponse
 from django.shortcuts import render
-from .encoders import ConcertVOEncoder, TicketEncoder, UserVOEncoder, TicketDetailEncoder
+from .encoders import AddressEncoder, ConcertVOEncoder, OrderItemEncoder, TicketEncoder, UserVOEncoder, TicketDetailEncoder
 from django.views.decorators.http import require_http_methods
 import requests
-from .models import ConcertVO, Ticket, UserVO
+from .models import Address, ConcertVO, OrderItem, Ticket, UserVO
 #from concerts_rest.models import Concert
 
 
-#Get request of all concerts
-# Will need to go back and edit the page and location of the url in order to show the right
-# city and pages
-# follow the pagination of the setlist api (20 items per page) - if user clicks next arrow
-# on react, add one to the end of page string (or subtract) and use that to show the next
-# list of concerts
-# keep in mind date being in future
+
 @require_http_methods(["GET"])
 def api_list_concerts(request):
     page = '&p=1'
@@ -33,9 +28,7 @@ def api_list_concerts(request):
         {"concerts": concerts}
     )
 
-#Get a specific concert
-# will change the id to make dynamic after. Will utilize calling concerts.setlist[0].id on the page
-# click in order to generate the correct concert information on the page
+
 @require_http_methods(["GET"])
 def api_get_concert_by_location(request, pk):
     id = '3bb2b4ec'
@@ -49,9 +42,7 @@ def api_get_concert_by_location(request, pk):
         {"concert": concert}
     )
 
-#list concerts by artist for the seller to list tickets
-#hard coded for now but will edit on the front end to pass through as a parameter
-# also will think about consolidating this code to use as a function instead of repeating
+
 @require_http_methods(["GET"])
 def api_get_concert_by_artist(request, pk):
     # artist_name = 'The%20Mother%20Hips'
@@ -70,16 +61,7 @@ def api_get_concert_by_artist(request, pk):
             {"concerts": concerts}
         )
 
-# will have to add more to this part
-# i think ConcertVO part might have to be an API call?
-# since we are not saving all ConcertVO instances ...
-# how will a seller be able to choose a concert from ConcertVO when
-# we are not saving them? Api likely
-# make sure that when we click the page on react to see the concert, a concert
-# post request is sent to the concert microservice which should then poll over
-# to this microservice as a concertvo option. That concertVO option will automatically
-# be selected on the backend when the ticket is being sold
-# be sure to leave buyer as null on this request. Put request will update the buyer
+
 @require_http_methods(["GET", "POST"])
 def api_get_tickets(request):
     if request.method == "GET":
@@ -143,8 +125,6 @@ def api_update_tickets(request, pk):
     elif request.method == "PUT":
         try:
             tickets = Ticket.objects.get(id=pk)
-
-
             setattr(tickets, "sold", True)
             #setattr(tickets, "buyer", True)
 
@@ -158,6 +138,8 @@ def api_update_tickets(request, pk):
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response
+
+
 @require_http_methods(["GET"])
 def api_tickets_by_concert(request):
     if request.method == "GET":
@@ -173,3 +155,64 @@ def api_tickets_by_concert(request):
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response
+
+
+@require_http_methods(["GET", "POST"])
+def api_get_orderitems(request):
+    if request.method == "GET":
+        order_item = OrderItem.objects.all()
+        return JsonResponse(
+            {"order_item": order_item},
+            encoder=OrderItemEncoder,
+            )
+    else:
+        content = json.loads(request.body)
+        print(content)
+        try:
+            ticket = Ticket.objects.get(id=content["ticket"])
+            content["ticket"] = ticket
+        except Ticket.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid concert id"},
+                status=400
+            )
+        try:
+            user = UserVO.objects.get(id=content["user"])
+            content["user"] = user
+        except UserVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid user id"},
+                status=400
+            )
+        order_item = OrderItem.objects.create(**content)
+        return JsonResponse(
+            order_item,
+            encoder = OrderItemEncoder,
+            safe=False,
+        )
+
+@require_http_methods(["GET", "POST"])
+def api_get_addresses(request):
+    if request.method == "GET":
+        address = Address.objects.all()
+        return JsonResponse(
+            {"address": address},
+            encoder=AddressEncoder,
+            )
+    else:
+        content = json.loads(request.body)
+        print(content)
+        try:
+            user = UserVO.objects.get(id=content["user"])
+            content["user"] = user
+        except UserVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid user id"},
+                status=400
+            )
+        address = Address.objects.create(**content)
+        return JsonResponse(
+            address,
+            encoder = AddressEncoder,
+            safe=False,
+        )
