@@ -78,7 +78,7 @@ export default function ConcertDetail() {
 
     </tbody>
     </table>
-    {tickets ? (<table  className="table table-striped table-bordered ">
+    {tickets.length !== 0 ? (<table  className="table table-striped table-bordered ">
     <thead>
         <tr>
              <th>Price</th>
