@@ -175,6 +175,7 @@ export default function ConcertDetail() {
             <th>Row</th>
             <th>Seat</th> 
             <th>Buy</th> 
+            
 
         </tr>
     </thead>
