@@ -96,7 +96,7 @@ export default function ConcertDetail() {
         const data = {
           user: user.user_id,
           ticket: ticket,
-          shipping_address: user.user_id,
+          address_for_order_item: user.user_id,
           buyer_venmo: "testing"
         }
         const submit = {

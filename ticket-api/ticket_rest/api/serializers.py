@@ -31,7 +31,7 @@
 # class OrderSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Order
-#         fields = ['tickets', 'order_date', 'shipping_address',
+#         fields = ['tickets', 'order_date', 'address_for_order_item',
 #                 'billing_address', 'buyer_venmo']
 #         depth = 1
 

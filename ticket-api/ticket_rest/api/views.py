@@ -16,7 +16,7 @@
 
 #         new_order = Order(
 #             order_date=data["order_date"],
-#             shipping_address=data["shipping_address"],
+#             address_for_order_item=data["address_for_order_item"],
 #             billing_address=data["billing_address"],
 #             buyer_venmo=data["buyer_venmo"],
 #             )

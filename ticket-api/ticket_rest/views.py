@@ -198,22 +198,22 @@ def api_get_orderitems(request):
             try:
                 # POST request to address model
                 try: #possibly existing shipping address
-                    shipping_address = Address.objects.get(user=content["shipping_address"]) 
-                    setattr(shipping_address, "user", content["user"])
-                    setattr(shipping_address, "street_address", content["street_address"])
-                    setattr(shipping_address, "apartment_address", content["apartment_address"])
-                    setattr(shipping_address, "country", content["country"])
-                    setattr(shipping_address, "zip", content["zip"])
+                    address_for_order_item = Address.objects.get(user=content["address_for_order_item"]) 
+                    setattr(address_for_order_item, "user", content["user"])
+                    setattr(address_for_order_item, "street_address", content["street_address"])
+                    setattr(address_for_order_item, "apartment_address", content["apartment_address"])
+                    setattr(address_for_order_item, "country", content["country"])
+                    setattr(address_for_order_item, "zip", content["zip"])
                 except: #no existing shipping address 
-                    Address.objects.create(
+                    Address.objects.update_or_create(
                         user=content["user"],
                         street_address=content["street_address"],
                         apartment_address=content["apartment_address"],
                         country=content["country"],
                         zip=content["zip"]
                     )
-                    shipping_address = Address.objects.get(user=content["shipping_address"])
-                content["shipping_address"] = shipping_address
+                    address_for_order_item = Address.objects.get(user=content["address_for_order_item"])
+                content["address_for_order_item"] = address_for_order_item
             except Address.DoesNotExist:
                 return JsonResponse(
                     {"message": "Invalid Address User"},
@@ -223,7 +223,7 @@ def api_get_orderitems(request):
             order_item = OrderItem.objects.create(
                 user=content["user"],
                 ticket=content["ticket"],
-                shipping_address=content["shipping_address"],
+                address_for_order_item=content["address_for_order_item"],
                 buyer_venmo=content["buyer_venmo"]
             )
 

@@ -27,7 +27,7 @@ function TicketCheckout() {
             const data = {
                 user: user.user_id,
                 ticket: Number(ticket),
-                shipping_address: user.user_id,
+                address_for_order_item: user.user_id,
                 buyer_venmo: venmo,
                 street_address: street_address,
                 apartment_address: apartment_address,
