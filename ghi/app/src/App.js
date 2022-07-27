@@ -8,7 +8,7 @@ import Concerts from './components/selectconcert';
 import Navbar from './components/Navbar'
 import Home from './components/pages/Home';
 import SellTicketForm from './components/pages/SellTicket';
-import SearchToSellTickets from './components/pages/SearchSellTickets';
+import SearchToSellTickets from './components/pages/UselessSearchSellTickets';
 import Fellowusersgoingtoconcert from './components/fellowusersgoingtoconcert';
 import TicketCheckout from './components/pages/TicketCheckout';
 

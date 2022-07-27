@@ -89,14 +89,6 @@ function SearchToSellTickets() {
             setConcerts(undefined);
         });
 
-            // const fetchConcert = async () => {
-            //     const concertResponse = await fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`);
-            //     const concertData = await concertResponse.json()
-            //     console.log(concertData)
-            //     setConcerts(concertData.concerts.setlist)
-            // }
-            // fetchConcert()
-
     }
 
     const handleKeypress = e => {
@@ -146,10 +138,10 @@ function SearchToSellTickets() {
     <thead>
 
         <tr>
-            {/* <th>Artist</th>
+            <th>Artist</th>
             <th>Venue</th>
             <th>Date</th>
-            <th>Save Concert</th> */}
+            <th>Save Concert</th> 
         </tr>
     </thead>
         <tbody>
@@ -160,10 +152,10 @@ function SearchToSellTickets() {
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
                     <td>
-                        <form action={`http://localhost:8080/api/add/${concert.id}/`} method="POST">
-                        <button>
-                        Sell ticekt for this concert
-                        </button>
+                        <form action={`http://localhost:3000/tickets/${concert.id}/`}>
+                            <button >
+                            Sell ticket for this concert
+                            </button>
                         </form>
                     </td>
                 </tr>
