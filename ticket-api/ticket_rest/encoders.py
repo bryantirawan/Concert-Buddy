@@ -71,20 +71,6 @@ class TicketDetailEncoder(ModelEncoder):
         "buyer": UserVOEncoder(),
     }
 
-
-class OrderItemEncoder(ModelEncoder):
-    model = OrderItem
-    properties = [
-        "id",
-        "user",
-        "ticket"
-    ]
-    encoders = {
-        "user": UserVOEncoder(),
-        "ticket": TicketDetailEncoder()
-    }
-
-
 class AddressEncoder(ModelEncoder):
     model = Address
     properties = [
@@ -98,3 +84,19 @@ class AddressEncoder(ModelEncoder):
     encoders = {
         "user": UserVOEncoder()
     }
+
+class OrderItemEncoder(ModelEncoder):
+    model = OrderItem
+    properties = [
+        "id",
+        "user",
+        "ticket",
+        "shipping_address"
+    ]
+    encoders = {
+        "user": UserVOEncoder(),
+        "ticket": TicketDetailEncoder(),
+        "shipping_address": AddressEncoder()
+    }
+
+

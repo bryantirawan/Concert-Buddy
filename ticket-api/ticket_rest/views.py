@@ -165,7 +165,7 @@ def api_get_orderitems(request):
             {"order_item": order_item},
             encoder=OrderItemEncoder,
             )
-    else:
+    else: #POST order item 
         content = json.loads(request.body)
         print(content)
         ticket = Ticket.objects.get(id=content["ticket"])
@@ -180,7 +180,6 @@ def api_get_orderitems(request):
                 content["ticket"] = ticket
                 setattr(ticket, "sold", True)
                 new_user = UserVO.objects.get(id=content["user"])
-                # content["user"] = new_user
                 setattr(ticket, "buyer", new_user)
                 ticket.save()
             except Ticket.DoesNotExist:
@@ -198,17 +197,15 @@ def api_get_orderitems(request):
                 )
             try:
                 # POST request to address model
-
-                #     user_for_address = UserVO.objects.get(id=content["user"])
-                # except UserVO.DoesNotExist:
-                #     return JsonResponse(
-                #         {"message": "Invalid user id"},
-                #         status=400
-                #     )
-                try:
-                    shipping_address = Address.objects.get(user=content["shipping_address"])
-                except:
-                    Address.objects.update_or_create(
+                try: #possibly existing shipping address
+                    shipping_address = Address.objects.get(user=content["shipping_address"]) 
+                    setattr(shipping_address, "user", content["user"])
+                    setattr(shipping_address, "street_address", content["street_address"])
+                    setattr(shipping_address, "apartment_address", content["apartment_address"])
+                    setattr(shipping_address, "country", content["country"])
+                    setattr(shipping_address, "zip", content["zip"])
+                except: #no existing shipping address 
+                    Address.objects.create(
                         user=content["user"],
                         street_address=content["street_address"],
                         apartment_address=content["apartment_address"],

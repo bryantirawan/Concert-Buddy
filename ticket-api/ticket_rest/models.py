@@ -74,7 +74,7 @@ class OrderItem(models.Model):
 
 
 class Address(models.Model):
-    user = models.ForeignKey(UserVO, on_delete=models.CASCADE)
+    user = models.OneToOneField(UserVO, on_delete=models.CASCADE)
     street_address = models.CharField(max_length=100)
     apartment_address = models.CharField(max_length=100, null=True)
     country = models.CharField(max_length=2)
