@@ -46,55 +46,15 @@ function TicketCheckout() {
 
         let resJson = await res.json();
       if (res.status === 200) {
-        // setPrice("");
-        // setSection("");
-        // setRow("");
-        // setSeat("");
-        // setPicture("");
-        navigate(-1)
-
-
-
+        //eventually navigate to page where you can see all the tickets you bought 
+        navigate('/')
       } else {
-        console.log(res.status);
+        alert('Ticket cannot be bought. Someone probably bought it just before you did.')
       }
     } catch (err) {
       console.log(err);
     }
   }
-
-
-//   if (res.status === 200){
-//     console.log('concert added successfully and user attached to fellow user now needs to redirect')
-//     navigate(`/concertdetail/${concID}`)
-// } else {
-//     alert('concert unable to be added')
-// }
-
-
-  // let handleSulbmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     let res = await fetch("https://httpbin.org/post", {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         name: name,
-  //         email: email,
-  //         mobileNumber: mobileNumber,
-  //       }),
-  //     });
-  //     let resJson = await res.json();
-  //     if (res.status === 200) {
-  //       setName("");
-  //       setEmail("");
-  //       setMessage("User created successfully");
-  //     } else {
-  //       setMessage("Some error occured");
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
 
 return (
