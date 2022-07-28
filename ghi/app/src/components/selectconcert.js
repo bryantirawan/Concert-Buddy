@@ -156,8 +156,8 @@ export default function Concerts() {
             <th>Venue</th>
             <th>Date</th>
             {/* <th>Concert ID</th> */}
-            <th>           </th>
-
+            <th></th>
+            <th></th>
         </tr>
     </thead>
         <tbody>
