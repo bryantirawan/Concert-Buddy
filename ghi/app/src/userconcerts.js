@@ -17,8 +17,7 @@ export default function Userconcerts() {
     
     useEffect(() => {
         getUserConcerts()
-
-    }, [])
+    }, [userconcerts])
 
     const getUserConcerts = async() => {
         const response = await fetch('http://localhost:8080/api/userconcerts/', {
