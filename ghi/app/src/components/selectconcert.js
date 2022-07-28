@@ -143,11 +143,11 @@ export default function Concerts() {
             <div className='entry'>
                 { toggled ?
             <form onSubmit={handleLocationSubmit}>
-                <input type="text" value={city} required onChange={(e) => {setCity(e.target.value)}} onKeyPress={handleKeypress}/>
+                <input class="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value)}} onKeyPress={handleKeypress}/>
             </form>
             :
             <form onSubmit={handleArtistSubmit}>
-                <input type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
+                <input class="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
             </form>
             }
         <div>
