@@ -51,30 +51,18 @@ class UserViewSet(viewsets.ModelViewSet):
         user = User.objects.all()
         return user
 
-    #not actually used but in case you want to update via insomnia
+    #used for removing concerts from user model and fellow user from concert model at user concert pag
     def update(self, request, *args, **kwargs):
         user_object = self.get_object()
 
         data = request.data
 
-        for concert in data["concert"]:
-            concert_obj = Concert.objects.get(concert_id=concert["concert_id"])
-            user_object.concert.add(concert_obj)
+        concert_obj = Concert.objects.get(concert_id=data["concert"])
+        user_object.concert.remove(concert_obj)
+        concert_obj.fellow_user.remove(user_object)
 
         serializer = UserSerializer(user_object)
         return Response(serializer.data)
-    
-    # def delete(self, request, *args, **kwargs): 
-    #     user_object = self.get_object()
-
-    #     data = request.data 
-
-    #     for concert in data["concert"]: 
-    #         concert_obj = Concert.objects.get(concert_id=concert["concert_id"])
-    #         user_object.concert.remove(concert_obj)
-        
-    #     serializer = UserSerializer(user_object) 
-    #     return Response(serializer.data)
     
 
 

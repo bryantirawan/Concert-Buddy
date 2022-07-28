@@ -17,10 +17,6 @@ export default function Concerts() {
     let {user} = useContext(AuthContext)
 
 
-
-
-
-
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
 
@@ -161,7 +157,7 @@ export default function Concerts() {
             <th>Venue</th>
             <th>Date</th>
             {user ? (<th>Wanna go?</th>) : (<th>Want to find a buddy? Log in first</th>)}
-            <th>Have a ticket to sell?</th>
+            {user ? (<th>Have a ticket to sell?</th>) : (<th>Log in first to sell a ticket</th>)}
 
 
 
@@ -172,7 +168,6 @@ export default function Concerts() {
                 <tr key={idx}>
                     <td>{concert.artist.name}</td>
                     <td>{concert.venue.city.name}</td>
-
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
                     {user ?                     (<td>
