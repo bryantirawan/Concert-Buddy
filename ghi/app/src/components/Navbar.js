@@ -63,7 +63,7 @@ function Navbar() {
             <li>
                 {user ? (
                   <Link className="nav-links" aria-current="page" to="/userconcerts/">
-                 Concerts You're Going To
+                 Your Concerts
                 </Link>
                 ): (<></>)}
             </li>

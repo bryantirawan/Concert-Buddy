@@ -186,18 +186,18 @@ export default function Concerts() {
                     <td>{concert.eventDate.toLocaleDateString()} </td>
                     {user ?                     (<td>
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
-                        <button type="submit">
+                    <button className="btn btn-success" type="submit">  
                         I'm going!
                         </button>
                     </form>
                     </td>) : (<td></td>)}
-                    {user ? (<form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
-                        <button type="submit">
+                    {user ?                     (<td>
+                    <form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
+                    <button className="btn btn-primary" type="submit">  
                         Sell ticket
                         </button>
-                    </form>):(<td></td>)}
-
-                 
+                    </form>
+                    </td>) : (<td></td>)}
                 </tr>
             ))
         }

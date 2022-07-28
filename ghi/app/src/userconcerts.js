@@ -12,8 +12,6 @@ export default function Userconcerts() {
     const {authTokens, logoutUser} = useContext(AuthContext)
     const { concert_id } = useParams();
     let {user} = useContext(AuthContext)
-
-    
     let navigate = useNavigate()
 
     
@@ -67,64 +65,59 @@ const handleRemoveConcertSubmit = async (e, concID) => {
   putConcertandputUser(concID)
 }
 
-
-
-
-
-
-
-    
-
     return (
-    <div className="container">
-    <table className="table table-hover table-striped">
-    <thead>
-        <tr>
-            <th>Artist</th>
-            <th>Venue</th>
-            <th>City</th>
-            <th>ID</th>
-            <th>Date</th>
-            <th>Other users going to this concert</th>
-            <th>Buy ticket if available</th>
-            <th>I can no longer go</th>
-        </tr>
-    </thead>
-        <tbody>
-        {userconcerts.map((userconcert,idx) => (
-                <tr key={idx}>
-                    <td>{userconcert.artist}</td>  
-                    <td>{userconcert.venue}</td>
-                    <td>{userconcert.city}</td>
-                    <td>{userconcert.concert_id}</td>
-                    <td>{new Date(userconcert.date).toLocaleDateString('en-US')}</td>
-                    <td>
-                    <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-success"type="button">
-          Other Users Going
-     </button></Link>
-                    </td>
-                    <td>
-                        <form action={`http://localhost:3000/concertdetail/${userconcert.concert_id}`}>
-                        <button className="btn btn-primary">        
-                        Buy
-                        </button>
-                        </form>
-                    </td>
-                    <td>
-                    <form onSubmit={(e) => handleRemoveConcertSubmit(e, userconcert.concert_id)}>
-                        {/* will need its own handle submit after making adding delete/PUT logic   */}
-                        <button className="btn btn-primary">        
-                        Remove
-                        </button>
-                        </form>
-                    </td>
-                </tr>
-            )) 
-            }  
-        </tbody>
-    </table>
-    </div>
-    
+        <>
+        {userconcerts.length > 0 ? (    <div className="container">
+        <h1 align="center">Concerts You're Going To</h1>
+        <table className="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Artist</th>
+                <th>Venue</th>
+                <th>City</th>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Other users going to this concert</th>
+                <th>Buy ticket if available</th>
+                <th>I can no longer go</th>
+            </tr>
+        </thead>
+            <tbody>
+            {userconcerts.map((userconcert,idx) => (
+                    <tr key={idx}>
+                        <td>{userconcert.artist}</td>  
+                        <td>{userconcert.venue}</td>
+                        <td>{userconcert.city}</td>
+                        <td>{userconcert.concert_id}</td>
+                        <td>{new Date(userconcert.date).toLocaleDateString('en-US')}</td>
+                        <td>
+                        <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-success"type="button">
+              Other Users Going
+         </button></Link>
+                        </td>
+                        <td>
+                            <form action={`http://localhost:3000/concertdetail/${userconcert.concert_id}`}>
+                            <button className="btn btn-primary">        
+                            Buy
+                            </button>
+                            </form>
+                        </td>
+                        <td>
+                        <form onSubmit={(e) => handleRemoveConcertSubmit(e, userconcert.concert_id)}>
+                            {/* will need its own handle submit after making adding delete/PUT logic   */}
+                            <button className="btn btn-primary">        
+                            Remove
+                            </button>
+                            </form>
+                        </td>
+                    </tr>
+                )) 
+                }  
+            </tbody>
+        </table>
+        </div>):(<h1 align="center">You have no concerts yet.</h1>)}
+
+        </>
   )
 }
 

@@ -23,7 +23,7 @@ const Fellowusersgoingtoconcert = () => {
     <thead>
 
         <tr>
-             <th>Concert Buddies!</th>
+             <th>Concert Buddies! Feel free to reach out to other users!</th>
 
         </tr>
     </thead>

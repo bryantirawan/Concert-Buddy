@@ -84,12 +84,6 @@ function SignupPage() {
                         </div>
                       </div>
                     </div>
-                    {/* <div className="col">
-      <div className="form-floating mb-3">
-        <input onChange={(e) => setPicture(e.target.value)} required placeholder="Picture Url" type="text" value={picture_url} id="picture_url" name="picture_url" className="form-control" />
-        <label htmlFor="picture_url">Ticket Picture Url</label>
-      </div>
-    </div> */}
                   </div>
                   <button className="btn btn-lg btn-primary">Create Account</button>
                 </form>
