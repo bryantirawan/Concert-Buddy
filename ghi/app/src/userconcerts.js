@@ -77,6 +77,7 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                 <th>City</th>
                 <th>Date</th>
                 <th>Find buddies</th>
+                <th>Sell extra tickets</th>
                 <th>Buy ticket</th>
                 <th>I can no longer go</th>
             </tr>
@@ -92,6 +93,13 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                         <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-success"type="button">
               Other Users Going
          </button></Link>
+                        </td>
+                        <td>
+                            <form action={`http://localhost:3000/tickets/${userconcert.concert_id}`}>
+                            <button className="btn btn-primary">        
+                            Sell
+                            </button>
+                            </form>
                         </td>
                         <td>
                             <form action={`http://localhost:3000/concertdetail/${userconcert.concert_id}`}>
