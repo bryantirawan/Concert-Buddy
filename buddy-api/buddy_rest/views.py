@@ -40,7 +40,6 @@ def api_get_user_concerts_withoutpk(request):
     user_concerts = one_user.concert.all()
     return JsonResponse(
         {   
-            # 'user': one_user.id,
             'concerts': user_concerts,
         },
         encoder=ConcertEncoder

@@ -2,7 +2,7 @@ import React, {useEffect, useState } from 'react';
 import Toggle from './Toggle';
 import { useContext } from 'react'
 import AuthContext from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
 
@@ -119,6 +119,21 @@ export default function Concerts() {
       addConcertandPutUser(concID)
     }
 
+    const handleAddConcertSubmit = async(e, venue, city, date, artist, concert_id, venue_id, artist_id) => {
+        e.preventDefault();
+        const concertURL = `http://localhost:8080/buddy/concert/`
+        const data = {venue, city, date, artist, concert_id, venue_id, artist_id}
+        console.log(data)
+        const request = {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        }
+        let res = await fetch(concertURL, request);
+        console.log("Concert Added")
+        navigate(`/tickets/${concert_id}/`)
+    }
+
     return (
         <>
         <div className='selectconcerts'>
@@ -155,9 +170,11 @@ export default function Concerts() {
 
             <th>Venue</th>
             <th>Date</th>
-            {/* <th>Concert ID</th> */}
-            <th></th>
-            <th></th>
+            {user ? (<th>Wanna go?</th>) : (<th>Want to find a buddy? Log in first</th>)}
+            {user ? (<th>Have a ticket to sell?</th>) : (<th>Log in first to sell a ticket</th>)}
+
+
+
         </tr>
     </thead>
         <tbody>
@@ -165,19 +182,18 @@ export default function Concerts() {
                 <tr key={idx}>
                     <td>{concert.artist.name}</td>
                     <td>{concert.venue.city.name}</td>
-
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
-                    {/* <td>{concert.id}</td> */}
-                    <td>
+                    {user ?                     (<td>
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
                         <button type="submit">
                         I'm going!
                         </button>
                     </form>
-                    </td>
+                    </td>) : (<td></td>)}
+
                     <td>
-                    <form action={`http://localhost:3000/tickets/${concert.id}/`}>
+                    <form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
                         <button type="submit">
                         Sell ticket
                         </button>

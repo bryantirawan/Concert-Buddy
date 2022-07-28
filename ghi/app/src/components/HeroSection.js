@@ -24,7 +24,6 @@ function HeroSection() {
           className='btns'
           buttonStyle='btn--primary'
           buttonSize='btn--large'
-          onClick={console.log('hey')}
         >
           FIND A CONCERT <i className='btns' />
         </Button>

@@ -25,6 +25,7 @@ function SellTicketForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
         const form = {price, section, row, seat, picture_url, concert, seller, buyer}
        const a = {
@@ -39,7 +40,7 @@ function SellTicketForm() {
 
         let resJson = await res.json();
       if (res.status === 200) {
-        //eventually navigate to page tickets you are selling 
+        //eventually navigate to page tickets you are selling
         alert('Ticket successfully sold')
         navigate('/')
       } else {
