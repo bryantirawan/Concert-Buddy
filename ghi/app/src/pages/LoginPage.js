@@ -1,29 +1,35 @@
 import { React, useContext } from "react"
 import AuthContext from "../context/AuthContext"
 import "./signup.css";
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginPage = () => {
 
   let {loginUser} = useContext(AuthContext)
+  let navigate = useNavigate()
+
 
   return (
 
 
 
     
-    <><link href="signin.css" rel="stylesheet"></link>
     <div>
+
       <form class="form-signin" onSubmit={loginUser}>
+
+        
         <label for="username" class="sr-only">Email address</label>
 
         <input type="text" id="username" class="form-control" name="username" placeholder='Enter Username' />
         <input type="password" name="password" class="form-control" placeholder='Enter Password' />
         {/* <input type="submit" />  */}
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-    </div></>
+        <button className="btn btn-primary btn-lg " onClick={(e) => navigate('/sign-up')} >Register </button> 
 
+      </form>
+    </div>
   )
 }
 

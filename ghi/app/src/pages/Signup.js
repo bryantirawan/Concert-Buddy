@@ -1,5 +1,5 @@
 import { React, useContext, useState } from "react"
-import AuthContext from "../context/AuthContext"
+//import AuthContext from "../context/AuthContext"
 import "./signin.css";
 
 //import React, {useEffect, useState } from 'react';
@@ -70,18 +70,25 @@ function SignupPage() {
 
   return (
     <>
-    <div className="my-5 container">
+    <>
+      
+      <div className="my-5 container">
+
         <div className="row">
           <div className="col col-sm-auto">
+          <button className="btn btn-primary btn-lg align-center" onClick={(e) => navigate('/login')} >Log in </button> 
+
             <img width="300" className="bg-white rounded shadow d-block mx-auto mb-4" src="/images/img-8.jpg" />
           </div>
           <div className="col">
             <div className="card shadow">
               <div className="card-body">
+
                 <form onSubmit={handleSubmit} className="form" id="create-attendee-form">
-                  <h1 className="card-title">Ticket for sale details</h1>
+                  <h1 className="card-title">Sign Up</h1>
+
                   <p className="mb-3">
-                    Fill us in on your ticket.
+                    Make an account.
                   </p>
                   <div className="row">
                     <div className="col">
@@ -97,25 +104,25 @@ function SignupPage() {
                       </div>
                     </div>
                     <div className="row">
-                    <div className="col">
-                      <div className="form-floating mb-3">
-                        <input onChange={(e) => setPassword1(e.target.value)} required placeholder="Password1" type="text" value={password1} id="password1" name="password1" className="form-control" />
-                        <label htmlFor="password1">Password1</label>
+                      <div className="col">
+                        <div className="form-floating mb-3">
+                          <input onChange={(e) => setPassword1(e.target.value)} required placeholder="Password1" type="text" value={password1} id="password1" name="password" className="form-control" />
+                          <label htmlFor="password1">Password</label>
+                        </div>
                       </div>
-                    </div>
-                    <div className="col">
-                      <div className="form-floating mb-3">
-                        <input onChange={(e) => setPassword2(e.target.value)} required placeholder="Password2" type="text" value={password2} id="password2" name="password2" className="form-control" />
-                        <label htmlFor="password2">Password2</label>
+                      <div className="col">
+                        <div className="form-floating mb-3">
+                          <input onChange={(e) => setPassword2(e.target.value)} required placeholder="Password2" type="text" value={password2} id="password2" name="confirm password" className="form-control" />
+                          <label htmlFor="password2">Confirm Password</label>
+                        </div>
                       </div>
-                    </div>
                     </div>
                     {/* <div className="col">
-                      <div className="form-floating mb-3">
-                        <input onChange={(e) => setPicture(e.target.value)} required placeholder="Picture Url" type="text" value={picture_url} id="picture_url" name="picture_url" className="form-control" />
-                        <label htmlFor="picture_url">Ticket Picture Url</label>
-                      </div>
-                    </div> */}
+      <div className="form-floating mb-3">
+        <input onChange={(e) => setPicture(e.target.value)} required placeholder="Picture Url" type="text" value={picture_url} id="picture_url" name="picture_url" className="form-control" />
+        <label htmlFor="picture_url">Ticket Picture Url</label>
+      </div>
+    </div> */}
                   </div>
                   <button className="btn btn-lg btn-primary">Submit Listing</button>
 
@@ -125,7 +132,7 @@ function SignupPage() {
             </div>
           </div>
         </div>
-      </div>
+      </div></>
     </>
 )
 
