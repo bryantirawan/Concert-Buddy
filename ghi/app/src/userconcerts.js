@@ -20,7 +20,7 @@ export default function Userconcerts() {
     useEffect(() => {
         getUserConcerts()
 
-    }, [userconcerts])
+    }, [])
 
     const getUserConcerts = async() => {
         const response = await fetch('http://localhost:8080/api/userconcerts/', {
@@ -76,7 +76,7 @@ const handleRemoveConcertSubmit = async (e, concID) => {
     
 
     return (
-    <>
+    <div className="container">
     <table className="table table-hover table-striped">
     <thead>
         <tr>
@@ -123,18 +123,8 @@ const handleRemoveConcertSubmit = async (e, concID) => {
             }  
         </tbody>
     </table>
-
+    </div>
     
-    </>
-
-
-
-
-
-
-
-
-
   )
 }
 
