@@ -73,6 +73,7 @@
 .selltickets {
   background-image: url('Images/img-11.jpg');
   background-position: center;
+  background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: black;
@@ -103,15 +104,18 @@
 
 .selectconcerts {
   background-image: url('Images/img-12.jpg');
-  background-position: center;
+  background-position: fixed;
+  background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: black;
   color: white;
   display: flex;
-  height: 90vh;
+  min-height: 90vh;
+  overflow: hidden;
   align-items: center;
   justify-content: center;
+  padding-top: 10px;
 }
 
 .entry {

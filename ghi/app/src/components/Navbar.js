@@ -46,6 +46,7 @@ function Navbar() {
                 to='/selectconcerts/'
                 className='nav-links'
                 onClick={closeMobileMenu}
+                reloadDocument
               >
                 Find a Buddy
               </Link>
@@ -68,7 +69,7 @@ function Navbar() {
             </li>
             <li>
                 {user ? (
-                  <p className="nav-links" onClick={logoutUser}>Logout</p>
+                  <p className="nav-links" aria-current="page" onClick={logoutUser}>Logout</p>
                 ): (
                   <Link className="nav-links" aria-current="page" to="/login/">
                  Login / SignUp 

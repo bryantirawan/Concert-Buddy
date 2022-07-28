@@ -14,16 +14,12 @@ export default function Concerts() {
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
-    let {user} = useContext(AuthContext)
-
-
-
-
+    const [invalid, setInvalid] = useState(false);
+    let {user} = useContext(AuthContext)    
 
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
-
 
         const city_new = city.split(' ')
         let final_city = city_new[0]
@@ -41,9 +37,12 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+                setArtist('');
+                setInvalid(false)
             } else {
                 console.error('concertData:', concertResponse);
-                setConcerts(undefined)
+                setInvalid(true)
+                setConcerts([])
             }
         }
     }
@@ -66,9 +65,12 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+                setCity('')
+                setInvalid(false)
             } else {
                 console.error('concertData:', concertResponse);
-                setConcerts(undefined)
+                setInvalid(true)
+                setConcerts([])
             }
         }
     }
@@ -148,11 +150,19 @@ export default function Concerts() {
                 <input type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
             </form>
             }
+        <div>
+        <p></p>
         </div>
+        
+    
+    {invalid &&
+        <p>Invalid Search Request</p>
+    }
 
-    {concerts !== undefined ?
+    {concerts.length > 0 &&
     (
-    <table>
+    
+    <table className="table table-dark table-striped">
     <thead>
         <tr>
             <th>Artist</th>
@@ -161,7 +171,7 @@ export default function Concerts() {
             <th>Venue</th>
             <th>Date</th>
             {user ? (<th>Wanna go?</th>) : (<th>Want to find a buddy? Log in first</th>)}
-            <th>Have a ticket to sell?</th>
+            {user ? (<th>Have a ticket to sell?</th>) : (<th>Log in first to sell a ticket</th>)}
 
 
 
@@ -172,7 +182,6 @@ export default function Concerts() {
                 <tr key={idx}>
                     <td>{concert.artist.name}</td>
                     <td>{concert.venue.city.name}</td>
-
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
                     {user ?                     (<td>
@@ -194,10 +203,9 @@ export default function Concerts() {
             ))
         }
         </tbody>
-    </table>
-    ) :
-    (<p>Invalid Search Request</p>)
+    </table>)
     }
+    </div>
     </div>
     </div>
     </>
