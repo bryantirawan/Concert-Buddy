@@ -46,7 +46,6 @@ function SignupPage() {
       <div className="my-5 container">
         <div className="row">
           <div className="col col-sm-auto">
-          <button className="btn btn-primary btn-lg align-center" onClick={(e) => navigate('/login')} >Log in </button> 
             <img width="300" className="bg-white rounded shadow d-block mx-auto mb-4" src="/images/img-8.jpg" />
           </div>
           <div className="col">
@@ -89,8 +88,13 @@ function SignupPage() {
                 </form>
               </div>
             </div>
+            <br></br>
+        <h3> Alread have an account? </h3>
+        <button className="btn btn-primary btn-lg " onClick={(e) => navigate('/login')}>Login </button> 
           </div>
+          
         </div>
+        
       </div>
     </>
 )
@@ -99,20 +103,3 @@ export default SignupPage;
 
 
 
-// const SignupPage = () => {
-//   let {SignupUser} = useContext(AuthContext)
-//   return (
-//     <div>
-//       <form className="form-signin" onSubmit={SignupUser}>
-//         <label for="username" className="sr-only">Email address</label>
-//         <input type="text" id="username" className="form-control" name="username" placeholder='Enter Username' />
-//         <input type="email" id="email" name="email" className="form-control" placeholder="Email Address" required  />
-//         <input type="password" name="password1" className="form-control" placeholder='Enter Password' />
-//         <input type="password" name="password2" className="form-control" placeholder='Confirm Password' />
-//         <button className="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-//       </form>
-//     </div>
-//   )
-// }
-
-// export default SignupPage
