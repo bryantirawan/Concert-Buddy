@@ -10,7 +10,7 @@ export default function Concerts() {
 
     let navigate = useNavigate()
 
-    const [concerts, setConcerts] = useState([]);
+    const [concerts, setConcerts] = useState([]); 
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
@@ -153,11 +153,11 @@ export default function Concerts() {
             <div className='entry'>
                 { toggled ?
             <form onSubmit={handleLocationSubmit}>
-                <input type="text" value={city} required onChange={(e) => {setCity(e.target.value)}} onKeyPress={handleKeypress}/>
+                <input class="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value)}} onKeyPress={handleKeypress}/>
             </form>
             :
             <form onSubmit={handleArtistSubmit}>
-                <input type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
+                <input class="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
             </form>
             }
         <div>
@@ -195,19 +195,18 @@ export default function Concerts() {
                     <td>{concert.eventDate.toLocaleDateString()} </td>
                     {user ?                     (<td>
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
-                        <button type="submit">
+                    <button className="btn btn-success" type="submit">  
                         I'm going!
                         </button>
                     </form>
                     </td>) : (<td></td>)}
-                    {user ? (<td> <form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
-                        <button type="submit">
+                    {user ?                     (<td>
+                    <form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
+                    <button className="btn btn-primary" type="submit">  
                         Sell ticket
                         </button>
                     </form>
-                    </td>):(<td></td>)}
-
-                 
+                    </td>) : (<td></td>)}
                 </tr>
             ))
         }

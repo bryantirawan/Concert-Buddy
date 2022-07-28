@@ -63,7 +63,7 @@ function Navbar() {
             <li>
                 {user ? (
                   <Link className="nav-links" aria-current="page" to="/userconcerts/">
-                 Concerts You're Going To
+                 Your Concerts
                 </Link>
                 ): (<></>)}
             </li>
@@ -76,9 +76,10 @@ function Navbar() {
                  </Link>
                 )}
               </li>
+              
           </ul>
 
-          {user && <p className='nav-links'>Hello {user.username}</p>}
+          
         </div>
       </nav>
     </>

@@ -41,6 +41,7 @@ export default function ConcertDetail() {
 
       return (
         <>
+        <br></br>
             <h1>Concert Details</h1>
               <table className="table table-striped table-bordered ">
               <thead>
@@ -108,7 +109,7 @@ export default function ConcertDetail() {
         }
         </tbody>
     </table>
-    ):(<h1>Sorry no tickets available</h1>)}
+    ):(<><br></br><h1 align="center">Sorry no tickets available</h1></>)}
 
         </>
       );
