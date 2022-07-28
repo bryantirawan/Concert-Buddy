@@ -1,8 +1,8 @@
-import React, {useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import Toggle from './Toggle';
 import { useContext } from 'react'
 import AuthContext from '../context/AuthContext';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -171,8 +171,8 @@ export default function Concerts() {
 
             <th>Venue</th>
             <th>Date</th>
-            {user ? (<th>Wanna go?</th>) : (<th>Want to find a buddy? Log in first</th>)}
-            {user ? (<th>Have a ticket to sell?</th>) : (<th>Log in first to sell a ticket</th>)}
+            {user ? (<th>Wanna go?</th>) : (<th>Login to find buddies</th>)}
+            {user ? (<th>Have a ticket to sell?</th>) : (<th>Login to sell tickets</th>)}
 
 
 
@@ -192,14 +192,13 @@ export default function Concerts() {
                         </button>
                     </form>
                     </td>) : (<td></td>)}
-
-                    <td>
-                    <form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
+                    {user ? (<form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
                         <button type="submit">
                         Sell ticket
                         </button>
-                    </form>
-                    </td>
+                    </form>):(<td></td>)}
+
+                 
                 </tr>
             ))
         }
