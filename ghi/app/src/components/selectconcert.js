@@ -10,7 +10,7 @@ export default function Concerts() {
 
     let navigate = useNavigate()
 
-    const [concerts, setConcerts] = useState([]);
+    const [concerts, setConcerts] = useState([]); 
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
@@ -161,7 +161,6 @@ export default function Concerts() {
 
     {concerts.length > 0 &&
     (
-    
     <table className="table table-dark table-striped">
     <thead>
         <tr>
