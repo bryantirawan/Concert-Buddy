@@ -1,6 +1,6 @@
 import { React, useContext } from "react"
 import AuthContext from "../context/AuthContext"
-import "./signup.css";
+// import "./signup.css";
 import { useNavigate } from 'react-router-dom';
 
 
