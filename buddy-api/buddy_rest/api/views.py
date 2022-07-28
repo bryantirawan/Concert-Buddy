@@ -63,6 +63,18 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = UserSerializer(user_object) 
         return Response(serializer.data)
     
+    # def delete(self, request, *args, **kwargs): 
+    #     user_object = self.get_object()
+
+    #     data = request.data 
+
+    #     for concert in data["concert"]: 
+    #         concert_obj = Concert.objects.get(concert_id=concert["concert_id"])
+    #         user_object.concert.remove(concert_obj)
+        
+    #     serializer = UserSerializer(user_object) 
+    #     return Response(serializer.data)
+    
 
 
 

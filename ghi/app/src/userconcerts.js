@@ -46,6 +46,7 @@ export default function Userconcerts() {
             <th>Date</th>
             <th>Other users going to this concert</th>
             <th>Buy ticket if available</th>
+            <th>I can no longer go</th>
         </tr>
     </thead>
         <tbody>
@@ -64,6 +65,14 @@ export default function Userconcerts() {
                         <form action={`http://localhost:3000/concertdetail/${userconcert.concert_id}`}>
                         <button className="btn btn-primary">        
                         Buy
+                        </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action={`/`}> 
+                        {/* will need its own handle submit after making adding delete/PUT logic   */}
+                        <button className="btn btn-primary">        
+                        Remove
                         </button>
                         </form>
                     </td>
