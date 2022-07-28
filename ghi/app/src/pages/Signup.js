@@ -1,6 +1,6 @@
 import { React, useContext, useState } from "react"
 //import AuthContext from "../context/AuthContext"
-import "./signup.css";
+// import "./signup.css";
 
 //import React, {useEffect, useState } from 'react';
 //import { useContext } from 'react'
