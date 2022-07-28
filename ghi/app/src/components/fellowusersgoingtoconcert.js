@@ -19,12 +19,11 @@ const Fellowusersgoingtoconcert = () => {
   } 
   return (
     <>
+    <br></br>
 <table  className="table table-striped table-bordered ">
     <thead>
-
         <tr>
-             <th>Concert Buddies! Feel free to reach out to other users!</th>
-
+             <th><h2>Potential concert buddies: Feel free to reach out to other users!</h2></th>
         </tr>
     </thead>
         <tbody>
