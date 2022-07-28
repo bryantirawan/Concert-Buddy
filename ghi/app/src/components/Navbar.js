@@ -76,9 +76,10 @@ function Navbar() {
                  </Link>
                 )}
               </li>
+              
           </ul>
 
-          {user && <p className='nav-links'>Hello {user.username}</p>}
+          
         </div>
       </nav>
     </>

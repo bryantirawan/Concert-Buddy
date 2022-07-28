@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AuthContext from "../context/AuthContext";
 import '../App.css';
 import { Link } from 'react-router-dom';
 import './HeroSection.css';
 import { Button } from './Button';
 
 function HeroSection() {
+  let {user, logoutUser} = useContext(AuthContext)
   return (
     <div className='hero-container'>
       <video src='/videos/video-3.mp4' autoPlay loop muted />
       <h1>ADVENTURE AWAITS</h1>
-      <p>What are you waiting for?</p>
+      {user ? (<p>Hello {user.username}, what are you waiting for?</p>):(<p>What are you waiting for?</p>)}
+
       <div className='hero-btns'>
         <Link to='/'>
         <Button
