@@ -1,8 +1,8 @@
-import React, {useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import Toggle from './Toggle';
 import { useContext } from 'react'
 import AuthContext from '../context/AuthContext';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 

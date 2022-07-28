@@ -103,9 +103,11 @@
 
 .selectconcerts {
   background-image: url('Images/img-12.jpg');
+  width: 150%;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   background-color: black;
   color: white;
   display: flex;
