@@ -14,12 +14,12 @@ export default function Concerts() {
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
-    let {user} = useContext(AuthContext)
+    const [invalid, setInvalid] = useState(false);
+    let {user} = useContext(AuthContext)    
 
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
-
 
         const city_new = city.split(' ')
         let final_city = city_new[0]
@@ -37,9 +37,12 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+                setArtist('');
+                setInvalid(false)
             } else {
                 console.error('concertData:', concertResponse);
-                setConcerts(undefined)
+                setInvalid(true)
+                setConcerts([])
             }
         }
     }
@@ -62,9 +65,12 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+                setCity('')
+                setInvalid(false)
             } else {
                 console.error('concertData:', concertResponse);
-                setConcerts(undefined)
+                setInvalid(true)
+                setConcerts([])
             }
         }
     }
@@ -144,11 +150,19 @@ export default function Concerts() {
                 <input type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
             </form>
             }
+        <div>
+        <p></p>
         </div>
+        
+    
+    {invalid &&
+        <p>Invalid Search Request</p>
+    }
 
-    {concerts !== undefined ?
+    {concerts.length > 0 &&
     (
-    <table>
+    
+    <table className="table table-dark table-striped">
     <thead>
         <tr>
             <th>Artist</th>
@@ -189,10 +203,9 @@ export default function Concerts() {
             ))
         }
         </tbody>
-    </table>
-    ) :
-    (<p>Invalid Search Request</p>)
+    </table>)
     }
+    </div>
     </div>
     </div>
     </>

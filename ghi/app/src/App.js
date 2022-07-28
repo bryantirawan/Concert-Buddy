@@ -22,7 +22,7 @@ function App() {
 
       <AuthProvider>
         <Navbar />
-      <div className="container">
+      
           <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/userconcerts/" element={
@@ -43,7 +43,7 @@ function App() {
           <Route path="/sellertickets" element={<SellerTicketList />} />
           <Route path="/myconcerts" element={<BuyerConcerts />} />
         </Routes>
-        </div>
+        
         </AuthProvider>
     </BrowserRouter>
     </>
