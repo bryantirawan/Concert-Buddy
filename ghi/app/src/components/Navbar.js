@@ -68,25 +68,16 @@ function Navbar() {
             </li>
             <li>
                 {user ? (
-                  <p className="nav-links" onClick={logoutUser}>Logout</p>
+                  <p className="nav-links" aria-current="page" onClick={logoutUser}>Logout</p>
                 ): (
                   <Link className="nav-links" aria-current="page" to="/login/">
-                 Login
+                 Login / SignUp 
                  </Link>
                 )}
               </li>
-            <li>
-              <Link
-                to='/sign-up'
-                className='nav-links-mobile'
-                onClick={closeMobileMenu}>
-                Sign Up
-              </Link>
-            </li>
           </ul>
-          {user && <p>Hello {user.username}</p>}
-          {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
-          {user && <p>Hello {user.username}</p>}
+
+          {user && <p className='nav-links'>Hello {user.username}</p>}
         </div>
       </nav>
     </>

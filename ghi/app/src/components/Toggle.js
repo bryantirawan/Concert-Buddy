@@ -25,7 +25,7 @@ const Slider = styled.span`
     width: 50px;
     height: 25px;
     border-radius: 100px;
-    background-color: #bfbfbf;
+    background-color: #18ed54;
     position: relative;
     transition: background-color 0.2s;
 

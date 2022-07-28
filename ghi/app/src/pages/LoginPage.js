@@ -13,7 +13,7 @@ const LoginPage = () => {
   return (
 
 
-
+<>
     
     <div>
 
@@ -26,14 +26,40 @@ const LoginPage = () => {
         <input type="password" name="password" class="form-control" placeholder='Enter Password' />
         {/* <input type="submit" />  */}
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <button className="btn btn-primary btn-lg " onClick={(e) => navigate('/sign-up')} >Register </button> 
 
       </form>
     </div>
+    <div>
+    <h1> Don't have an account? </h1>
+        {/* <form action='/signup'>
+            <button>Sign up</button>
+        </form> */}
+        <button className="btn btn-primary btn-lg " onClick={(e) => navigate('/sign-up')} >Register </button> 
+
+    </div>
+
+
+
+
+
+
+    
+    </>
   )
 }
 
 export default LoginPage
+
+
+{/* 
+<>
+    <div>
+      <h1> Login with your credentails: </h1>
+        <form onSubmit={loginUser}>
+            <input type="text" name="username" placeholder='Enter Username' /> 
+            <input type="password" name="password" placeholder='Enter Password' /> 
+            <input type="submit" /> 
+        </form> */}
 
  {/* // //     <form class="form-signin" onSubmit={loginUser}>
     // //         <input type="text" name="username" placeholder='Enter Username' /> 

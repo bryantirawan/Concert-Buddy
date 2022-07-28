@@ -1,6 +1,6 @@
 import { React, useContext, useState } from "react"
 //import AuthContext from "../context/AuthContext"
-import "./signin.css";
+import "./signup.css";
 
 //import React, {useEffect, useState } from 'react';
 //import { useContext } from 'react'
@@ -11,10 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-
 function SignupPage() {
-
-
 
 
 
