@@ -11,6 +11,7 @@ import SellTicketForm from './components/pages/SellTicket';
 import SearchToSellTickets from './components/pages/UselessSearchSellTickets';
 import Fellowusersgoingtoconcert from './components/fellowusersgoingtoconcert';
 import TicketCheckout from './components/pages/TicketCheckout';
+import SellerTicketList from './components/pages/SellerPersonalTickets';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/tickets/:concert_id" element={<SellTicketForm />} />
           <Route path="/selltickets" element={<SearchToSellTickets />} />
           <Route path="/checkout/:ticket_id" element={<TicketCheckout />} />
+          <Route path="/sellertickets" element={<SellerTicketList />} />
         </Routes>
         </div>
         </AuthProvider>
