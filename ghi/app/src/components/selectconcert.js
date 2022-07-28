@@ -15,8 +15,8 @@ export default function Concerts() {
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
     const [invalid, setInvalid] = useState(false);
+    const [concertList, setConcertList] = useState([]);
     let {user} = useContext(AuthContext)    
-
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
@@ -39,6 +39,7 @@ export default function Concerts() {
                 setConcerts(concertData.concerts.setlist);
                 setArtist('');
                 setInvalid(false)
+                
             } else {
                 console.error('concertData:', concertResponse);
                 setInvalid(true)
