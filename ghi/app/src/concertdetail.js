@@ -14,18 +14,6 @@ export default function ConcertDetail() {
     const [concerts, setConcerts] = useState([]);
     const [tickets, setTickets] = useState([]);
     let {user} = useContext(AuthContext)
-    //const [sell, setSell] = useState();
-
-
-    //useEffect( () => {
-     //   const fetchConcert = async () => {
-            //const concertResponse = await fetch(`http://localhost:8080/api/selectconcerts`);
-    //         const concertData = await concertResponse.json();
-    //         setConcerts(concertData.setlist);
-    //     }
-    //     fetchConcert()
-    // }, []
-    // );
 
     useEffect(() => {
         const fetchConcertDetail = async () => {
@@ -53,8 +41,6 @@ export default function ConcertDetail() {
 
       return (
         <>
-
-            <>
             <h1>Concert Details</h1>
               <table className="table table-striped table-bordered ">
               <thead>
@@ -92,8 +78,7 @@ export default function ConcertDetail() {
 
     </tbody>
     </table>
-
-<table  className="table table-striped table-bordered ">
+    {tickets.length !== 0 ? (<table  className="table table-striped table-bordered ">
     <thead>
         <tr>
              <th>Price</th>
@@ -105,14 +90,12 @@ export default function ConcertDetail() {
         </tr>
     </thead>
         <tbody>
-          {tickets && tickets.map((ticket,idx) => (
-
+          {tickets.map((ticket,idx) => (
                 <tr key={idx}>
                     <td>{ticket.price}</td>
                     <td>{ticket.section}</td>
                     <td>{ticket.row} </td>
                     <td>{ticket.seat} </td>
-
                     <td>
                     <Link to={`/checkout/${ticket.id}`} className="current btn-lg   btn-block   ">
                     <button className="btn btn-primary btn-lg btn-block">
@@ -125,7 +108,7 @@ export default function ConcertDetail() {
         }
         </tbody>
     </table>
-            </>
+    ):(<h1>Sorry no tickets available</h1>)}
 
         </>
       );

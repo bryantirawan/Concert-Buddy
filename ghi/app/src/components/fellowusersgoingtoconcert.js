@@ -17,15 +17,8 @@ const Fellowusersgoingtoconcert = () => {
     const data = await response.json() 
     setFellowUsers(data.users);
   } 
-
-
-
   return (
     <>
-
-
-
-
 <table  className="table table-striped table-bordered ">
     <thead>
 
@@ -44,18 +37,11 @@ const Fellowusersgoingtoconcert = () => {
       
         </tbody>
     </table> 
-
-    {/* <p>Other users going to the concert:</p>
-    <ul>
-      {fellowusers.map((fellowuser,idx) => (
-        <li key={idx}>
-          {fellowuser.email}
-          
-        </li>
-      )
-      )}
-
-    </ul> */}
+    <form action={`http://localhost:3000/userconcerts/`}>
+                        <button className="btn btn-primary">        
+                        Go back to other concerts you are going to
+                        </button>
+    </form>
     </>
   )
 }

@@ -34,8 +34,6 @@ export default function Userconcerts() {
         }
 
     }
-    const current = new Date();
-    const date = `${current.getDate()}-${('0' + (current.getMonth()+1)).slice(-2)}-${current.getFullYear()}`;
 
     return (
     <>
@@ -63,9 +61,11 @@ export default function Userconcerts() {
      </button></Link>
                     </td>
                     <td>
+                        <form action={`http://localhost:3000/concertdetail/${userconcert.concert_id}`}>
                         <button className="btn btn-primary">        
                         Buy
                         </button>
+                        </form>
                     </td>
                 </tr>
             )) 

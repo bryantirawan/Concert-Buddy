@@ -149,9 +149,6 @@ export default function Concerts() {
             </form>
             }
         </div>
-        <p></p>
-        <div>
-        </div>
 
     {concerts !== undefined ?
     (
@@ -163,8 +160,10 @@ export default function Concerts() {
 
             <th>Venue</th>
             <th>Date</th>
-            {/* <th>Concert ID</th> */}
-            <th>           </th>
+            {user ? (<th>Wanna go?</th>) : (<th>Want to find a buddy? Log in first</th>)}
+            <th>Have a ticket to sell?</th>
+
+
 
         </tr>
     </thead>
@@ -176,14 +175,14 @@ export default function Concerts() {
 
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
-                    {/* <td>{concert.id}</td> */}
-                    <td>
+                    {user ?                     (<td>
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
                         <button type="submit">
                         I'm going!
                         </button>
                     </form>
-                    </td>
+                    </td>) : (<td></td>)}
+
                     <td>
                     <form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
                         <button type="submit">
