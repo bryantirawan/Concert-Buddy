@@ -76,8 +76,8 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                 <th>Venue</th>
                 <th>City</th>
                 <th>Date</th>
-                <th>Other users going to this concert</th>
-                <th>Buy ticket if available</th>
+                <th>Find buddies</th>
+                <th>Buy ticket</th>
                 <th>I can no longer go</th>
             </tr>
         </thead>
