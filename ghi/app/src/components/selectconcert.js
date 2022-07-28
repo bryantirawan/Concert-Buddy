@@ -15,7 +15,6 @@ export default function Concerts() {
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
     const [invalid, setInvalid] = useState(false);
-    const [concertList, setConcertList] = useState([]);
     let {user} = useContext(AuthContext)    
 
     const handleLocationSubmit = async (e) => {
@@ -37,6 +36,11 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+                let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
+                console.log(concList)
+                if (concList[0].length === 0){
+                    setConcerts(0)
+                }
                 setArtist('');
                 setInvalid(false)
                 
@@ -66,6 +70,11 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+                let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
+                console.log(concList)
+                if (concList[0].length === 0){
+                    setConcerts(0)
+                }
                 setCity('')
                 setInvalid(false)
             } else {
@@ -192,19 +201,21 @@ export default function Concerts() {
                         </button>
                     </form>
                     </td>) : (<td></td>)}
-                    {user ? (<form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
+                    {user ? (<td> <form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
                         <button type="submit">
                         Sell ticket
                         </button>
-                    </form>):(<td></td>)}
+                    </form>
+                    </td>):(<td></td>)}
 
                  
                 </tr>
             ))
         }
         </tbody>
-    </table>)
-    }
+    </table>)}
+    {concerts === 0 &&
+    (<p>No concerts matching search</p>)}
     </div>
     </div>
     </div>
