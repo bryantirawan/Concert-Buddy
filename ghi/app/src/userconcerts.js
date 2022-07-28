@@ -75,7 +75,6 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                 <th>Artist</th>
                 <th>Venue</th>
                 <th>City</th>
-                <th>ID</th>
                 <th>Date</th>
                 <th>Other users going to this concert</th>
                 <th>Buy ticket if available</th>
@@ -88,7 +87,6 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                         <td>{userconcert.artist}</td>  
                         <td>{userconcert.venue}</td>
                         <td>{userconcert.city}</td>
-                        <td>{userconcert.concert_id}</td>
                         <td>{new Date(userconcert.date).toLocaleDateString('en-US')}</td>
                         <td>
                         <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-success"type="button">
