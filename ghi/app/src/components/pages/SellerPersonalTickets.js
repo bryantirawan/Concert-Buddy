@@ -36,6 +36,10 @@ useEffect( () => {
     fetchTickets()
 }, []
 );
+
+// Add toggle button to change sold back to not sold & clear the buyer field if changed to not sold
+// Delete button for ticket listing (if sold == False) -- (delete ticket from ticket model)
+
     return (
       <div className="col">
         {/* {props.list.map(data => {
