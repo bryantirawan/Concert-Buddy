@@ -171,7 +171,6 @@ export default function Concerts() {
 
     {concerts.length > 0 &&
     (
-    
     <table className="table table-dark table-striped">
     <thead>
         <tr>
