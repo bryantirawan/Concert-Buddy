@@ -128,14 +128,8 @@ export default function ConcertDetail() {
              <th>Price</th>
             <th>Section</th>
             <th>Row</th>
-<<<<<<< HEAD
-            <th>Seat</th> 
-            <th>Buy</th> 
-            
-=======
             <th>Seat</th>
             <th>Buy</th>
->>>>>>> main
 
         </tr>
     </thead>

@@ -39,6 +39,34 @@ export const AuthProvider = ({children}) => {
     }
 
 
+
+    // let signupUser = async (e ) => {
+    //     e.preventDefault()
+    //     const submit = {
+    //         method:'POST',
+    //         headers:{
+    //             'Content-Type':'application/json'
+    //         },
+    //         body:JSON.stringify({'username':e.target.username.value, 'email':e.target.email.value, 'password1':e.target.password1.value, 'password2':e.target.password2.value})
+    //     }
+    //     console.log((submit))
+    //     let response = await fetch('http://localhost:8080/buddy/user/', submit)
+    //     console.log(response)
+    //     console.log(e.target.username.value)
+    //     let data = await response.json()
+    //     console.log(data)
+    //     if(response.status === 200){
+    //         // setAuthTokens(data)
+    //         // setUser(jwt_decode(data.access))
+    //         // localStorage.setItem('authTokens', JSON.stringify(data))
+    //         alert('yay!')
+
+    //     }
+    //     else{
+    //         alert('Something went wrong!')
+    //     }
+    // }
+
     let logoutUser = () => {
         setAuthTokens(null)
         setUser(null)
@@ -75,6 +103,8 @@ export const AuthProvider = ({children}) => {
         authTokens:authTokens,
         loginUser:loginUser, 
         logoutUser:logoutUser,
+      //  signupUser:signupUser,
+
     }
 
     useEffect( () => {

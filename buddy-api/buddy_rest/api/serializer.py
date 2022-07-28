@@ -33,7 +33,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User 
         fields = ['id', 'username', 'email', 'concert', 'password1', 'password2',
-            'first_name', 'last_name',]
+            ]
         depth = 2
         read_only_fields = ('id',)
 

@@ -45,12 +45,13 @@ class Ticket(models.Model):
 
 
 class OrderItem(models.Model):
+    
     user = models.ForeignKey(UserVO, on_delete=models.CASCADE, null=True)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
     address_for_order_item = models.ForeignKey(
         'Address', related_name='address_for_order_item', on_delete=models.SET_NULL, blank=True, null=True)
     buyer_venmo = models.CharField(max_length=100, null=True)
-
+    
 
 class Address(models.Model):
     user = models.OneToOneField(UserVO, on_delete=models.CASCADE)
