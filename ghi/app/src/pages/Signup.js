@@ -51,11 +51,11 @@ function SignupPage() {
       let resJson = await res.json();
     if (res.status === 201) {
       //eventually navigate to page tickets you are selling 
-      alert('user successfully madde')
+      alert('user successfully made')
       navigate('/')
     } else {
       console.log(res.status);
-      alert('Error processing ticket')
+      alert('Error processing registration')
     }
   } catch (err) {
     console.log('error', err);
@@ -124,7 +124,7 @@ function SignupPage() {
       </div>
     </div> */}
                   </div>
-                  <button className="btn btn-lg btn-primary">Submit Listing</button>
+                  <button className="btn btn-lg btn-primary">Create Account</button>
 
                 </form>
 
