@@ -4,8 +4,9 @@ import {
     useParams, useNavigate
   } from "react-router-dom";
 import { Link, BrowserRouter as Router, Route } from "react-router-dom";
-  
-  
+import Footer from './components/Footer';
+
+
 
 export default function Userconcerts() {
     const [userconcerts, setUserConcerts] = useState([])
@@ -27,7 +28,7 @@ export default function Userconcerts() {
             }
         })
         const data = await response.json()
-        if(response.status===200){        
+        if(response.status===200){
             setUserConcerts(data.concerts)
         }else if(response.statusText === 'Unauthorized'){
             logoutUser()
@@ -84,7 +85,7 @@ const handleRemoveConcertSubmit = async (e, concID) => {
             <tbody>
             {userconcerts.map((userconcert,idx) => (
                     <tr key={idx}>
-                        <td>{userconcert.artist}</td>  
+                        <td>{userconcert.artist}</td>
                         <td>{userconcert.venue}</td>
                         <td>{userconcert.city}</td>
                         <td>{new Date(userconcert.date).toLocaleDateString('en-US')}</td>
@@ -95,14 +96,14 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                         </td>
                         <td>
                             <form action={`http://localhost:3000/tickets/${userconcert.concert_id}`}>
-                            <button className="btn btn-primary">        
+                            <button className="btn btn-primary">
                             Sell
                             </button>
                             </form>
                         </td>
                         <td>
                             <form action={`http://localhost:3000/concertdetail/${userconcert.concert_id}`}>
-                            <button className="btn btn-primary">        
+                            <button className="btn btn-primary">
                             Buy
                             </button>
                             </form>
@@ -110,19 +111,28 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                         <td>
                         <form onSubmit={(e) => handleRemoveConcertSubmit(e, userconcert.concert_id)}>
                             {/* will need its own handle submit after making adding delete/PUT logic   */}
-                            <button className="btn btn-primary">        
+                            <button className="btn btn-primary">
                             Remove
                             </button>
                             </form>
                         </td>
                     </tr>
-                )) 
-                }  
+                ))
+                }
             </tbody>
         </table>
         </div>):(<h1 align="center">You have no concerts yet.</h1>)}
-
+        <div
+        style={{
+          position: "fixed",
+          left: 0,
+          bottom: 0,
+          right: 0,
+          backgroundColor: "green"
+        }}
+      >
+        <Footer />
+        </div>
         </>
   )
 }
-

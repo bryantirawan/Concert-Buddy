@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 import { useContext } from 'react'
+import Footer from '../Footer';
 
 function TicketColumn() {
 
@@ -37,7 +38,7 @@ useEffect( () => {
 );
     return (
 <div  style={{color: 'white' }} className="col">
-    
+
 
 <h3 className="display-6 fw-bold">Upcoming</h3>
 
@@ -161,6 +162,8 @@ function BuyerConcerts() {
         </div>
         </div>
         </div>
+
+        <Footer />
         </>
     )
 

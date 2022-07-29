@@ -5,6 +5,7 @@ import {
   useParams
 } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Footer';
 
 
 
@@ -98,7 +99,7 @@ return (
                 <form onSubmit={handleSubmit} className="form" id="create-attendee-form">
                   <h1 className="card-title">Ticket for sale details</h1>
                   <p className="mb-3">
-                    Fill us in on your ticket. You must sell each ticket individually. 
+                    Fill us in on your ticket. You must sell each ticket individually.
                   </p>
                   <div className="row">
                     <div className="col">
@@ -142,6 +143,16 @@ return (
             </div>
           </div>
         </div>
+      </div>
+      <div
+        style={{
+          position: "fixed",
+          left: 0,
+          bottom: 0,
+          right: 0
+        }}
+      >
+      <Footer/>
       </div>
     </>
 )

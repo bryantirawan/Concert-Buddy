@@ -6,6 +6,7 @@ import {
 import { useContext } from 'react'
 import AuthContext from './context/AuthContext';
 import { Link, BrowserRouter as Router, Route } from "react-router-dom";
+import Footer from './components/Footer';
 
 export default function ConcertDetail() {
     let { concert_id } = useParams();
@@ -110,7 +111,16 @@ export default function ConcertDetail() {
         </tbody>
     </table>
     ):(<><br></br><h1 align="center">Sorry no tickets available</h1></>)}
-
+          <div
+        style={{
+          position: "fixed",
+          left: 0,
+          bottom: 0,
+          right: 0
+        }}
+      >
+        <Footer />
+      </div>
         </>
       );
     };

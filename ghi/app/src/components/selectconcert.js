@@ -3,6 +3,7 @@ import Toggle from './Toggle';
 import { useContext } from 'react'
 import AuthContext from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import Footer from './Footer';
 
 
 
@@ -10,12 +11,12 @@ export default function Concerts() {
 
     let navigate = useNavigate()
 
-    const [concerts, setConcerts] = useState([]); 
+    const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
     const [invalid, setInvalid] = useState(false);
-    let {user} = useContext(AuthContext)    
+    let {user} = useContext(AuthContext)
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
@@ -43,7 +44,7 @@ export default function Concerts() {
                 }
                 setArtist('');
                 setInvalid(false)
-                
+
             } else {
                 console.error('concertData:', concertResponse);
                 setInvalid(true)
@@ -163,8 +164,8 @@ export default function Concerts() {
         <div>
         <p></p>
         </div>
-        
-    
+
+
     {invalid &&
         <p>Invalid Search Request</p>
     }
@@ -195,7 +196,7 @@ export default function Concerts() {
                     <td>{concert.eventDate.toLocaleDateString()} </td>
                     {user ?                     (<td>
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
-                    <button className="btn btn-success" type="submit">  
+                    <button className="btn btn-success" type="submit">
                         I'm going!
                         </button>
                     </form>
@@ -207,7 +208,7 @@ export default function Concerts() {
                     </form>
                     </td>):(<td></td>)}
 
-                 
+
                 </tr>
             ))
         }
@@ -218,6 +219,7 @@ export default function Concerts() {
     </div>
     </div>
     </div>
+    <Footer/>
     </>
     )
 }
