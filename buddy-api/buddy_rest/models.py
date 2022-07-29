@@ -25,8 +25,3 @@ class User(AbstractUser):
         return str(self.email)
 
 
-    # def save(self):
-    #     user = super(User, self)
-    #     user.set_password(self.password)
-    #     user.save()
-    #     return user

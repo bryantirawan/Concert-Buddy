@@ -17,7 +17,7 @@ export default function Userconcerts() {
 
     useEffect(() => {
         getUserConcerts()
-    }, [userconcerts])
+    }, [])
 
     const getUserConcerts = async() => {
         const response = await fetch('http://localhost:8080/api/userconcerts/', {
@@ -59,9 +59,10 @@ export default function Userconcerts() {
     }
 
 const handleRemoveConcertSubmit = async (e, concID) => {
-    e.preventDefault();
+    //e.preventDefault();
   //POST to Concert and PUT to User all in one
   putConcertandputUser(concID)
+  //window.location.reload()
 }
 
     return (
