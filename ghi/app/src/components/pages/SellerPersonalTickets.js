@@ -5,6 +5,7 @@ import AuthContext from '../../context/AuthContext';
 import { useContext } from 'react'
 import Toggle from '../Toggle';
 import axios from 'axios';
+import Footer from '../Footer';
 
 function SellerTicketList() {
 
@@ -156,6 +157,7 @@ function SellerTicketList() {
         }
 
         </div>
+        <Footer />
         </>
     )
     }

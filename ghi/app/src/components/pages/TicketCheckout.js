@@ -5,6 +5,7 @@ import {
   useParams
 } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Footer';
 
 
 
@@ -46,7 +47,7 @@ function TicketCheckout() {
 
         let resJson = await res.json();
       if (res.status === 200) {
-        //eventually navigate to page where you can see all the tickets you bought 
+        //eventually navigate to page where you can see all the tickets you bought
         navigate('/')
       } else {
         alert('Ticket cannot be bought. Someone probably bought it just before you did.')
@@ -113,6 +114,7 @@ return (
           </div>
         </div>
       </div>
+      <Footer />
     </>
 )
 

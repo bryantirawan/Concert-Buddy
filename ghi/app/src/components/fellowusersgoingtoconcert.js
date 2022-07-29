@@ -2,21 +2,22 @@ import React, { useState, useEffect } from 'react'
 import {
   useParams
 } from "react-router-dom";
+import Footer from './Footer';
 
 
 const Fellowusersgoingtoconcert = () => {
   const [fellowusers, setFellowUsers] = useState([])
   const { concert_id } = useParams();
-  
+
   useEffect( () => {
     getFellowUsers()
   }, [fellowusers])
 
   const getFellowUsers = async() => {
     const response = await fetch(`http://localhost:8080/api/concertfellowusers/${concert_id}/`)
-    const data = await response.json() 
+    const data = await response.json()
     setFellowUsers(data.users);
-  } 
+  }
   return (
     <>
         <div className="container">
@@ -35,15 +36,16 @@ const Fellowusersgoingtoconcert = () => {
                 </tr>
             ))
         }
-      
+
         </tbody>
-    </table> 
+    </table>
     <form action={`http://localhost:3000/userconcerts/`}>
-                        <button className="btn btn-primary">        
+                        <button className="btn btn-primary">
                         Go back to other concerts you are going to
                         </button>
     </form>
     </div>
+    <Footer />
     </>
   )
 }
