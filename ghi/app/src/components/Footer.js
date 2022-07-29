@@ -14,7 +14,7 @@ function Footer() {
             <h3>Tickets</h3>
             <Link to='/selectconcerts'>Sell a ticket</Link>
             <Link to='/selectconcerts'>Buy a ticket</Link>
-            <Link to='/selectconcerts'>Find a Buddy</Link>
+            <Link to='/selectconcerts' reloadDocument>Find a Buddy</Link>
           </div>
           <div class='footer-link-items'>
             <h3>User profile</h3>
