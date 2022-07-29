@@ -28,8 +28,8 @@ function HeroSection() {
   return (
     <div className='hero-container'>
       <video src='/videos/video-3.mp4' autoPlay loop muted />
-      <h1>ADVENTURE AWAITS</h1>
-      {user ? (<p>Hello {user.username}, what are you waiting for?</p>):(<p>What are you waiting for?</p>)}
+      <h1 align="center">ADVENTURE AWAITS</h1>
+      {user ? (<p align="center">Hello {user.username}, what are you waiting for?</p>):(<p align="center">What are you waiting for?</p>)}
 
       <div className='hero-btns'>
         <form onSubmit={handleImGoingSubmit}>
