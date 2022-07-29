@@ -8,6 +8,11 @@ const LoginPage = () => {
   let navigate = useNavigate()
 
   return (
+
+
+
+
+
 <>
 <div className="my-5 container">
 <form class="form-signin" onSubmit={loginUser}>
@@ -39,11 +44,10 @@ const LoginPage = () => {
         </div>
         <br></br>
         <h3> Don't have an account? </h3>
-        <button className="btn btn-primary btn-lg " onClick={(e) => navigate('/sign-up')} >Register </button> 
-  </form>
+        <button className="btn btn-primary btn-lg " onClick={(e) => navigate('/sign-up')} >Register </button>
+      </form>
       </div>
     </>
   )
 }
 export default LoginPage
-

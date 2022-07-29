@@ -12,6 +12,7 @@ function SellerTicketList() {
     const [unsold_tickets, setUnsoldTickets] = useState([]);
     const [sold_tickets, setSoldTickets] = useState([]);
     const [toggled, setToggled] = useState(false);
+    const [avail_tickets, setAvailTickets] = useState(false)
     let {user} = useContext(AuthContext)
     const seller = user.user_id
 
@@ -19,9 +20,11 @@ function SellerTicketList() {
         const fetchTickets = async() => {
             const ticketResponse = await fetch(`http://localhost:8090/api/tickets/`);
             const ticketData = await ticketResponse.json();
+            if (ticketData.length > 0) {
+                setAvailTickets(true)
+            }
             let unsold_list = []
             let sold_list = []
-
             for (let ticket of ticketData.tickets) {
                 let person = ticket.seller.import_href.slice(11)
                 if (person == seller && ticket.sold == false) {
@@ -34,6 +37,9 @@ function SellerTicketList() {
             setSoldTickets(sold_list)
             console.log(sold_list, "sold list")
             console.log(unsold_list, "unsold_list")
+
+
+
         }
         fetchTickets();
     }, []
@@ -157,6 +163,7 @@ function SellerTicketList() {
         }
 
         </div>
+
         {/* <div
         style={{
           position: "fixed",

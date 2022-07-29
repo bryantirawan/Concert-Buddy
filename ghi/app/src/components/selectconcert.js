@@ -183,6 +183,10 @@ export default function Concerts() {
         navigate(`/tickets/${concert_id}/`)
     }
 
+    const handleConcertDetails = (e) => {
+        navigate(`/login/`)
+    }
+
     return (
         <>
         <div className='selectconcerts'>
@@ -218,10 +222,9 @@ export default function Concerts() {
 
             <th>Venue</th>
             <th>Date</th>
-            {user ? (<th>Wanna go?</th>) : (<th>Login to find buddies</th>)}
-            {user ? (<th>Have a ticket to sell?</th>) : (<th>Login to sell tickets</th>)}
-
-
+            {user ? (<th>Wanna go?</th>) : <th>Concert Details</th>}
+            {user ?
+            (<th>Have a ticket to sell?</th>) : <></> }
 
         </tr>
     </thead>
@@ -232,21 +235,29 @@ export default function Concerts() {
                     <td>{concert.venue.city.name}</td>
                     <td>{concert.venue.name}</td>
                     <td>{concert.eventDate.toLocaleDateString()} </td>
-                    {user ?                     (<td>
+                    {user ?
+                    (<td>
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
                     <button className="btn btn-success" type="submit">
                         I'm going!
                         </button>
                     </form>
-                    </td>) : (<td></td>)}
+
+                    </td>
+                    ) : (<td>
+                    <form onSubmit={(e) => handleConcertDetails(e)}>
+                    <button className="btn btn-success" type="submit">
+                        Login to See Concert Details
+                        </button>
+                    </form>
+
+                    </td>)}
                     {user ? (<td> <form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
                         <button className="btn btn-primary" type="submit">
                         Sell ticket
                         </button>
                     </form>
-                    </td>):(<td></td>)}
-
-
+                    </td>):(<></>)}
                 </tr>
             ))
         }

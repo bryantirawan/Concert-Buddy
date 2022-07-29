@@ -84,7 +84,7 @@ function Navbar() {
                     </Dropdown>
                 ): (
                   <Link className="nav-links" aria-current="page" to="/login/">
-                 Login / SignUp
+                 Login
                  </Link>
                 )}
               </li>
