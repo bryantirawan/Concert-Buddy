@@ -3,6 +3,7 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import AuthContext from "../context/AuthContext";
 import './Navbar.css';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 
 
@@ -41,16 +42,16 @@ function Navbar() {
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            {/* <li className='nav-item'>
+            <li className='nav-item'>
               <Link
                 to='/selectconcerts/'
                 className='nav-links'
                 onClick={closeMobileMenu}
                 reloadDocument
               >
-                Find a Buddy
+                Find A Buddy
               </Link>
-            </li> */}
+            </li>
             <li className='nav-item'>
               <Link
                 to='/selectconcerts/'
@@ -60,16 +61,27 @@ function Navbar() {
                 Sell Tickets
               </Link>
             </li>
-            <li>
+            {/* <li>
                 {user ? (
                   <Link className="nav-links" aria-current="page" to="/userconcerts/">
                  Your Concerts
                 </Link>
                 ): (<></>)}
-            </li>
+            </li> */}
             <li>
                 {user ? (
-                  <p className="nav-links" aria-current="page" onClick={logoutUser}>Logout</p>
+                  <Dropdown className="nav-links">
+                    <Dropdown.Toggle variant="dark">
+                      {user.username}
+                      <Dropdown.Menu>
+                        <Dropdown.Item href="/mytickets/">Purchased Tickets</Dropdown.Item>
+                        <Dropdown.Item href="/userconcerts/">Concerts I Am Attending</Dropdown.Item>
+                        <Dropdown.Item href="/sellertickets">My Tickets for Sale</Dropdown.Item>
+                        <Dropdown.Item href="/"  variant="dark" onClick={logoutUser}>Logout</Dropdown.Item>
+                    {/* <p className="nav-links" aria-current="page" onClick={logoutUser}>Logout</p> */}
+                    </Dropdown.Menu>
+                    </Dropdown.Toggle>
+                    </Dropdown>
                 ): (
                   <Link className="nav-links" aria-current="page" to="/login/">
                  Login / SignUp
