@@ -125,7 +125,7 @@ useEffect( () => {
     );
   }
 
-function BuyerConcerts() {
+function BuyerTickets() {
 
     TicketColumn();
 
@@ -169,4 +169,4 @@ function BuyerConcerts() {
 
     }
 
-    export default BuyerConcerts;
+    export default BuyerTickets;

@@ -26,7 +26,7 @@ const LoginPage = () => {
                     <div className="row">
                       <div className="col">
                         <div className="form-floating mb-3">
-                        <input type="password" name="password" class="form-control" placeholder='Enter Password' />
+                        <input type="password" name="password" className="form-control" placeholder='Enter Password' />
                           <label htmlFor="password1">Password</label>
                         </div>
                       </div>

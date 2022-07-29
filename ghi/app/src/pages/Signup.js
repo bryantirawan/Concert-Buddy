@@ -54,7 +54,7 @@ function SignupPage() {
                 <form onSubmit={handleSubmit} className="form" id="create-attendee-form">
                   <h1 className="card-title">Sign Up</h1>
                   <p className="mb-3">
-                    Make an account.
+                    Make an account. By signing up, you agree to all terms & conditions. 
                   </p>
                   <div className="row">
                     <div className="col">
