@@ -19,6 +19,8 @@ const Fellowusersgoingtoconcert = () => {
   } 
   return (
     <>
+        <div className="container">
+
 <table  className="table table-striped table-bordered ">
     <thead>
 
@@ -42,6 +44,7 @@ const Fellowusersgoingtoconcert = () => {
                         Go back to other concerts you are going to
                         </button>
     </form>
+    </div>
     </>
   )
 }

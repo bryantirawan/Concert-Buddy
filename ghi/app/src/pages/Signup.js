@@ -1,10 +1,6 @@
 import { React, useContext, useState } from "react"
 //import AuthContext from "../context/AuthContext"
-<<<<<<< HEAD
-//import "./signup.css";
-=======
 // import "./signup.css";
->>>>>>> main
 
 //import React, {useEffect, useState } from 'react';
 //import { useContext } from 'react'
@@ -107,13 +103,13 @@ function SignupPage() {
                     <div className="row">
                       <div className="col">
                         <div className="form-floating mb-3">
-                          <input onChange={(e) => setPassword1(e.target.value)} required placeholder="Password1" type="text" value={password1} id="password1" name="password" className="form-control" />
+                          <input onChange={(e) => setPassword1(e.target.value)} required placeholder="Password1" type="password" value={password1} id="password1" name="password1" className="form-control" />
                           <label htmlFor="password1">Password</label>
                         </div>
                       </div>
                       <div className="col">
                         <div className="form-floating mb-3">
-                          <input onChange={(e) => setPassword2(e.target.value)} required placeholder="Password2" type="text" value={password2} id="password2" name="confirm password" className="form-control" />
+                          <input onChange={(e) => setPassword2(e.target.value)} required placeholder="Password2" type="password" value={password2} id="password2" name="password2" className="form-control" />
                           <label htmlFor="password2">Confirm Password</label>
                         </div>
                       </div>
