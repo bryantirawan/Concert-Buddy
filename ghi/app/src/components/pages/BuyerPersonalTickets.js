@@ -7,6 +7,8 @@ import { useContext } from 'react'
 function TicketColumn() {
 
 const [my_concerts, setMyConcerts] = useState([]);
+const [past_concerts, setpastConcerts] = useState([]);
+
 let {user} = useContext(AuthContext)
 const buyer = user.user_id
 
@@ -33,34 +35,91 @@ useEffect( () => {
     fetchTickets()
 }, []
 );
-
-// Need grouping by historical vs. upcoming (bens filter)
-
-
     return (
-      <div className="col">
-        {/* {props.list.map(data => {
-          const conference = data.conference;
-          return (
-            <div key={conference.href} className="card mb-3 shadow">
-              <img src={conference.location.picture_url} className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">{conference.name}</h5>
-                <h6 className="card-subtitle mb-2 text-muted">
-                  {conference.location.name}
-                </h6>
-                <p className="card-text">
-                  {conference.description}
-                </p>
-              </div>
-              <div className="card-footer">
-                {new Date(conference.starts).toLocaleDateString()}
-                -
-                {new Date(conference.ends).toLocaleDateString()}
-              </div>
-            </div>
-          );
-        })} */}
+<div  style={{color: 'white' }} className="col">
+    
+
+<h3 className="display-6 fw-bold">Upcoming</h3>
+
+{/* {myconcerts.length !== 0 ? ( */}
+<table  className="table table-dark table-striped table-bordered ">
+    <thead>
+        <tr>
+        <th>Date</th>
+        <th>Artist</th>
+
+             <th>Price</th>
+            <th>Section</th>
+            <th>Row</th>
+            <th>Seat</th>
+
+        </tr>
+    </thead>
+        <tbody>
+        {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) >= (Date.now())).map((ticket,idx) => (
+
+          // {my_concerts.map((ticket,idx) => (
+                <tr key={idx}>
+                    <td>{new Date(ticket.concert.date).toLocaleDateString()}</td>
+                    <td>{ticket.concert.artist}</td>
+                    <td>{ticket.price}</td>
+                    <td>{ticket.section}</td>
+                    <td>{ticket.row} </td>
+                    <td>{ticket.seat} </td>
+                    {/* <td>
+                    <Link to={`/checkout/${ticket.id}`} className="current btn-lg   btn-block   ">
+                    <button className="btn btn-primary btn-lg btn-block">
+           Buy
+          </button>
+          </Link>
+                    </td> */}
+                </tr>
+            ))
+        }
+        </tbody>
+    </table>
+
+    <h3 className="display-6 fw-bold">Past</h3>
+{/*          */}
+    <table  className="table table-dark table-striped table-bordered ">
+    <thead>
+        <tr>
+        <th>Date</th>
+        <th>Artist</th>
+
+             <th>Price</th>
+            <th>Section</th>
+            <th>Row</th>
+            <th>Seat</th>
+
+        </tr>
+    </thead>
+        <tbody>
+        {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) <= (Date.now())).map((ticket,idx) => (
+
+          // {my_concerts.map((ticket,idx) => (
+                <tr key={idx}>
+                    <td>{new Date(ticket.concert.date).toLocaleDateString()}</td>
+                    <td>{ticket.concert.artist}</td>
+                    <td>{ticket.price}</td>
+                    <td>{ticket.section}</td>
+                    <td>{ticket.row} </td>
+                    <td>{ticket.seat} </td>
+                    {/* <td>
+                    <Link to={`/checkout/${ticket.id}`} className="current btn-lg   btn-block   ">
+                    <button className="btn btn-primary btn-lg btn-block">
+           Buy
+          </button>
+          </Link>
+                    </td> */}
+                </tr>
+            ))
+        }
+        </tbody>
+    </table>
+
+
+
       </div>
     );
   }
@@ -88,8 +147,11 @@ function BuyerConcerts() {
           </div>
         </div>
         <div className="container">
-          {/* <h2>Upcoming conferences</h2> */}
           <div className="row">
+
+          {TicketColumn()}
+
+
             {/* {this.state.conferenceColumns.map((conferenceList, index) => {
               return (
                 <ConferenceColumn key={index} list={conferenceList} />

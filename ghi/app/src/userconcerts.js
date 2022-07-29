@@ -66,6 +66,7 @@ const handleRemoveConcertSubmit = async (e, concID) => {
 
     return (
         <>
+        <br></br>
         {userconcerts.length > 0 ? (    <div className="container">
         <h1 align="center">Concerts You're Going To</h1>
         <table className="table table-hover table-striped">
@@ -74,10 +75,10 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                 <th>Artist</th>
                 <th>Venue</th>
                 <th>City</th>
-                <th>ID</th>
                 <th>Date</th>
-                <th>Other users going to this concert</th>
-                <th>Buy ticket if available</th>
+                <th>Find buddies</th>
+                <th>Sell extra tickets</th>
+                <th>Buy ticket</th>
                 <th>I can no longer go</th>
             </tr>
         </thead>
@@ -87,12 +88,18 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                         <td>{userconcert.artist}</td>  
                         <td>{userconcert.venue}</td>
                         <td>{userconcert.city}</td>
-                        <td>{userconcert.concert_id}</td>
                         <td>{new Date(userconcert.date).toLocaleDateString('en-US')}</td>
                         <td>
                         <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-success"type="button">
               Other Users Going
          </button></Link>
+                        </td>
+                        <td>
+                            <form action={`http://localhost:3000/tickets/${userconcert.concert_id}`}>
+                            <button className="btn btn-primary">        
+                            Sell
+                            </button>
+                            </form>
                         </td>
                         <td>
                             <form action={`http://localhost:3000/concertdetail/${userconcert.concert_id}`}>

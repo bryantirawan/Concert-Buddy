@@ -78,7 +78,7 @@ function SignupPage() {
                       </div>
                       <div className="col">
                         <div className="form-floating mb-3">
-                          <input onChange={(e) => setPassword2(e.target.value)} required placeholder="Password2" type="password" value={password2} id="password2" name="confirm password" className="form-control" />
+                          <input onChange={(e) => setPassword2(e.target.value)} required placeholder="Password2" type="password" value={password2} id="password2" name="password2" className="form-control" />
                           <label htmlFor="password2">Confirm Password</label>
                         </div>
                       </div>
