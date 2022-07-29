@@ -14,7 +14,6 @@ export default function Userconcerts() {
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
 
-    
     useEffect(() => {
         getUserConcerts()
     }, [userconcerts])
