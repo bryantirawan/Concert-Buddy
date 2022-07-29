@@ -22,7 +22,7 @@ function App() {
 
       <AuthProvider>
         <Navbar />
-      
+
           <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/userconcerts/" element={
@@ -33,6 +33,7 @@ function App() {
           />
           <Route path="/fellowusers/:concert_id" element={<Fellowusersgoingtoconcert />} />
           <Route path="/selectconcerts/" element={<Concerts />} />
+          <Route path="/selectconcerts/:location" element={<Concerts />} />
           <Route path="/login/" element={<LoginPage />} />
           <Route path="/sign-up/" element={<SignupPage />} />
 
@@ -43,7 +44,7 @@ function App() {
           <Route path="/sellertickets" element={<SellerTicketList />} />
           <Route path="/mytickets" element={<BuyerTickets />} />
         </Routes>
-        
+
         </AuthProvider>
     </BrowserRouter>
     </>

@@ -1,12 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import AuthContext from "../context/AuthContext";
 import '../App.css';
-import { Link } from 'react-router-dom';
 import './HeroSection.css';
-import { Button } from './Button';
+import { useNavigate } from 'react-router-dom';
 
 function HeroSection() {
   let {user, logoutUser} = useContext(AuthContext)
+  const [city, setCity] = useState('');
+
+  let navigate = useNavigate()
+
+  const handleImGoingSubmit = async (e) => {
+    e.preventDefault();
+    console.log(city)
+    navigate(`/selectconcerts/${city}`)
+
+    }
+
+  const handleKeypress = e => {
+    //it triggers by pressing the enter key
+  if (e.keyCode === 13) {
+    handleImGoingSubmit();
+
+  }
+};
+
   return (
     <div className='hero-container'>
       <video src='/videos/video-3.mp4' autoPlay loop muted />
@@ -14,7 +32,12 @@ function HeroSection() {
       {user ? (<p>Hello {user.username}, what are you waiting for?</p>):(<p>What are you waiting for?</p>)}
 
       <div className='hero-btns'>
-        <Link to='/'>
+        <form onSubmit={handleImGoingSubmit}>
+          <input className="form-control" type="text" placeholder="Search concerts by city..." value={city} required onChange={(e) => setCity(e.target.value)} onKeyPress={handleKeypress}/>
+        </form>
+
+
+        {/* <Link to='/'>
         <Button
           className='btns'
           buttonStyle='btn--outline'
@@ -30,7 +53,7 @@ function HeroSection() {
         >
           FIND A CONCERT <i className='btns' />
         </Button>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

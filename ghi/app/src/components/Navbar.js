@@ -41,7 +41,7 @@ function Navbar() {
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            <li className='nav-item'>
+            {/* <li className='nav-item'>
               <Link
                 to='/selectconcerts/'
                 className='nav-links'
@@ -50,7 +50,7 @@ function Navbar() {
               >
                 Find a Buddy
               </Link>
-            </li>
+            </li> */}
             <li className='nav-item'>
               <Link
                 to='/selectconcerts/'
@@ -72,14 +72,14 @@ function Navbar() {
                   <p className="nav-links" aria-current="page" onClick={logoutUser}>Logout</p>
                 ): (
                   <Link className="nav-links" aria-current="page" to="/login/">
-                 Login / SignUp 
+                 Login / SignUp
                  </Link>
                 )}
               </li>
-              
+
           </ul>
 
-          
+
         </div>
       </nav>
     </>
