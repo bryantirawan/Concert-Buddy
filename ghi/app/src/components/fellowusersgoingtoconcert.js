@@ -10,7 +10,7 @@ const Fellowusersgoingtoconcert = () => {
   
   useEffect( () => {
     getFellowUsers()
-  }, [])
+  }, [fellowusers])
 
   const getFellowUsers = async() => {
     const response = await fetch(`http://localhost:8080/api/concertfellowusers/${concert_id}/`)
@@ -21,12 +21,11 @@ const Fellowusersgoingtoconcert = () => {
     <>
         <div className="container">
 
+    <br></br>
 <table  className="table table-striped table-bordered ">
     <thead>
-
         <tr>
-             <th>Concert Buddies!</th>
-
+             <th><h2>Potential concert buddies: Feel free to reach out to other users!</h2></th>
         </tr>
     </thead>
         <tbody>

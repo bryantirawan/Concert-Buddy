@@ -10,13 +10,12 @@ export default function Concerts() {
 
     let navigate = useNavigate()
 
-    const [concerts, setConcerts] = useState([]);
+    const [concerts, setConcerts] = useState([]); 
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
     const [invalid, setInvalid] = useState(false);
     let {user} = useContext(AuthContext)    
-
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
@@ -37,8 +36,14 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+                let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
+                console.log(concList)
+                if (concList[0].length === 0){
+                    setConcerts(0)
+                }
                 setArtist('');
                 setInvalid(false)
+                
             } else {
                 console.error('concertData:', concertResponse);
                 setInvalid(true)
@@ -65,6 +70,11 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
+                let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
+                console.log(concList)
+                if (concList[0].length === 0){
+                    setConcerts(0)
+                }
                 setCity('')
                 setInvalid(false)
             } else {
@@ -143,11 +153,11 @@ export default function Concerts() {
             <div className='entry'>
                 { toggled ?
             <form onSubmit={handleLocationSubmit}>
-                <input type="text" value={city} required onChange={(e) => {setCity(e.target.value)}} onKeyPress={handleKeypress}/>
+                <input class="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value)}} onKeyPress={handleKeypress}/>
             </form>
             :
             <form onSubmit={handleArtistSubmit}>
-                <input type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
+                <input class="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
             </form>
             }
         <div>
@@ -161,7 +171,6 @@ export default function Concerts() {
 
     {concerts.length > 0 &&
     (
-    
     <table className="table table-dark table-striped">
     <thead>
         <tr>
@@ -186,24 +195,26 @@ export default function Concerts() {
                     <td>{concert.eventDate.toLocaleDateString()} </td>
                     {user ?                     (<td>
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
-                        <button type="submit">
+                    <button className="btn btn-success" type="submit">  
                         I'm going!
                         </button>
                     </form>
                     </td>) : (<td></td>)}
-                    {user ? (<form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
+                    {user ? (<td> <form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
                         <button type="submit">
                         Sell ticket
                         </button>
-                    </form>):(<td></td>)}
+                    </form>
+                    </td>):(<td></td>)}
 
                  
                 </tr>
             ))
         }
         </tbody>
-    </table>)
-    }
+    </table>)}
+    {concerts === 0 &&
+    (<p>No concerts matching search</p>)}
     </div>
     </div>
     </div>

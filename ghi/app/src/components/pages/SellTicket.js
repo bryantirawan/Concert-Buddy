@@ -41,8 +41,8 @@ function SellTicketForm() {
         let resJson = await res.json();
       if (res.status === 200) {
         //eventually navigate to page tickets you are selling
-        alert('Ticket successfully sold')
-        navigate('/')
+        alert('Ticket successfully listed')
+        navigate(`/concertdetail/${concert}`)
       } else {
         console.log(res.status);
         alert('Error processing ticket')
@@ -98,7 +98,7 @@ return (
                 <form onSubmit={handleSubmit} className="form" id="create-attendee-form">
                   <h1 className="card-title">Ticket for sale details</h1>
                   <p className="mb-3">
-                    Fill us in on your ticket.
+                    Fill us in on your ticket. You must sell each ticket individually. 
                   </p>
                   <div className="row">
                     <div className="col">
