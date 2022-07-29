@@ -1,31 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Footer.css';
 import { Button } from './Button';
+import AuthContext from "../context/AuthContext";
 import { Link } from 'react-router-dom';
 
 function Footer() {
+  let {user, logoutUser} = useContext(AuthContext)
   return (
     <div className='footer-container'>
       <div class='footer-links'>
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
             <h3>Tickets</h3>
-            <Link to='/selectconcerts'>Find Concerts</Link>
+            <Link to='/selectconcerts'>Sell a ticket</Link>
+            <Link to='/selectconcerts'>Buy a ticket</Link>
             <Link to='/selectconcerts'>Find a Buddy</Link>
-            <Link to='/'>Terms of Service</Link>
           </div>
           <div class='footer-link-items'>
             <h3>User profile</h3>
-            <Link to='/selltickets'>Sell Tickets</Link>
-            <Link to='/myconcerts'>Your Tickets</Link>
-            <Link to='/sellertickets'>Seller Tickets</Link>
+            <Link to='/mytickets'>Your Tickets</Link>
+            <Link to='/sellertickets'>Tickets you're selling</Link>
           </div>
         </div>
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
             <h3>Support</h3>
-            <Link to='/login'>Login</Link>
-            <Link to='/sign-up'>Sign Up</Link>
             <Link to='/'>Contact</Link>
           </div>
         </div>
@@ -35,6 +34,7 @@ function Footer() {
             <Link to='/'>About</Link>
             <Link to='/'>Jobs</Link>
             <Link to='/'>Press</Link>
+            <Link to='/'>Terms of Service</Link>
           </div>
         </div>
       </div>

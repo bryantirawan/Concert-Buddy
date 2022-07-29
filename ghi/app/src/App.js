@@ -13,7 +13,7 @@ import Fellowusersgoingtoconcert from './components/fellowusersgoingtoconcert';
 import TicketCheckout from './components/pages/TicketCheckout';
 import SignupPage from './pages/Signup';
 import SellerTicketList from './components/pages/SellerPersonalTickets';
-import BuyerConcerts from './components/pages/BuyerPersonalTickets';
+import BuyerTickets from './components/pages/BuyerPersonalTickets';
 
 function App() {
   return (
@@ -41,7 +41,7 @@ function App() {
           <Route path="/selltickets" element={<SearchToSellTickets />} />
           <Route path="/checkout/:ticket_id" element={<TicketCheckout />} />
           <Route path="/sellertickets" element={<SellerTicketList />} />
-          <Route path="/myconcerts" element={<BuyerConcerts />} />
+          <Route path="/mytickets" element={<BuyerTickets />} />
         </Routes>
         
         </AuthProvider>
