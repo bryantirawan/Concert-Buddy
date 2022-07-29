@@ -201,7 +201,7 @@ export default function Concerts() {
                     </form>
                     </td>) : (<td></td>)}
                     {user ? (<td> <form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
-                        <button type="submit">
+                        <button className="btn btn-primary" type="submit">
                         Sell ticket
                         </button>
                     </form>
