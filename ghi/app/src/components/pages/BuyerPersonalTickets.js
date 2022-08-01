@@ -30,6 +30,11 @@ useEffect( () => {
             }
         }
         }
+        //concerts_list.sort((a,b)=>a.getTime()-b.getTime());
+        console.log(concerts_list, "concerts list")
+
+        concerts_list.sort((a,b) => Date.parse(a.concert.date) - Date.parse(b.concert.date))
+
         console.log(concerts_list, "concerts list")
         setMyConcerts(concerts_list)
     }
@@ -38,7 +43,7 @@ useEffect( () => {
 );
     return (
       
-<div  style={{color: 'white' }} className="col">
+<div  style={{color: 'black' }} className="col">
 
 
 <h3 className="display-6 fw-bold">Upcoming</h3>
@@ -97,7 +102,7 @@ useEffect( () => {
         </tr>
     </thead>
         <tbody>
-        {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) <= (Date.now())).map((ticket,idx) => (
+        {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) <= (Date.now())).reverse().map((ticket,idx) => (
 
           // {my_concerts.map((ticket,idx) => (
                 <tr key={idx}>
@@ -135,18 +140,18 @@ function BuyerTickets() {
                 <div className="tabeltoavoidfooter">
 
         <div style={{
-            backgroundColor: 'black',
+            backgroundColor: 'white',
             width: 'auto',
             height: 'auto'
         }}>
-        <div className="my-4 container bg-dark">
-        <div className="px-4 py-4 my-4 mt-0 text-center bg-light">
-          <img className="bg-white rounded shadow d-block mx-auto mb-1" alt="" width="600" />
+        <div className="my-4 container bg-light">
+        <div className="px-4 py-4 my-4 mt-0 text-center bg-secondary">
+          <img className="bg-black rounded shadow d-block mx-auto mb-1" alt="" width="600" />
           <h1 className="display-6 fw-bold">SEE WHAT'S NEW</h1>
           <p>Looking for something to do? See what events are coming up and book tickets.</p>
           <div className="col-lg-6 mx-auto">
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Link to="/selectconcerts" className="btn btn-dark btn-lg px-4 gap-3">Search Events</Link>
+              <Link to="/selectconcerts" className="btn btn-light btn-lg px-4 gap-3">Search Events</Link>
             </div>
           </div>
         </div>
