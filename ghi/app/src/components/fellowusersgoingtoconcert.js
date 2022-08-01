@@ -23,6 +23,8 @@ const Fellowusersgoingtoconcert = () => {
         <div className="container">
 
     <br></br>
+    <div className="tabeltoavoidfooter">
+
 <table  className="table table-striped table-bordered ">
     <thead>
         <tr>
@@ -44,6 +46,8 @@ const Fellowusersgoingtoconcert = () => {
                         Go back to other concerts you are going to
                         </button>
     </form>
+    <br></br>
+
     </div>
     <div
         style={{
@@ -53,6 +57,7 @@ const Fellowusersgoingtoconcert = () => {
           right: 0
         }}
       >
+        </div>
     <Footer />
     </div>
     </>

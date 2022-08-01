@@ -1,6 +1,13 @@
 .App {
   text-align: center;
 }
+.tabletoavoidfooter {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
 
 .App-logo {
   height: 40vmin;
@@ -108,4 +115,6 @@
   margin-bottom:10px;
 }
 
-
+.tabletoavoidfooter {
+  min-height: 90vh;
+}
