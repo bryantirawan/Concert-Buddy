@@ -44,6 +44,7 @@ export default function ConcertDetail() {
         <>
         <br></br>
         <div className="tabeltoavoidfooter">
+          <div className="container">
 
             <h1>Concert Details</h1>
               <table className="table table-striped table-bordered ">
@@ -122,8 +123,9 @@ export default function ConcertDetail() {
         }}
       >
         </div>  
+        </div>
+        </div>
         <Footer />
-      </div>
         </>
       );
     };
