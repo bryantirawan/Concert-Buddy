@@ -55,7 +55,6 @@ let {loginUser} = useContext(AuthContext)
 return (
     <div className="/react-auth-ui/">
     <div className="App">
-    <div className="appAside" />
     <div className="appForm">
     <div className="pageSwitcher">
        {/* <div className="formTitle">
