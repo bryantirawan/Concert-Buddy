@@ -47,8 +47,7 @@ function TicketCheckout() {
 
         let resJson = await res.json();
       if (res.status === 200) {
-        //eventually navigate to page where you can see all the tickets you bought
-        navigate('/')
+        navigate('/mytickets/')
       } else {
         alert('Ticket cannot be bought. Someone probably bought it just before you did.')
       }
