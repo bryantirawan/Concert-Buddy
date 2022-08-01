@@ -154,7 +154,7 @@ function SellerTicketList() {
                             </p>
                         </div>
                         <div className="card-footer">
-                            {/* Buyer: {ticket.buyer.email} */}
+                        Buyer's Email: {ticket.buyer.email}
                         </div>
                         </div>
                     );
