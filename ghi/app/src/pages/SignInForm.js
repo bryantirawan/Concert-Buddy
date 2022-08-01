@@ -11,8 +11,8 @@ const SignInForm = () => {
   return (
 <>
 <div className="App">
-<div className="appAside" />
-<div className="appForm">
+
+
 <div className="pageSwitcher">
 {/* <div className="formTitle">
               <NavLink

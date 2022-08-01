@@ -108,4 +108,7 @@
   margin-bottom:10px;
 }
 
+.tabletoavoidfooter {
+  min-height: 90vh;
+}
 
