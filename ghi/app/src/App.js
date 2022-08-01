@@ -35,6 +35,7 @@ function App() {
           />
           <Route path="/fellowusers/:concert_id" element={<Fellowusersgoingtoconcert />} />
           <Route path="/selectconcerts/" element={<Concerts />} />
+          <Route path="/selectconcerts/:location" element={<Concerts />} />
           <Route path="/login/" element={<SignInForm/>} />
           <Route path="/sign-up/" element={<SignUpForm />} />
 
