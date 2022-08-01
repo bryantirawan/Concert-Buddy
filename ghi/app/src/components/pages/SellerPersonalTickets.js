@@ -65,7 +65,7 @@ function SellerTicketList() {
     return (
         <>
         <div className="tabeltoavoidfooter">
-        <div className="my-4 container bg-dark">
+        <div className="my-4 container bg-secondary">
         <div className="px-4 py-4 my-4 mt-0 text-center bg-secondary">
           <img className="bg-white rounded shadow d-block mx-auto mb-1" alt="" width="600" />
           <h1 className="display-6 fw-bold">Ticket Listings</h1>
