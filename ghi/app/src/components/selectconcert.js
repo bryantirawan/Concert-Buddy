@@ -19,6 +19,8 @@ export default function Concerts() {
     const [invalid, setInvalid] = useState(false);
     let { location } = useParams();
     let {user} = useContext(AuthContext)
+    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+
 
 
     useEffect( () => {
@@ -187,6 +189,12 @@ export default function Concerts() {
         navigate(`/login/`)
     }
 
+    const getYesterday = (dateOnly = false) => {
+        let d = new Date();
+        d.setDate(d.getDate() - 1);
+        return dateOnly ? new Date(d.toDateString()) : d;
+      };
+
     return (
         <>
         <div className='selectconcerts'>
@@ -229,7 +237,7 @@ export default function Concerts() {
         </tr>
     </thead>
         <tbody>
-        {concerts.filter(concert => ((concert.eventDate)) >= (Date.now())).map((concert,idx) => (
+        {concerts.filter(concert => ((concert.eventDate)) >= (yesterday)).reverse().map((concert,idx) => (
                 <tr key={idx}>
                     <td>{concert.artist.name}</td>
                     <td>{concert.venue.city.name}</td>
