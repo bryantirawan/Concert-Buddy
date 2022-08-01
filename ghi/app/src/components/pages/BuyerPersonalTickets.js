@@ -37,6 +37,7 @@ useEffect( () => {
 }, []
 );
     return (
+      
 <div  style={{color: 'white' }} className="col">
 
 
@@ -131,6 +132,8 @@ function BuyerTickets() {
 
     return (
         <>
+                <div className="tabeltoavoidfooter">
+
         <div style={{
             backgroundColor: 'black',
             width: 'auto',
@@ -162,7 +165,7 @@ function BuyerTickets() {
         </div>
         </div>
         </div>
-
+</div>
         <Footer />
         </>
     )
