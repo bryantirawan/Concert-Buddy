@@ -64,6 +64,7 @@ function SellerTicketList() {
 
     return (
         <>
+        <div className="tabeltoavoidfooter">
         <div className="my-4 container bg-dark">
         <div className="px-4 py-4 my-4 mt-0 text-center bg-secondary">
           <img className="bg-white rounded shadow d-block mx-auto mb-1" alt="" width="600" />
@@ -172,6 +173,7 @@ function SellerTicketList() {
           right: 0
         }}
       > */}
+      </div>
         <Footer />
         {/* </div> */}
         </>
