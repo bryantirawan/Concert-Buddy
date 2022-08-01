@@ -33,15 +33,16 @@ function SellerTicketList() {
                     sold_list.push(ticket)
                 }
             }
-            setUnsoldTickets(unsold_list)
-            setSoldTickets(sold_list)
+            setUnsoldTickets(unsold_list);
+            setSoldTickets(sold_list);
+
+            console.log(user, "user")
+            console.log(sold_tickets, "sold_tickets")
             console.log(sold_list, "sold list")
             console.log(unsold_list, "unsold_list")
-
-
-
         }
         fetchTickets();
+
     }, []
     );
 
@@ -85,7 +86,7 @@ function SellerTicketList() {
             <div className="container">
             <h2>Listed Tickets</h2>
 
-            <div classNamem="row">
+            <div className="row">
             <div className="col">
                 <div className="col">
                     {unsold_tickets.map((ticket, idx) => {
@@ -127,7 +128,7 @@ function SellerTicketList() {
           <>
            <div className="container">
             <h2>Sold Tickets</h2>
-            <div classNamem="row">
+            <div className="row">
             <div className="col">
                 <div className="col">
                     {sold_tickets.map((ticket, idx) => {
