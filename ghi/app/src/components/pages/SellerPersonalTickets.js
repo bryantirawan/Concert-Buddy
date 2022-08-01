@@ -35,11 +35,13 @@ function SellerTicketList() {
             }
             setUnsoldTickets(unsold_list);
             setSoldTickets(sold_list);
+            
+            
 
             console.log(user, "user")
-            console.log(sold_tickets, "sold_tickets")
+            console.log(sold_tickets, "sold_tickets+state")
             console.log(sold_list, "sold list")
-            console.log(unsold_list, "unsold_list")
+            console.log(unsold_tickets, "unsold_list_state")
         }
         fetchTickets();
 
@@ -152,7 +154,7 @@ function SellerTicketList() {
                             </p>
                         </div>
                         <div className="card-footer">
-                            Buyer: {ticket.buyer.email}
+                            {/* Buyer: {ticket.buyer.email} */}
                         </div>
                         </div>
                     );
