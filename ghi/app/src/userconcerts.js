@@ -14,6 +14,9 @@ export default function Userconcerts() {
     const { concert_id } = useParams();
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
+    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+    console.log(yesterday)
+
 
     useEffect(() => {
         getUserConcerts()
@@ -29,6 +32,8 @@ export default function Userconcerts() {
         })
         const data = await response.json()
         if(response.status===200){
+             data.concerts.sort((a,b) => Date.parse(a.date) - Date.parse(b.date))
+
             setUserConcerts(data.concerts)
         }else if(response.statusText === 'Unauthorized'){
             logoutUser()
@@ -85,7 +90,9 @@ const handleRemoveConcertSubmit = async (e, concID) => {
             </tr>
         </thead>
             <tbody>
-            {userconcerts.map((userconcert,idx) => (
+            {userconcerts.filter(userconcert => ((new Date(userconcert.date))) >= (yesterday)).map((userconcert,idx) => (
+
+            //  {userconcerts.map((userconcert,idx) => (
                     <tr key={idx}>
                         <td>{userconcert.artist}</td>
                         <td>{userconcert.venue}</td>
