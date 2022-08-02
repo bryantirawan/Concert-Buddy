@@ -1,5 +1,4 @@
 import json
-from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
 from rest_framework.response import Response 
@@ -213,30 +212,6 @@ def log_concert(request, concertdict):
     print('concertdict from log_concert', concertdict)
     return JsonResponse(concertdict)
 
-
-
-    # try: 
-    #     Concert_save = Concert.objects.get(concert_id = concertdict['id']) #check to see if Concert exists already 
-    # except: 
-    #     Concert_save = Concert(
-    #         venue=concertdict['venue'], 
-    #         city=concertdict['city'], 
-    #         date=concertdict['eventDate'], 
-    #         artist=concertdict['artist'],
-    #         concert_id=concertdict['id'], 
-    #         venue_id=concertdict['venueID'],
-    #         artist_id=concertdict['artistID'], 
-    #         )
-        
-    # Concert_save.save() #save instance to Concert model 
-    # Concert_save.fellow_user.add(request.user) #assign user to Concert just saved (many to many needs to be created before assigned)
-
-    # User_save = request.user 
-    # User_save.concert.add(Concert_save)
-
-    # return redirect('http://localhost:3000/concertdetail/'+concertdict['id'])
-
-    
 
 
 

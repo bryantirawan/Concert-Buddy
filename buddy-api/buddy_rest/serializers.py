@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer 
-from .models import ConcertVO, User 
+from .models import User 
 
 class UserSerializer(ModelSerializer): 
     class Meta:
