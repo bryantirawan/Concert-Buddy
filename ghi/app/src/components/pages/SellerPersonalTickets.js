@@ -33,8 +33,13 @@ function SellerTicketList() {
                     sold_list.push(ticket)
                 }
             }
-            setUnsoldTickets(unsold_list)
-            setSoldTickets(sold_list)
+            setUnsoldTickets(unsold_list);
+            setSoldTickets(sold_list);
+
+
+
+            console.log(user, "user")
+            console.log(sold_tickets, "sold_tickets+state")
             console.log(sold_list, "sold list")
             console.log(unsold_list, "unsold_list")
         }
@@ -50,8 +55,10 @@ function SellerTicketList() {
         }
 
 
+            console.log(unsold_tickets, "unsold_list_state")
         }
         fetchTickets();
+
     }, []
     );
 
