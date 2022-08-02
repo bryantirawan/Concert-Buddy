@@ -47,6 +47,7 @@ function TicketCheckout() {
 
         let resJson = await res.json();
       if (res.status === 200) {
+        alert('Ticket successfully bought!')
         navigate('/mytickets/')
       } else {
         alert('Ticket cannot be bought. Someone probably bought it just before you did.')
@@ -59,6 +60,7 @@ function TicketCheckout() {
 
 return (
     <>
+    <div className="tabletoavoidfooter">
     <div className="my-5 container">
         <div className="row">
           <div className="col col-sm-auto">
@@ -106,7 +108,7 @@ return (
                       </div>
                     </div>
                   </div>
-                  <button className="btn btn-lg btn-primary">Submit Listing</button>
+                  <button className="btn btn-lg btn-primary">Buy</button>
                 </form>
               </div>
             </div>
@@ -121,6 +123,7 @@ return (
           right: 0
         }}
       >
+        </div>
       <Footer />
       </div>
     </>

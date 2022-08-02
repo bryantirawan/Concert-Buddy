@@ -14,6 +14,9 @@ export default function Userconcerts() {
     const { concert_id } = useParams();
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
+    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+    console.log(yesterday)
+
 
     useEffect(() => {
         getUserConcerts()
@@ -29,6 +32,8 @@ export default function Userconcerts() {
         })
         const data = await response.json()
         if(response.status===200){
+             data.concerts.sort((a,b) => Date.parse(a.date) - Date.parse(b.date))
+
             setUserConcerts(data.concerts)
         }else if(response.statusText === 'Unauthorized'){
             logoutUser()
@@ -68,8 +73,10 @@ const handleRemoveConcertSubmit = async (e, concID) => {
     return (
         <>
         <br></br>
-        <div className="tabeltoavoidfooter">
-        {userconcerts.length > 0 ? (    <div className="container">
+        <div className="tabletoavoidfooter">
+
+        {userconcerts.length > 0 ? (    
+        <div className="my-4 container bg-light">
         <h1 align="center">Concerts You're Going To</h1>
         <table className="table table-hover table-striped">
         <thead>
@@ -85,12 +92,14 @@ const handleRemoveConcertSubmit = async (e, concID) => {
             </tr>
         </thead>
             <tbody>
-            {userconcerts.map((userconcert,idx) => (
+            {userconcerts.filter(userconcert => ((new Date(userconcert.date))) >= (yesterday)).map((userconcert,idx) => (
+
+            //  {userconcerts.map((userconcert,idx) => (
                     <tr key={idx}>
                         <td>{userconcert.artist}</td>
                         <td>{userconcert.venue}</td>
                         <td>{userconcert.city}</td>
-                        <td>{new Date(userconcert.date).toLocaleDateString('en-US')}</td>
+                        <td>{new Date(userconcert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
                         <td>
                         <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-success"type="button">
               Other Users Going
@@ -123,19 +132,30 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                 }
             </tbody>
         </table>
-        </div>):(<h1 align="center">You have no concerts yet.</h1>)}
-        <div
-        style={{
-          position: "fixed",
-          left: 0,
-          bottom: 0,
-          right: 0,
-          backgroundColor: "green"
-        }}
-      >
+        </div>):(<>
+                    <div className="px-4 py-4 my-4 mt-0 text-center bg-secondary">
+                    <img className="bg-black rounded shadow d-block mx-auto mb-1" alt="" width="600" />
+                    <h1 className="display-6 fw-bold">SEE WHAT'S NEW</h1>
+                    <p>Looking for something to do? See what events are coming up and book tickets.</p>
+                    <div className="col-lg-6 mx-auto">
+                      <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <Link to="/selectconcerts" className="btn btn-light btn-lg px-4 gap-3">Search Events</Link>
+                      </div>
+                    </div>
+                  </div>
+        
+        
+        
+        
+        <h1 align="center">You have no concerts yet.</h1>
+        
+        </>
+        )}
+
         </div>
+        <br></br>
         <Footer />
-        </div>
+       
 
         </>
   )

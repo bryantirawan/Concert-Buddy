@@ -23,7 +23,7 @@ const Fellowusersgoingtoconcert = () => {
         <div className="container">
 
     <br></br>
-    <div className="tabeltoavoidfooter">
+    <div className="tabletoavoidfooter">
 
 <table  className="table table-striped table-bordered ">
     <thead>

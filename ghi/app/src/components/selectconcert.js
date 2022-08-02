@@ -22,7 +22,6 @@ export default function Concerts() {
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
 
 
-
     useEffect( () => {
         const fetchConcerts = async() => {
             const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${location}/&p=1`)
@@ -56,7 +55,6 @@ export default function Concerts() {
         fetchConcerts();
     }, []
     );
-
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
@@ -189,11 +187,11 @@ export default function Concerts() {
         navigate(`/login/`)
     }
 
-    const getYesterday = (dateOnly = false) => {
-        let d = new Date();
-        d.setDate(d.getDate() - 1);
-        return dateOnly ? new Date(d.toDateString()) : d;
-      };
+    // const getYesterday = (dateOnly = false) => {
+    //     let d = new Date();
+    //     d.setDate(d.getDate() - 1);
+    //     return dateOnly ? new Date(d.toDateString()) : d;
+    //   };
 
     return (
         <>
@@ -242,7 +240,7 @@ export default function Concerts() {
                     <td>{concert.artist.name}</td>
                     <td>{concert.venue.city.name}</td>
                     <td>{concert.venue.name}</td>
-                    <td>{concert.eventDate.toLocaleDateString()} </td>
+                    <td>{concert.eventDate.toLocaleDateString(undefined, {timeZone: "UTC"})} </td>
                     {user ?
                     (<td>
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>
