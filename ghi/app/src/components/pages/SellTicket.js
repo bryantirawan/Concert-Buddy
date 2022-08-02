@@ -139,9 +139,7 @@ return (
                     </div>
                   </div>
                   <button className="btn btn-lg btn-primary">Submit Listing</button>
-
                 </form>
-
               </div>
             </div>
           </div>
