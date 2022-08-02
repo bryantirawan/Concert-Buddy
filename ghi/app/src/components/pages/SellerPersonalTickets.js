@@ -16,6 +16,7 @@ function SellerTicketList() {
     const [sold_avail_tickets, setSoldAvailTickets] = useState(false)
     let {user} = useContext(AuthContext)
     const seller = user.user_id
+    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
 
     useEffect( () => {
         const fetchTickets = async() => {
@@ -28,8 +29,12 @@ function SellerTicketList() {
             for (let ticket of ticketData.tickets) {
                 let person = ticket.seller.import_href.slice(11)
                 if (person == seller && ticket.sold == false) {
+                    let ticketdate = ticket.concert.date.split("-")
+                    let newticketdate = new Date(ticketdate[1] + "/" + ticketdate[2].slice(0,2) + "/" + ticketdate[0])
+                    if (newticketdate >= Date.now()) {
                     unsold_list.push(ticket)
                     setAvailTickets(true)
+                }
                 } else {
                     continue;
                 }
@@ -107,7 +112,7 @@ function SellerTicketList() {
         <div>
             <div className="container">
         <Toggle onChange={(e) => setToggled(e.target.checked)} />
-        <p> Search by {toggled ? "Listed": "Sold"}</p>
+        <p> Toggle to Search by {toggled ? "Sold": "Listed"}</p>
         </div>
             {toggled ?
             <>
@@ -148,7 +153,7 @@ function SellerTicketList() {
                         </div>
                     );
                     })}
-                    </div>):(<div className="col">No Tickets for Sale</div>)}
+                    </div>):(<div className="col">You have no tickets for sale.</div>)}
                 </div>
                 </div>
                 </div>
@@ -191,7 +196,7 @@ function SellerTicketList() {
                         </div>
                     );
                     })}
-                    </div>):(<div className="col">No Tickets Sold</div>)}
+                    </div>):(<div className="col">You have no sold tickets.</div>)}
                 </div>
                 </div>
                 </div>
