@@ -31,7 +31,7 @@ function SellerTicketList() {
                 if (person == seller && ticket.sold == false) {
                     let ticketdate = ticket.concert.date.split("-")
                     let newticketdate = new Date(ticketdate[1] + "/" + ticketdate[2].slice(0,2) + "/" + ticketdate[0])
-                    if (newticketdate >= Date.now()) {
+                    if (newticketdate >= yesterday) {
                     unsold_list.push(ticket)
                     setAvailTickets(true)
                 }
@@ -84,6 +84,7 @@ function SellerTicketList() {
                 sold: false,
                 buyer: null
             });
+            window.location.reload();
             console.log(ticketChangeRes)
 
             // have to change Sold from True --> False on Ticket
@@ -187,6 +188,7 @@ function SellerTicketList() {
                             </p>
                         </div>
                         <div className="card-footer">
+                        Buyer: {order.ticket.buyer.email}
                         <form onSubmit={(e) => handleSoldTicketChange(e, order.ticket.id)}>
                         <button className="btn btn-warning" type="submit">
                         Revert to Unsold
