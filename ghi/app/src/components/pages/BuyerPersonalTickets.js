@@ -137,7 +137,7 @@ function BuyerTickets() {
 
     return (
         <>
-                <div className="tabeltoavoidfooter">
+                <div className="tabletoavoidfooter">
 
         <div style={{
             backgroundColor: 'white',
