@@ -20,11 +20,11 @@ function SellerTicketList() {
         const fetchTickets = async() => {
             const ticketResponse = await fetch(`http://localhost:8090/api/tickets/`);
             const ticketData = await ticketResponse.json();
-            if (ticketData.length > 0) {
-                setAvailTickets(true)
-            }
+
             let unsold_list = []
             let sold_list = []
+            if (ticketData.length > 0)
+            {
             for (let ticket of ticketData.tickets) {
                 let person = ticket.seller.import_href.slice(11)
                 if (person == seller && ticket.sold == false) {
@@ -37,13 +37,24 @@ function SellerTicketList() {
             setSoldTickets(sold_list)
             console.log(sold_list, "sold list")
             console.log(unsold_list, "unsold_list")
+        }
+        else {
+            setUnsoldTickets(unsold_list)
+            setSoldTickets(sold_list)
+        }
 
+        if (sold_list.length > 0) {
+            setAvailTickets(true)
+        } else {
+            setAvailTickets(false)
+        }
 
 
         }
         fetchTickets();
     }, []
     );
+
 
     const handleDeleteTicketSubmit = async (e, id) => {
         e.preventDefault();
@@ -86,7 +97,7 @@ function SellerTicketList() {
             <div className="container">
             <h2>Listed Tickets</h2>
 
-            <div classNamem="row">
+            <div className="row">
             <div className="col">
                 <div className="col">
                     {unsold_tickets.map((ticket, idx) => {
@@ -128,7 +139,7 @@ function SellerTicketList() {
           <>
            <div className="container">
             <h2>Sold Tickets</h2>
-            <div classNamem="row">
+            <div className="row">
             <div className="col">
                 <div className="col">
                     {sold_tickets.map((ticket, idx) => {
@@ -151,7 +162,7 @@ function SellerTicketList() {
                             </p>
                         </div>
                         <div className="card-footer">
-                            Buyer: {ticket.buyer.email}
+                        {avail_tickets ? (<p align="center">Buyer: {ticket.buyer.email}</p>):(<p align="center"></p>)}
                         </div>
                         </div>
                     );
