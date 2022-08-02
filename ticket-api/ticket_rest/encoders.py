@@ -91,12 +91,11 @@ class OrderItemEncoder(ModelEncoder):
         "id",
         "user",
         "ticket",
-        "address_for_order_item"
+        "address_for_order_item",
+        "buyer_venmo"
     ]
     encoders = {
         "user": UserVOEncoder(),
         "ticket": TicketDetailEncoder(),
         "address_for_order_item": AddressEncoder()
     }
-
-

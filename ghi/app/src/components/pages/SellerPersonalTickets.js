@@ -188,7 +188,13 @@ function SellerTicketList() {
                             </p>
                         </div>
                         <div className="card-footer">
-                        Buyer: {order.ticket.buyer.email}
+                        <p>
+                        Buyer Email: {order.ticket.buyer.email}
+                        <div>
+                        Buyer Venmo: {order.buyer_venmo}
+                        </div>
+                        </p>
+                        <p>If the buyer hasn't venmo'd you within 2 hours, revert the ticket back to unsold.</p>
                         <form onSubmit={(e) => handleSoldTicketChange(e, order.ticket.id)}>
                         <button className="btn btn-warning" type="submit">
                         Revert to Unsold
