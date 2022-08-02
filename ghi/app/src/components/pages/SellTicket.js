@@ -23,6 +23,8 @@ function SellTicketForm() {
     const seller = user.user_id
     const buyer = null
 
+   
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,7 +48,7 @@ function SellTicketForm() {
         navigate(`/concertdetail/${concert}`)
       } else {
         console.log(res.status);
-        alert('Error processing ticket')
+        alert('Error processing ticket. Please try again in a few seconds.')
       }
     } catch (err) {
       console.log('error', err);
@@ -88,7 +90,7 @@ function SellTicketForm() {
 
 return (
     <>
-    <div className="tabeltoavoidfooter">
+    <div className="tabletoavoidfooter">
     <div className="my-5 container">
         <div className="row">
           <div className="col col-sm-auto">

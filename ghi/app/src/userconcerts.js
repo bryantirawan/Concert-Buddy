@@ -73,7 +73,7 @@ const handleRemoveConcertSubmit = async (e, concID) => {
     return (
         <>
         <br></br>
-        <div className="tabeltoavoidfooter">
+        <div className="tabletoavoidfooter">
 
         {userconcerts.length > 0 ? (    
         <div className="my-4 container bg-light">
@@ -153,12 +153,6 @@ const handleRemoveConcertSubmit = async (e, concID) => {
         )}
 
         </div>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
         <br></br>
         <Footer />
        

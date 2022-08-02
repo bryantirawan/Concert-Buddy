@@ -43,7 +43,7 @@ export default function ConcertDetail() {
       return (
         <>
         <br></br>
-        <div className="tabeltoavoidfooter">
+        <div className="tabletoavoidfooter">
           <div className="container">
 
             <h1>Concert Details</h1>
