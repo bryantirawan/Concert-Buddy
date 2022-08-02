@@ -88,6 +88,7 @@ function SellTicketForm() {
 
 return (
     <>
+    <div className="tabeltoavoidfooter">
     <div className="my-5 container">
         <div className="row">
           <div className="col col-sm-auto">
@@ -152,6 +153,7 @@ return (
           right: 0
         }}
       >
+        </div>
       <Footer/>
       </div>
     </>
