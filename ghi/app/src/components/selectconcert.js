@@ -242,7 +242,7 @@ export default function Concerts() {
                     <td>{concert.artist.name}</td>
                     <td>{concert.venue.city.name}</td>
                     <td>{concert.venue.name}</td>
-                    <td>{concert.eventDate.toLocaleDateString()} </td>
+                    <td>{concert.eventDate.toLocaleDateString(undefined, {timeZone: "UTC"})} </td>
                     {user ?
                     (<td>
                     <form onSubmit={(e) => handleImGoingSubmit(e, concert.id)}>

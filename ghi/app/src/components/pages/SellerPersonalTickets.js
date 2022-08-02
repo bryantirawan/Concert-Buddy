@@ -109,7 +109,7 @@ function SellerTicketList() {
                             Seat: {ticket.seat}
                             <br>
                             </br>
-                            {new Date(ticket.concert.date).toLocaleDateString()} at {ticket.concert.venue}
+                            {new Date(ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})} at {ticket.concert.venue}
                             </p>
                         </div>
                         <div className="card-footer">
@@ -150,7 +150,7 @@ function SellerTicketList() {
                             <br></br>
                             Seat: {ticket.seat}
                             <br></br>
-                            {new Date(ticket.concert.date).toLocaleDateString()} at {ticket.concert.venue}
+                            {new Date(ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})} at {ticket.concert.venue}
                             </p>
                         </div>
                         <div className="card-footer">

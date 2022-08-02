@@ -23,6 +23,7 @@ function SignUpForm() {
   let { concert_id } = useParams();
   let navigate = useNavigate()
 
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {

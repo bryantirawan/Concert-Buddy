@@ -107,7 +107,7 @@ return (
                       </div>
                     </div>
                   </div>
-                  <button className="btn btn-lg btn-primary">Submit Listing</button>
+                  <button className="btn btn-lg btn-primary">Buy</button>
                 </form>
               </div>
             </div>

@@ -30,7 +30,8 @@ export default function ConcertDetail() {
                 ticket_list.push(tick)
               }
             }
-
+              console.log(ticket_list)
+              //console.log(concertData)
             setTickets(ticket_list);
             setData(concertData);
 
@@ -94,9 +95,11 @@ export default function ConcertDetail() {
         </tr>
     </thead>
         <tbody>
-          {tickets.map((ticket,idx) => (
+        {tickets.filter(ticket => ticket.sold !== true ).map((ticket,idx) => (
+
+          // {tickets.map((ticket,idx) => (
                 <tr key={idx}>
-                    <td>{ticket.price}</td>
+                    <td>{ticket.price} {ticket.sold}</td>
                     <td>{ticket.section}</td>
                     <td>{ticket.row} </td>
                     <td>{ticket.seat} </td>
