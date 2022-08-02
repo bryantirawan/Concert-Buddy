@@ -117,6 +117,7 @@
 
 .tabletoavoidfooter {
   display: flex;
-  min-height: 100vh;
+  min-height: 1000px;
   flex-direction: column;
 }
+

@@ -74,7 +74,9 @@ const handleRemoveConcertSubmit = async (e, concID) => {
         <>
         <br></br>
         <div className="tabeltoavoidfooter">
-        {userconcerts.length > 0 ? (    <div className="container">
+
+        {userconcerts.length > 0 ? (    
+        <div className="my-4 container bg-light">
         <h1 align="center">Concerts You're Going To</h1>
         <table className="table table-hover table-striped">
         <thead>
@@ -131,18 +133,17 @@ const handleRemoveConcertSubmit = async (e, concID) => {
             </tbody>
         </table>
         </div>):(<h1 align="center">You have no concerts yet.</h1>)}
-        <div
-        style={{
-          position: "fixed",
-          left: 0,
-          bottom: 0,
-          right: 0,
-          backgroundColor: "green"
-        }}
-      >
+
         </div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
         <Footer />
-        </div>
+       
 
         </>
   )
