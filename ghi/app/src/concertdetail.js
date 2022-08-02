@@ -62,9 +62,8 @@ export default function ConcertDetail() {
 
     </tr>
     <tr>
-        <th>Date</th>
-        <td> { new Date(data.date).toLocaleDateString('en-US')}</td>
-
+        <th>Date </th>
+        <td> { new Date(data.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
     </tr>
 
     <tr>
