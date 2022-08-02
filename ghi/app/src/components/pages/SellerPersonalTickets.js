@@ -13,6 +13,7 @@ function SellerTicketList() {
     const [sold_tickets, setSoldTickets] = useState([]);
     const [toggled, setToggled] = useState(false);
     const [avail_tickets, setAvailTickets] = useState(false)
+    const [sold_avail_tickets, setSoldAvailTickets] = useState(false)
     let {user} = useContext(AuthContext)
     const seller = user.user_id
 
@@ -20,48 +21,44 @@ function SellerTicketList() {
         const fetchTickets = async() => {
             const ticketResponse = await fetch(`http://localhost:8090/api/tickets/`);
             const ticketData = await ticketResponse.json();
+            setAvailTickets(false)
 
             let unsold_list = []
-            let sold_list = []
-            if (ticketData.length > 0)
-            {
+
             for (let ticket of ticketData.tickets) {
                 let person = ticket.seller.import_href.slice(11)
                 if (person == seller && ticket.sold == false) {
                     unsold_list.push(ticket)
+                    setAvailTickets(true)
                 } else {
-                    sold_list.push(ticket)
+                    continue;
                 }
             }
             setUnsoldTickets(unsold_list);
-            setSoldTickets(sold_list);
-
-
-
-            console.log(user, "user")
-            console.log(sold_tickets, "sold_tickets+state")
-            console.log(sold_list, "sold list")
             console.log(unsold_list, "unsold_list")
         }
-        else {
-            setUnsoldTickets(unsold_list)
-            setSoldTickets(sold_list)
-        }
+        const fetchOrders = async() => {
+            const orderitemResponse = await fetch(`http://localhost:8090/api/orderitems/`)
+            const orderitemData = await orderitemResponse.json();
+            setSoldAvailTickets(false)
 
-        if (sold_list.length > 0) {
-            setAvailTickets(true)
-        } else {
-            setAvailTickets(false)
-        }
+            let sold_list = []
 
-
-            console.log(unsold_tickets, "unsold_list_state")
+            for (let order of orderitemData.order_item) {
+                let person = order.ticket.seller.import_href.slice(11)
+                let order_sold = order.ticket.sold;
+                if (person == seller && order_sold == true) {
+                    sold_list.push(order)
+                    setSoldAvailTickets(true)
+                }
+            }
+            setSoldTickets(sold_list);
+            console.log(sold_list, "sold_list")
         }
         fetchTickets();
-
+        fetchOrders();
     }, []
     );
-
 
     const handleDeleteTicketSubmit = async (e, id) => {
         e.preventDefault();
@@ -72,12 +69,25 @@ function SellerTicketList() {
         } catch (e) {
             console.log('something went wrong!', e);
         }
-        // const ticketURL = await fetch(`http://localhost:8090/api/tickets/${id}/`);
-        // console.log(ticketURL)
-        // let fetchConfig = {
-        //     method: "DELETE",
-        // }
-        // const response = await fetch(ticketURL, fetchConfig);
+    }
+
+    const handleSoldTicketChange = async (e, id) => {
+        e.preventDefault();
+        try {
+            const ticketChangeRes = await axios.put(`http://localhost:8090/api/changetickets/${id}/`,
+            {
+                sold: false,
+                buyer: null
+            });
+            console.log(ticketChangeRes)
+
+            // have to change Sold from True --> False on Ticket
+            // have to remove the Buyer from the Ticket (make null)
+            // Order item kept intact for future reference
+
+        } catch (e) {
+            console.log('Error with Sold Ticket Change', e);
+        }
     }
 
     return (
@@ -107,6 +117,7 @@ function SellerTicketList() {
             <div className="row">
             <div className="col">
                 <div className="col">
+                {avail_tickets ? (<div className="col">
                     {unsold_tickets.map((ticket, idx) => {
                     return (
                         <div key={idx} className="card mb-3 shadow">
@@ -137,6 +148,7 @@ function SellerTicketList() {
                         </div>
                     );
                     })}
+                    </div>):(<div className="col">No Tickets for Sale</div>)}
                 </div>
                 </div>
                 </div>
@@ -149,31 +161,37 @@ function SellerTicketList() {
             <div className="row">
             <div className="col">
                 <div className="col">
-                    {sold_tickets.map((ticket, idx) => {
+                {sold_avail_tickets ? (<div className="col">
+                    {sold_tickets.map((order, idx) => {
                     return (
                         <div key={idx} className="card mb-3 shadow">
                         {/* <img src={ticket.picture_url} className="card-img-top" /> */}
                         <div className="card-body">
-                            <h5 className="card-title">{ticket.concert.artist}</h5>
+                            <h5 className="card-title">{order.ticket.concert.artist}</h5>
                             <h6 className="card-subtitle mb-2 text-muted">
-                            ${ new Intl.NumberFormat().format(ticket.price)}
+                            ${ new Intl.NumberFormat().format(order.ticket.price)}
                             </h6>
                             <p className="card-text">
-                            Section: {ticket.section}
+                            Section: {order.ticket.section}
                             <br></br>
-                            Row: {ticket.row}
+                            Row: {order.ticket.row}
                             <br></br>
-                            Seat: {ticket.seat}
+                            Seat: {order.ticket.seat}
                             <br></br>
-                            {new Date(ticket.concert.date).toLocaleDateString()} at {ticket.concert.venue}
+                            {new Date(order.ticket.concert.date).toLocaleDateString()} at {order.ticket.concert.venue}
                             </p>
                         </div>
                         <div className="card-footer">
-                        {avail_tickets ? (<p align="center">Buyer: {ticket.buyer.email}</p>):(<p align="center"></p>)}
+                        <form onSubmit={(e) => handleSoldTicketChange(e, order.ticket.id)}>
+                        <button className="btn btn-warning" type="submit">
+                        Revert to Unsold
+                        </button>
+                        </form>
                         </div>
                         </div>
                     );
                     })}
+                    </div>):(<div className="col">No Tickets Sold</div>)}
                 </div>
                 </div>
                 </div>
