@@ -8,7 +8,7 @@ function Footer() {
   let {user, logoutUser} = useContext(AuthContext)
   return (
     <div className='footer-container'>
-      <div class='footer-links'>
+      <div className='footer-links'>
         <div className='footer-link-wrapper'>
           <div className='footer-link-items'>
             <h3>Tickets</h3>
@@ -39,12 +39,12 @@ function Footer() {
           </div>
         </div>
       </div>
-      <section class='social-media'>
+      <section className='social-media'>
         <div className='social-media-wrap'>
           <div className='footer-logo'>
             <Link to='/' className='social-logo'>
               Concert Buddy
-              <i class='fab fa-typo3' />
+              <i className='fab fa-typo3' />
             </Link>
           </div>
           <small className='website-rights'>Concert Buddy © 2022</small>
@@ -79,7 +79,7 @@ function Footer() {
               target='_blank'
               aria-label='Twitter'
             >
-              <i class='fab fa-twitter' />
+              <i className='fab fa-twitter' />
             </Link>
             <Link
               className='social-icon-link twitter'
