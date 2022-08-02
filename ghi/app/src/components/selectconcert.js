@@ -21,6 +21,41 @@ export default function Concerts() {
     let {user} = useContext(AuthContext)
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
 
+
+    useEffect( () => {
+        const fetchConcerts = async() => {
+            const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${location}/&p=1`)
+            if(concertResponse.ok) {
+                const concertData = await concertResponse.json();
+                if (concertData.concerts.setlist) {
+                    for (let i in concertData.concerts.setlist){
+                        const dateParts = concertData.concerts.setlist[i].eventDate.split("-");
+                        const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+                        concertData.concerts.setlist[i].eventDate = dateObject
+                    }
+                    setConcerts(concertData.concerts.setlist);
+                    let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
+                    console.log(concList)
+                    if (concList[0].length === 0){
+                        setConcerts(0)
+                    }
+                    setArtist('');
+                    setInvalid(false)
+
+                } else {
+                    console.error('concertData:', concertResponse);
+                    console.log(location)
+                    if (location !== undefined) {
+                        setInvalid(true)
+                        setConcerts([])
+                    }
+                }
+            }
+        }
+        fetchConcerts();
+    }, []
+    );
+
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
 
