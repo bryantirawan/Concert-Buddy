@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
-  Navigate,
+  useNavigate,
     useParams
   } from "react-router-dom";
 import { useContext } from 'react'
@@ -15,6 +15,7 @@ export default function ConcertDetail() {
     const [concerts, setConcerts] = useState([]);
     const [tickets, setTickets] = useState([]);
     let {user} = useContext(AuthContext)
+    const goBack = useNavigate();
 
     useEffect(() => {
         const fetchConcertDetail = async () => {
@@ -45,7 +46,7 @@ export default function ConcertDetail() {
         <br></br>
         <div className="tabeltoavoidfooter">
           <div className="container">
-
+            <button onClick={()=>goBack(-1, {replace: true})}> go back </button>
             <h1>Concert Details</h1>
               <table className="table table-striped table-bordered ">
               <thead>

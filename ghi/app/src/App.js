@@ -44,7 +44,7 @@ function App() {
           <Route path="/selltickets" element={<SearchToSellTickets />} />
           <Route path="/checkout/:ticket_id" element={<TicketCheckout />} />
           <Route path="/sellertickets" element={<SellerTicketList />} />
-          <Route path="/mytickets" element={<BuyerTickets />} />
+          <Route path="/mytickets/" element={<BuyerTickets />} />
         </Routes>
 
         </AuthProvider>

@@ -21,7 +21,18 @@ export default function Concerts() {
     let {user} = useContext(AuthContext)
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
 
+    
 
+    useEffect(() => {
+        const data = window.localStorage.getItem('Concerts');
+        if ( data !== null) {
+            setConcerts(JSON.parse(data))
+        }
+    }, [])
+
+    useEffect(() => {
+        window.localStorage.setItem('Concerts', JSON.stringify(concerts))
+    }, [concerts])
 
     useEffect( () => {
         const fetchConcerts = async() => {
