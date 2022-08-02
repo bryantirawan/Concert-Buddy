@@ -44,7 +44,7 @@ export default function ConcertDetail() {
       return (
         <>
         <br></br>
-        <div className="tabeltoavoidfooter">
+        <div className="tabletoavoidfooter">
           <div className="container">
             <button onClick={()=>goBack(-1, {replace: true})}> go back </button>
             <h1>Concert Details</h1>
@@ -63,9 +63,8 @@ export default function ConcertDetail() {
 
     </tr>
     <tr>
-        <th>Date</th>
-        <td> { new Date(data.date).toLocaleDateString('en-US')}</td>
-
+        <th>Date </th>
+        <td> { new Date(data.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
     </tr>
 
     <tr>
