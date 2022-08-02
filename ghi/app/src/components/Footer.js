@@ -20,6 +20,7 @@ function Footer() {
             <h3>User profile</h3>
             <Link to='/mytickets'>Your Tickets</Link>
             <Link to='/sellertickets'>Tickets you're selling</Link>
+            <Link to='/userconcerts'>Concerts you're going to</Link>
           </div>
         </div>
         <div className='footer-link-wrapper'>
