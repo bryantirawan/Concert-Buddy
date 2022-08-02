@@ -132,7 +132,25 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                 }
             </tbody>
         </table>
-        </div>):(<h1 align="center">You have no concerts yet.</h1>)}
+        </div>):(<>
+                    <div className="px-4 py-4 my-4 mt-0 text-center bg-secondary">
+                    <img className="bg-black rounded shadow d-block mx-auto mb-1" alt="" width="600" />
+                    <h1 className="display-6 fw-bold">SEE WHAT'S NEW</h1>
+                    <p>Looking for something to do? See what events are coming up and book tickets.</p>
+                    <div className="col-lg-6 mx-auto">
+                      <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <Link to="/selectconcerts" className="btn btn-light btn-lg px-4 gap-3">Search Events</Link>
+                      </div>
+                    </div>
+                  </div>
+        
+        
+        
+        
+        <h1 align="center">You have no concerts yet.</h1>
+        
+        </>
+        )}
 
         </div>
         <br></br>
