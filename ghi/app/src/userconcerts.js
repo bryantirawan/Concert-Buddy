@@ -134,8 +134,9 @@ const handleRemoveConcertSubmit = async (e, concID) => {
         }}
       >
         </div>
-        <Footer />
         </div>
+        <Footer />
+        
 
         </>
   )
