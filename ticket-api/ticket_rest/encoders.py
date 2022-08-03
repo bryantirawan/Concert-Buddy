@@ -13,9 +13,7 @@ class ConcertVOEncoder(ModelEncoder):
         "artist",
         "concert_id",
     ]
-    # def get_extra_data(self, o):
-    #     return {'import_href': f'/api/concerts/{o.id}'}
-
+    
 
 class UserVOEncoder(ModelEncoder):
     model = UserVO

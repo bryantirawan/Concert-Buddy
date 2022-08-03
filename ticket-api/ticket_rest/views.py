@@ -4,7 +4,7 @@ import json
 from struct import pack_into
 from django.http import JsonResponse
 from django.shortcuts import render
-from .encoders import AddressEncoder, ConcertVOEncoder, OrderItemEncoder, TicketEncoder, UserVOEncoder, TicketDetailEncoder
+from .encoders import AddressEncoder, OrderItemEncoder, TicketEncoder, TicketDetailEncoder
 from django.views.decorators.http import require_http_methods
 import requests
 from .models import Address, ConcertVO, OrderItem, Ticket, UserVO
@@ -17,7 +17,6 @@ def api_list_concerts(request):
     page = '&p=1'
     location = 'San%20Francisco'
     url = 'https://api.setlist.fm/rest/1.0/search/setlists?cityName='+ location + page
-    # url = 'https://api.setlist.fm/rest/1.0/search/setlists?cityName=San%20Francisco&p=1'
     headers = {
         "x-api-key": "1Lw-KTV9OFozLe7JpUeAyOdJHJH9HeVWNn2B",
         "Accept": "application/json"}
@@ -222,6 +221,7 @@ def api_get_orderitems(request):
                     setattr(address_for_order_item, "user", content["user"])
                     setattr(address_for_order_item, "street_address", content["street_address"])
                     setattr(address_for_order_item, "apartment_address", content["apartment_address"])
+                    setattr(address_for_order_item, "city", content["city"])
                     setattr(address_for_order_item, "country", content["country"])
                     setattr(address_for_order_item, "zip", content["zip"])
                 except: #no existing shipping address
@@ -229,6 +229,7 @@ def api_get_orderitems(request):
                         user=content["user"],
                         street_address=content["street_address"],
                         apartment_address=content["apartment_address"],
+                        city=content["city"],
                         country=content["country"],
                         zip=content["zip"]
                     )
