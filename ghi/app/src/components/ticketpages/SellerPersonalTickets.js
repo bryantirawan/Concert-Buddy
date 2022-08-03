@@ -16,7 +16,7 @@ function SellerTicketList() {
     const [sold_avail_tickets, setSoldAvailTickets] = useState(false)
     let {user} = useContext(AuthContext)
     const seller = user.user_id
-    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
 
     useEffect( () => {
         const fetchTickets = async() => {

@@ -13,7 +13,7 @@ export default function Userconcerts() {
     const {authTokens, logoutUser} = useContext(AuthContext)
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
-    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
 
     const getUserConcerts = async() => {
         const response = await fetch('http://localhost:8080/api/userconcerts/', {
