@@ -348,3 +348,89 @@ Edit information of a sold ticket back to unsold
 	"concert_id": "concert_id"
 }
 ```
+
+### `GET orderitems/`
+Get all order items from ticket transactions
+
+#### Response
+```json
+{
+	"order_item": [
+		{
+			"id": 1,
+			"user": {
+				"import_href": "/api/users/2",
+				"email": "user@user.com",
+				"first_name": "first",
+				"last_name": "last"
+			},
+			"ticket": {
+				"id": 1,
+				"price": "10.00",
+				"section": "A",
+				"row": "1",
+				"seat": "1",
+				"sold": true,
+				"picture_url": "picture.com",
+				"concert": {
+					"id": 3,
+					"import_href": "/api/concerts/3",
+					"venue": "Venue",
+					"city": "City",
+					"date": "Date",
+					"artist": "Artist",
+					"concert_id": "concert_id"
+				},
+				"seller": {
+					"import_href": "/api/users/3",
+					"email": "123@123.com",
+					"first_name": "first",
+					"last_name": "last"
+				},
+				"buyer": {
+					"import_href": "/api/users/2",
+					"email": "user@user.com",
+					"first_name": "first",
+					"last_name": "last"
+				}
+			},
+			"address_for_order_item": {
+				"user": {
+					"import_href": "/api/users/2",
+					"email": "user@user.com",
+					"first_name": "first",
+					"last_name": "last"
+				},
+				"street_address": "1 Street",
+				"apartment_address": "1",
+				"country": "US",
+				"zip": "12345"
+			},
+			"buyer_venmo": "@venmo"
+		}
+	]
+}
+```
+
+### `GET addresses/`
+Get a list of addresses for all users
+
+#### Response
+```json
+{
+    "address": [
+		{
+			"user": {
+				"import_href": "/api/users/2",
+				"email": "user@user.com",
+				"first_name": "first",
+				"last_name": "last"
+			},
+			"street_address": "1 Street",
+			"apartment_address": "1",
+			"country": "US",
+			"zip": "12345"
+		}
+	]
+}
+```
