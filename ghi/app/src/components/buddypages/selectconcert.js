@@ -96,7 +96,7 @@ export default function Concerts() {
             final_artist += '%20'
             final_artist += artist_new[i]
         }
-        const concertResponse = await fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`)
+        const concertResponse = await fetch(`http://localhost:8080/api/concerts/artist/${final_artist}/`)
         if(concertResponse.ok) {
             const concertData = await concertResponse.json();
             if (concertData.concerts.setlist) {

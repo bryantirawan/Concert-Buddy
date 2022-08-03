@@ -1,7 +1,7 @@
 import json
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-from rest_framework.response import Response 
+from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -13,23 +13,23 @@ import requests
 
 
 def format_date(date):
-    proper_date = date.split("-") 
-    return proper_date[2] + "-" + proper_date[1] + "-" + proper_date[0] 
+    proper_date = date.split("-")
+    return proper_date[2] + "-" + proper_date[1] + "-" + proper_date[0]
 
-#used for concerts im attending page 
+#used for concerts im attending page
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def api_get_user_concerts_withoutpk(request):
     one_user = request.user
     user_concerts = one_user.concert.all()
     return JsonResponse(
-        {   
+        {
             'concerts': user_concerts,
         },
         encoder=ConcertEncoder
         )
 
-#used for fellow users going to concert 
+#used for fellow users going to concert
 @require_http_methods(["GET"])
 def api_get_fellow_concert_users(request, pk):
     one_concert = Concert.objects.get(concert_id=pk)
@@ -40,7 +40,7 @@ def api_get_fellow_concert_users(request, pk):
         }
     )
 
-#used for concert detail page 
+#used for concert detail page
 @require_http_methods(["GET", "PUT"])
 def api_concert(request, pk):
     if request.method == "GET":
@@ -88,7 +88,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-#used for poller 
+#used for poller
 @require_http_methods(["GET", "POST"])
 def api_concerts(request):
     if request.method == "GET":
@@ -97,13 +97,13 @@ def api_concerts(request):
             {"concerts": concerts},
             encoder=ConcertEncoder,
         )
-    else: #POST 
+    else: #POST
         try:
             content = json.loads(request.body)
             concert = Concert.objects.create(**content)
             return JsonResponse(
                 concert,
-                #encoder=ConcertEncoder, #need to figure out how to do this without encoders 
+                #encoder=ConcertEncoder, #need to figure out how to do this without encoders
                 safe=False,
             )
         except:
@@ -113,7 +113,7 @@ def api_concerts(request):
             response.status_code = 400
             return response
 
-#used for search 
+#used for search
 @require_http_methods(["GET"])
 def api_select_concert_for_city(request, location, page):
     url = 'https://api.setlist.fm/rest/1.0/search/setlists?cityName='+ location + page
@@ -131,7 +131,7 @@ def api_select_concert_for_city(request, location, page):
             {"concerts": concerts}
         )
 
-#used for search 
+#used for search
 @require_http_methods(["GET"])
 def api_get_concert_by_artist(request, pk):
     # artist_name = 'The%20Mother%20Hips'
@@ -158,22 +158,21 @@ def log_concert(request, concertdict):
     header = {
     "x-api-key": "1Lw-KTV9OFozLe7JpUeAyOdJHJH9HeVWNn2B",
     "Accept": "application/json"
-    } 
-    
-    setlists = requests.get(f"{url}{setlist_path}", headers=header).json() 
+    }
+
+    setlists = requests.get(f"{url}{setlist_path}", headers=header).json()
     print('setlist trying to be saved', setlists)
-    concertdict = {} 
+    concertdict = {}
     concertdict['venue'] = setlists['venue']['name']
     concertdict['venue_id'] = setlists['venue']['id']
     concertdict['artist_id'] = setlists['artist']['mbid']
     concertdict['city'] = setlists['venue']['city']['name']
     concertdict['date'] = format_date(setlists['eventDate'])
     concertdict['artist'] = setlists['artist']['name']
-    concertdict['concert_id'] = setlists['id'] 
+    concertdict['concert_id'] = setlists['id']
 
     print('concertdict from log_concert', concertdict)
     return JsonResponse(concertdict)
-
 
 
 

@@ -1,4 +1,3 @@
-
 import django
 import os
 import sys
@@ -27,7 +26,7 @@ def poll():
                     import_href=user["import_href"],
                     defaults={
                         "email": user["email"],
-                        "first_name": user["first_name"], 
+                        "first_name": user["first_name"],
                         "last_name": user["last_name"],
                     },
                 )

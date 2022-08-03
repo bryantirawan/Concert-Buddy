@@ -7,3 +7,7 @@ Today, I worked on:
 ## Aug 1, 2022
 Today, I worked on:
 * finished the SellerPersonalTicket.js page. Changed sold tickets to come from the orderitem model instead of ticket model. Also added a date filter. Also created a new view for changing tickets.
+
+## Aug 3, 2022
+Today, I worked on:
+* adding tests to application. Cleaning up the file for deployment. Working on deployment.
