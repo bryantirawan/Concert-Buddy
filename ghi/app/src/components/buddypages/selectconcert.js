@@ -180,12 +180,6 @@ export default function Concerts() {
         navigate(`/login/`)
     }
 
-    // const getYesterday = (dateOnly = false) => {
-    //     let d = new Date();
-    //     d.setDate(d.getDate() - 1);
-    //     return dateOnly ? new Date(d.toDateString()) : d;
-    //   };
-
     return (
         <>
         <div className='selectconcerts'>
