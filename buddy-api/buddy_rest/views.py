@@ -11,6 +11,17 @@ from .encoders import ( ConcertEncoder)
 from .models import Concert
 import requests
 
+#used for poller
+@require_http_methods(["GET", "POST"])
+def api_users(request):
+    if request.method == "GET":
+        users = User.objects.all()
+        return JsonResponse(
+            {"users": users},
+            encoder=UserEncoder,
+        )
+    else:
+        return "Create POST REQUEST VIEW"
 
 def format_date(date):
     proper_date = date.split("-")

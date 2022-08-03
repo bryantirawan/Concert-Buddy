@@ -12,11 +12,16 @@ from .views import (
     api_concert,
     api_get_user_concerts_withoutpk,  
     MyTokenObtainPairView, 
-    api_get_fellow_concert_users
+    api_get_fellow_concert_users,
+    api_users,
 )
 
 urlpatterns = [
-
+    path(
+        "users/",
+        api_users,
+        name="api_users",
+    ),
     path(
         "selectconcertsforcity/<str:location>/<str:page>/",
         api_select_concert_for_city,
