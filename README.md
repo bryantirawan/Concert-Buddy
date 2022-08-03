@@ -229,3 +229,23 @@ Get list of fellow users attending the concert
 ```
 
 ## Ticket Microservice
+The Ticket Microservice handles all of the ticket transactions that occur through the Concert Buddy Application.
+The Ticket Microservice consists of five models titled 'ConcertVO', 'UserVO', 'Ticket', 'OrderItem', and 'Address'.
+
+'ConcertVO' and 'UserVO' models are used in conjunction with polling to receive data from the Buddy Microservice.
+'ConcertVO' receives concert information including venue, city, date, artist, and concert_id, whereas 'UserVO'
+receives email, first name, and last name from the custom user model created in the Buddy Microserivce. This information
+is used during ticket transactions making sure that each ticket has a designated concert, user buyer, and user seller.
+
+The 'Ticket' model contains all of the relevant ticket information necessary for ticket transactions. This includes the
+price of the ticket as well as the general tickets of the ticket, such as section, row, and seat number. Ticket sellers
+are also able to upload a ticket image url of the ticket that is to be sold. This model utilizes one-to-many relationships
+with concerts and users to ensure that each ticket only corresponds to one concert, buyer, or seller, but does not restrict
+each concert, buyer, and seller from having many tickets.
+
+An 'OrderItem' instance is created following the purchase of a ticket through Concert Buddy. Once users fill out the purchase
+form, order information including the purchaser's home address and venmo username. The 'Address' model handles user entry of
+their home addresses. The 'OrderItem' model includes a one-to-many relationship with address so that each order item only includes
+the home address of the user that purchased the ticket. These instances will be stored in the database to maintain history of 
+purchases which is available for users to view.
+
