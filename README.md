@@ -152,4 +152,80 @@ Search for concerts by artist
 }
 ```
 
+### `GET add/<str:concertdict>/`
+Get concert data for post request
+
+#### Response
+```json
+{
+	"venue": "Soldier Field",
+	"venue_id": "4bd637ce",
+	"artist_id": "b83bc61f-8451-4a5d-8b8e-7e9ed295e822",
+	"city": "Chicago",
+	"date": "2022-08-05",
+	"artist": "Elton John",
+	"concert_id": "63b256e3"
+}
+```
+
+### `GET concert/<str:pk>/`
+Get concert data for concert detail page
+
+#### Response
+```json
+{
+	"id": 5,
+	"venue": "Soldier Field",
+	"city": "Chicago",
+	"date": "2022-08-05T00:00:00+00:00",
+	"artist": "Elton John",
+	"concert_id": "63b256e3",
+	"venue_id": "4bd637ce",
+	"artist_id": "b83bc61f-8451-4a5d-8b8e-7e9ed295e822",
+	"import_href": "/api/concerts/5"
+}
+```
+
+### `GET userconcerts/`
+Get list of concerts user is attending
+
+#### Response
+```json
+[{
+	"id": 5,
+	"venue": "Soldier Field",
+	"city": "Chicago",
+	"date": "2022-08-05T00:00:00+00:00",
+	"artist": "Elton John",
+	"concert_id": "63b256e3",
+	"venue_id": "4bd637ce",
+	"artist_id": "b83bc61f-8451-4a5d-8b8e-7e9ed295e822",
+	"import_href": "/api/concerts/5"
+},]
+```
+
+### `GET concertfellowusers/<str:pk>/`
+Get list of fellow users attending the concert
+
+#### Response
+```json
+{
+	"users": [
+		{
+			"id": 2,
+			"password": "password",
+			"last_login": null,
+			"is_superuser": false,
+			"username": "user",
+			"first_name": "first",
+			"last_name": "last",
+			"is_staff": false,
+			"is_active": true,
+			"date_joined": "2022-08-02T21:59:24.164Z",
+			"email": "email@email.com"
+		}
+	]
+}
+```
+
 ## Ticket Microservice
