@@ -7,8 +7,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .encoders import ( ConcertEncoder)
-from .models import Concert
+from .encoders import ( ConcertEncoder, UserEncoder )
+from .models import Concert, User
 import requests
 
 #used for poller
@@ -186,4 +186,13 @@ def log_concert(request, concertdict):
     return JsonResponse(concertdict)
 
 
-
+@require_http_methods(["GET", "POST"])
+def api_users(request):
+    if request.method == "GET":
+        users = User.objects.all()
+        return JsonResponse(
+            {"users": users},
+            encoder=UserEncoder,
+        )
+    else:
+        return "Create POST REQUEST VIEW"

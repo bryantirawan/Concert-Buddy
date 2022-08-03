@@ -23,8 +23,8 @@ class UserEncoder(ModelEncoder):
     model = User
     properties = [
         "email",
-        "first_name", 
-        "last_name", 
+        "first_name",
+        "last_name",
         "username",
         "id"
     ]
