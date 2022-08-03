@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Button } from './Button';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from "../context/AuthContext";
 import './Navbar.css';
@@ -45,13 +44,6 @@ function Navbar() {
                 Sell Tickets
               </Link>
             </li>
-            {/* <li>
-                {user ? (
-                  <Link className="nav-links" aria-current="page" to="/userconcerts/">
-                 Your Concerts
-                </Link>
-                ): (<></>)}
-            </li> */}
             <li>
                 {user ? (
                   <Dropdown className="nav-links">
@@ -62,7 +54,6 @@ function Navbar() {
                         <Dropdown.Item href="/userconcerts/">Concerts I Am Attending</Dropdown.Item>
                         <Dropdown.Item href="/sellertickets">My Tickets for Sale</Dropdown.Item>
                         <Dropdown.Item href="/"  variant="dark" onClick={logoutUser}>Logout</Dropdown.Item>
-                    {/* <p className="nav-links" aria-current="page" onClick={logoutUser}>Logout</p> */}
                     </Dropdown.Menu>
                     </Dropdown.Toggle>
                     </Dropdown>
