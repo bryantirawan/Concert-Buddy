@@ -2,6 +2,8 @@ from common.json import ModelEncoder
 
 from .models import Address, ConcertVO, OrderItem, UserVO, Ticket
 
+
+
 class ConcertVOEncoder(ModelEncoder):
     model = ConcertVO
     properties = [
@@ -13,8 +15,6 @@ class ConcertVOEncoder(ModelEncoder):
         "artist",
         "concert_id",
     ]
-    # def get_extra_data(self, o):
-    #     return {'import_href': f'/api/concerts/{o.id}'}
 
 
 class UserVOEncoder(ModelEncoder):
@@ -71,6 +71,7 @@ class TicketDetailEncoder(ModelEncoder):
         "buyer": UserVOEncoder(),
     }
 
+
 class AddressEncoder(ModelEncoder):
     model = Address
     properties = [
@@ -84,6 +85,7 @@ class AddressEncoder(ModelEncoder):
     encoders = {
         "user": UserVOEncoder()
     }
+
 
 class OrderItemEncoder(ModelEncoder):
     model = OrderItem

@@ -2,7 +2,7 @@ import json
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-from rest_framework.response import Response 
+from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -14,16 +14,16 @@ import requests
 
 
 def format_date(date):
-    proper_date = date.split("-") 
-    #proper_date_list = [MM, DD, YEAR] 
-    return proper_date[2] + "-" + proper_date[1] + "-" + proper_date[0] 
+    proper_date = date.split("-")
+    #proper_date_list = [MM, DD, YEAR]
+    return proper_date[2] + "-" + proper_date[1] + "-" + proper_date[0]
 
 
-#not really important 
+#not really important
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def api_get_user_concerts(request, pk):
-    one_user = User.objects.get(id=pk) 
+    one_user = User.objects.get(id=pk)
     user_concerts = one_user.concert.all()
     return JsonResponse(
         {   'user': one_user.id,
@@ -39,7 +39,7 @@ def api_get_user_concerts_withoutpk(request):
     one_user = request.user
     user_concerts = one_user.concert.all()
     return JsonResponse(
-        {   
+        {
             'concerts': user_concerts,
         },
         encoder=ConcertEncoder
@@ -123,13 +123,13 @@ def api_concerts(request):
             {"concerts": concerts},
             encoder=ConcertEncoder,
         )
-    else: #POST 
+    else: #POST
         try:
             content = json.loads(request.body)
             concert = Concert.objects.create(**content)
             return JsonResponse(
                 concert,
-                #encoder=ConcertEncoder, #need to figure out how to do this without encoders 
+                #encoder=ConcertEncoder, #need to figure out how to do this without encoders
                 safe=False,
             )
         except:
@@ -197,46 +197,41 @@ def log_concert(request, concertdict):
     header = {
     "x-api-key": "1Lw-KTV9OFozLe7JpUeAyOdJHJH9HeVWNn2B",
     "Accept": "application/json"
-    } 
-    
-    setlists = requests.get(f"{url}{setlist_path}", headers=header).json() 
+    }
+
+    setlists = requests.get(f"{url}{setlist_path}", headers=header).json()
     print('setlist trying to be saved', setlists)
-    concertdict = {} 
+    concertdict = {}
     concertdict['venue'] = setlists['venue']['name']
     concertdict['venue_id'] = setlists['venue']['id']
     concertdict['artist_id'] = setlists['artist']['mbid']
     concertdict['city'] = setlists['venue']['city']['name']
     concertdict['date'] = format_date(setlists['eventDate'])
     concertdict['artist'] = setlists['artist']['name']
-    concertdict['concert_id'] = setlists['id'] 
+    concertdict['concert_id'] = setlists['id']
 
     print('concertdict from log_concert', concertdict)
     return JsonResponse(concertdict)
 
 
 
-    # try: 
-    #     Concert_save = Concert.objects.get(concert_id = concertdict['id']) #check to see if Concert exists already 
-    # except: 
+    # try:
+    #     Concert_save = Concert.objects.get(concert_id = concertdict['id']) #check to see if Concert exists already
+    # except:
     #     Concert_save = Concert(
-    #         venue=concertdict['venue'], 
-    #         city=concertdict['city'], 
-    #         date=concertdict['eventDate'], 
+    #         venue=concertdict['venue'],
+    #         city=concertdict['city'],
+    #         date=concertdict['eventDate'],
     #         artist=concertdict['artist'],
-    #         concert_id=concertdict['id'], 
+    #         concert_id=concertdict['id'],
     #         venue_id=concertdict['venueID'],
-    #         artist_id=concertdict['artistID'], 
+    #         artist_id=concertdict['artistID'],
     #         )
-        
-    # Concert_save.save() #save instance to Concert model 
+
+    # Concert_save.save() #save instance to Concert model
     # Concert_save.fellow_user.add(request.user) #assign user to Concert just saved (many to many needs to be created before assigned)
 
-    # User_save = request.user 
+    # User_save = request.user
     # User_save.concert.add(Concert_save)
 
     # return redirect('http://localhost:3000/concertdetail/'+concertdict['id'])
-
-    
-
-
-

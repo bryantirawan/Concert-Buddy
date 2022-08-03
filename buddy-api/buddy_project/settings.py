@@ -51,12 +51,9 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ###
         'rest_framework.authentication.SessionAuthentication',
-
-    
-    )
+    ),
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }
-
-
 
 
 SIMPLE_JWT = {
@@ -108,7 +105,7 @@ MIDDLEWARE = [
 
 CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
 CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
-#CORS_ALLOW_ALL_ORIGINS = True 
+#CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'buddy_project.urls'
 
@@ -134,7 +131,16 @@ WSGI_APPLICATION = 'buddy_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres-data',
+        'USER': 'postgres',
+        'PASSWORD': 'test-databases',
+        'HOST': 'db',
+        'PORT': 5432,
+    }
+}
 DATABASES["default"] = dj_database_url.config()
 
 

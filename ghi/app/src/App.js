@@ -8,7 +8,6 @@ import Concerts from './components/selectconcert';
 import Navbar from './components/Navbar'
 import Home from './components/pages/Home';
 import SellTicketForm from './components/pages/SellTicket';
-import SearchToSellTickets from './components/pages/UselessSearchSellTickets';
 import Fellowusersgoingtoconcert from './components/fellowusersgoingtoconcert';
 import TicketCheckout from './components/pages/TicketCheckout';
 
@@ -41,7 +40,6 @@ function App() {
 
           <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
           <Route path="/tickets/:concert_id" element={<SellTicketForm />} />
-          <Route path="/selltickets" element={<SearchToSellTickets />} />
           <Route path="/checkout/:ticket_id" element={<TicketCheckout />} />
           <Route path="/sellertickets" element={<SellerTicketList />} />
           <Route path="/mytickets" element={<BuyerTickets />} />

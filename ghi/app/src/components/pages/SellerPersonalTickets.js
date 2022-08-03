@@ -103,9 +103,10 @@ function SellerTicketList() {
         <div className="px-4 py-4 my-4 mt-0 text-center bg-secondary">
           <img className="bg-white rounded shadow d-block mx-auto mb-1" alt="" width="600" />
           <h1 className="display-6 fw-bold">Ticket Listings</h1>
+          <p>Your tickets currently for sale and previously sold. Want to sell another?</p>
           <div className="col-lg-6 mx-auto">
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Link to="/selectconcerts" className="btn btn-dark btn-lg px-4 gap-3">Sell new ticket</Link>
+              <Link to="/selectconcerts" className="btn btn-light btn-lg px-4 gap-3">Sell new ticket</Link>
             </div>
           </div>
         </div>
