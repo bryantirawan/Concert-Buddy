@@ -7,31 +7,16 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .encoders import ( UserEncoder, ConcertEncoder)
-from .models import User, Concert
+from .encoders import ( ConcertEncoder)
+from .models import Concert
 import requests
 
 
 def format_date(date):
     proper_date = date.split("-") 
-    #proper_date_list = [MM, DD, YEAR] 
     return proper_date[2] + "-" + proper_date[1] + "-" + proper_date[0] 
 
-
-#not really important 
-@api_view(["GET"])
-@permission_classes([IsAuthenticated])
-def api_get_user_concerts(request, pk):
-    one_user = User.objects.get(id=pk) 
-    user_concerts = one_user.concert.all()
-    return JsonResponse(
-        {   'user': one_user.id,
-            'concerts': user_concerts,
-        },
-        encoder=ConcertEncoder
-        )
-
-
+#used for concerts im attending page 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def api_get_user_concerts_withoutpk(request):
@@ -44,6 +29,7 @@ def api_get_user_concerts_withoutpk(request):
         encoder=ConcertEncoder
         )
 
+#used for fellow users going to concert 
 @require_http_methods(["GET"])
 def api_get_fellow_concert_users(request, pk):
     one_concert = Concert.objects.get(concert_id=pk)
@@ -54,7 +40,7 @@ def api_get_fellow_concert_users(request, pk):
         }
     )
 
-
+#used for concert detail page 
 @require_http_methods(["GET", "PUT"])
 def api_concert(request, pk):
     if request.method == "GET":
@@ -98,22 +84,11 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
 
-
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-@require_http_methods(["GET", "POST"])
-def api_users(request):
-    if request.method == "GET":
-        users = User.objects.all()
-        return JsonResponse(
-            {"users": users},
-            encoder=UserEncoder,
-        )
-    else:
-        return "Create POST REQUEST VIEW"
-
+#used for poller 
 @require_http_methods(["GET", "POST"])
 def api_concerts(request):
     if request.method == "GET":
@@ -138,21 +113,7 @@ def api_concerts(request):
             response.status_code = 400
             return response
 
-
-
-
-@require_http_methods(["GET"])
-def api_select_concert(request):
-    url = 'https://api.setlist.fm/rest/1.0/search/setlists?cityName=San%20Francisco&p=1'
-    headers = {
-        "x-api-key": "1Lw-KTV9OFozLe7JpUeAyOdJHJH9HeVWNn2B",
-        "Accept": "application/json"}
-
-    r = requests.get(url, headers=headers).json()
-    return JsonResponse(
-        r
-    )
-
+#used for search 
 @require_http_methods(["GET"])
 def api_select_concert_for_city(request, location, page):
     url = 'https://api.setlist.fm/rest/1.0/search/setlists?cityName='+ location + page
@@ -170,6 +131,7 @@ def api_select_concert_for_city(request, location, page):
             {"concerts": concerts}
         )
 
+#used for search 
 @require_http_methods(["GET"])
 def api_get_concert_by_artist(request, pk):
     # artist_name = 'The%20Mother%20Hips'
@@ -188,7 +150,7 @@ def api_get_concert_by_artist(request, pk):
             {"concerts": concerts}
         )
 
-
+#used for 1st half of logic of im going button in conjunction with viewset logic
 @require_http_methods(["GET"])
 def log_concert(request, concertdict):
     url = 'https://api.setlist.fm/rest/1.0/'
