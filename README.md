@@ -30,8 +30,24 @@ Our target market is anyone that enjoys going to concerts. In particular, those 
 * Connect with a concert buddy option -- the user will be able to find a concert buddy based on future concerts they are attending. They will be
 able to connect with other users attending the same concerts.
 
+## Set-up
+* Fork and clone this repo
+* Sign up for a setlistfm api key at https://api.setlist.fm/docs/1.0/index.html
+* create a docker volume called postgres-data
+* Set up docker containers using the docker-compose.yml file
+* start up docker containers and wait for application to compile before accessing it through your browser
+
 ## Buddy Microservice
 The Buddy microservice is mainly in charge of connecting users with concerts from the setlistfm api.
+The Buddy microservice consists of two models titled 'Concert' and 'User'.
+
+The 'Concert' model is used to organize the concert information that is being recieved from the setlistfm api.
+Every single concert instance from the setlistfm api is not saved within the database corresponding to the 'Concert' Model.
+Only when a user selects that they are going to a particular concert does the microservice save the selected concert
+to the postgres database. This was an intended design to reduce the memory burden of the concerts that are being requested
+from the setlistfm api. 'Concert' Model includes the city, venue, date, and artist for the concert along with id values for the
+concert, artist, and venue. 'Concert' Model also includes a fellow_user field that is a many-to-many field holding all the users 
+that have indicated they are attending that specific concert instance.
 
 ### `GET salespeople/`
 Retrieve a list of salespeople
