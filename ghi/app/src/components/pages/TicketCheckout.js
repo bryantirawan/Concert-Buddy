@@ -12,7 +12,8 @@ import Footer from '../Footer';
 function TicketCheckout() {
     const [venmo, setVenmo] = useState("");
     const [street_address, setStreetAddress] = useState("")
-    const [apartment_address, setApartmentAddress] = useState(0);
+    const [apartment_address, setApartmentAddress] = useState("");
+    const [city, setCity] = useState("")
     const [country, setCountry] = useState("US")
     const [zip, setZip] = useState("")
     let { ticket_id } = useParams();
@@ -32,6 +33,7 @@ function TicketCheckout() {
                 buyer_venmo: venmo,
                 street_address: street_address,
                 apartment_address: apartment_address,
+                city: city,
                 country: country,
                 zip: zip
               }
@@ -83,7 +85,7 @@ return (
                     </div>
                     <div className="col">
                     <div className="form-floating mb-3">
-                        <input onChange={(e) => setApartmentAddress(e.target.value)} required placeholder="Apartment Address" type="text" value={apartment_address} id="apartment_address" name="apartment_address" className="form-control" />
+                        <input onChange={(e) => setApartmentAddress(e.target.value)} placeholder="Apartment Address" type="text" value={apartment_address} id="apartment_address" name="apartment_address" className="form-control" />
                         <label htmlFor="apartment_address">Apartment Address</label>
                       </div>
                     </div>
@@ -92,6 +94,12 @@ return (
                     <div className="form-floating mb-3">
                         <input onChange={(e) => setCountry(e.target.value)} required placeholder="Country" type="text" value={country} id="country" name="country" className="form-control" />
                         <label htmlFor="country">Country</label>
+                      </div>
+                    </div>
+                    <div className="col">
+                    <div className="form-floating mb-3">
+                        <input onChange={(e) => setCity(e.target.value)} required placeholder="city" type="text" value={city} id="city" name="city" className="form-control" />
+                        <label htmlFor="city">City</label>
                       </div>
                     </div>
                     <div className="col">
