@@ -5,15 +5,22 @@ get to the Web site.
 
 ![home page](wireframes/home-page.png)
 
-## Create User page
+## Find a Buddy / Sell Tickets page
 
-Main form that will be used to enter user information to create a user.
+Find a buddy and sell tickets both utilize a search feature that searches for concerts based on city name or artist name.
+There is a toggle feature to switch between the two search options. Once a search is submitted, a table will populate containing
+all of the concerts taking place within the next few days that match the search criteria. Buttons to attend the concert and sell
+tickets are available for each concert.
 
-![create user page](wireframes/create-user-page.png)
+![find a buddy search](wireframes/find-a-buddy-search.png)
+![find a buddy table](wireframes/find-a-buddy-table.png)
 
-## User Settings page
+## Purchased Tickets Page
 
-Main form that will be used to update user information.
+The purchased tickets page will contain information regarding tickets that have been bought by the user's account. This will include
+concert date, artist, ticket price, and ticket seat information. Tickets will be displayed in two separate tables based on whether
+the concert has already taken place or the concert will occur in the future. The purchased tickets page will have a button redirecting
+users back to the find a buddy / sell tickets page.
 
 ![update user page](wireframes/user-settings.png)
 
