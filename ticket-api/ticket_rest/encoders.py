@@ -2,6 +2,8 @@ from common.json import ModelEncoder
 
 from .models import Address, ConcertVO, OrderItem, UserVO, Ticket
 
+
+
 class ConcertVOEncoder(ModelEncoder):
     model = ConcertVO
     properties = [
@@ -13,7 +15,7 @@ class ConcertVOEncoder(ModelEncoder):
         "artist",
         "concert_id",
     ]
-    
+
 
 class UserVOEncoder(ModelEncoder):
     model = UserVO
@@ -69,6 +71,7 @@ class TicketDetailEncoder(ModelEncoder):
         "buyer": UserVOEncoder(),
     }
 
+
 class AddressEncoder(ModelEncoder):
     model = Address
     properties = [
@@ -82,6 +85,7 @@ class AddressEncoder(ModelEncoder):
     encoders = {
         "user": UserVOEncoder()
     }
+
 
 class OrderItemEncoder(ModelEncoder):
     model = OrderItem

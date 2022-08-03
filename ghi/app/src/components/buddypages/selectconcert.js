@@ -1,9 +1,9 @@
 import React, {useEffect, useState } from 'react';
-import Toggle from './Toggle';
+import Toggle from '../Toggle';
 import { useContext } from 'react'
-import AuthContext from '../context/AuthContext';
+import AuthContext from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import Footer from './Footer';
+import Footer from '../Footer';
 import { useParams } from "react-router-dom";
 
 
@@ -23,6 +23,7 @@ export default function Concerts() {
 
 
     useEffect( () => {
+
         const fetchConcerts = async() => {
             const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${location}/&p=1`)
             if(concertResponse.ok) {
@@ -35,7 +36,6 @@ export default function Concerts() {
                     }
                     setConcerts(concertData.concerts.setlist);
                     let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
-                    console.log(concList)
                     if (concList[0].length === 0){
                         setConcerts(0)
                     }
@@ -43,8 +43,6 @@ export default function Concerts() {
                     setInvalid(false)
 
                 } else {
-                    console.error('concertData:', concertResponse);
-                    console.log(location)
                     if (location !== undefined) {
                         setInvalid(true)
                         setConcerts([])
@@ -76,7 +74,6 @@ export default function Concerts() {
                 }
                 setConcerts(concertData.concerts.setlist);
                 let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
-                console.log(concList)
                 if (concList[0].length === 0){
                     setConcerts(0)
                 }
@@ -99,7 +96,7 @@ export default function Concerts() {
             final_artist += '%20'
             final_artist += artist_new[i]
         }
-        const concertResponse = await fetch(`http://localhost:8090/api/concerts/artist/${final_artist}/`)
+        const concertResponse = await fetch(`http://localhost:8080/api/concerts/artist/${final_artist}/`)
         if(concertResponse.ok) {
             const concertData = await concertResponse.json();
             if (concertData.concerts.setlist) {
@@ -110,7 +107,6 @@ export default function Concerts() {
                 }
                 setConcerts(concertData.concerts.setlist);
                 let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
-                console.log(concList)
                 if (concList[0].length === 0){
                     setConcerts(0)
                 }
@@ -155,7 +151,6 @@ export default function Concerts() {
 
             let res = await fetch(`http://localhost:8080/buddy/concert/`, jsonBody);
             if (res.status === 200){
-                console.log('concert added successfully and user attached to fellow user now needs to redirect')
                 navigate(`/concertdetail/${concID}`)
             } else {
                 alert('concert unable to be added')
@@ -172,26 +167,18 @@ export default function Concerts() {
         e.preventDefault();
         const concertURL = `http://localhost:8080/buddy/concert/`
         const data = {venue, city, date, artist, concert_id, venue_id, artist_id}
-        console.log(data)
         const request = {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         }
         let res = await fetch(concertURL, request);
-        console.log("Concert Added")
         navigate(`/tickets/${concert_id}/`)
     }
 
     const handleConcertDetails = (e) => {
         navigate(`/login/`)
     }
-
-    // const getYesterday = (dateOnly = false) => {
-    //     let d = new Date();
-    //     d.setDate(d.getDate() - 1);
-    //     return dateOnly ? new Date(d.toDateString()) : d;
-    //   };
 
     return (
         <>

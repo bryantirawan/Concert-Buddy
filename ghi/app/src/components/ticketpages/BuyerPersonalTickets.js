@@ -31,12 +31,7 @@ useEffect( () => {
             }
         }
         }
-        //concerts_list.sort((a,b)=>a.getTime()-b.getTime());
-        console.log(concerts_list, "concerts list")
-
         concerts_list.sort((a,b) => Date.parse(a.concert.date) - Date.parse(b.concert.date))
-
-        console.log(concerts_list, "concerts list")
         setMyConcerts(concerts_list)
     }
     fetchTickets()
@@ -48,8 +43,6 @@ useEffect( () => {
 
 
 <h3 className="display-6 fw-bold">Upcoming</h3>
-
-{/* {myconcerts.length !== 0 ? ( */}
 <table  className="table table-dark table-striped table-bordered ">
     <thead>
         <tr>
@@ -65,8 +58,6 @@ useEffect( () => {
     </thead>
         <tbody>
         {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) >= yesterday).map((ticket,idx) => (
-
-          // {my_concerts.map((ticket,idx) => (
                 <tr key={idx}>
                     <td>{new Date(ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
                     <td>{ticket.concert.artist}</td>
@@ -74,13 +65,6 @@ useEffect( () => {
                     <td>{ticket.section}</td>
                     <td>{ticket.row} </td>
                     <td>{ticket.seat} </td>
-                    {/* <td>
-                    <Link to={`/checkout/${ticket.id}`} className="current btn-lg   btn-block   ">
-                    <button className="btn btn-primary btn-lg btn-block">
-           Buy
-          </button>
-          </Link>
-                    </td> */}
                 </tr>
             ))
         }
@@ -88,7 +72,6 @@ useEffect( () => {
     </table>
 
     <h3 className="display-6 fw-bold">Past</h3>
-{/*          */}
     <table  className="table table-dark table-striped table-bordered ">
     <thead>
         <tr>
@@ -104,8 +87,6 @@ useEffect( () => {
     </thead>
         <tbody>
         {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) <= yesterday).reverse().map((ticket,idx) => (
-
-          // {my_concerts.map((ticket,idx) => (
                 <tr key={idx}>
                     <td>{new Date(ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
                     <td>{ticket.concert.artist}</td>
@@ -113,13 +94,7 @@ useEffect( () => {
                     <td>{ticket.section}</td>
                     <td>{ticket.row} </td>
                     <td>{ticket.seat} </td>
-                    {/* <td>
-                    <Link to={`/checkout/${ticket.id}`} className="current btn-lg   btn-block   ">
-                    <button className="btn btn-primary btn-lg btn-block">
-           Buy
-          </button>
-          </Link>
-                    </td> */}
+
                 </tr>
             ))
         }
@@ -158,15 +133,7 @@ function BuyerTickets() {
         </div>
         <div className="container">
           <div className="row">
-
           {TicketColumn()}
-
-
-            {/* {this.state.conferenceColumns.map((conferenceList, index) => {
-              return (
-                <ConferenceColumn key={index} list={conferenceList} />
-              );
-            })} */}
           </div>
         </div>
         </div>

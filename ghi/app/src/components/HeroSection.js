@@ -12,16 +12,13 @@ function HeroSection() {
 
   const handleImGoingSubmit = async (e) => {
     e.preventDefault();
-    console.log(city)
     navigate(`/selectconcerts/${city}`)
-
     }
 
   const handleKeypress = e => {
     //it triggers by pressing the enter key
   if (e.keyCode === 13) {
     handleImGoingSubmit();
-
   }
 };
 

@@ -36,21 +36,17 @@ function SellTicketForm() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(form)
         }
-      console.log(a)
         let res = await fetch(`http://localhost:8090/api/tickets/`, a);
-            console.log('Ticket Added');
 
-
-        let resJson = await res.json();
       if (res.status === 200) {
         alert('Ticket successfully listed')
         navigate(`/concertdetail/${concert}`)
       } else {
-        console.log(res.status);
+        console.error(res.status);
         alert('Error processing ticket. Please try again in a few seconds.')
       }
     } catch (err) {
-      console.log('error', err);
+      console.error('error', err);
     }
   }
 

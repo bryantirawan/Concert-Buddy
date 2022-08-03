@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Navigate,
-    useParams
-  } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import { useContext } from 'react'
-import AuthContext from './context/AuthContext';
+import AuthContext from '../../context/AuthContext';
 import { Link, BrowserRouter as Router, Route } from "react-router-dom";
-import Footer from './components/Footer';
+import Footer from '../Footer';
 
 export default function ConcertDetail() {
     let { concert_id } = useParams();
@@ -30,8 +27,6 @@ export default function ConcertDetail() {
                 ticket_list.push(tick)
               }
             }
-              console.log(ticket_list)
-              //console.log(concertData)
             setTickets(ticket_list);
             setData(concertData);
 

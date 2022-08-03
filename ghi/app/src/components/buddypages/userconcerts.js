@@ -1,10 +1,10 @@
 import React, {useState, useEffect, useContext} from 'react'
-import AuthContext from './context/AuthContext'
+import AuthContext from '../../context/AuthContext';
 import {
     useParams, useNavigate
   } from "react-router-dom";
 import { Link, BrowserRouter as Router, Route } from "react-router-dom";
-import Footer from './components/Footer';
+import Footer from '../Footer';
 
 
 
@@ -15,8 +15,6 @@ export default function Userconcerts() {
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
-    console.log(yesterday)
-
 
     useEffect(() => {
         getUserConcerts()
@@ -50,11 +48,9 @@ export default function Userconcerts() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(concertToRemove)
         }
-        console.log('concertToRemove', concertToRemove)
 
         let res = await fetch(`http://localhost:8080/buddy/user/${user.user_id}/`, jsonBody);
         if (res.status === 200){
-            console.log('User removed as fellow user and concert removed from user model')
             alert('Concert successfully removed')
             navigate(`/userconcerts/`)
         } else {

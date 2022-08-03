@@ -34,19 +34,16 @@ function SignUpForm() {
         },
         body:JSON.stringify({'username':e.target.username.value, 'email':e.target.email.value, 'password1':e.target.password1.value, 'password2':e.target.password2.value})
     }
-    console.log(submit)
     let res = await fetch('http://localhost:8080/buddy/user/', submit)
-          console.log('user? Added');
       let resJson = await res.json();
     if (res.status === 201) {
       alert('user successfully made')
       navigate('/')
     } else {
-      console.log(res.status);
       alert('Error processing registration')
     }
   } catch (err) {
-    console.log('error', err);
+    console.error('error', err);
   }
 }
 
@@ -58,21 +55,11 @@ return (
     <div className="App">
     <div className="appForm">
     <div className="pageSwitcher">
-       {/* <div className="formTitle">
-              <NavLink
-                to="/login"
-                activeClassName="formTitleLink-active"
-                className="formTitleLink"
-              >
-                Sign Up
-              </NavLink>{" "}
-            </div> */}
     <div className="formCenter">
       <form onSubmit={handleSubmit} className="formFields">
       <div className="formField">
               <NavLink
                 to="/login"
-                activeClassName="formTitleLink-active"
                 className="formTitleLink"
               >
                 Sign up
@@ -134,23 +121,6 @@ return (
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-
-        {/* <div className="formField">
-          <label className="formFieldCheckboxLabel">
-            <input
-              className="formFieldCheckbox"
-              type="checkbox"
-              name="hasAgreed"
-              value={this.state.hasAgreed}
-              onChange={this.handleChange}
-            />{" "}
-            I agree all statements in{" "}
-            <a href="null" className="formFieldTermsLink">
-              terms of service
-            </a>
-          </label>
-        </div> */}
-
         <div className="formField">
           <button className="formFieldButton">Sign Up</button>{" "}
           <Link to="/login" className="formFieldLink">

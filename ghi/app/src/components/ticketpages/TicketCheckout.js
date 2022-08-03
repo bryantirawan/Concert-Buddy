@@ -42,11 +42,7 @@ function TicketCheckout() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
               }
-              console.log(submit)
               let res = await fetch(`http://localhost:8090/api/orderitems/`, submit);
-              console.log(data)
-              console.log('Submitted')
-
         let resJson = await res.json();
       if (res.status === 200) {
         alert('Ticket successfully bought!')
@@ -55,7 +51,7 @@ function TicketCheckout() {
         alert('Ticket cannot be bought. Someone probably bought it just before you did.')
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
