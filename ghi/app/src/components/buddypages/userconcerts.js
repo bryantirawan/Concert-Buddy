@@ -11,7 +11,7 @@ import Footer from '../Footer';
 export default function Userconcerts() {
     const [userconcerts, setUserConcerts] = useState([])
     const {authTokens, logoutUser} = useContext(AuthContext)
-    const { concert_id } = useParams();
+    //const { concert_id } = useParams();
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
@@ -102,18 +102,19 @@ const handleRemoveConcertSubmit = async (e, concID) => {
          </button></Link>
                         </td>
                         <td>
-                            <form action={`http://localhost:3000/tickets/${userconcert.concert_id}`}>
-                            <button className="btn btn-primary">
+
+                            <button className="btn btn-primary" onClick={() => navigate(`/tickets/${userconcert.concert_id}/`)}> 
                             Sell
                             </button>
-                            </form>
+
+
                         </td>
                         <td>
-                            <form action={`http://localhost:3000/concertdetail/${userconcert.concert_id}`}>
-                            <button className="btn btn-primary">
+                          
+                            
+                            <button className="btn btn-primary" onClick={() => navigate(`/concertdetail/${userconcert.concert_id}/`)}> 
                             Buy
                             </button>
-                            </form>
                         </td>
                         <td>
                         <form onSubmit={(e) => handleRemoveConcertSubmit(e, userconcert.concert_id)}>

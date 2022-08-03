@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
-  useParams
+  useParams, useNavigate
 } from "react-router-dom";
 import Footer from '../Footer';
 
@@ -8,6 +8,8 @@ import Footer from '../Footer';
 const Fellowusersgoingtoconcert = () => {
   const [fellowusers, setFellowUsers] = useState([])
   const { concert_id } = useParams();
+  let navigate = useNavigate()
+
 
   useEffect( () => {
     getFellowUsers()
@@ -41,11 +43,12 @@ const Fellowusersgoingtoconcert = () => {
 
         </tbody>
     </table>
-    <form action={`http://localhost:3000/userconcerts/`}>
-                        <button className="btn btn-primary">
-                        Go back to other concerts you are going to
-                        </button>
-    </form>
+
+                        
+                        <button className="btn btn-sm btn-primary" onClick={() => navigate('/userconcerts/')}>Go Back</button> 
+
+
+
     <br></br>
 
     </div>
