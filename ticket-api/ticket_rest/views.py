@@ -148,6 +148,7 @@ def api_get_orderitems(request):
                     setattr(address_for_order_item, "user", content["user"])
                     setattr(address_for_order_item, "street_address", content["street_address"])
                     setattr(address_for_order_item, "apartment_address", content["apartment_address"])
+                    setattr(address_for_order_item, "city", content["city"])
                     setattr(address_for_order_item, "country", content["country"])
                     setattr(address_for_order_item, "zip", content["zip"])
                 except: #no existing shipping address
@@ -155,6 +156,7 @@ def api_get_orderitems(request):
                         user=content["user"],
                         street_address=content["street_address"],
                         apartment_address=content["apartment_address"],
+                        city=content["city"],
                         country=content["country"],
                         zip=content["zip"]
                     )

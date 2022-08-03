@@ -43,7 +43,6 @@ function SellTicketForm() {
 
         let resJson = await res.json();
       if (res.status === 200) {
-        //eventually navigate to page tickets you are selling
         alert('Ticket successfully listed')
         navigate(`/concertdetail/${concert}`)
       } else {
@@ -55,38 +54,6 @@ function SellTicketForm() {
     }
   }
 
-
-//   if (res.status === 200){
-//     console.log('concert added successfully and user attached to fellow user now needs to redirect')
-//     navigate(`/concertdetail/${concID}`)
-// } else {
-//     alert('concert unable to be added')
-// }
-
-
-  // let handleSulbmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     let res = await fetch("https://httpbin.org/post", {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         name: name,
-  //         email: email,
-  //         mobileNumber: mobileNumber,
-  //       }),
-  //     });
-  //     let resJson = await res.json();
-  //     if (res.status === 200) {
-  //       setName("");
-  //       setEmail("");
-  //       setMessage("User created successfully");
-  //     } else {
-  //       setMessage("Some error occured");
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
 return (
     <>
