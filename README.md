@@ -158,13 +158,13 @@ Get concert data for post request
 #### Response
 ```json
 {
-	"venue": "Soldier Field",
-	"venue_id": "4bd637ce",
-	"artist_id": "b83bc61f-8451-4a5d-8b8e-7e9ed295e822",
-	"city": "Chicago",
-	"date": "2022-08-05",
-	"artist": "Elton John",
-	"concert_id": "63b256e3"
+	"venue": "Venue",
+	"venue_id": "venue_id",
+	"artist_id": "artist_id",
+	"city": "City",
+	"date": "Date",
+	"artist": "Artist",
+	"concert_id": "concert_id"
 }
 ```
 
@@ -175,13 +175,13 @@ Get concert data for concert detail page
 ```json
 {
 	"id": 5,
-	"venue": "Soldier Field",
-	"city": "Chicago",
-	"date": "2022-08-05T00:00:00+00:00",
-	"artist": "Elton John",
-	"concert_id": "63b256e3",
-	"venue_id": "4bd637ce",
-	"artist_id": "b83bc61f-8451-4a5d-8b8e-7e9ed295e822",
+	"venue": "Venue",
+	"city": "City",
+	"date": "Date",
+	"artist": "Artist",
+	"concert_id": "concert_id",
+	"venue_id": "venue_id",
+	"artist_id": "artist_id",
 	"import_href": "/api/concerts/5"
 }
 ```
@@ -193,13 +193,13 @@ Get list of concerts user is attending
 ```json
 [{
 	"id": 5,
-	"venue": "Soldier Field",
-	"city": "Chicago",
-	"date": "2022-08-05T00:00:00+00:00",
-	"artist": "Elton John",
-	"concert_id": "63b256e3",
-	"venue_id": "4bd637ce",
-	"artist_id": "b83bc61f-8451-4a5d-8b8e-7e9ed295e822",
+	"venue": "Venue",
+	"city": "City",
+	"date": "Date",
+	"artist": "Artist",
+	"concert_id": "concert_id",
+	"venue_id": "venue_id",
+	"artist_id": "artist_id",
 	"import_href": "/api/concerts/5"
 },]
 ```
@@ -221,7 +221,7 @@ Get list of fellow users attending the concert
 			"last_name": "last",
 			"is_staff": false,
 			"is_active": true,
-			"date_joined": "2022-08-02T21:59:24.164Z",
+			"date_joined": "date joined",
 			"email": "email@email.com"
 		}
 	]
@@ -249,3 +249,102 @@ their home addresses. The 'OrderItem' model includes a one-to-many relationship 
 the home address of the user that purchased the ticket. These instances will be stored in the database to maintain history of 
 purchases which is available for users to view.
 
+### `GET tickets/`
+List all tickets
+
+#### Response
+```json
+{
+	"tickets": [
+		{
+			"id": 1,
+			"price": "10.00",
+			"section": "A",
+			"row": "1",
+			"seat": "1",
+			"sold": false,
+			"picture_url": "picture.com",
+			"concert": {
+				"id": 3,
+				"import_href": "/api/concerts/3",
+				"venue": "Venue",
+				"city": "City",
+				"date": "Date",
+				"artist": "Artist",
+				"concert_id": "concert id"
+			},
+		},
+	]
+}
+```
+
+### `PUT tickets/<int:pk>/`
+Update ticket information when sold
+
+#### Response
+```json
+{
+    "id": 1,
+    "price": "10.00",
+    "section": "A",
+    "row": "1",
+    "seat": "1",
+    "sold": true,
+    "picture_url": "picture.com",
+    "concert": {
+        "id": 3,
+        "import_href": "/api/concerts/3",
+        "venue": "Venue",
+        "city": "City",
+        "date": "Date",
+        "artist": "Artist",
+        "concert_id": "concert_id"
+    },
+    "seller": {
+        "import_href": "/api/users/3",
+        "email": "123@123.com",
+        "first_name": "first",
+        "last_name": "last"
+    },
+    "buyer": {
+        "import_href": "/api/users/2",
+        "email": "user@user.com",
+        "first_name": "first",
+        "last_name": "last"
+    },
+    "concert_id": "concert_id"
+}
+```
+
+### `PUT changetickets/<int:pk>/`
+Edit information of a sold ticket back to unsold
+
+#### Response
+```json
+{
+	"id": 1,
+	"price": "10.00",
+	"section": "A",
+	"row": "1",
+	"seat": "1",
+	"sold": false,
+	"picture_url": "picture.com",
+	"concert": {
+        "id": 3,
+        "import_href": "/api/concerts/3",
+        "venue": "Venue",
+        "city": "City",
+        "date": "Date",
+        "artist": "Artist",
+        "concert_id": "concert_id"
+    },
+	"seller": {
+		"import_href": "/api/users/3",
+		"email": "123@123.com",
+		"first_name": "first",
+		"last_name": "last"
+	},
+	"buyer": null,
+	"concert_id": "concert_id"
+}
+```
