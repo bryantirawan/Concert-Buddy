@@ -5,7 +5,7 @@ import './HeroSection.css';
 import { useNavigate } from 'react-router-dom';
 
 function HeroSection() {
-  let {user, logoutUser} = useContext(AuthContext)
+  let {user} = useContext(AuthContext)
   const [city, setCity] = useState('');
 
   let navigate = useNavigate()

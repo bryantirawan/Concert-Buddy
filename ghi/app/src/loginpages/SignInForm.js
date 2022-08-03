@@ -1,12 +1,11 @@
 import { React, useContext } from "react"
 import AuthContext from "../context/AuthContext"
-import { useNavigate, Link, NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import "./SignupPages.css"
 
 
 const SignInForm = () => {
   let {loginUser} = useContext(AuthContext)
-  let navigate = useNavigate()
 
   return (
 <>
