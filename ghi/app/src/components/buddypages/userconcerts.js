@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useContext} from 'react'
 import AuthContext from '../../context/AuthContext';
 import {
-    useParams, useNavigate
+    useNavigate
   } from "react-router-dom";
-import { Link, BrowserRouter as Router, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from '../Footer';
 
 
@@ -11,14 +11,9 @@ import Footer from '../Footer';
 export default function Userconcerts() {
     const [userconcerts, setUserConcerts] = useState([])
     const {authTokens, logoutUser} = useContext(AuthContext)
-    const { concert_id } = useParams();
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
-
-    useEffect(() => {
-        getUserConcerts()
-    }, [])
 
     const getUserConcerts = async() => {
         const response = await fetch('http://localhost:8080/api/userconcerts/', {
@@ -37,6 +32,11 @@ export default function Userconcerts() {
             logoutUser()
         }
     }
+
+    useEffect(() => {
+        getUserConcerts()
+    })
+
 
 
     const putConcertandputUser = async (concID) => {
@@ -60,10 +60,8 @@ export default function Userconcerts() {
     }
 
 const handleRemoveConcertSubmit = async (e, concID) => {
-    //e.preventDefault();
   //POST to Concert and PUT to User all in one
   putConcertandputUser(concID)
-  //window.location.reload()
 }
 
     return (
@@ -89,8 +87,6 @@ const handleRemoveConcertSubmit = async (e, concID) => {
         </thead>
             <tbody>
             {userconcerts.filter(userconcert => ((new Date(userconcert.date))) >= (yesterday)).map((userconcert,idx) => (
-
-            //  {userconcerts.map((userconcert,idx) => (
                     <tr key={idx}>
                         <td>{userconcert.artist}</td>
                         <td>{userconcert.venue}</td>
@@ -117,7 +113,6 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                         </td>
                         <td>
                         <form onSubmit={(e) => handleRemoveConcertSubmit(e, userconcert.concert_id)}>
-                            {/* will need its own handle submit after making adding delete/PUT logic   */}
                             <button className="btn btn-primary">
                             Remove
                             </button>

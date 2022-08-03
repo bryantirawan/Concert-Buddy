@@ -8,8 +8,6 @@ import Footer from '../Footer';
 function TicketColumn() {
 
 const [my_concerts, setMyConcerts] = useState([]);
-const [past_concerts, setpastConcerts] = useState([]);
-
 let {user} = useContext(AuthContext)
 const buyer = user.user_id
 const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);

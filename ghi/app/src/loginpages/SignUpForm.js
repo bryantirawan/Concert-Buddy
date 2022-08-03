@@ -1,26 +1,14 @@
-import { React, useContext, useState } from "react"
-import AuthContext from "../context/AuthContext"
-// import "./signup.css";
-//import React, {useEffect, useState } from 'react';
-//import { useContext } from 'react'
-import {
-  useParams
-} from "react-router-dom";
+import { React, useState } from "react"
 import { useNavigate } from 'react-router-dom';
 import { Link, NavLink } from "react-router-dom";
 import "./SignupPages.css"
-// import {
-//     FacebookLoginButton,
-//     InstagramLoginButton
-//   } from "react-social-login-buttons";
-import Toggle from "../components/Toggle";
 
 function SignUpForm() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password1, setPassword1] = useState('')
   const [password2, setPassword2] = useState('')
-  let { concert_id } = useParams();
+
   let navigate = useNavigate()
 
 
@@ -35,7 +23,7 @@ function SignUpForm() {
         body:JSON.stringify({'username':e.target.username.value, 'email':e.target.email.value, 'password1':e.target.password1.value, 'password2':e.target.password2.value})
     }
     let res = await fetch('http://localhost:8080/buddy/user/', submit)
-      let resJson = await res.json();
+
     if (res.status === 201) {
       alert('user successfully made')
       navigate('/')
@@ -46,8 +34,6 @@ function SignUpForm() {
     console.error('error', err);
   }
 }
-
-let {loginUser} = useContext(AuthContext)
 
 
 return (
