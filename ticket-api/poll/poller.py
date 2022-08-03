@@ -22,7 +22,6 @@ def poll():
             response = requests.get(url)
             content = json.loads(response.content)
             for concert in content["concerts"]:
-                print(concert)
                 ConcertVO.objects.update_or_create(
                     import_href=concert["import_href"],
                     defaults={
