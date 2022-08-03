@@ -4,7 +4,7 @@ import json
 from struct import pack_into
 from django.http import JsonResponse
 from django.shortcuts import render
-from .encoders import AddressEncoder, ConcertVOEncoder, OrderItemEncoder, TicketEncoder, UserVOEncoder, TicketDetailEncoder
+from .encoders import AddressEncoder, OrderItemEncoder, TicketEncoder, TicketDetailEncoder
 from django.views.decorators.http import require_http_methods
 import requests
 from .models import Address, ConcertVO, OrderItem, Ticket, UserVO
@@ -17,7 +17,6 @@ def api_list_concerts(request):
     page = '&p=1'
     location = 'San%20Francisco'
     url = 'https://api.setlist.fm/rest/1.0/search/setlists?cityName='+ location + page
-    # url = 'https://api.setlist.fm/rest/1.0/search/setlists?cityName=San%20Francisco&p=1'
     headers = {
         "x-api-key": "1Lw-KTV9OFozLe7JpUeAyOdJHJH9HeVWNn2B",
         "Accept": "application/json"}
@@ -140,6 +139,24 @@ def api_update_tickets(request, pk):
             return response
 
 
+@require_http_methods(["PUT"])
+def api_change_sold_ticket(request, pk):
+    try:
+        tickets = Ticket.objects.get(id=pk)
+        setattr(tickets, "sold", False)
+        setattr(tickets, "buyer", None)
+        tickets.save()
+
+        return JsonResponse(
+            tickets,
+            encoder=TicketEncoder,
+            safe=False,
+        )
+    except Ticket.DoesNotExist:
+        response = JsonResponse({"message": "Does not exist"})
+        response.status_code = 404
+        return response
+
 @require_http_methods(["GET"])
 def api_tickets_by_concert(request):
     if request.method == "GET":
@@ -165,7 +182,7 @@ def api_get_orderitems(request):
             {"order_item": order_item},
             encoder=OrderItemEncoder,
             )
-    else: #POST order item 
+    else: #POST order item
         content = json.loads(request.body)
         print(content)
         ticket = Ticket.objects.get(id=content["ticket"])
@@ -175,10 +192,10 @@ def api_get_orderitems(request):
             status=400
             )
         else:
-            #assigning ticket to OrderItem and changing sold = True 
+            #assigning ticket to OrderItem and changing sold = True
             try:
                 ticket = Ticket.objects.get(id=content["ticket"])
-                content["ticket"] = ticket 
+                content["ticket"] = ticket
                 setattr(ticket, "sold", True)
                 new_user = UserVO.objects.get(id=content["user"])
                 setattr(ticket, "buyer", new_user)
@@ -197,16 +214,16 @@ def api_get_orderitems(request):
                     {"message": "Invalid user id"},
                     status=400
                 )
-            #assigning address for order item for OrderItem 
+            #assigning address for order item for OrderItem
             try:
-                try: #possibly existing shipping address and updates existing address whether it needs it or not 
-                    address_for_order_item = Address.objects.get(user=content["address_for_order_item"]) 
+                try: #possibly existing shipping address and updates existing address whether it needs it or not
+                    address_for_order_item = Address.objects.get(user=content["address_for_order_item"])
                     setattr(address_for_order_item, "user", content["user"])
                     setattr(address_for_order_item, "street_address", content["street_address"])
                     setattr(address_for_order_item, "apartment_address", content["apartment_address"])
                     setattr(address_for_order_item, "country", content["country"])
                     setattr(address_for_order_item, "zip", content["zip"])
-                except: #no existing shipping address 
+                except: #no existing shipping address
                     Address.objects.update_or_create(
                         user=content["user"],
                         street_address=content["street_address"],
@@ -221,8 +238,6 @@ def api_get_orderitems(request):
                     {"message": "Invalid Address User"},
                     status=400
                 )
-           
-            
 
             order_item = OrderItem.objects.create(
                 user=content["user"],
@@ -235,6 +250,8 @@ def api_get_orderitems(request):
                 encoder = OrderItemEncoder,
                 safe=False,
             )
+
+
 
 @require_http_methods(["GET", "POST"])
 def api_get_addresses(request):

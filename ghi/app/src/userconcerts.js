@@ -99,7 +99,7 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                         <td>{userconcert.artist}</td>
                         <td>{userconcert.venue}</td>
                         <td>{userconcert.city}</td>
-                        <td>{new Date(userconcert.date).toLocaleDateString('en-US')}</td>
+                        <td>{new Date(userconcert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
                         <td>
                         <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-success"type="button">
               Other Users Going

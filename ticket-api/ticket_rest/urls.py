@@ -8,7 +8,8 @@ from .views import (
     api_get_tickets,
     api_list_concerts,
     api_tickets_by_concert,
-    api_update_tickets
+    api_update_tickets,
+    api_change_sold_ticket
 )
 
 urlpatterns = [
@@ -36,6 +37,11 @@ urlpatterns = [
         "tickets/<int:pk>/",
         api_update_tickets,
         name="api_update_tickets"
+    ),
+    path(
+        "changetickets/<int:pk>/",
+        api_change_sold_ticket,
+        name="api_change_sold_ticket"
     ),
       path(
         "concerttickets/",

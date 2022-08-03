@@ -72,7 +72,7 @@ return (
                 <form onSubmit={handleSubmit} className="form" id="create-attendee-form">
                   <h1 className="card-title">Ticket for sale details</h1>
                   <p className="mb-3">
-                    Fill us in on your ticket.
+                    If you do not complete seller's venmo request within 2 hours, the seller reserves the right to relist the ticket.
                   </p>
                   <div className="row">
                     <div className="col">
@@ -108,7 +108,7 @@ return (
                       </div>
                     </div>
                   </div>
-                  <button className="btn btn-lg btn-primary">Submit Listing</button>
+                  <button className="btn btn-lg btn-primary">Buy</button>
                 </form>
               </div>
             </div>

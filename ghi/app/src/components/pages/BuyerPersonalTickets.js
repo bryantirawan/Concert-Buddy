@@ -67,7 +67,7 @@ useEffect( () => {
 
           // {my_concerts.map((ticket,idx) => (
                 <tr key={idx}>
-                    <td>{new Date(ticket.concert.date).toLocaleDateString()}</td>
+                    <td>{new Date(ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
                     <td>{ticket.concert.artist}</td>
                     <td>{ticket.price}</td>
                     <td>{ticket.section}</td>
@@ -106,7 +106,7 @@ useEffect( () => {
 
           // {my_concerts.map((ticket,idx) => (
                 <tr key={idx}>
-                    <td>{new Date(ticket.concert.date).toLocaleDateString()}</td>
+                    <td>{new Date(ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
                     <td>{ticket.concert.artist}</td>
                     <td>{ticket.price}</td>
                     <td>{ticket.section}</td>

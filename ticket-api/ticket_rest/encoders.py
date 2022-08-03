@@ -13,9 +13,7 @@ class ConcertVOEncoder(ModelEncoder):
         "artist",
         "concert_id",
     ]
-    # def get_extra_data(self, o):
-    #     return {'import_href': f'/api/concerts/{o.id}'}
-
+    
 
 class UserVOEncoder(ModelEncoder):
     model = UserVO
@@ -91,12 +89,11 @@ class OrderItemEncoder(ModelEncoder):
         "id",
         "user",
         "ticket",
-        "address_for_order_item"
+        "address_for_order_item",
+        "buyer_venmo"
     ]
     encoders = {
         "user": UserVOEncoder(),
         "ticket": TicketDetailEncoder(),
         "address_for_order_item": AddressEncoder()
     }
-
-
