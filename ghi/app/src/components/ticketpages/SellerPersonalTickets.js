@@ -40,7 +40,6 @@ function SellerTicketList() {
                 }
             }
             setUnsoldTickets(unsold_list);
-            console.log(unsold_list, "unsold_list")
         }
         const fetchOrders = async() => {
             const orderitemResponse = await fetch(`http://localhost:8090/api/orderitems/`)
@@ -58,7 +57,6 @@ function SellerTicketList() {
                 }
             }
             setSoldTickets(sold_list);
-            console.log(sold_list, "sold_list")
         }
         fetchTickets();
         fetchOrders();
@@ -69,10 +67,9 @@ function SellerTicketList() {
         e.preventDefault();
         try {
             const response = await axios.delete(`http://localhost:8090/api/tickets/${id}/`,);
-            console.log(response.status)
             window.location.reload();
         } catch (e) {
-            console.log('something went wrong!', e);
+            console.error('something went wrong!', e);
         }
     }
 
@@ -85,14 +82,13 @@ function SellerTicketList() {
                 buyer: null
             });
             window.location.reload();
-            console.log(ticketChangeRes)
 
             // have to change Sold from True --> False on Ticket
             // have to remove the Buyer from the Ticket (make null)
             // Order item kept intact for future reference
 
         } catch (e) {
-            console.log('Error with Sold Ticket Change', e);
+            console.error('Error with Sold Ticket Change', e);
         }
     }
 
@@ -127,7 +123,6 @@ function SellerTicketList() {
                     {unsold_tickets.map((ticket, idx) => {
                     return (
                         <div key={idx} className="card mb-3 shadow">
-                        {/* <img src={ticket.picture_url} className="card-img-top" /> */}
                         <div className="card-body">
                             <h5 className="card-title">{ticket.concert.artist}</h5>
                             <h6 className="card-subtitle mb-2 text-muted">
@@ -171,7 +166,6 @@ function SellerTicketList() {
                     {sold_tickets.map((order, idx) => {
                     return (
                         <div key={idx} className="card mb-3 shadow">
-                        {/* <img src={ticket.picture_url} className="card-img-top" /> */}
                         <div className="card-body">
                             <h5 className="card-title">{order.ticket.concert.artist}</h5>
                             <h6 className="card-subtitle mb-2 text-muted">
@@ -188,12 +182,8 @@ function SellerTicketList() {
                             </p>
                         </div>
                         <div className="card-footer">
-                        <p>
-                        Buyer Email: {order.ticket.buyer.email}
-                        <div>
-                        Buyer Venmo: {order.buyer_venmo}
-                        </div>
-                        </p>
+                        <p>Buyer Email: {order.ticket.buyer.email}</p>
+                        <p>Buyer Venmo: {order.buyer_venmo}</p>
                         <p>If the buyer hasn't venmo'd you within 2 hours, revert the ticket back to unsold.</p>
                         <form onSubmit={(e) => handleSoldTicketChange(e, order.ticket.id)}>
                         <button className="btn btn-warning" type="submit">
@@ -213,18 +203,8 @@ function SellerTicketList() {
         }
 
         </div>
-
-        {/* <div
-        style={{
-          position: "fixed",
-          left: 0,
-          bottom: 0,
-          right: 0
-        }}
-      > */}
       </div>
         <Footer />
-        {/* </div> */}
         </>
     )
     }

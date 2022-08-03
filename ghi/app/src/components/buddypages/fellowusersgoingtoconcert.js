@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {
   useParams
 } from "react-router-dom";
-import Footer from './Footer';
+import Footer from '../Footer';
 
 
 const Fellowusersgoingtoconcert = () => {

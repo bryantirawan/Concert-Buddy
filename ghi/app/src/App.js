@@ -1,21 +1,18 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute'
-import LoginPage from './pages/oldLoginPage'
 import { AuthProvider } from './context/AuthContext'
-import Userconcerts from './userconcerts';
-import ConcertDetail from './concertdetail';
-import Concerts from './components/selectconcert';
+import Userconcerts from './components/buddypages/userconcerts';
+import ConcertDetail from './components/buddypages/concertdetail';
+import Concerts from './components/buddypages/selectconcert';
 import Navbar from './components/Navbar'
-import Home from './components/pages/Home';
-import SellTicketForm from './components/pages/SellTicket';
-import SearchToSellTickets from './components/pages/UselessSearchSellTickets';
-import Fellowusersgoingtoconcert from './components/fellowusersgoingtoconcert';
-import TicketCheckout from './components/pages/TicketCheckout';
-
-import SellerTicketList from './components/pages/SellerPersonalTickets';
-import BuyerTickets from './components/pages/BuyerPersonalTickets';
-import SignUpForm from './pages/SignUpForm';
-import SignInForm from './pages/SignInForm';
+import Home from './components/ticketpages/Home';
+import SellTicketForm from './components/ticketpages/SellTicket';
+import Fellowusersgoingtoconcert from './components/buddypages/fellowusersgoingtoconcert';
+import TicketCheckout from './components/ticketpages/TicketCheckout';
+import SellerTicketList from './components/ticketpages/SellerPersonalTickets';
+import BuyerTickets from './components/ticketpages/BuyerPersonalTickets';
+import SignUpForm from './loginpages/SignUpForm';
+import SignInForm from './loginpages/SignInForm';
 
 function App() {
   return (
@@ -38,10 +35,8 @@ function App() {
           <Route path="/selectconcerts/:location" element={<Concerts />} />
           <Route path="/login/" element={<SignInForm/>} />
           <Route path="/sign-up/" element={<SignUpForm />} />
-
           <Route path="/concertdetail/:concert_id" element={<ConcertDetail />} />
           <Route path="/tickets/:concert_id" element={<SellTicketForm />} />
-          <Route path="/selltickets" element={<SearchToSellTickets />} />
           <Route path="/checkout/:ticket_id" element={<TicketCheckout />} />
           <Route path="/sellertickets" element={<SellerTicketList />} />
           <Route path="/mytickets" element={<BuyerTickets />} />

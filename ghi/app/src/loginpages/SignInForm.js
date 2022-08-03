@@ -14,21 +14,11 @@ const SignInForm = () => {
 
 <div className="appForm">
 <div className="pageSwitcher">
-{/* <div className="formTitle">
-              <NavLink
-                to="/sign-up"
-                activeClassName="formTitleLink-active"
-                className="formTitleLink"
-              >
-                Login
-              </NavLink>{" "}
-            </div> */}
 <div className="formCenter">
         <form className="formFields" onSubmit={loginUser}>
         <div className="formField">
               <NavLink
                 to="/sign-up"
-                activeClassName="formTitleLink-active"
                 className="formTitleLink"
               >
                 Login
@@ -64,15 +54,6 @@ const SignInForm = () => {
               Create an account
             </Link>
           </div>
-
-          {/* <div className="socialMediaButtons">
-            <div className="facebookButton">
-              <FacebookLoginButton onClick={() => alert("Hello")} />
-            </div>
-            <div className="instagramButton">
-              <InstagramLoginButton onClick={() => alert("Hello")} />
-            </div>
-          </div> */}
         </form>
       </div>
       </div>
