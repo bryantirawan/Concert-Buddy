@@ -60,8 +60,7 @@ Search for concerts by city
 #### Response
 ```json
 {
-    "setlist": [
-        {
+    "setlist": [{
             "id": "13b25585",
             "versionId": "g2bf0484e",
             "eventDate": "05-08-2022",
@@ -99,7 +98,57 @@ Search for concerts by city
                 "set": []
                 },
             "url": "https://www.setlist.fm/setlist/pathology/2022/the-great-northern-san-francisco-ca-13b25585.html"
-    }
+        }
+    ]
+}
+```
+
+### `GET concerts/artist/<str:pk>/`
+Search for concerts by artist
+
+#### Response
+```json
+{
+    "setlist": [{
+            "id": "63b256e3",
+            "versionId": "g3bf1b8c0",
+            "eventDate": "05-08-2022",
+            "lastUpdated": "2022-08-03T08:13:18.000+0000",
+            "artist": {
+                "mbid": "b83bc61f-8451-4a5d-8b8e-7e9ed295e822",
+                "name": "Elton John",
+                "sortName": "John, Elton",
+                "disambiguation": "English singer, songwriter, pianist, and composer",
+                "url": "https://www.setlist.fm/setlists/elton-john-63d6be6f.html"
+                },
+            "venue": {
+                "id": "4bd637ce",
+                "name": "Soldier Field",
+                "city": {
+                    "id": "4887398",
+                    "name": "Chicago",
+                    "state": "Illinois",
+                    "stateCode": "IL",
+                    "coords": {
+                        "lat": 41.850033,
+                        "long": -87.6500523
+                        },
+                    "country": {
+                        "code": "US",
+                        "name": "United States"
+                        }
+                    },
+			    "url": "https://www.setlist.fm/venue/soldier-field-chicago-il-usa-4bd637ce.html"
+				},
+			"tour": {
+				"name": "Farewell Yellow Brick Road World Tour"
+				},
+			"sets": {
+				"set": []
+				},
+			"url": "https://www.setlist.fm/setlist/elton-john/2022/soldier-field-chicago-il-63b256e3.html"
+		}
+    ]
 }
 ```
 
