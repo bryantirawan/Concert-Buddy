@@ -5,7 +5,6 @@ import Footer from '../Footer';
 
 export default function ConcertDetail() {
     let { concert_id } = useParams();
-
     const [data, setData] = useState({});
     const [tickets, setTickets] = useState([]);
 
@@ -30,7 +29,7 @@ export default function ConcertDetail() {
             // catch error for empty ticket error
         }
         fetchConcertDetail()
-    }, []
+    }
     );
 
       return (
