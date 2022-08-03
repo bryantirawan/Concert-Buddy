@@ -12,6 +12,7 @@ const [past_concerts, setpastConcerts] = useState([]);
 
 let {user} = useContext(AuthContext)
 const buyer = user.user_id
+const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
 
 useEffect( () => {
     const fetchTickets = async() => {
@@ -63,7 +64,7 @@ useEffect( () => {
         </tr>
     </thead>
         <tbody>
-        {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) >= (Date.now())).map((ticket,idx) => (
+        {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) >= yesterday).map((ticket,idx) => (
 
           // {my_concerts.map((ticket,idx) => (
                 <tr key={idx}>
@@ -102,13 +103,13 @@ useEffect( () => {
         </tr>
     </thead>
         <tbody>
-        {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) <= (Date.now())).reverse().map((ticket,idx) => (
+        {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) <= yesterday).reverse().map((ticket,idx) => (
 
           // {my_concerts.map((ticket,idx) => (
                 <tr key={idx}>
                     <td>{new Date(ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
                     <td>{ticket.concert.artist}</td>
-                    <td>{ticket.price}</td>
+                    <td>{ticket.price} </td>
                     <td>{ticket.section}</td>
                     <td>{ticket.row} </td>
                     <td>{ticket.seat} </td>
