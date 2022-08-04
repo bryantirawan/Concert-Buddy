@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function HeroSection() {
   let {user} = useContext(AuthContext)
   const [city, setCity] = useState('');
+  let videoimage = require('./Images/video-3.mp4')
 
   let navigate = useNavigate()
 
@@ -16,7 +17,7 @@ function HeroSection() {
     }
 
   const handleKeypress = e => {
-    //it triggers by pressing the enter key
+    //it triggers enter button by pressing the enter key
   if (e.keyCode === 13) {
     handleImGoingSubmit();
   }
@@ -24,7 +25,7 @@ function HeroSection() {
 
   return (
     <div className='hero-container'>
-      <video src='/videos/video-3.mp4' autoPlay loop muted />
+      <video src={videoimage} autoPlay loop muted />
       <h1 align="center">ADVENTURE AWAITS</h1>
       {user ? (<p align="center">Hello {user.username}, what are you waiting for?</p>):(<p align="center">What are you waiting for?</p>)}
 
@@ -32,25 +33,6 @@ function HeroSection() {
         <form onSubmit={handleImGoingSubmit}>
           <input className="form-control" type="text" placeholder="Search concerts by city..." value={city} required onChange={(e) => setCity(e.target.value)} onKeyPress={handleKeypress}/>
         </form>
-
-
-        {/* <Link to='/'>
-        <Button
-          className='btns'
-          buttonStyle='btn--outline'
-          buttonSize='btn--large'
-        >
-          FIND A BUDDY
-        </Button>
-        </Link>
-        <Link to='/selectconcerts/'><Button
-          className='btns'
-          buttonStyle='btn--primary'
-          buttonSize='btn--large'
-        >
-          FIND A CONCERT <i className='btns' />
-        </Button>
-        </Link> */}
       </div>
     </div>
   );

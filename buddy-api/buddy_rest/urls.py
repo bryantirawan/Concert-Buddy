@@ -1,5 +1,4 @@
 from django.urls import path
-from rest_framework_simplejwt import views as jwt_views
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
@@ -32,7 +31,6 @@ urlpatterns = [
         api_users,
         name="api_users",
     ),
-
     path(
         "concerts/artist/<str:pk>/",
         api_get_concert_by_artist,

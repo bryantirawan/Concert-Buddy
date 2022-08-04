@@ -8,7 +8,6 @@ function SignUpForm() {
   const [email, setEmail] = useState('')
   const [password1, setPassword1] = useState('')
   const [password2, setPassword2] = useState('')
-
   let navigate = useNavigate()
 
 
@@ -22,8 +21,9 @@ function SignUpForm() {
         },
         body:JSON.stringify({'username':e.target.username.value, 'email':e.target.email.value, 'password1':e.target.password1.value, 'password2':e.target.password2.value})
     }
-    let res = await fetch('http://localhost:8080/buddy/user/', submit)
-
+    let res = await fetch(`${process.env.REACT_APP_BUDDY_API}/buddy/user/`, submit)
+      let resJson = await res.json();
+      console.log(resJson)
     if (res.status === 201) {
       alert('user successfully made')
       navigate('/')
@@ -34,7 +34,6 @@ function SignUpForm() {
     console.error('error', err);
   }
 }
-
 
 return (
     <div className="/react-auth-ui/">

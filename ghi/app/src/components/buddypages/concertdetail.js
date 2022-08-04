@@ -11,10 +11,9 @@ export default function ConcertDetail() {
 
     useEffect(() => {
         const fetchConcertDetail = async () => {
-            const concertResponse = await fetch(`http://localhost:8080/api/concert/${concert_id}`)
+            const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/concert/${concert_id}`)
             const concertData = await concertResponse.json();
-
-            const ticketResponse = await fetch(`http://localhost:8090/api/tickets/`)
+            const ticketResponse = await fetch(`${process.env.REACT_APP_TICKET_API}/api/tickets/`)
             const ticketData = await ticketResponse.json();
 
             let ticket_list = [];
@@ -115,7 +114,7 @@ export default function ConcertDetail() {
           right: 0
         }}
       >
-        </div>  
+        </div>
         </div>
         </div>
         <Footer />

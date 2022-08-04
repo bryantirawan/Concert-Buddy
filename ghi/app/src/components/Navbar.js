@@ -5,7 +5,6 @@ import './Navbar.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
-
 function Navbar() {
   let {user, logoutUser} = useContext(AuthContext)
   const [click, setClick] = useState(false);
@@ -13,7 +12,6 @@ function Navbar() {
   const closeMobileMenu = () => setClick(false);
 
   return (
-
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
@@ -50,23 +48,20 @@ function Navbar() {
                     <Dropdown.Toggle variant="dark">
                       {user.username}
                       <Dropdown.Menu>
-                        <Dropdown.Item href="/mytickets/">Purchased Tickets</Dropdown.Item>
-                        <Dropdown.Item href="/userconcerts/">Concerts I Am Attending</Dropdown.Item>
-                        <Dropdown.Item href="/sellertickets">My Tickets for Sale</Dropdown.Item>
-                        <Dropdown.Item href="/"  variant="dark" onClick={logoutUser}>Logout</Dropdown.Item>
+                        <Dropdown.Item href="/concert-buddy/mytickets/">Purchased Tickets</Dropdown.Item>
+                        <Dropdown.Item href="/concert-buddy/userconcerts/">Concerts I Am Attending</Dropdown.Item>
+                        <Dropdown.Item href="/concert-buddy/sellertickets">My Tickets for Sale</Dropdown.Item>
+                        <Dropdown.Item href="/concert-buddy/"  variant="dark" onClick={logoutUser}>Logout</Dropdown.Item>
                     </Dropdown.Menu>
                     </Dropdown.Toggle>
                     </Dropdown>
-                ): (
-                  <Link className="nav-links" aria-current="page" to="/login/">
-                 Login
-                 </Link>
-                )}
+                  ): (
+                    <Link className="nav-links" aria-current="page" to="/login/">
+                  Login
+                  </Link>
+                  )}
               </li>
-
           </ul>
-
-
         </div>
       </nav>
     </>

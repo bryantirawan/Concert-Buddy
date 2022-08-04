@@ -1,12 +1,9 @@
-import React, {useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useContext } from 'react'
 import AuthContext from '../../context/AuthContext';
-import {
-  useParams
-} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
-
 
 
 function SellTicketForm() {
@@ -18,37 +15,33 @@ function SellTicketForm() {
     let { concert_id } = useParams();
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
-
     const concert =  concert_id
     const seller = user.user_id
     const buyer = null
-
-   
+    let imagepic = require('./Images/img-8.jpg')
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
         const form = {price, section, row, seat, picture_url, concert, seller, buyer}
-       const a = {
+        const a = {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(form)
         }
-        let res = await fetch(`http://localhost:8090/api/tickets/`, a);
-
-      if (res.status === 200) {
-        alert('Ticket successfully listed')
-        navigate(`/concertdetail/${concert}`)
-      } else {
-        console.error(res.status);
-        alert('Error processing ticket. Please try again in a few seconds.')
+        let res = await fetch(`${process.env.REACT_APP_TICKET_API}/api/tickets/`, a);
+        if (res.status === 200) {
+          alert('Ticket successfully listed')
+          navigate(`/concertdetail/${concert}`)
+        } else {
+          console.error(res.status);
+          alert('Error processing ticket. Please try again in a few seconds.')
+        }
+      } catch (err) {
+        console.error('error', err);
       }
-    } catch (err) {
-      console.error('error', err);
     }
-  }
 
 
 return (
@@ -57,7 +50,7 @@ return (
     <div className="my-5 container">
         <div className="row">
           <div className="col col-sm-auto">
-            <img width="300" className="bg-white rounded shadow d-block mx-auto mb-4" src="/images/img-8.jpg" />
+            <img width="300" className="bg-white rounded shadow d-block mx-auto mb-4" alt="concert_image" src={imagepic}/>
           </div>
           <div className="col">
             <div className="card shadow">

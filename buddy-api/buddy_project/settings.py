@@ -1,3 +1,4 @@
+import os
 import dj_database_url
 from pathlib import Path
 from datetime import timedelta
@@ -13,9 +14,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@g(j5bsd!ffj)6w1d_!cr-y&%q!oy5ym*&zyt8e@a-%+(q50s8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not os.environ.get("DEBUG")
 
-ALLOWED_HOSTS = ["localhost", "buddy-api"]
+ALLOWED_HOSTS = [
+    ".localhost",
+    "127.0.0.1",
+    "buddy-api",
+    "[::1]",
+    os.environ.get("DEPLOYED_HOST", "localhost"),
+    ]
+
 AUTH_USER_MODEL = 'buddy_rest.User'
 
 
@@ -90,9 +98,18 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
-CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
-#CORS_ALLOW_ALL_ORIGINS = True
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    os.environ.get("CORS_HOST", "http://localhost:3001"),
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    os.environ.get("CORS_HOST", "http://localhost:3001"),
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
 
 ROOT_URLCONF = 'buddy_project.urls'
 
@@ -118,16 +135,7 @@ WSGI_APPLICATION = 'buddy_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres-data',
-        'USER': 'postgres',
-        'PASSWORD': 'test-databases',
-        'HOST': 'db',
-        'PORT': 5432,
-    }
-}
+DATABASES = {}
 DATABASES["default"] = dj_database_url.config()
 
 
