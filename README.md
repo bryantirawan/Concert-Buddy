@@ -16,19 +16,16 @@ Concert Buddy
 * Erica Dippold
 
 ## App Summary
-Concert Buddy is a ticket sales application focused around connecting users with other users based on their musical interests.
-Buyers and Sellers connect with each other based on concert locations and shared artists. Users can be both ticket buyers and
-ticket sellers.
+Concert Buddy is a ticket sales and concert-buddy matching application. Users can select a concert they plan on going to in the next few days and find other users who also plan on going to that concert. Users can search for a concert by location or artist. Since this app is meant to encourage users to actually meet up with each other, concert queries are limited to concerts happening in the next three or so days to prevent no-shows from schedule conflicts. Users who say they plan on attending a concert can also purchase tickets selling users have listed (if available). Users can buy and sell tickets in the same account. 
 
 ## Target Market
 Our target market is anyone that enjoys going to concerts. In particular, those who are last minute planners as well as people with cancelled plans that need to sell tickets last minute. Our objective is to meet a market demand based on last minute urgency.
 
 ## Features & Functionality
 * Users search for concerts located in particular cities and featuring specific artists
-* User will receive a query of concerts that are occurring over the next couple of days using their city / artist preferences
-* There will be a ticket marketplace for last minute buying and selling of concert tickets
-* Connect with a concert buddy option -- the user will be able to find a concert buddy based on future concerts they are attending. They will be
-able to connect with other users attending the same concerts.
+* User will receive a query of concerts that are occurring over the next three or so days using their city / artist preferences
+* Connect with a concert buddy option -- the user will be able to find a concert buddy based on future concerts they are attending. They will be able to connect with other users attending the same concerts.
+*  There will be a ticket marketplace for last minute buying and selling of concert tickets
 
 ## Set-up
 * Fork and clone this repo
@@ -152,6 +149,8 @@ Search for concerts by artist
 }
 ```
 
+### @Justin this is just the first part for adding a concert when a user clicks I'm going button. This just grabs the info from setlist fm api for a specific concert. The previous two setlist fm links grab a list of concerts while this one grabs info for one specific concert. 
+
 ### `GET add/<str:concertdict>/`
 Get concert data for post request
 
@@ -167,6 +166,9 @@ Get concert data for post request
 	"concert_id": "concert_id"
 }
 ```
+
+### @Justin the second part is POSTING to our Concert Model. The json body needs to include "fellow_user": id as well ###In the same POST function to Concert, it also updates concert proprety for User model. Look at create function lines 20 to 52 in buddy_rest/api/views.py  
+
 
 ### `GET concert/<str:pk>/`
 Get concert data for concert detail page
@@ -228,6 +230,15 @@ Get list of fellow users attending the concert
 }
 ```
 
+#### @Justin there is one more PUT request for removing a concert in User model if they choose to no longer go to a concert and also removing said user from Concert model' fellow_user. Look at update function line 62-72 in buddy-api/buddy_rest/api 
+### The json body should just be {"concert: "concert_id"} like "3b219ef" 
+
+
+#### In reality, we used serializer and rest_framework as well as django view functions because I did not discover serializers/rest_framework but you can say something like we seperated simple get requests with django view functions/encoders/polling (which by the way do you have a seciton on polling in this read me?) and more complciated logic with serializer/rest_framework 
+
+
+
+
 ## Ticket Microservice
 The Ticket Microservice handles all of the ticket transactions that occur through the Concert Buddy Application.
 The Ticket Microservice consists of five models titled 'ConcertVO', 'UserVO', 'Ticket', 'OrderItem', and 'Address'.
@@ -245,9 +256,7 @@ each concert, buyer, and seller from having many tickets.
 
 An 'OrderItem' instance is created following the purchase of a ticket through Concert Buddy. Once users fill out the purchase
 form, order information including the purchaser's home address and venmo username. The 'Address' model handles user entry of
-their home addresses. The 'OrderItem' model includes a one-to-many relationship with address so that each order item only includes
-the home address of the user that purchased the ticket. These instances will be stored in the database to maintain history of 
-purchases which is available for users to view.
+their home addresses. The 'OrderItem' model includes a one-to-many relationship with address so that each order item only includes the home address of the user that purchased the ticket. These instances will be stored in the database to maintain history of purchases which is available for users to view.
 
 ### `GET tickets/`
 List all tickets
