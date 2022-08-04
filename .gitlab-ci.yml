@@ -73,7 +73,7 @@ build-ticket-poll-image-job:
 
     # EVERYWHERE IT SHOWS fastapi_api BELOW, CHANGE THOSE
     # TO A MORE MEANINGFUL SERVICE NAME (5 PLACES)
-    - docker build -t ${CI_REGISTRY_IMAGE}/ticket_poller:latest .
+    - docker build -f Dockerfile.poller -t ${CI_REGISTRY_IMAGE}/ticket_poller:latest .
     - docker tag ${CI_REGISTRY_IMAGE}/ticket_poller:latest ${CI_REGISTRY_IMAGE}/ticket_poller:$CI_JOB_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker push ${CI_REGISTRY_IMAGE}/ticket_poller:$CI_JOB_ID
@@ -93,7 +93,7 @@ build-ticketuser-poll-image-job:
 
     # EVERYWHERE IT SHOWS fastapi_api BELOW, CHANGE THOSE
     # TO A MORE MEANINGFUL SERVICE NAME (5 PLACES)
-    - docker build -t ${CI_REGISTRY_IMAGE}/ticketuser_poller:latest .
+    - docker build -f Dockerfile.userpoller -t ${CI_REGISTRY_IMAGE}/ticketuser_poller:latest .
     - docker tag ${CI_REGISTRY_IMAGE}/ticketuser_poller:latest ${CI_REGISTRY_IMAGE}/ticketuser_poller:$CI_JOB_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker push ${CI_REGISTRY_IMAGE}/ticketuser_poller:$CI_JOB_ID
