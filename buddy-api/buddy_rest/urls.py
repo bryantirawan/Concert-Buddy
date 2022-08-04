@@ -9,8 +9,8 @@ from .views import (
     log_concert,
     api_concerts,
     api_concert,
-    api_get_user_concerts_withoutpk,  
-    MyTokenObtainPairView, 
+    api_get_user_concerts_withoutpk,
+    MyTokenObtainPairView,
     api_get_fellow_concert_users,
     api_users,
 )
@@ -31,7 +31,6 @@ urlpatterns = [
         api_users,
         name="api_users",
     ),
-
     path(
         "concerts/artist/<str:pk>/",
         api_get_concert_by_artist,
