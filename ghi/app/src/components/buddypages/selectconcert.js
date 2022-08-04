@@ -138,6 +138,7 @@ export default function Concerts() {
 
     const addConcertandPutUser = async (concID) => {
             const concertToAdd = await fetchConcerttoAdd(concID)
+            console.log(concertToAdd, "concertToAdd")
             concertToAdd["fellow_user"] = [{
                 "id": user.user_id
             }
@@ -149,6 +150,7 @@ export default function Concerts() {
             }
 
             let res = await fetch(`${process.env.REACT_APP_BUDDY_API}/buddy/concert/`, jsonBody);
+            console.log(res, "res under addConcertandPutUser")
             if (res.status === 200){
                 navigate(`/concertdetail/${concID}`)
             } else {

@@ -31,6 +31,8 @@ function SellTicketForm() {
           body: JSON.stringify(form)
         }
         let res = await fetch(`${process.env.REACT_APP_TICKET_API}/api/tickets/`, a);
+        console.log(`${process.env.REACT_APP_TICKET_API}/api/tickets/`)
+        console.log(res)
         if (res.status === 200) {
           alert('Ticket successfully listed')
           navigate(`/concertdetail/${concert}`)
