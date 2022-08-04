@@ -29,7 +29,7 @@ def format_date(date):
 
 #used for concerts im attending page
 @api_view(["GET"])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_get_user_concerts_withoutpk(request):
     one_user = request.user
     user_concerts = one_user.concert.all()
