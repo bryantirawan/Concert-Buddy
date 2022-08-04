@@ -13,8 +13,11 @@ export default function ConcertDetail() {
         const fetchConcertDetail = async () => {
             const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/concert/${concert_id}`)
             const concertData = await concertResponse.json();
+            console.log(concertData, "Concert Data in Concert Detail")
+            console.log(`${process.env.REACT_APP_BUDDY_API}/api/concert/${concert_id}`, "Logging the URL")
             const ticketResponse = await fetch(`${process.env.REACT_APP_TICKET_API}/api/tickets/`)
             const ticketData = await ticketResponse.json();
+            console.log(ticketData, "TicketData in ConcertDetail")
 
             let ticket_list = [];
             for (let tick of ticketData.tickets){
