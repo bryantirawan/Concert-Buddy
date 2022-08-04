@@ -7,7 +7,7 @@ import Footer from '../Footer';
 
 export default function Userconcerts() {
     const [userconcerts, setUserConcerts] = useState([])
-    // const {authTokens, logoutUser} = useContext(AuthContext)
+    const {authTokens, logoutUser} = useContext(AuthContext)
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
@@ -18,8 +18,8 @@ export default function Userconcerts() {
             const response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/userconcerts/`, {
                 method:'GET',
                 headers:{
-                    'Content-Type':'application/json'
-                    // 'Authorization':'Bearer ' + String(authTokens.access)
+                    'Content-Type':'application/json',
+                    'Authorization':'Bearer ' + String(authTokens.access)
                 }
             })
             const data = await response.json()
@@ -28,11 +28,11 @@ export default function Userconcerts() {
 
                 setUserConcerts(data.concerts)
             }else if(response.statusText === 'Unauthorized'){
-                // logoutUser()
+                logoutUser()
             }
         }
         getUserConcerts()
-    }, []
+    }, [logoutUser, authTokens]
     )
 
 
