@@ -51,6 +51,8 @@ The 'User' model is a custom user model set up to include and email and concerts
 feature that allows users to connect to other users attending the same concerts as them. Concerts is a many-to-many field that includes 
 all the concerts that a particular user is attending.
 
+For api endpoints, simple get requests were handled using a combination of Django view functions and encoders. More complicated requests that involved multiple CRUD operations for multiple models were accomplished using serializers and rest_framework.
+
 ### `GET selectconcertsforcity/<str:location>/<str:page>/`
 Search for concerts by city
 
@@ -247,13 +249,84 @@ Get list of fellow users attending the concert
 }
 ```
 
+### `GET buddy/user/`
+Viewset to get list of users using serializers/rest_framework
+
+#### Response
+```json
+{
+	[
+		{
+			"id": 1,
+			"username": "user",
+			"email": "user@user.com",
+			"concert": []
+		},
+		{
+			"id": 2,
+			"username": "user2",
+			"email": "user2@user2.com",
+			"concert": []
+		}	
+	]
+}
+```
+
 ### `PUT buddy/user/<int:pk>/`
 Edit concert field for user model after concert is removed
 
 #### Response
 ```json
 {
-	"concert": "concert_id"
+	"id": 2,
+	"username": "user",
+	"email": "user@user.com",
+	"concert": []
+}
+```
+
+### `GET buddy/concert/`
+Viewset to get list of concerts using serializers/rest_framework
+
+#### Response
+```json
+{
+	[
+		{
+			"id": 1,
+			"venue": "Venue",
+			"city": "City",
+			"date": "Date",
+			"artist": "Artist",
+			"concert_id": "concert_id",
+			"venue_id": "venue_id",
+			"artist_id": "artist_id",
+			"fellow_user": [
+				{
+					"id": 2,
+					"password": "password",
+					"last_login": null,
+					"is_superuser": false,
+					"username": "user",
+					"first_name": "first",
+					"last_name": "last",
+					"is_staff": false,
+					"is_active": true,
+					"date_joined": "date",
+					"email": "user@user.com",
+					"groups": [],
+					"user_permissions": [],
+					"concert": [
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					]
+				}
+		}
+	]
 }
 ```
 
