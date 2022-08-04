@@ -28,6 +28,7 @@ class UserEncoder(ModelEncoder):
         "username",
         "id"
     ]
+
     def get_extra_data(self, o):
         return {
             'import_href': f'/api/users/{o.id}'

@@ -14,12 +14,9 @@ import requests
 #used for poller
 @require_http_methods(["GET", "POST"])
 def api_users(request):
-    print("HEY")
     if request.method == "GET":
         users = User.objects.all()
-        print("HELP")
         return JsonResponse(
-            print("RETURN STATEMENT"),
             {"users": users},
             encoder=UserEncoder,
         )
