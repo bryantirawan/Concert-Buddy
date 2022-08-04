@@ -14,7 +14,7 @@ api-unit-test-job:
     - cd buddy-api
     - pip install -r requirements.txt
     - python manage.py test buddy_rest
-    - cd .
+    - cd ..
     - cd ticket-api
     - pip install -r requirements.txt
     - python manage.py test ticket_rest
