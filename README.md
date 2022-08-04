@@ -149,10 +149,8 @@ Search for concerts by artist
 }
 ```
 
-### @Justin this is just the first part for adding a concert when a user clicks I'm going button. This just grabs the info from setlist fm api for a specific concert. The previous two setlist fm links grab a list of concerts while this one grabs info for one specific concert. 
-
 ### `GET add/<str:concertdict>/`
-Get concert data for post request
+Get concert data for post request to concert model
 
 #### Response
 ```json
@@ -167,7 +165,26 @@ Get concert data for post request
 }
 ```
 
-### @Justin the second part is POSTING to our Concert Model. The json body needs to include "fellow_user": id as well ###In the same POST function to Concert, it also updates concert proprety for User model. Look at create function lines 20 to 52 in buddy_rest/api/views.py  
+### `POST concerts/`
+Post a new concert to the concert model with fellow_user field
+Also Updates user model concerts field to include the posted concert
+
+#### Response
+```json
+"Concert Model"
+{
+	"id": id,
+	"venue": "Venue",
+	"city": "City",
+	"date": "Date",
+	"artist": "Artist",
+	"concert_id": "concert_id",
+	"venue_id": "venue_id",
+	"artist_id": "artist_id",
+	"fellow_user": "id",
+	"import_href": "href"
+}
+```
 
 
 ### `GET concert/<str:pk>/`
@@ -230,14 +247,15 @@ Get list of fellow users attending the concert
 }
 ```
 
-#### @Justin there is one more PUT request for removing a concert in User model if they choose to no longer go to a concert and also removing said user from Concert model' fellow_user. Look at update function line 62-72 in buddy-api/buddy_rest/api 
-### The json body should just be {"concert: "concert_id"} like "3b219ef" 
+### `PUT buddy/user/<int:pk>/`
+Edit concert field for user model after concert is removed
 
-
-#### In reality, we used serializer and rest_framework as well as django view functions because I did not discover serializers/rest_framework but you can say something like we seperated simple get requests with django view functions/encoders/polling (which by the way do you have a seciton on polling in this read me?) and more complciated logic with serializer/rest_framework 
-
-
-
+#### Response
+```json
+{
+	"concert": "concert_id"
+}
+```
 
 ## Ticket Microservice
 The Ticket Microservice handles all of the ticket transactions that occur through the Concert Buddy Application.

@@ -27,11 +27,6 @@ urlpatterns = [
         name="api_select_concert_for_city"
     ),
     path(
-        "users/",
-        api_users,
-        name="api_users",
-    ),
-    path(
         "concerts/artist/<str:pk>/",
         api_get_concert_by_artist,
         name="api_get_concert_by_artist"
