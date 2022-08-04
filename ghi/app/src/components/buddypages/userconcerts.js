@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import AuthContext from '../../context/AuthContext';
+// import AuthContext from '../../context/AuthContext';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Footer from '../Footer';
@@ -13,26 +13,27 @@ export default function Userconcerts() {
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
 
 
-    const getUserConcerts = async() => {
-        const response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/userconcerts/`, {
-            method:'GET',
-            headers:{
-                'Content-Type':'application/json'
-                // 'Authorization':'Bearer ' + String(authTokens.access)
+    useEffect(() => {
+        const getUserConcerts = async() => {
+            const response = await fetch('http://localhost:8080/api/userconcerts/', {
+                method:'GET',
+                headers:{
+                    'Content-Type':'application/json'
+                    // 'Authorization':'Bearer ' + String(authTokens.access)
+                }
+            })
+            const data = await response.json()
+            if(response.status===200){
+                 data.concerts.sort((a,b) => Date.parse(a.date) - Date.parse(b.date))
+
+                setUserConcerts(data.concerts)
+            }else if(response.statusText === 'Unauthorized'){
+                // logoutUser()
             }
-        })
-        const data = await response.json()
-        if(response.status===200){
-                data.concerts.sort((a,b) => Date.parse(a.date) - Date.parse(b.date))
-
-            setUserConcerts(data.concerts)
-        }else if(response.statusText === 'Unauthorized'){
-            // logoutUser()
-            console.log('Hi')
         }
-    }
-
-    getUserConcerts();
+        getUserConcerts()
+    }, []
+    )
 
 
     const putConcertandputUser = async (concID) => {
