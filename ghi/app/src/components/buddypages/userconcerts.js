@@ -32,7 +32,7 @@ export default function Userconcerts() {
             }
         }
         getUserConcerts();
-    }, []
+    }
     )
 
     const putConcertandputUser = async (concID) => {
