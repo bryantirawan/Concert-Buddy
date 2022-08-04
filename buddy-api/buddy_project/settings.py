@@ -20,6 +20,7 @@ ALLOWED_HOSTS = [
     ".localhost",
     "127.0.0.1",
     "buddy-api",
+    "ticket-api",
     "[::1]",
     os.environ.get("DEPLOYED_HOST", "localhost"),
     ]
