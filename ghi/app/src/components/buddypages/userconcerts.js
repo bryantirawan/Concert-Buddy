@@ -12,28 +12,28 @@ export default function Userconcerts() {
     let navigate = useNavigate()
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
 
-    const getUserConcerts = async() => {
-        const response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/userconcerts/`, {
-            method:'GET',
-            headers:{
-                'Content-Type':'application/json',
-                'Authorization':'Bearer ' + String(authTokens.access)
+
+    useEffect( () => {
+        const getUserConcerts = async() => {
+            const response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/userconcerts/`, {
+                method:'GET',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization':'Bearer ' + String(authTokens.access)
+                }
+            })
+            const data = await response.json()
+            if(response.status===200){
+                 data.concerts.sort((a,b) => Date.parse(a.date) - Date.parse(b.date))
+
+                setUserConcerts(data.concerts)
+            }else if(response.statusText === 'Unauthorized'){
+                logoutUser()
             }
-        })
-        const data = await response.json()
-        if(response.status===200){
-             data.concerts.sort((a,b) => Date.parse(a.date) - Date.parse(b.date))
-
-            setUserConcerts(data.concerts)
-        }else if(response.statusText === 'Unauthorized'){
-            logoutUser()
         }
-    }
-
-    useEffect(() => {
-        getUserConcerts()
-    })
-
+        getUserConcerts();
+    }, []
+    )
 
     const putConcertandputUser = async (concID) => {
         const concertToRemove = {
