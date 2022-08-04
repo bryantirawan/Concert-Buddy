@@ -24,6 +24,8 @@ export default function Concerts() {
 
     useEffect( () => {
 
+        let foundlocation = location
+
         const fetchConcerts = async() => {
             const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/selectconcertsforcity/${location}/&p=1`)
             if(concertResponse.ok) {
@@ -43,11 +45,11 @@ export default function Concerts() {
                     setInvalid(false)
 
                 } else {
-                    continue;
-                    // if (location !== undefined) {
-                    //     setInvalid(true)
-                    //     setConcerts([])
-                    // }
+
+                    if (foundlocation !== undefined) {
+                        setInvalid(true)
+                        setConcerts([])
+                    }
                 }
             }
         }
