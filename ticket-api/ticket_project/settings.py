@@ -1,3 +1,4 @@
+import os
 import dj_database_url
 from pathlib import Path
 
@@ -15,8 +16,12 @@ SECRET_KEY = 'django-insecure-5*hx^4)j2@4j)agns72xx@l)yeb7g9d4gf8(y(hr)c&qvbv(m3
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "localhost",
+    ".localhost",
+    "127.0.0.1",
+    "ticket-api",
     "buddy-api",
+    "[::1]",
+    os.environ.get("DEPLOYED_HOST", "localhost"),
 ]
 
 
@@ -47,8 +52,17 @@ CRONJOBS = [
     ("* * * * *", "ticket-api.poll.poll"),
 ]
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
-CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    os.environ.get("CORS_HOST", "http://localhost:3001"),
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    os.environ.get("CORS_HOST", "http://localhost:3001"),
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'ticket_project.urls'
 
