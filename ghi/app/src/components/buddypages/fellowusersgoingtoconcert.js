@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import Footer from '../Footer';
+import { useNavigate } from 'react-router-dom';
 
 
 const Fellowusersgoingtoconcert = () => {
   const [fellowusers, setFellowUsers] = useState([])
   const { concert_id } = useParams();
+  let navigate = useNavigate()
 
   useEffect( () => {
     getFellowUsers()
