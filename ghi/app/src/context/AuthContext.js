@@ -8,8 +8,6 @@ export default AuthContext;
 
 export const AuthProvider = ({children}) => {
 
-
-    
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     let [user, setUser] = useState( () => localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
     let [loading, setLoading] = useState(true)
@@ -19,7 +17,7 @@ export const AuthProvider = ({children}) => {
 
     let loginUser = async (e ) => {
         e.preventDefault()
-        let response = await fetch('http://localhost:8080/api/token/', {
+        let response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/token/`, {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -43,10 +41,10 @@ export const AuthProvider = ({children}) => {
         setUser(null)
         localStorage.removeItem('authTokens')
         navigate('/sign-up')
-    }       
+    }
 
     let updateToken = async () => {
-        let response = await fetch('http://localhost:8080/api/token/refresh/', {
+        let response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/token/refresh/`, {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -70,9 +68,9 @@ export const AuthProvider = ({children}) => {
 
 
     let contextData = {
-        user:user, 
+        user:user,
         authTokens:authTokens,
-        loginUser:loginUser, 
+        loginUser:loginUser,
         logoutUser:logoutUser
     }
 
@@ -84,7 +82,7 @@ export const AuthProvider = ({children}) => {
 
 
 
-        let fourMinutes = 1000 * 60 * 4 
+        let fourMinutes = 1000 * 60 * 4
         let interval = setInterval(() => {
             if(authTokens){
                 updateToken()
@@ -93,8 +91,8 @@ export const AuthProvider = ({children}) => {
         return () => clearInterval(interval)
 
     }, [authTokens, loading])
-    
-    
+
+
     return (
         <AuthContext.Provider value={contextData}>
             {loading ? null : children}

@@ -6,31 +6,14 @@ import './Navbar.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
-
 function Navbar() {
   let {user, logoutUser} = useContext(AuthContext)
   const [click, setClick] = useState(false);
-  const [button, setButton] = useState(true);
-
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
-  const showButton = () => {
-    if (window.innerWidth <= 960) {
-      setButton(false);
-    } else {
-      setButton(true);
-    }
-  };
-
-  useEffect(() => {
-    showButton();
-  }, []);
-
-  window.addEventListener('resize', showButton);
 
   return (
-
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
@@ -61,13 +44,6 @@ function Navbar() {
                 Sell Tickets
               </Link>
             </li>
-            {/* <li>
-                {user ? (
-                  <Link className="nav-links" aria-current="page" to="/userconcerts/">
-                 Your Concerts
-                </Link>
-                ): (<></>)}
-            </li> */}
             <li>
                 {user ? (
                   <Dropdown className="nav-links">
@@ -78,20 +54,16 @@ function Navbar() {
                         <Dropdown.Item href="/userconcerts/">Concerts I Am Attending</Dropdown.Item>
                         <Dropdown.Item href="/sellertickets">My Tickets for Sale</Dropdown.Item>
                         <Dropdown.Item href="/"  variant="dark" onClick={logoutUser}>Logout</Dropdown.Item>
-                    {/* <p className="nav-links" aria-current="page" onClick={logoutUser}>Logout</p> */}
                     </Dropdown.Menu>
                     </Dropdown.Toggle>
                     </Dropdown>
-                ): (
-                  <Link className="nav-links" aria-current="page" to="/login/">
-                 Login
-                 </Link>
-                )}
+                  ): (
+                    <Link className="nav-links" aria-current="page" to="/login/">
+                  Login
+                  </Link>
+                  )}
               </li>
-
           </ul>
-
-
         </div>
       </nav>
     </>

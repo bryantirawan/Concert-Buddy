@@ -5,7 +5,7 @@ import './HeroSection.css';
 import { useNavigate } from 'react-router-dom';
 
 function HeroSection() {
-  let {user, logoutUser} = useContext(AuthContext)
+  let {user} = useContext(AuthContext)
   const [city, setCity] = useState('');
 
   let navigate = useNavigate()
@@ -16,7 +16,7 @@ function HeroSection() {
     }
 
   const handleKeypress = e => {
-    //it triggers by pressing the enter key
+    //it triggers enter button by pressing the enter key
   if (e.keyCode === 13) {
     handleImGoingSubmit();
   }
@@ -32,25 +32,6 @@ function HeroSection() {
         <form onSubmit={handleImGoingSubmit}>
           <input className="form-control" type="text" placeholder="Search concerts by city..." value={city} required onChange={(e) => setCity(e.target.value)} onKeyPress={handleKeypress}/>
         </form>
-
-
-        {/* <Link to='/'>
-        <Button
-          className='btns'
-          buttonStyle='btn--outline'
-          buttonSize='btn--large'
-        >
-          FIND A BUDDY
-        </Button>
-        </Link>
-        <Link to='/selectconcerts/'><Button
-          className='btns'
-          buttonStyle='btn--primary'
-          buttonSize='btn--large'
-        >
-          FIND A CONCERT <i className='btns' />
-        </Button>
-        </Link> */}
       </div>
     </div>
   );

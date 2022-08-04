@@ -1,9 +1,7 @@
-import React, {useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useContext } from 'react'
 import AuthContext from '../../context/AuthContext';
-import {
-  useParams
-} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 
@@ -42,18 +40,18 @@ function TicketCheckout() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
               }
-              let res = await fetch(`http://localhost:8090/api/orderitems/`, submit);
-        let resJson = await res.json();
-      if (res.status === 200) {
-        alert('Ticket successfully bought!')
-        navigate('/mytickets/')
-      } else {
-        alert('Ticket cannot be bought. Someone probably bought it just before you did.')
-      }
-    } catch (err) {
-      console.error(err);
+              let res = await fetch(`${process.env.REACT_APP_TICKET_API}/api/orderitems/`, submit);
+          let resJson = await res.json();
+          if (res.status === 200) {
+            alert('Ticket successfully bought!')
+            navigate('/mytickets/')
+          } else {
+            alert('Ticket cannot be bought. Someone probably bought it just before you did.')
+          }
+        } catch (err) {
+          console.error(err);
+        }
     }
-  }
 
 
 return (

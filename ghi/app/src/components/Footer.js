@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import './Footer.css';
-import { Button } from './Button';
-import AuthContext from "../context/AuthContext";
 import { Link } from 'react-router-dom';
 
 function Footer() {
-  let {user, logoutUser} = useContext(AuthContext)
+
   return (
     <div className='footer-container'>
       <div className='footer-links'>

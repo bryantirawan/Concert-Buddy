@@ -16,11 +16,11 @@ function SellerTicketList() {
     const [sold_avail_tickets, setSoldAvailTickets] = useState(false)
     let {user} = useContext(AuthContext)
     const seller = user.user_id
-    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
 
     useEffect( () => {
         const fetchTickets = async() => {
-            const ticketResponse = await fetch(`http://localhost:8090/api/tickets/`);
+            const ticketResponse = await fetch(`${process.env.REACT_APP_TICKET_API}/api/tickets/`);
             const ticketData = await ticketResponse.json();
             setAvailTickets(false)
 
@@ -42,7 +42,7 @@ function SellerTicketList() {
             setUnsoldTickets(unsold_list);
         }
         const fetchOrders = async() => {
-            const orderitemResponse = await fetch(`http://localhost:8090/api/orderitems/`)
+            const orderitemResponse = await fetch(`${process.env.REACT_APP_TICKET_API}/api/orderitems/`)
             const orderitemData = await orderitemResponse.json();
             setSoldAvailTickets(false)
 
@@ -66,7 +66,7 @@ function SellerTicketList() {
     const handleDeleteTicketSubmit = async (e, id) => {
         e.preventDefault();
         try {
-            const response = await axios.delete(`http://localhost:8090/api/tickets/${id}/`,);
+            const response = await axios.delete(`${process.env.REACT_APP_TICKET_API}/api/tickets/${id}/`,);
             window.location.reload();
         } catch (e) {
             console.error('something went wrong!', e);
@@ -76,7 +76,7 @@ function SellerTicketList() {
     const handleSoldTicketChange = async (e, id) => {
         e.preventDefault();
         try {
-            const ticketChangeRes = await axios.put(`http://localhost:8090/api/changetickets/${id}/`,
+            const ticketChangeRes = await axios.put(`${process.env.REACT_APP_TICKET_API}/api/changetickets/${id}/`,
             {
                 sold: false,
                 buyer: null
@@ -116,7 +116,6 @@ function SellerTicketList() {
             <>
             <div className="container">
             <h2>Listed Tickets</h2>
-
             <div className="row">
             <div className="col">
                 <div className="col">
@@ -202,9 +201,8 @@ function SellerTicketList() {
                 </div>
                 </>
         }
-
         </div>
-      </div>
+        </div>
         <Footer />
         </>
     )

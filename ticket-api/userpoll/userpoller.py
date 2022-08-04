@@ -9,6 +9,7 @@ import requests
 sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ticket_project.settings")
 django.setup()
+BUDDY_API = os.environ["BUDDY_API"]
 
 
 from ticket_rest.models import UserVO
@@ -18,7 +19,7 @@ def poll():
     while True:
         print('Ticket user poller polling for data')
         try:
-            url = "http://buddy-api:8000/api/users/"
+            url = f"{BUDDY_API}/api/concerts/"
             response = requests.get(url)
             content = json.loads(response.content)
             for user in content["users"]:

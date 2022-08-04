@@ -19,13 +19,13 @@ export default function Concerts() {
     const [invalid, setInvalid] = useState(false);
     let { location } = useParams();
     let {user} = useContext(AuthContext)
-    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
 
 
     useEffect( () => {
 
         const fetchConcerts = async() => {
-            const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${location}/&p=1`)
+            const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/selectconcertsforcity/${location}/&p=1`)
             if(concertResponse.ok) {
                 const concertData = await concertResponse.json();
                 if (concertData.concerts.setlist) {
@@ -63,7 +63,7 @@ export default function Concerts() {
             final_city += '%20'
             final_city += city_new[i]
         }
-        const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=1`)
+        const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/selectconcertsforcity/${final_city}/&p=1`)
         if(concertResponse.ok) {
             const concertData = await concertResponse.json();
             if (concertData.concerts.setlist) {
@@ -96,7 +96,7 @@ export default function Concerts() {
             final_artist += '%20'
             final_artist += artist_new[i]
         }
-        const concertResponse = await fetch(`http://localhost:8080/api/concerts/artist/${final_artist}/`)
+        const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/concerts/artist/${final_artist}/`)
         if(concertResponse.ok) {
             const concertData = await concertResponse.json();
             if (concertData.concerts.setlist) {
@@ -132,7 +132,7 @@ export default function Concerts() {
     };
 
     const fetchConcerttoAdd = async (concID) => {
-        const concertResponse = await fetch(`http://localhost:8080/api/add/${concID}/`);
+        const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/add/${concID}/`);
         const concertData = await concertResponse.json()
         return concertData
     }
@@ -149,7 +149,7 @@ export default function Concerts() {
                 body: JSON.stringify(concertToAdd)
             }
 
-            let res = await fetch(`http://localhost:8080/buddy/concert/`, jsonBody);
+            let res = await fetch(`${process.env.REACT_APP_BUDDY_API}/buddy/concert/`, jsonBody);
             if (res.status === 200){
                 navigate(`/concertdetail/${concID}`)
             } else {
@@ -165,7 +165,7 @@ export default function Concerts() {
 
     const handleAddConcertSubmit = async(e, venue, city, date, artist, concert_id, venue_id, artist_id) => {
         e.preventDefault();
-        const concertURL = `http://localhost:8080/buddy/concert/`
+        const concertURL = `${process.env.REACT_APP_BUDDY_API}/buddy/concert/`
         const data = {venue, city, date, artist, concert_id, venue_id, artist_id}
         const request = {
             method: 'POST',

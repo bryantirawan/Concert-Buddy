@@ -67,6 +67,7 @@ services:
         DATABASE_URL: postgres://ticket:password@database:5432/ticket
         WAIT_HOSTS: database:5432,ticket-api:8000
         WAIT_TIMEOUT: 240
+        BUDDY_API: http://buddy-api:8000
     tickets-user-poller:
       build:
         context: ./ticket-api/userpoll
@@ -82,3 +83,4 @@ services:
         DATABASE_URL: postgres://ticket:password@database:5432/ticket
         WAIT_HOSTS: database:5432,ticket-api:8000
         WAIT_TIMEOUT: 240
+        BUDDY_API: http://buddy-api:8000

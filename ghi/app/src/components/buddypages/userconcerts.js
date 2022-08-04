@@ -1,27 +1,23 @@
 import React, {useState, useEffect, useContext} from 'react'
 import AuthContext from '../../context/AuthContext';
-import {
-    useParams, useNavigate
-  } from "react-router-dom";
-import { Link, BrowserRouter as Router, Route } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from '../Footer';
-
 
 
 export default function Userconcerts() {
     const [userconcerts, setUserConcerts] = useState([])
     const {authTokens, logoutUser} = useContext(AuthContext)
-    const { concert_id } = useParams();
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
-    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
 
     useEffect(() => {
         getUserConcerts()
     }, [])
 
     const getUserConcerts = async() => {
-        const response = await fetch('http://localhost:8080/api/userconcerts/', {
+        const response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/userconcerts/`, {
             method:'GET',
             headers:{
                 'Content-Type':'application/json',
@@ -38,7 +34,6 @@ export default function Userconcerts() {
         }
     }
 
-
     const putConcertandputUser = async (concID) => {
         const concertToRemove = {
             "concert": concID
@@ -49,7 +44,7 @@ export default function Userconcerts() {
             body: JSON.stringify(concertToRemove)
         }
 
-        let res = await fetch(`http://localhost:8080/buddy/user/${user.user_id}/`, jsonBody);
+        let res = await fetch(`${process.env.REACT_APP_BUDDY_API}/buddy/user/${user.user_id}/`, jsonBody);
         if (res.status === 200){
             alert('Concert successfully removed')
             navigate(`/userconcerts/`)
@@ -65,13 +60,11 @@ const handleRemoveConcertSubmit = async (e, concID) => {
   putConcertandputUser(concID)
   //window.location.reload()
 }
-
     return (
         <>
         <br></br>
         <div className="tabletoavoidfooter">
-
-        {userconcerts.length > 0 ? (    
+        {userconcerts.length > 0 ? (
         <div className="my-4 container bg-light">
         <h1 align="center">Concerts You're Going To</h1>
         <table className="table table-hover table-striped">
@@ -89,34 +82,28 @@ const handleRemoveConcertSubmit = async (e, concID) => {
         </thead>
             <tbody>
             {userconcerts.filter(userconcert => ((new Date(userconcert.date))) >= (yesterday)).map((userconcert,idx) => (
-
-            //  {userconcerts.map((userconcert,idx) => (
                     <tr key={idx}>
                         <td>{userconcert.artist}</td>
                         <td>{userconcert.venue}</td>
                         <td>{userconcert.city}</td>
                         <td>{new Date(userconcert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
-                        <td>
-                        <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-success"type="button">
-              Other Users Going
-         </button></Link>
-                        </td>
-                        <td>
-                            <form action={`http://localhost:3000/tickets/${userconcert.concert_id}`}>
-                            <button className="btn btn-primary">
+                            <td>
+                            <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-success"type="button">
+                            Other Users Going
+                            </button></Link>
+                            </td>
+                            <td>
+                            <button className="btn btn-primary" onClick={() => navigate(`/tickets/${userconcert.concert_id}/`)}>
                             Sell
                             </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action={`http://localhost:3000/concertdetail/${userconcert.concert_id}`}>
-                            <button className="btn btn-primary">
+                            </td>
+                            <td>
+                            <button className="btn btn-primary" onClick={() => navigate(`/concertdetail/${userconcert.concert_id}/`)}>
                             Buy
                             </button>
-                            </form>
-                        </td>
-                        <td>
-                        <form onSubmit={(e) => handleRemoveConcertSubmit(e, userconcert.concert_id)}>
+                            </td>
+                            <td>
+                            <form onSubmit={(e) => handleRemoveConcertSubmit(e, userconcert.concert_id)}>
                             {/* will need its own handle submit after making adding delete/PUT logic   */}
                             <button className="btn btn-primary">
                             Remove
@@ -139,20 +126,12 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                       </div>
                     </div>
                   </div>
-        
-        
-        
-        
         <h1 align="center">You have no concerts yet.</h1>
-        
         </>
         )}
-
         </div>
         <br></br>
         <Footer />
-       
-
         </>
   )
 }

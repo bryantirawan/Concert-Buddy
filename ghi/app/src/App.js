@@ -15,13 +15,14 @@ import SignUpForm from './loginpages/SignUpForm';
 import SignInForm from './loginpages/SignInForm';
 
 function App() {
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, '');
+
   return (
     <>
-    <BrowserRouter>
-
+    <BrowserRouter basename={basename}>
       <AuthProvider>
         <Navbar />
-
           <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/userconcerts/" element={
@@ -41,7 +42,6 @@ function App() {
           <Route path="/sellertickets" element={<SellerTicketList />} />
           <Route path="/mytickets" element={<BuyerTickets />} />
         </Routes>
-
         </AuthProvider>
     </BrowserRouter>
     </>
