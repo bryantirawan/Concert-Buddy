@@ -42,6 +42,7 @@ function TicketCheckout() {
               }
               let res = await fetch(`${process.env.REACT_APP_TICKET_API}/api/orderitems/`, submit);
           let resJson = await res.json();
+          console.log(resJson)
           if (res.status === 200) {
             alert('Ticket successfully bought!')
             navigate('/mytickets/')

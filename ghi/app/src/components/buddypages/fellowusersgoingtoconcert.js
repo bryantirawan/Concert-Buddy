@@ -10,14 +10,14 @@ const Fellowusersgoingtoconcert = () => {
   let navigate = useNavigate()
 
   useEffect( () => {
+    const getFellowUsers = async() => {
+      const response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/concertfellowusers/${concert_id}/`)
+      const data = await response.json()
+      setFellowUsers(data.users);
+    }
     getFellowUsers()
   }, [])
 
-  const getFellowUsers = async() => {
-    const response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/concertfellowusers/${concert_id}/`)
-    const data = await response.json()
-    setFellowUsers(data.users);
-  }
   return (
     <>
     <div className="container">

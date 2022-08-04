@@ -43,10 +43,11 @@ export default function Concerts() {
                     setInvalid(false)
 
                 } else {
-                    if (location !== undefined) {
-                        setInvalid(true)
-                        setConcerts([])
-                    }
+                    continue;
+                    // if (location !== undefined) {
+                    //     setInvalid(true)
+                    //     setConcerts([])
+                    // }
                 }
             }
         }
@@ -173,6 +174,7 @@ export default function Concerts() {
             body: JSON.stringify(data)
         }
         let res = await fetch(concertURL, request);
+        console.log(res)
         navigate(`/tickets/${concert_id}/`)
     }
 

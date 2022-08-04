@@ -49,7 +49,7 @@ return (
     <div className="my-5 container">
         <div className="row">
           <div className="col col-sm-auto">
-            <img width="300" className="bg-white rounded shadow d-block mx-auto mb-4" src="/images/img-8.jpg" />
+            <img width="300" className="bg-white rounded shadow d-block mx-auto mb-4" alt="concert_image" src="/images/img-8.jpg" />
           </div>
           <div className="col">
             <div className="card shadow">

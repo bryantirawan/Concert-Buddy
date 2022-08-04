@@ -23,6 +23,7 @@ function SignUpForm() {
     }
     let res = await fetch(`${process.env.REACT_APP_BUDDY_API}/buddy/user/`, submit)
       let resJson = await res.json();
+      console.log(resJson)
     if (res.status === 201) {
       alert('user successfully made')
       navigate('/')
