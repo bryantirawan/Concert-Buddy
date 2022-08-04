@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function HeroSection() {
   let {user} = useContext(AuthContext)
   const [city, setCity] = useState('');
+  let videoimage = require('/videos/video-3.mp4')
 
   let navigate = useNavigate()
 
@@ -24,7 +25,7 @@ function HeroSection() {
 
   return (
     <div className='hero-container'>
-      <video src='/videos/video-3.mp4' autoPlay loop muted />
+      <video src={videoimage} autoPlay loop muted />
       <h1 align="center">ADVENTURE AWAITS</h1>
       {user ? (<p align="center">Hello {user.username}, what are you waiting for?</p>):(<p align="center">What are you waiting for?</p>)}
 

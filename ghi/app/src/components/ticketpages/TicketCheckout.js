@@ -16,10 +16,10 @@ function TicketCheckout() {
     const [zip, setZip] = useState("")
     let { ticket_id } = useParams();
     let {user} = useContext(AuthContext);
-
+    let imagepic = require("/images/img-8.jpg")
     let navigate = useNavigate()
-
     const ticket = ticket_id
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -61,7 +61,7 @@ return (
     <div className="my-5 container">
         <div className="row">
           <div className="col col-sm-auto">
-            <img width="300" className="bg-white rounded shadow d-block mx-auto mb-4" src="/images/img-8.jpg" alt="background" />
+            <img width="300" className="bg-white rounded shadow d-block mx-auto mb-4" src={imagepic} alt="background" />
           </div>
           <div className="col">
             <div className="card shadow">
