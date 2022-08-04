@@ -19,13 +19,6 @@ api-unit-test-job:
     - pip install -r requirements.txt
     - python manage.py test ticket_rest
 
-lint-test-job:
-  image: python:3-bullseye
-  stage: test
-  script:
-    - pip install flake8
-    - flake8 ticket-api buddy-api
-
 
 build-buddy-api-image-job:
   rules:
