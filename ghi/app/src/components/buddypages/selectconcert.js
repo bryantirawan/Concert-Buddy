@@ -21,9 +21,9 @@ export default function Concerts() {
 
 
     useEffect( () => {
-        let { location } = useParams();
 
         const fetchConcerts = async() => {
+            let { location } = useParams();
             const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/selectconcertsforcity/${location}/&p=1`)
             if(concertResponse.ok) {
                 const concertData = await concertResponse.json();
