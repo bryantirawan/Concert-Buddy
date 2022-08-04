@@ -30,8 +30,8 @@ function SellTicketForm() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(form)
         }
+        console.log(a, "JSON BODY in SELL TICKET")
         let res = await fetch(`${process.env.REACT_APP_TICKET_API}/api/tickets/`, a);
-        console.log(`${process.env.REACT_APP_TICKET_API}/api/tickets/`)
         console.log(res)
         if (res.status === 200) {
           alert('Ticket successfully listed')
