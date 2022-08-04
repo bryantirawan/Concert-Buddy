@@ -28,7 +28,7 @@ export default function ConcertDetail() {
             // catch error for empty ticket error
         }
         fetchConcertDetail()
-    }, []
+    }
     );
 
       return (

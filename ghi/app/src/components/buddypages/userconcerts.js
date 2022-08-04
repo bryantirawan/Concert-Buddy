@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react'
 import AuthContext from '../../context/AuthContext';
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Footer from '../Footer';
 
@@ -11,10 +11,6 @@ export default function Userconcerts() {
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
-
-    useEffect(() => {
-        getUserConcerts()
-    }, [])
 
     const getUserConcerts = async() => {
         const response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/userconcerts/`, {
@@ -33,6 +29,11 @@ export default function Userconcerts() {
             logoutUser()
         }
     }
+
+    useEffect(() => {
+        getUserConcerts()
+    })
+
 
     const putConcertandputUser = async (concID) => {
         const concertToRemove = {
@@ -55,10 +56,8 @@ export default function Userconcerts() {
     }
 
 const handleRemoveConcertSubmit = async (e, concID) => {
-    //e.preventDefault();
   //POST to Concert and PUT to User all in one
   putConcertandputUser(concID)
-  //window.location.reload()
 }
     return (
         <>
@@ -104,7 +103,6 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                             </td>
                             <td>
                             <form onSubmit={(e) => handleRemoveConcertSubmit(e, userconcert.concert_id)}>
-                            {/* will need its own handle submit after making adding delete/PUT logic   */}
                             <button className="btn btn-primary">
                             Remove
                             </button>

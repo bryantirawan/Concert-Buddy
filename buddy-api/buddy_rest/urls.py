@@ -1,5 +1,4 @@
 from django.urls import path
-from rest_framework_simplejwt import views as jwt_views
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
@@ -10,14 +9,18 @@ from .views import (
     log_concert,
     api_concerts,
     api_concert,
-    api_get_user_concerts_withoutpk,
-    MyTokenObtainPairView,
+    api_get_user_concerts_withoutpk,  
+    MyTokenObtainPairView, 
     api_get_fellow_concert_users,
-    api_users
+    api_users,
 )
 
 urlpatterns = [
-
+    path(
+        "users/",
+        api_users,
+        name="api_users",
+    ),
     path(
         "selectconcertsforcity/<str:location>/<str:page>/",
         api_select_concert_for_city,

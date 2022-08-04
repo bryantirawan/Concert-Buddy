@@ -1,10 +1,7 @@
-import { React, useContext, useState } from "react"
-import AuthContext from "../context/AuthContext"
-import { useParams } from "react-router-dom";
+import { React, useState } from "react"
 import { useNavigate } from 'react-router-dom';
 import { Link, NavLink } from "react-router-dom";
 import "./SignupPages.css"
-
 
 function SignUpForm() {
   const [username, setUsername] = useState('')
