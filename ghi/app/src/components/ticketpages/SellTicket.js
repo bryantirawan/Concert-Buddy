@@ -18,7 +18,7 @@ function SellTicketForm() {
     const concert =  concert_id
     const seller = user.user_id
     const buyer = null
-    let imagepic = require("/images/img-8.jpg")
+    let imagepic = require('./Images/img-8.jpg')
 
 
     const handleSubmit = async (e) => {

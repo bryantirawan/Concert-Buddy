@@ -16,7 +16,7 @@ function TicketCheckout() {
     const [zip, setZip] = useState("")
     let { ticket_id } = useParams();
     let {user} = useContext(AuthContext);
-    let imagepic = require("/images/img-8.jpg")
+    let imagepic = require('./Images/img-8.jpg')
     let navigate = useNavigate()
     const ticket = ticket_id
 
