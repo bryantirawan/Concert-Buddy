@@ -11,20 +11,17 @@ import { useParams } from "react-router-dom";
 export default function Concerts() {
 
     let navigate = useNavigate()
-
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
     const [invalid, setInvalid] = useState(false);
-    let { location } = useParams();
     let {user} = useContext(AuthContext)
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
 
 
     useEffect( () => {
-
-        let foundlocation = location
+        let { location } = useParams();
 
         const fetchConcerts = async() => {
             const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/selectconcertsforcity/${location}/&p=1`)
@@ -46,7 +43,7 @@ export default function Concerts() {
 
                 } else {
 
-                    if (foundlocation !== undefined) {
+                    if (location !== undefined) {
                         setInvalid(true)
                         setConcerts([])
                     }

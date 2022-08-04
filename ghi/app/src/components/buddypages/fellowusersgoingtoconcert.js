@@ -5,11 +5,12 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Fellowusersgoingtoconcert = () => {
+
   const [fellowusers, setFellowUsers] = useState([])
-  const { concert_id } = useParams();
   let navigate = useNavigate()
 
   useEffect( () => {
+    const { concert_id } = useParams();
     const getFellowUsers = async() => {
       const response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/concertfellowusers/${concert_id}/`)
       const data = await response.json()
