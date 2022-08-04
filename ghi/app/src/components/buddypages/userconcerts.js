@@ -15,7 +15,7 @@ export default function Userconcerts() {
 
     useEffect(() => {
         const getUserConcerts = async() => {
-            const response = await fetch('http://localhost:8080/api/userconcerts/', {
+            const response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/userconcerts/`, {
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json'
