@@ -8,16 +8,16 @@ const Fellowusersgoingtoconcert = () => {
 
   const [fellowusers, setFellowUsers] = useState([])
   let navigate = useNavigate()
+  const { concert_id } = useParams();
 
   useEffect( () => {
     const getFellowUsers = async() => {
-      const { concert_id } = useParams();
       const response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/concertfellowusers/${concert_id}/`)
       const data = await response.json()
       setFellowUsers(data.users);
     }
     getFellowUsers()
-  }, [])
+  }, [concert_id])
 
   return (
     <>

@@ -18,12 +18,11 @@ export default function Concerts() {
     const [invalid, setInvalid] = useState(false);
     let {user} = useContext(AuthContext)
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
-
+    let { location } = useParams();
 
     useEffect( () => {
 
         const fetchConcerts = async() => {
-            let { location } = useParams();
             const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/selectconcertsforcity/${location}/&p=1`)
             if(concertResponse.ok) {
                 const concertData = await concertResponse.json();
@@ -51,7 +50,7 @@ export default function Concerts() {
             }
         }
         fetchConcerts();
-    }, []
+    }, [location]
     );
 
     const handleLocationSubmit = async (e) => {
