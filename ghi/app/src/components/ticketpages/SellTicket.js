@@ -27,7 +27,8 @@ function SellTicketForm() {
         const form = {price, section, row, seat, picture_url, concert, seller, buyer}
         const a = {
           method: 'POST',
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json",
+                    'Access-Control-Allow-Origin':'*', },
           body: JSON.stringify(form)
         }
         let res = await fetch(`${process.env.REACT_APP_TICKET_API}/api/tickets/`, a);
