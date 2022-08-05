@@ -1,17 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
-import { useContext } from 'react'
-import AuthContext from '../../context/AuthContext';
-import { Link, BrowserRouter as Router, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from '../Footer';
 
 export default function ConcertDetail() {
     let { concert_id } = useParams();
-
     const [data, setData] = useState({});
-    const [concerts, setConcerts] = useState([]);
     const [tickets, setTickets] = useState([]);
-    let {user} = useContext(AuthContext)
+
 
     useEffect(() => {
         const fetchConcertDetail = async () => {
@@ -33,7 +29,7 @@ export default function ConcertDetail() {
             // catch error for empty ticket error
         }
         fetchConcertDetail()
-    }, []
+    }
     );
 
       return (

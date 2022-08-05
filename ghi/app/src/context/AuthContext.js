@@ -45,30 +45,6 @@ export const AuthProvider = ({children}) => {
         navigate('/sign-up')
     }       
 
-    let updateToken = async () => {
-        let response = await fetch('http://localhost:8080/api/token/refresh/', {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({'refresh':authTokens?.refresh})
-        })
-        let data = await response.json()
-
-        if (response.status===200){
-            setAuthTokens(data)
-            setUser(jwt_decode(data.access))
-            localStorage.setItem('authTokens', JSON.stringify(data))
-        } else{
-            logoutUser()
-        }
-
-        if(loading){
-            setLoading(false)
-        }
-    }
-
-
     let contextData = {
         user:user, 
         authTokens:authTokens,
@@ -77,6 +53,28 @@ export const AuthProvider = ({children}) => {
     }
 
     useEffect( () => {
+        let updateToken = async () => {
+            let response = await fetch('http://localhost:8080/api/token/refresh/', {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({'refresh':authTokens?.refresh})
+            })
+            let data = await response.json()
+    
+            if (response.status===200){
+                setAuthTokens(data)
+                setUser(jwt_decode(data.access))
+                localStorage.setItem('authTokens', JSON.stringify(data))
+            } else{
+                logoutUser()
+            }
+    
+            if(loading){
+                setLoading(false)
+            }
+        }
 
         if(loading){
             updateToken()

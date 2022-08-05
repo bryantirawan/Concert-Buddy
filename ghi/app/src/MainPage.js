@@ -1,31 +1,12 @@
 
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState} from "react";
 import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom'
 import { Container } from "react-bootstrap";
 
 
 
-const data = [
-  // {
-  //  image: require('./Images/header-bg.jpg'),
-  //  caption:"Find Friends & Book Concerts Anywhere",
-  //  description:" ",
-  //  comment:" "
-  // }
-  //  {
-  //   image:require(''),
-  //   caption:"",
-  //   description:" ",
-  //   comment:""
-  //  },
-  //  {
-  //   image:require(''),
-  //   caption:"",
-  //   description:" ",
-  //   comment:""
-  //  }
-]
+const data = []
 
 function MainPage() {
   const [index, setIndex] = useState(0);

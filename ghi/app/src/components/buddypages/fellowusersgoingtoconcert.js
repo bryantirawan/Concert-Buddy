@@ -12,14 +12,15 @@ const Fellowusersgoingtoconcert = () => {
 
 
   useEffect( () => {
+    const getFellowUsers = async() => {
+      const response = await fetch(`http://localhost:8080/api/concertfellowusers/${concert_id}/`)
+      const data = await response.json()
+      setFellowUsers(data.users);
+    }
     getFellowUsers()
   }, [])
 
-  const getFellowUsers = async() => {
-    const response = await fetch(`http://localhost:8080/api/concertfellowusers/${concert_id}/`)
-    const data = await response.json()
-    setFellowUsers(data.users);
-  }
+
   return (
     <>
         <div className="container">

@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useContext } from 'react'
 import AuthContext from '../../context/AuthContext';
 import {
@@ -43,7 +43,6 @@ function TicketCheckout() {
                 body: JSON.stringify(data)
               }
               let res = await fetch(`http://localhost:8090/api/orderitems/`, submit);
-        let resJson = await res.json();
       if (res.status === 200) {
         alert('Ticket successfully bought!')
         navigate('/mytickets/')
@@ -62,7 +61,7 @@ return (
     <div className="my-5 container">
         <div className="row">
           <div className="col col-sm-auto">
-            <img width="300" className="bg-white rounded shadow d-block mx-auto mb-4" src="/images/img-8.jpg" />
+            <img width="300" className="bg-white rounded shadow d-block mx-auto mb-4" src="/images/img-8.jpg" alt="background" />
           </div>
           <div className="col">
             <div className="card shadow">
