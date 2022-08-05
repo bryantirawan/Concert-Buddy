@@ -16,6 +16,7 @@ export default function Concerts() {
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
     const [invalid, setInvalid] = useState(false);
+    const [page, setPage] = useState(1)
     let {user} = useContext(AuthContext)
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
     let { location } = useParams();
@@ -23,7 +24,7 @@ export default function Concerts() {
     useEffect( () => {
 
         const fetchConcerts = async() => {
-            const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/selectconcertsforcity/${location}/&p=1`)
+            const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/selectconcertsforcity/${location}/&p=${page}`)
             if(concertResponse.ok) {
                 const concertData = await concertResponse.json();
                 if (concertData.concerts.setlist) {
@@ -50,7 +51,7 @@ export default function Concerts() {
             }
         }
         fetchConcerts();
-    }, [location]
+    }, [location, page]
     );
 
     const handleLocationSubmit = async (e) => {
@@ -199,26 +200,21 @@ export default function Concerts() {
         <div>
         <p></p>
         </div>
-
-
     {invalid &&
         <p>Invalid Search Request</p>
     }
-
     {concerts.length > 0 &&
-    (
+    (<>
     <table className="table table-dark table-striped">
     <thead>
         <tr>
             <th>Artist</th>
             <th>City</th>
-
             <th>Venue</th>
             <th>Date</th>
             {user ? (<th>Wanna go?</th>) : <th>Concert Details</th>}
             {user ?
             (<th>Have a ticket to sell?</th>) : <></> }
-
         </tr>
     </thead>
         <tbody>
@@ -235,7 +231,6 @@ export default function Concerts() {
                         I'm going!
                         </button>
                     </form>
-
                     </td>
                     ) : (<td>
                     <form onSubmit={(e) => handleConcertDetails(e)}>
@@ -243,7 +238,6 @@ export default function Concerts() {
                         Login to See Concert Details
                         </button>
                     </form>
-
                     </td>)}
                     {user ? (<td> <form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
                         <button className="btn btn-primary" type="submit">
@@ -255,9 +249,29 @@ export default function Concerts() {
             ))
         }
         </tbody>
-    </table>)}
+    </table>
+
+    <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+        Previous Page
+    </button>
+    <button className="btn btn-success" onClick={() => setPage(page + 1)}>
+        Next Page
+    </button>
+
+    </>
+    )}
     {concerts === 0 &&
-    (<p>No concerts matching search</p>)}
+    (<>
+    <p>No concerts matching search</p>
+    <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+        Previous Page
+    </button>
+    <button className="btn btn-success" onClick={() => setPage(page + 1)}>
+        Next Page
+    </button>
+
+    </>)
+    }
     </div>
     </div>
     </div>
