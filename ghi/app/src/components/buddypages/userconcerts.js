@@ -11,10 +11,6 @@ import Footer from '../Footer';
 export default function Userconcerts() {
     const [userconcerts, setUserConcerts] = useState([])
     const {authTokens, logoutUser} = useContext(AuthContext)
-<<<<<<< HEAD
-    //const { concert_id } = useParams();
-=======
->>>>>>> newMain
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());

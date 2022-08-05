@@ -36,7 +36,7 @@ export default function Concerts() {
                         concertData.concerts.setlist[i].eventDate = dateObject
                     }
                     setConcerts(concertData.concerts.setlist);
-                    let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
+                    let concList = [concertData.concerts.setlist.filter(concert => ((new Date(concert.eventDate))) >= (Date.now()))]
                     if (concList[0].length === 0){
                         setConcerts(0)
                     }
@@ -74,11 +74,19 @@ export default function Concerts() {
                     const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
-                setConcerts(concertData.concerts.setlist);
-                let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
+             //   setConcerts(concertData.concerts.setlist);
+                let concList = [concertData.concerts.setlist.filter(concert => ((new Date(concert.eventDate))) >= yesterday)]
+                let concListO = concertData.concerts.setlist.filter(concert => ((new Date(concert.eventDate))) >= yesterday)
+
                 if (concList[0].length === 0){
                     setConcerts(0)
                 }
+                else{
+                setConcerts(concListO);
+                console.log (concertData.concerts.setlist)
+                console.log(concListO)
+                }
+
                 setArtist('');
                 setInvalid(false)
 
@@ -88,6 +96,7 @@ export default function Concerts() {
                 setConcerts([])
             }
         }
+        
     }
 
     
@@ -110,7 +119,7 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
-                let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
+                let concList = [concertData.concerts.setlist.filter(concert => (( new Date(concert.eventDate))) >= (Date.now()))]
                 if (concList[0].length === 0){
                     setConcerts(0)
                 }
@@ -230,6 +239,7 @@ export default function Concerts() {
     </thead>
         <tbody>
         {concerts.filter(concert => ((concert.eventDate)) >= (yesterday)).reverse().map((concert,idx) => (
+            
                 <tr key={idx}>
                     <td>{concert.artist.name}</td>
                     <td>{concert.venue.city.name}</td>
@@ -266,28 +276,38 @@ export default function Concerts() {
     
     { toggled ?
             (<>
-            <form onSubmit={handleArtistSubmit}>
-                <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
-                    Previous Page
-                </button>
-            </form>
+            {page > 1 &&
+                <form onSubmit={handleArtistSubmit}>
+                    <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+                        Previous Page
+                    </button>
+                </form>
+            }
+            {concerts.length === 20 &&
             <form onSubmit={handleArtistSubmit}>
                 <button className="btn btn-success" onClick={() => setPage(page + 1)}>
                     Next Page
                 </button>
-            </form>
+            </form>}
+
             </>) : (
             <>
-            <form onSubmit={handleLocationSubmit}>
-                <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
-                    Previous Page
-                </button>
-            </form>
-            <form onSubmit={handleLocationSubmit}>
-                <button className="btn btn-success" onClick={() => setPage(page + 1)}>
-                    Next Page
-                </button>
-            </form>
+            {page > 1 &&
+
+                <form onSubmit={handleLocationSubmit}>
+                    <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+                        Previous Page
+                    </button>
+                </form> 
+            }
+            {concerts.length === 20 &&
+
+                <form onSubmit={handleLocationSubmit}>
+                    <button className="btn btn-success" onClick={() => setPage(page + 1)}>
+                        Next Page
+                    </button>
+                </form>
+            }
             </>    
             )
 
@@ -298,28 +318,35 @@ export default function Concerts() {
     (<>
     { toggled ?
             (<>
-            <form onSubmit={handleArtistSubmit}>
-                <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
-                    Previous Page
-                </button>
-            </form>
-            <form onSubmit={handleArtistSubmit}>
+
+            <p>No concerts matching search</p>
+            {page > 1 &&
+                <form onSubmit={handleArtistSubmit}>
+                    <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+                        Previous Page
+                    </button>
+                </form>
+            }
+            {/* <form onSubmit={handleArtistSubmit}>
                 <button className="btn btn-success" onClick={() => setPage(page + 1)}>
                     Next Page
                 </button>
-            </form>
+            </form> */}
             </>) : (
             <>
-            <form onSubmit={handleLocationSubmit}>
-                <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
-                    Previous Page
-                </button>
-            </form>
-            <form onSubmit={handleLocationSubmit}>
+            <p>No concerts matching search</p>
+            {page > 1 &&
+                <form onSubmit={handleLocationSubmit}>
+                    <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+                        Previous Page
+                    </button>
+                </form>
+            }
+            {/* <form onSubmit={handleLocationSubmit}>
                 <button className="btn btn-success" onClick={() => setPage(page + 1)}>
                     Next Page
                 </button>
-            </form>
+            </form> */}
             </>    
             )
 
