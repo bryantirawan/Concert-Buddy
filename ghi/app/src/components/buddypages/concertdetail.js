@@ -108,7 +108,7 @@ export default function ConcertDetail() {
         }
         </tbody>
     </table>
-    ):(<><br></br><h1 align="center">Sorry no tickets available</h1></>)}
+    ):(<><br></br><h1 className = "text-white" align="center">Sorry no tickets available</h1></>)}
           <div
         style={{
           position: "fixed",
