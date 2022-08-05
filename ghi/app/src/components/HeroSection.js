@@ -12,7 +12,7 @@ function HeroSection() {
 
   const handleImGoingSubmit = async (e) => {
     e.preventDefault();
-    navigate(`/selectconcerts/${city}`)
+    navigate(`/selectconcerts/q=${city}`)
     }
 
   const handleKeypress = e => {
