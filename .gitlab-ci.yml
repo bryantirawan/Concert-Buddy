@@ -19,13 +19,13 @@ api-unit-test-job:
     - pip install -r requirements.txt
     - python manage.py test ticket_rest
 
-  lint-test-job:
-  image: python:3-bullseye
-  stage: test
-  script:
-    - pip install flake8
-    - flake8 --max-line-length=88 --ignore=E501 buddy-api ticket-api
-    # Run flake8 on Python project to check for code quality
+lint-test-job:
+image: python:3-bullseye
+stage: test
+script:
+  - pip install flake8
+  - flake8 --max-line-length=88 --ignore=E501 buddy-api ticket-api
+  # Run flake8 on Python project to check for code quality
 
 
 build-buddy-api-image-job:
@@ -111,6 +111,9 @@ build-ticketuser-poll-image-job:
 build-front-end-job:
   stage: build
   image: node:lts-bullseye
+  needs:
+    - api-unit-test-job
+    - lint-test-job
   variables:
     PUBLIC_URL: https://kanye-rest.gitlab.io/concert-buddy
   script:
