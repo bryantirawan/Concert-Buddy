@@ -125,17 +125,17 @@ export default function Concerts() {
     }
 
     //something iffy here might not be coded right 
-    const handleKeypress = e => {
-        //it triggers by pressing the enter key
-      if (e.keyCode === 13) {
-        if (toggled === false) {
-            handleArtistSubmit()
-        } else {
-            navigate('selectconcerts')
-        handleLocationSubmit();
-        }
-      }
-    };
+    // const handleKeypress = e => {
+    //     //it triggers by pressing the enter key
+    //   if (e.keyCode === 13) {
+    //     if (toggled === false) {
+    //         handleArtistSubmit()
+    //     } else {
+    //         navigate('selectconcerts')
+    //     handleLocationSubmit();
+    //     }
+    //   }
+    // };
 
 
     const fetchConcerttoAdd = async (concID) => {
@@ -196,11 +196,13 @@ export default function Concerts() {
             <div className='entry'>
                 { toggled ?
             <form onSubmit={handleArtistSubmit}>
-            <input className="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
+            {/* <input className="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/> */}
+            <input className="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}}/>
             </form>
             :
             <form onSubmit={handleLocationSubmit}>
-            <input className="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value); setPage(1)}} onKeyPress={handleKeypress}/>
+            {/* <input className="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value); setPage(1)}} onKeyPress={handleKeypress}/> */}
+            <input className="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value); setPage(1)}} />
             </form>
             }
         <div>
