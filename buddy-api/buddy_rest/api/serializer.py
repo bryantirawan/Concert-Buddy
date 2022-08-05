@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from buddy_rest.models import Concert, User
 
+
 class ConcertSerializer(serializers.ModelSerializer):
     class Meta:
         model = Concert
