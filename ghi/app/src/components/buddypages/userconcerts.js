@@ -7,14 +7,12 @@ import { Link } from "react-router-dom";
 import Footer from '../Footer';
 
 
-
 export default function Userconcerts() {
     const [userconcerts, setUserConcerts] = useState([])
     const {authTokens, logoutUser} = useContext(AuthContext)
     let {user} = useContext(AuthContext)
     let navigate = useNavigate()
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
-
 
 
     useEffect(() => {
@@ -29,7 +27,7 @@ export default function Userconcerts() {
             const data = await response.json()
             if(response.status===200){
                  data.concerts.sort((a,b) => Date.parse(a.date) - Date.parse(b.date))
-    
+
                 setUserConcerts(data.concerts)
             }else if(response.statusText === 'Unauthorized'){
                 logoutUser()
@@ -39,8 +37,6 @@ export default function Userconcerts() {
         getUserConcerts()
     }, []
     )
-
-
 
     const putConcertandputUser = async (concID) => {
         const concertToRemove = {
@@ -66,26 +62,34 @@ const handleRemoveConcertSubmit = async (e, concID) => {
   //POST to Concert and PUT to User all in one
   putConcertandputUser(concID)
 }
-
     return (
         <>
+        <div className='imagebackground'>
+        <div className="container bg-dark">
+        <div className="px-4 py-4 my-4 mt-0 text-center bg-dark">
+          <h1 className="display-6 fw-bold text-white">Concerts You're Attending</h1>
+          <p className="text-white">Concerts you've confirmed you're going to.</p>
+          <div className="col-lg-6 mx-auto">
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            </div>
+          </div>
+        </div>
+        </div>
         <br></br>
         <div className="tabletoavoidfooter">
-
-        {userconcerts.length > 0 ? (    
-        <div className="my-4 container bg-light">
-        <h1 align="center">Concerts You're Going To</h1>
-        <table className="table table-hover table-striped">
-        <thead>
-            <tr>
+        {userconcerts.length > 0 ? (
+        <div className="my-4 container bg-dark text-white">
+        <table className="table text-white">
+        <thead className="text-white">
+            <tr className="text-white">
                 <th>Artist</th>
                 <th>Venue</th>
                 <th>City</th>
                 <th>Date</th>
-                <th>Find buddies</th>
-                <th>Sell extra tickets</th>
-                <th>Buy ticket</th>
-                <th>I can no longer go</th>
+                <th>Find a Concert Buddy</th>
+                <th>Sell Extra Tickets</th>
+                <th>Buy Ticket</th>
+                <th>Remove from My Concerts</th>
             </tr>
         </thead>
             <tbody>
@@ -97,27 +101,27 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                         <td>{new Date(userconcert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
                         <td>
                         <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-success"type="button">
-              Other Users Going
+              Explore Users
          </button></Link>
                         </td>
                         <td>
                             <form action={`http://localhost:3000/tickets/${userconcert.concert_id}`}>
                             <button className="btn btn-primary">
-                            Sell
+                            Sell Ticket
                             </button>
                             </form>
                         </td>
                         <td>
                             <form action={`http://localhost:3000/concertdetail/${userconcert.concert_id}`}>
                             <button className="btn btn-primary">
-                            Buy
+                            Buy Ticket
                             </button>
                             </form>
                         </td>
                         <td>
                         <form onSubmit={(e) => handleRemoveConcertSubmit(e, userconcert.concert_id)}>
                             <button className="btn btn-primary">
-                            Remove
+                            Remove Concert
                             </button>
                             </form>
                         </td>
@@ -137,19 +141,16 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                       </div>
                     </div>
                   </div>
-        
-        
-        
-        
+
         <h1 align="center">You have no concerts yet.</h1>
-        
+
         </>
         )}
 
         </div>
         <br></br>
         <Footer />
-       
+        </div>
 
         </>
   )

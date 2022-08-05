@@ -11,11 +11,13 @@ export default function ConcertDetail() {
 
     useEffect(() => {
         const fetchConcertDetail = async () => {
-            const concertResponse = await fetch(`http://localhost:8080/api/concert/${concert_id}`)
+            const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/concert/${concert_id}/`)
             const concertData = await concertResponse.json();
-
-            const ticketResponse = await fetch(`http://localhost:8090/api/tickets/`)
+            console.log(concertData, "Concert Data in Concert Detail")
+            console.log(`${process.env.REACT_APP_BUDDY_API}/api/concert/${concert_id}/`, "Logging the URL")
+            const ticketResponse = await fetch(`${process.env.REACT_APP_TICKET_API}/api/tickets/`)
             const ticketData = await ticketResponse.json();
+            console.log(ticketData, "TicketData in ConcertDetail")
 
             let ticket_list = [];
             for (let tick of ticketData.tickets){
@@ -29,17 +31,18 @@ export default function ConcertDetail() {
             // catch error for empty ticket error
         }
         fetchConcertDetail()
-    }
+    }, [concert_id]
     );
 
       return (
         <>
+         <div className='imagebackground'>
         <br></br>
         <div className="tabletoavoidfooter">
           <div className="container">
 
-            <h1>Concert Details</h1>
-              <table className="table table-striped table-bordered ">
+            <h1 className="text-white">Concert Details</h1>
+              <table className="table table-bordered text-white">
               <thead>
               </thead>
     <tbody>
@@ -106,7 +109,7 @@ export default function ConcertDetail() {
         }
         </tbody>
     </table>
-    ):(<><br></br><h1 align="center">Sorry no tickets available</h1></>)}
+    ):(<><br></br><h2 className="text-white" align="center">Sorry, no tickets available.</h2></>)}
           <div
         style={{
           position: "fixed",
@@ -115,10 +118,11 @@ export default function ConcertDetail() {
           right: 0
         }}
       >
-        </div>  
+        </div>
         </div>
         </div>
         <Footer />
+        </div>
         </>
       );
     };
