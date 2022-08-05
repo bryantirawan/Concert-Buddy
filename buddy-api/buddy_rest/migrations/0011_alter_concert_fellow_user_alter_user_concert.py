@@ -7,18 +7,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('buddy_rest', '0010_alter_user_concert'),
+        ("buddy_rest", "0010_alter_user_concert"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='concert',
-            name='fellow_user',
-            field=models.ManyToManyField(blank=True, related_name='concertsgoing', to=settings.AUTH_USER_MODEL),
+            model_name="concert",
+            name="fellow_user",
+            field=models.ManyToManyField(
+                blank=True, related_name="concertsgoing", to=settings.AUTH_USER_MODEL
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='concert',
-            field=models.ManyToManyField(blank=True, to='buddy_rest.concert'),
+            model_name="user",
+            name="concert",
+            field=models.ManyToManyField(blank=True, to="buddy_rest.concert"),
         ),
     ]

@@ -21,7 +21,9 @@ class ConcertViewSet(viewsets.ModelViewSet):
         data = request.data
 
         try:
-            new_concert = Concert.objects.get(concert_id = data["concert_id"]) #check to see if Concert exists already
+            new_concert = Concert.objects.get(
+                concert_id=data["concert_id"]
+            )  # check to see if Concert exists already
         except:
             new_concert = Concert(
                 venue=data["venue"],
@@ -30,26 +32,27 @@ class ConcertViewSet(viewsets.ModelViewSet):
                 artist=data["artist"],
                 concert_id=data["concert_id"],
                 venue_id=data["venue_id"],
-                artist_id=data["artist_id"]
-                )
+                artist_id=data["artist_id"],
+            )
 
         new_concert.save()
 
-        user_object = ''
+        user_object = ""
 
-        try: # POST for buddy
+        try:  # POST for buddy
             for user in data["fellow_user"]:
                 fellow_user_obj = User.objects.get(id=user["id"])
                 user_object = User.objects.get(id=user["id"])
                 new_concert.fellow_user.add(fellow_user_obj)
             concert_obj = Concert.objects.get(concert_id=data["concert_id"])
             user_object.concert.add(concert_obj)
-        except: #POST for tickets
+        except:  # POST for tickets
             pass
 
         serializer = ConcertSerializer(new_concert)
 
         return Response(serializer.data)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
@@ -58,7 +61,7 @@ class UserViewSet(viewsets.ModelViewSet):
         user = User.objects.all()
         return user
 
-    #used for removing concerts from user model and fellow user from concert model at user concert pag
+    # used for removing concerts from user model and fellow user from concert model at user concert pag
     def update(self, request, *args, **kwargs):
         user_object = self.get_object()
 
@@ -71,16 +74,8 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = UserSerializer(user_object)
         return Response(serializer.data)
 
+
 ###
 class SignUpView(generics.CreateAPIView):
-        queryset = get_user_model().objects.all()
-        serializer_class = UserSerializer
-    
-
-
-
-
-
-
-        
-        
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer

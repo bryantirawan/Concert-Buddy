@@ -16,20 +16,12 @@ class ConcertEncoder(ModelEncoder):
     ]
 
     def get_extra_data(self, o):
-        return {'import_href': f'/api/concerts/{o.id}'}
+        return {"import_href": f"/api/concerts/{o.id}"}
 
 
 class UserEncoder(ModelEncoder):
     model = User
-    properties = [
-        "email",
-        "first_name",
-        "last_name",
-        "username",
-        "id"
-    ]
+    properties = ["email", "first_name", "last_name", "username", "id"]
 
     def get_extra_data(self, o):
-        return {
-            'import_href': f'/api/users/{o.id}'
-        }
+        return {"import_href": f"/api/users/{o.id}"}

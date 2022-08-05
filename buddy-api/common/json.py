@@ -19,8 +19,9 @@ class QuerySetEncoder(JSONEncoder):
         else:
             return super().default(o)
 
+
 class ModelEncoder(DateEncoder, QuerySetEncoder, JSONEncoder):
-#class ModelEncoder(QuerySetEncoder, JSONEncoder):
+    # class ModelEncoder(QuerySetEncoder, JSONEncoder):
     encoders = {}
 
     def default(self, o):
@@ -44,5 +45,3 @@ class ModelEncoder(DateEncoder, QuerySetEncoder, JSONEncoder):
 
     def get_extra_data(self, o):
         return {}
-
-

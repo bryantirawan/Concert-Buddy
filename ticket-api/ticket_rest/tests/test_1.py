@@ -1,9 +1,6 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve
-from ticket_rest.views import (
-    api_get_orderitems,
-    api_get_addresses
-)
+from ticket_rest.views import api_get_orderitems, api_get_addresses
 
 
 # python manage.py test ticket_rest

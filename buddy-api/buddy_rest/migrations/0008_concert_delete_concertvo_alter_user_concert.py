@@ -6,29 +6,37 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('buddy_rest', '0007_alter_concertvo_artist_alter_concertvo_city_and_more'),
+        ("buddy_rest", "0007_alter_concertvo_artist_alter_concertvo_city_and_more"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Concert',
+            name="Concert",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('venue', models.CharField(max_length=200)),
-                ('city', models.CharField(max_length=100)),
-                ('date', models.DateTimeField(null=True)),
-                ('artist', models.CharField(max_length=100)),
-                ('concert_id', models.CharField(max_length=100, unique=True)),
-                ('venue_id', models.CharField(max_length=100)),
-                ('artist_id', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("venue", models.CharField(max_length=200)),
+                ("city", models.CharField(max_length=100)),
+                ("date", models.DateTimeField(null=True)),
+                ("artist", models.CharField(max_length=100)),
+                ("concert_id", models.CharField(max_length=100, unique=True)),
+                ("venue_id", models.CharField(max_length=100)),
+                ("artist_id", models.CharField(max_length=100)),
             ],
         ),
         migrations.DeleteModel(
-            name='ConcertVO',
+            name="ConcertVO",
         ),
         migrations.AlterField(
-            model_name='user',
-            name='concert',
-            field=models.ManyToManyField(to='buddy_rest.concert'),
+            model_name="user",
+            name="concert",
+            field=models.ManyToManyField(to="buddy_rest.concert"),
         ),
     ]

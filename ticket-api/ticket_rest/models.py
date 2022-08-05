@@ -1,7 +1,6 @@
 from django.db import models
 
 
-
 class ConcertVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True)
     venue = models.CharField(max_length=200)
@@ -31,15 +30,15 @@ class Ticket(models.Model):
     seat = models.CharField(max_length=20)
     sold = models.BooleanField(default=False)
     picture_url = models.URLField()
-    concert = models.ForeignKey(ConcertVO,
-        related_name="concert_tickets",
-        on_delete=models.PROTECT)
-    seller = models.ForeignKey(UserVO,
-        related_name="seller_tickets",
-        on_delete=models.PROTECT)
-    buyer = models.ForeignKey(UserVO,
-        related_name="buyer_tickets", null=True,
-        on_delete=models.PROTECT)
+    concert = models.ForeignKey(
+        ConcertVO, related_name="concert_tickets", on_delete=models.PROTECT
+    )
+    seller = models.ForeignKey(
+        UserVO, related_name="seller_tickets", on_delete=models.PROTECT
+    )
+    buyer = models.ForeignKey(
+        UserVO, related_name="buyer_tickets", null=True, on_delete=models.PROTECT
+    )
 
     def __str__(self):
         return f"{self.concert}, Sold by {self.seller} for ${self.price}"
@@ -50,7 +49,12 @@ class OrderItem(models.Model):
     user = models.ForeignKey(UserVO, on_delete=models.CASCADE, null=True)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
     address_for_order_item = models.ForeignKey(
-        'Address', related_name='address_for_order_item', on_delete=models.SET_NULL, blank=True, null=True)
+        "Address",
+        related_name="address_for_order_item",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     buyer_venmo = models.CharField(max_length=100, null=True)
 
 

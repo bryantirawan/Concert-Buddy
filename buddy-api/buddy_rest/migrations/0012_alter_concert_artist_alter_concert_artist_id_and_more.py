@@ -6,38 +6,38 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('buddy_rest', '0011_alter_concert_fellow_user_alter_user_concert'),
+        ("buddy_rest", "0011_alter_concert_fellow_user_alter_user_concert"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='concert',
-            name='artist',
+            model_name="concert",
+            name="artist",
             field=models.CharField(max_length=100, null=True),
         ),
         migrations.AlterField(
-            model_name='concert',
-            name='artist_id',
+            model_name="concert",
+            name="artist_id",
             field=models.CharField(max_length=100, null=True),
         ),
         migrations.AlterField(
-            model_name='concert',
-            name='city',
+            model_name="concert",
+            name="city",
             field=models.CharField(max_length=100, null=True),
         ),
         migrations.AlterField(
-            model_name='concert',
-            name='venue',
+            model_name="concert",
+            name="venue",
             field=models.CharField(max_length=200, null=True),
         ),
         migrations.AlterField(
-            model_name='concert',
-            name='venue_id',
+            model_name="concert",
+            name="venue_id",
             field=models.CharField(max_length=100, null=True),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='email',
+            model_name="user",
+            name="email",
             field=models.EmailField(max_length=254, null=True, unique=True),
         ),
     ]

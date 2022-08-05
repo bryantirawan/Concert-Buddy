@@ -3,7 +3,6 @@ from common.json import ModelEncoder
 from .models import Address, ConcertVO, OrderItem, UserVO, Ticket
 
 
-
 class ConcertVOEncoder(ModelEncoder):
     model = ConcertVO
     properties = [
@@ -39,7 +38,7 @@ class TicketEncoder(ModelEncoder):
         "picture_url",
         "concert",
         "seller",
-        "buyer"
+        "buyer",
     ]
     encoders = {
         "concert": ConcertVOEncoder(),
@@ -63,7 +62,7 @@ class TicketDetailEncoder(ModelEncoder):
         "picture_url",
         "concert",
         "seller",
-        "buyer"
+        "buyer",
     ]
     encoders = {
         "concert": ConcertVOEncoder(),
@@ -74,30 +73,15 @@ class TicketDetailEncoder(ModelEncoder):
 
 class AddressEncoder(ModelEncoder):
     model = Address
-    properties = [
-        "user",
-        "street_address",
-        "apartment_address",
-        "country",
-        "zip"
-
-    ]
-    encoders = {
-        "user": UserVOEncoder()
-    }
+    properties = ["user", "street_address", "apartment_address", "country", "zip"]
+    encoders = {"user": UserVOEncoder()}
 
 
 class OrderItemEncoder(ModelEncoder):
     model = OrderItem
-    properties = [
-        "id",
-        "user",
-        "ticket",
-        "address_for_order_item",
-        "buyer_venmo"
-    ]
+    properties = ["id", "user", "ticket", "address_for_order_item", "buyer_venmo"]
     encoders = {
         "user": UserVOEncoder(),
         "ticket": TicketDetailEncoder(),
-        "address_for_order_item": AddressEncoder()
+        "address_for_order_item": AddressEncoder(),
     }

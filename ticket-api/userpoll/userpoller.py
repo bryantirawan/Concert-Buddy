@@ -17,7 +17,7 @@ from ticket_rest.models import UserVO
 
 def poll():
     while True:
-        print('Ticket user poller polling for data')
+        print("Ticket user poller polling for data")
         try:
             url = f"{BUDDY_API}/api/users/"
             response = requests.get(url)

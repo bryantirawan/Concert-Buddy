@@ -7,13 +7,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('buddy_rest', '0008_concert_delete_concertvo_alter_user_concert'),
+        ("buddy_rest", "0008_concert_delete_concertvo_alter_user_concert"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='concert',
-            name='fellow_user',
-            field=models.ManyToManyField(related_name='concertsgoing', to=settings.AUTH_USER_MODEL),
+            model_name="concert",
+            name="fellow_user",
+            field=models.ManyToManyField(
+                related_name="concertsgoing", to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

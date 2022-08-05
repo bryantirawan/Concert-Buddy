@@ -3,74 +3,160 @@
 from django.db import migrations, models
 import django.db.models.deletion
 
+
 class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Address',
+            name="Address",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('street_address', models.CharField(max_length=100)),
-                ('apartment_address', models.CharField(max_length=100, null=True)),
-                ('country', models.CharField(max_length=2)),
-                ('zip', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("street_address", models.CharField(max_length=100)),
+                ("apartment_address", models.CharField(max_length=100, null=True)),
+                ("country", models.CharField(max_length=2)),
+                ("zip", models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
-            name='ConcertVO',
+            name="ConcertVO",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('import_href', models.CharField(max_length=200, unique=True)),
-                ('venue', models.CharField(max_length=200)),
-                ('city', models.CharField(max_length=100)),
-                ('date', models.DateTimeField()),
-                ('artist', models.CharField(max_length=100)),
-                ('concert_id', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("import_href", models.CharField(max_length=200, unique=True)),
+                ("venue", models.CharField(max_length=200)),
+                ("city", models.CharField(max_length=100)),
+                ("date", models.DateTimeField()),
+                ("artist", models.CharField(max_length=100)),
+                ("concert_id", models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
-            name='UserVO',
+            name="UserVO",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('import_href', models.CharField(max_length=200, unique=True)),
-                ('email', models.EmailField(max_length=254, unique=True)),
-                ('first_name', models.CharField(max_length=200, null=True)),
-                ('last_name', models.CharField(max_length=200, null=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("import_href", models.CharField(max_length=200, unique=True)),
+                ("email", models.EmailField(max_length=254, unique=True)),
+                ("first_name", models.CharField(max_length=200, null=True)),
+                ("last_name", models.CharField(max_length=200, null=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Ticket',
+            name="Ticket",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('price', models.DecimalField(decimal_places=2, max_digits=6)),
-                ('section', models.CharField(max_length=20)),
-                ('row', models.CharField(max_length=20)),
-                ('seat', models.CharField(max_length=20)),
-                ('sold', models.BooleanField(default=False)),
-                ('picture_url', models.URLField()),
-                ('buyer', models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, related_name='buyer_tickets', to='ticket_rest.uservo')),
-                ('concert', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='concert_tickets', to='ticket_rest.concertvo')),
-                ('seller', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='seller_tickets', to='ticket_rest.uservo')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("price", models.DecimalField(decimal_places=2, max_digits=6)),
+                ("section", models.CharField(max_length=20)),
+                ("row", models.CharField(max_length=20)),
+                ("seat", models.CharField(max_length=20)),
+                ("sold", models.BooleanField(default=False)),
+                ("picture_url", models.URLField()),
+                (
+                    "buyer",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="buyer_tickets",
+                        to="ticket_rest.uservo",
+                    ),
+                ),
+                (
+                    "concert",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="concert_tickets",
+                        to="ticket_rest.concertvo",
+                    ),
+                ),
+                (
+                    "seller",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="seller_tickets",
+                        to="ticket_rest.uservo",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='OrderItem',
+            name="OrderItem",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('buyer_venmo', models.CharField(max_length=100, null=True)),
-                ('address_for_order_item', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='address_for_order_item', to='ticket_rest.address')),
-                ('ticket', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ticket_rest.ticket')),
-                ('user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='ticket_rest.uservo')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("buyer_venmo", models.CharField(max_length=100, null=True)),
+                (
+                    "address_for_order_item",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="address_for_order_item",
+                        to="ticket_rest.address",
+                    ),
+                ),
+                (
+                    "ticket",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="ticket_rest.ticket",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="ticket_rest.uservo",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='address',
-            name='user',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='ticket_rest.uservo'),
+            model_name="address",
+            name="user",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to="ticket_rest.uservo"
+            ),
         ),
     ]

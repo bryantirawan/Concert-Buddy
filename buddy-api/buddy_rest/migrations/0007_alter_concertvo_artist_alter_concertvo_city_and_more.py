@@ -6,33 +6,33 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('buddy_rest', '0006_remove_concertvo_name'),
+        ("buddy_rest", "0006_remove_concertvo_name"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='concertvo',
-            name='artist',
+            model_name="concertvo",
+            name="artist",
             field=models.CharField(max_length=100, null=True),
         ),
         migrations.AlterField(
-            model_name='concertvo',
-            name='city',
+            model_name="concertvo",
+            name="city",
             field=models.CharField(max_length=100, null=True),
         ),
         migrations.AlterField(
-            model_name='concertvo',
-            name='concert_id',
+            model_name="concertvo",
+            name="concert_id",
             field=models.CharField(max_length=100, null=True),
         ),
         migrations.AlterField(
-            model_name='concertvo',
-            name='import_href',
+            model_name="concertvo",
+            name="import_href",
             field=models.CharField(max_length=200, null=True, unique=True),
         ),
         migrations.AlterField(
-            model_name='concertvo',
-            name='venue',
+            model_name="concertvo",
+            name="venue",
             field=models.CharField(max_length=200, null=True),
         ),
     ]

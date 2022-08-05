@@ -17,7 +17,7 @@ from ticket_rest.models import ConcertVO
 
 def poll():
     while True:
-        print('Ticket poller polling for data')
+        print("Ticket poller polling for data")
         try:
             url = f"{BUDDY_API}/api/concerts/"
             response = requests.get(url)
@@ -31,7 +31,7 @@ def poll():
                         "date": concert["date"],
                         "artist": concert["artist"],
                         "concert_id": concert["concert_id"],
-                                            },
+                    },
                 )
         except Exception as e:
             print(e, file=sys.stderr)
