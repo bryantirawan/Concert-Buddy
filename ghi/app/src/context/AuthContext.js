@@ -74,33 +74,6 @@ export const AuthProvider = ({children}) => {
             }
         }
 
-        let updateToken = async () => {
-            let response = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/token/refresh/`, {
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({'refresh':authTokens?.refresh})
-            })
-            let data = await response.json()
-
-            if (response.status===200){
-                setAuthTokens(data)
-                setUser(jwt_decode(data.access))
-                localStorage.setItem('authTokens', JSON.stringify(data))
-            } else{
-                //logout user
-                setAuthTokens(null)
-                setUser(null)
-                localStorage.removeItem('authTokens')
-                navigate('/sign-up')
-            }
-
-            if(loading){
-                setLoading(false)
-            }
-        }
-
         if(loading){
             updateToken()
         }
