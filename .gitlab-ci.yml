@@ -19,12 +19,13 @@ api-unit-test-job:
     - pip install -r requirements.txt
     - python manage.py test ticket_rest
 
-  packing-lists-linting-job:
-    image: python:3-bullseye
-    stage: test
-    script:
-      - pip install flake8
-      - flake8 --max-line-length=88 --ignore=E501 packing-lists
+  lint-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    flake8 --max-line-length=88 --ignore=E501 buddy-api ticket-api
+    # Run flake8 on Python project to check for code quality
 
 
 build-buddy-api-image-job:
