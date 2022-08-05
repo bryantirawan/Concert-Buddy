@@ -14,16 +14,17 @@ export default function Concerts() {
     const [concerts, setConcerts] = useState([]);
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
-    const [toggled, setToggled] = useState(false);
+    const [toggled, setToggled] = useState(false); 
+    //city is false, artist is true 
     const [invalid, setInvalid] = useState(false);
+    const [page, setPage] = useState(1);
+    let { location } = useParams();
     let {user} = useContext(AuthContext)
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
-    let { location } = useParams();
 
     useEffect( () => {
-
         const fetchConcerts = async() => {
-            const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/selectconcertsforcity/${location}/&p=1`)
+            const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${location}/&p=${page}`)
             if(concertResponse.ok) {
                 const concertData = await concertResponse.json();
                 if (concertData.concerts.setlist) {
@@ -49,8 +50,9 @@ export default function Concerts() {
                 }
             }
         }
+
         fetchConcerts();
-    }, [location]
+    }, [page]
     );
 
     const handleLocationSubmit = async (e) => {
@@ -62,7 +64,7 @@ export default function Concerts() {
             final_city += '%20'
             final_city += city_new[i]
         }
-        const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/selectconcertsforcity/${final_city}/&p=1`)
+        const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${final_city}/&p=${page}`)
         if(concertResponse.ok) {
             const concertData = await concertResponse.json();
             if (concertData.concerts.setlist) {
@@ -86,6 +88,8 @@ export default function Concerts() {
             }
         }
     }
+
+    
     const handleArtistSubmit = async (e) => {
         e.preventDefault();
 
@@ -119,16 +123,19 @@ export default function Concerts() {
         }
     }
 
-    const handleKeypress = e => {
-        //it triggers by pressing the enter key
-      if (e.keyCode === 13) {
-        if (toggled === false) {
-            handleArtistSubmit()
-        } else {
-        handleLocationSubmit();
-        }
-      }
-    };
+    //something iffy here might not be coded right 
+    // const handleKeypress = e => {
+    //     //it triggers by pressing the enter key
+    //   if (e.keyCode === 13) {
+    //     if (toggled === false) {
+    //         handleArtistSubmit()
+    //     } else {
+    //         navigate('selectconcerts')
+    //     handleLocationSubmit();
+    //     }
+    //   }
+    // };
+
 
     const fetchConcerttoAdd = async (concID) => {
         const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/add/${concID}/`);
@@ -189,11 +196,13 @@ export default function Concerts() {
             <div className='entry'>
                 { toggled ?
             <form onSubmit={handleArtistSubmit}>
-            <input className="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
+            {/* <input className="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/> */}
+            <input className="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}}/>
             </form>
             :
             <form onSubmit={handleLocationSubmit}>
-            <input className="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value)}} onKeyPress={handleKeypress}/>
+            {/* <input className="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value); setPage(1)}} onKeyPress={handleKeypress}/> */}
+            <input className="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value); setPage(1)}} />
             </form>
             }
         <div>
@@ -206,7 +215,7 @@ export default function Concerts() {
     }
 
     {concerts.length > 0 &&
-    (
+    (<>
     <table className="table table-dark table-striped">
     <thead>
         <tr>
@@ -255,9 +264,70 @@ export default function Concerts() {
             ))
         }
         </tbody>
-    </table>)}
+    </table>
+    
+    { toggled ?
+            (<>
+            <form onSubmit={handleArtistSubmit}>
+                <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+                    Previous Page
+                </button>
+            </form>
+            <form onSubmit={handleArtistSubmit}>
+                <button className="btn btn-success" onClick={() => setPage(page + 1)}>
+                    Next Page
+                </button>
+            </form>
+            </>) : (
+            <>
+            <form onSubmit={handleLocationSubmit}>
+                <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+                    Previous Page
+                </button>
+            </form>
+            <form onSubmit={handleLocationSubmit}>
+                <button className="btn btn-success" onClick={() => setPage(page + 1)}>
+                    Next Page
+                </button>
+            </form>
+            </>    
+            )
+
+    }
+    </>
+    )}
     {concerts === 0 &&
-    (<p>No concerts matching search</p>)}
+    (<>
+    { toggled ?
+            (<>
+            <form onSubmit={handleArtistSubmit}>
+                <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+                    Previous Page
+                </button>
+            </form>
+            <form onSubmit={handleArtistSubmit}>
+                <button className="btn btn-success" onClick={() => setPage(page + 1)}>
+                    Next Page
+                </button>
+            </form>
+            </>) : (
+            <>
+            <form onSubmit={handleLocationSubmit}>
+                <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+                    Previous Page
+                </button>
+            </form>
+            <form onSubmit={handleLocationSubmit}>
+                <button className="btn btn-success" onClick={() => setPage(page + 1)}>
+                    Next Page
+                </button>
+            </form>
+            </>    
+            )
+
+    }
+    </>)
+    }
     </div>
     </div>
     </div>
