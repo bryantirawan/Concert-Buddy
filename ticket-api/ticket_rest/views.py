@@ -1,4 +1,3 @@
-from email.headerregistry import Address
 import json
 from django.http import JsonResponse
 from .encoders import (
@@ -108,7 +107,7 @@ def api_get_orderitems(request):
         content = json.loads(request.body)
         print(content)
         ticket = Ticket.objects.get(id=content["ticket"])
-        if ticket.sold == True:
+        if ticket.sold is True:
             return JsonResponse({"message": "Ticket Already Sold"}, status=400)
         else:
             # assigning ticket to OrderItem and changing sold = True
@@ -147,7 +146,7 @@ def api_get_orderitems(request):
                     setattr(address_for_order_item, "city", content["city"])
                     setattr(address_for_order_item, "country", content["country"])
                     setattr(address_for_order_item, "zip", content["zip"])
-                except:  # no existing shipping address
+                except Address.DoesNotExist:  # no existing shipping address
                     Address.objects.update_or_create(
                         user=content["user"],
                         street_address=content["street_address"],

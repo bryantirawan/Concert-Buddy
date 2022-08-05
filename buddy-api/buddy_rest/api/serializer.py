@@ -1,7 +1,5 @@
 from rest_framework import serializers
 from buddy_rest.models import Concert, User
-from django.contrib.auth import get_user_model
-
 
 class ConcertSerializer(serializers.ModelSerializer):
     class Meta:

@@ -4,15 +4,13 @@ import sys
 import time
 import json
 import requests
+from ticket_rest.models import UserVO
 
 
 sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ticket_project.settings")
 django.setup()
 BUDDY_API = os.environ["BUDDY_API"]
-
-
-from ticket_rest.models import UserVO
 
 
 def poll():

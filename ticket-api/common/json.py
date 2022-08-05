@@ -3,7 +3,7 @@ from types import NoneType
 from django.urls import NoReverseMatch
 from django.db.models import QuerySet
 from datetime import datetime
-from decimal import *
+from decimal import Decimal
 
 
 class DateEncoder(JSONEncoder):

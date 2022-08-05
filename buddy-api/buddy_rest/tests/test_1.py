@@ -6,9 +6,6 @@ from buddy_rest.views import (
     api_concerts,
     api_get_user_concerts_withoutpk,
 )
-from buddy_rest.models import Concert
-from django.test import TestCase, Client
-
 # from rest_framework import status
 # from rest_framework.reverse import reverse
 

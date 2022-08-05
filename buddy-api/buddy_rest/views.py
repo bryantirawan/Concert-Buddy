@@ -1,7 +1,6 @@
 import json
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -10,6 +9,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .encoders import ConcertEncoder, UserEncoder
 from .models import Concert, User
 import requests
+
 
 # used for poller
 @require_http_methods(["GET", "POST"])
@@ -117,10 +117,11 @@ def api_concerts(request):
             concert = Concert.objects.create(**content)
             return JsonResponse(
                 concert,
-                # encoder=ConcertEncoder, #need to figure out how to do this without encoders
+                # encoder=ConcertEncoder, #need to figure out how to do this
+                # without encoders
                 safe=False,
             )
-        except:
+        except Concert.DoesNotExist:
             response = JsonResponse({"message": "Could not create the concert"})
             response.status_code = 400
             return response
@@ -136,7 +137,7 @@ def api_select_concert_for_city(request, location, page):
     }
     try:
         concerts = requests.get(url, headers=headers).json()
-    except:
+    except requests.exceptions.RequestException:
         return JsonResponse({"message": "invalid search request"}, status=400)
     return JsonResponse({"concerts": concerts})
 
@@ -152,7 +153,7 @@ def api_get_concert_by_artist(request, pk):
     }
     try:
         concerts = requests.get(url, headers=headers).json()
-    except:
+    except requests.exceptions.RequestException:
         return JsonResponse({"message": "invalid search request"}, status=400)
     return JsonResponse({"concerts": concerts})
 
@@ -180,15 +181,3 @@ def log_concert(request, concertdict):
 
     print("concertdict from log_concert", concertdict)
     return JsonResponse(concertdict)
-
-
-@require_http_methods(["GET", "POST"])
-def api_users(request):
-    if request.method == "GET":
-        users = User.objects.all()
-        return JsonResponse(
-            {"users": users},
-            encoder=UserEncoder,
-        )
-    else:
-        return "Create POST REQUEST VIEW"

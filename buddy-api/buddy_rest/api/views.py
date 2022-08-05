@@ -24,7 +24,7 @@ class ConcertViewSet(viewsets.ModelViewSet):
             new_concert = Concert.objects.get(
                 concert_id=data["concert_id"]
             )  # check to see if Concert exists already
-        except:
+        except Concert.DoesNotExist:
             new_concert = Concert(
                 venue=data["venue"],
                 city=data["city"],
@@ -46,7 +46,7 @@ class ConcertViewSet(viewsets.ModelViewSet):
                 new_concert.fellow_user.add(fellow_user_obj)
             concert_obj = Concert.objects.get(concert_id=data["concert_id"])
             user_object.concert.add(concert_obj)
-        except:  # POST for tickets
+        except User.DoesNotExist:  # POST for tickets
             pass
 
         serializer = ConcertSerializer(new_concert)
