@@ -17,6 +17,7 @@ export default function Concerts() {
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
     const [invalid, setInvalid] = useState(false);
+    const [page, setPage] = useState(1)
     let { location } = useParams();
     let {user} = useContext(AuthContext)
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
@@ -25,7 +26,7 @@ export default function Concerts() {
     useEffect( () => {
 
         const fetchConcerts = async() => {
-            const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${location}/&p=1`)
+            const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${location}/&p=${page}`)
             if(concertResponse.ok) {
                 const concertData = await concertResponse.json();
                 if (concertData.concerts.setlist) {
@@ -51,7 +52,7 @@ export default function Concerts() {
             }
         }
         fetchConcerts();
-    }, []
+    }, [page]
     );
 
     const handleLocationSubmit = async (e) => {
@@ -131,6 +132,7 @@ export default function Concerts() {
       }
     };
 
+
     const fetchConcerttoAdd = async (concID) => {
         const concertResponse = await fetch(`http://localhost:8080/api/add/${concID}/`);
         const concertData = await concertResponse.json()
@@ -206,7 +208,7 @@ export default function Concerts() {
     }
 
     {concerts.length > 0 &&
-    (
+    (<>
     <table className="table table-dark table-striped">
     <thead>
         <tr>
@@ -255,9 +257,42 @@ export default function Concerts() {
             ))
         }
         </tbody>
-    </table>)}
+    </table>
+   
+    <button className="btn btn-success" onClick={() => setPage(page - 1)}>
+        Previous Page
+    </button>
+    <button className="btn btn-success" onClick={() => setPage(page + 1)}>
+        Next Page
+    </button>
+
+    
+    </>
+    )}
     {concerts === 0 &&
-    (<p>No concerts matching search</p>)}
+    (<>
+    <p>No concerts matching search</p>
+    <button className="btn btn-success" onClick={() => setPage(page - 1)}>
+        Previous Page
+    </button>
+    <button className="btn btn-success" onClick={() => setPage(page + 1)}>
+        Next Page
+    </button>
+    
+    
+    
+    
+    
+    
+    
+    </>)
+    
+    
+    
+    
+    
+    
+    }
     </div>
     </div>
     </div>
