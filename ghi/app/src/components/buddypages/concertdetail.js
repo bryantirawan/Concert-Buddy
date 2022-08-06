@@ -36,12 +36,13 @@ export default function ConcertDetail() {
 
       return (
         <>
+        <div className='imagebackground'>
         <br></br>
         <div className="tabletoavoidfooter">
           <div className="container">
 
-            <h1>Concert Details</h1>
-              <table className="table table-striped table-bordered ">
+            <h1 className="text-white">Concert Details</h1>
+              <table className="table table-bordered text-white">
               <thead>
               </thead>
     <tbody>
@@ -76,7 +77,7 @@ export default function ConcertDetail() {
 
     </tbody>
     </table>
-    {tickets.length !== 0 ? (<table  className="table table-striped table-bordered ">
+    {tickets.length !== 0 ? (<table  className="table table-bordered text-white">
     <thead>
         <tr>
              <th>Price</th>
@@ -108,7 +109,7 @@ export default function ConcertDetail() {
         }
         </tbody>
     </table>
-    ):(<><br></br><h1 className = "text-white" align="center">Sorry no tickets available</h1></>)}
+    ):(<><br></br><h1 className="text-white" align="center">Sorry no tickets available</h1></>)}
           <div
         style={{
           position: "fixed",
@@ -121,6 +122,7 @@ export default function ConcertDetail() {
         </div>
         </div>
         <Footer />
+        </div>
         </>
       );
     };
