@@ -4,7 +4,7 @@ import os
 import sys
 
 
-def deployedmain():
+def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'buddy_project.settings')
     try:
@@ -18,5 +18,5 @@ def deployedmain():
     execute_from_command_line(sys.argv)
 
 
-if __name__ == '__deployedmain__':
-    deployedmain()
+if __name__ == '__main__':
+    main()

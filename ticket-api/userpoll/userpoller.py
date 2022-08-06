@@ -4,6 +4,7 @@ import sys
 import time
 import json
 import requests
+from ticket_rest.models import UserVO
 
 
 sys.path.append("")
@@ -12,12 +13,9 @@ django.setup()
 BUDDY_API = os.environ["BUDDY_API"]
 
 
-from ticket_rest.models import UserVO
-
-
 def poll():
     while True:
-        print('Ticket user poller polling for data')
+        print("Ticket user poller polling for data")
         try:
             url = f"{BUDDY_API}/api/users/"
             response = requests.get(url)
@@ -36,5 +34,5 @@ def poll():
         time.sleep(5)
 
 
-if __name__ == "__deployedmain__":
+if __name__ == "__main__":
     poll()
