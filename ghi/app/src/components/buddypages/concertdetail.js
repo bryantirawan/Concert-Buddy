@@ -84,7 +84,7 @@ export default function ConcertDetail() {
             <th>Section</th>
             <th>Row</th>
             <th>Seat</th>
-            <th>Buy Ticket</th>
+            <th>Buy</th>
 
         </tr>
     </thead>
