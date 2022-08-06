@@ -102,4 +102,3 @@ Created remaining project wireframes
 
 ## July 6, 2022
 Working on wireframe of project plan
-
