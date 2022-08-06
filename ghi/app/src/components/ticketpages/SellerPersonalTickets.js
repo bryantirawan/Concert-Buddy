@@ -94,117 +94,124 @@ function SellerTicketList() {
 
     return (
         <>
-        <div className="tabletoavoidfooter">
-        <div className="my-4 container bg-secondary">
-        <div className="px-4 py-4 my-4 mt-0 text-center bg-secondary">
-          <img className="bg-white rounded shadow d-block mx-auto mb-1" alt="" width="600" />
-          <h1 className="display-6 fw-bold">Ticket Listings</h1>
-          <p>Your tickets currently for sale and previously sold. Want to sell another?</p>
-          <div className="col-lg-6 mx-auto">
-            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Link to="/selectconcerts" className="btn btn-light btn-lg px-4 gap-3">Sell new ticket</Link>
-            </div>
+        <div className='imagebackground'>
+  <div className="container bg-dark">
+  <div className="px-4 py-4 my-4 mt-0 text-center bg-dark">
+    <h1 className="display-6 fw-bold text-white">Ticket Listings</h1>
+    <p className="text-white">Your tickets currently for sale and previously sold. Want to sell another?</p>
+    <div className="col-lg-6 mx-auto">
+      <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <div className="col-lg-6 mx-auto">
+                <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                  <Link to="/selectconcerts" className="btn btn-light btn-md px-4 gap-3">Sell New Ticket</Link>
+                </div>
+              </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+
+  <div className="tabletoavoidfooter">
+  <div>
+      <div className="container">
+  <Toggle onChange={(e) => setToggled(e.target.checked)} />
+  <p className="text-white"> Toggle to Search by {toggled ? "Sold": "Listed"}</p>
+  </div>
+      {toggled ?
+      <>
+      <div className="container">
+      <h2 className="text-white">Listed Tickets</h2>
+
+          {avail_tickets ?
+          ( <div className="row">
+
+              {unsold_tickets.map((ticket, idx) => {
+              return (
+                  <div className="col-md-3">
+                  <div key={idx} className="card mb-3 shadow">
+                  <div className="card-body">
+                      <h5 className="card-title">{ticket.concert.artist}</h5>
+                      <h6 className="card-subtitle mb-2 text-muted">
+                      ${ new Intl.NumberFormat().format(ticket.price)}
+                      </h6>
+                      <p className="card-text">
+                      Section: {ticket.section}
+                      <br></br>
+                      Row: {ticket.row}
+                      <br></br>
+                      Seat: {ticket.seat}
+                      <br>
+                      </br>
+                      {new Date(ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})} at {ticket.concert.venue}
+                      </p>
+                  </div>
+                  <div className="card-footer">
+                  <form onSubmit={(e) => handleDeleteTicketSubmit(e, ticket.id)}>
+              <button className="btn btn-danger" type="submit">
+                  Delete Listing
+                  </button>
+                  </form>
+                  </div>
+                  </div>
+                  </div>
+              );
+              })}
+              </div>):(<div className="col text-white">You have no tickets for sale.</div>)}
           </div>
-        </div>
-        </div>
-        <div>
-            <div className="container">
-        <Toggle onChange={(e) => setToggled(e.target.checked)} />
-        <p> Toggle to Search by {toggled ? "Sold": "Listed"}</p>
-        </div>
-            {toggled ?
-            <>
-            <div className="container">
-            <h2>Listed Tickets</h2>
-            <div className="row">
-            <div className="col">
-                <div className="col">
-                {avail_tickets ? (<div className="col">
-                    {unsold_tickets.map((ticket, idx) => {
-                    return (
-                        <div key={idx} className="card mb-3 shadow">
-                        <div className="card-body">
-                            <h5 className="card-title">{ticket.concert.artist}</h5>
-                            <h6 className="card-subtitle mb-2 text-muted">
-                            ${ new Intl.NumberFormat().format(ticket.price)}
-                            </h6>
-                            <p className="card-text">
-                            Section: {ticket.section}
-                            <br></br>
-                            Row: {ticket.row}
-                            <br></br>
-                            Seat: {ticket.seat}
-                            <br>
-                            </br>
-                            {new Date(ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})} at {ticket.concert.venue}
-                            </p>
-                        </div>
-                        <div className="card-footer">
-                        <form onSubmit={(e) => handleDeleteTicketSubmit(e, ticket.id)}>
-                    <button className="btn btn-danger" type="submit">
-                        Delete Listing
-                        </button>
-                        </form>
-                        </div>
-                        </div>
-                    );
-                    })}
-                    </div>):(<div className="col">You have no tickets for sale.</div>)}
-                </div>
-                </div>
-                </div>
-                </div>
-                </>
-          :
-          <>
-           <div className="container">
-            <h2>Sold Tickets</h2>
-            <div className="row">
-            <div className="col">
-                <div className="col">
-                {sold_avail_tickets ? (<div className="col">
-                    {sold_tickets.map((order, idx) => {
-                    return (
-                        <div key={idx} className="card mb-3 shadow">
-                        <div className="card-body">
-                            <h5 className="card-title">{order.ticket.concert.artist}</h5>
-                            <h6 className="card-subtitle mb-2 text-muted">
-                            ${ new Intl.NumberFormat().format(order.ticket.price)}
-                            </h6>
-                            <p className="card-text">
-                            Section: {order.ticket.section}
-                            <br></br>
-                            Row: {order.ticket.row}
-                            <br></br>
-                            Seat: {order.ticket.seat}
-                            <br></br>
-                            {new Date(order.ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})} at {order.ticket.concert.venue}
-                            </p>
-                        </div>
-                        <div className="card-footer">
-                        <p>Buyer Email: {order.ticket.buyer.email}</p>
-                        <p>Buyer Venmo: {order.buyer_venmo}</p>
-                        <p>If the buyer hasn't venmo'd you within 2 hours, revert the ticket back to unsold.</p>
-                        <form onSubmit={(e) => handleSoldTicketChange(e, order.ticket.id)}>
-                        <button className="btn btn-warning" type="submit">
-                        Revert to Unsold
-                        </button>
-                        </form>
-                        </div>
-                        </div>
-                    );
-                    })}
-                    </div>):(<div className="col">You have no sold tickets.</div>)}
-                </div>
-                </div>
-                </div>
-                </div>
-                </>
-        }
-        </div>
-        </div>
-        <Footer />
-        </>
-    )
-    }
+          </>
+    :
+    <>
+     <div className="container">
+      <h2 className="text-white">Sold Tickets</h2>
+          {sold_avail_tickets ?
+          ( <div className="row">
+              {sold_tickets.map((order, idx) => {
+              return (
+                  <div className="col-md-4">
+                  <div key={idx} className="card mb-3 shadow">
+                  <div className="card-body">
+                      <h5 className="card-title">{order.ticket.concert.artist}</h5>
+                      <h6 className="card-subtitle mb-2 text-muted">
+                      ${ new Intl.NumberFormat().format(order.ticket.price)}
+                      </h6>
+                      <p className="card-text">
+                      Section: {order.ticket.section}
+                      <br></br>
+                      Row: {order.ticket.row}
+                      <br></br>
+                      Seat: {order.ticket.seat}
+                      <br></br>
+                      {new Date(order.ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})} at {order.ticket.concert.venue}
+                      </p>
+                  </div>
+                  <div className="card-footer">
+                  <p>If the buyer hasn't venmo'd you within 2 hours, revert the ticket back to unsold.</p>
+                  <div>Buyer Email: {order.ticket.buyer.email}</div>
+                  <p>Buyer Venmo: {order.buyer_venmo}</p>
+                  <form onSubmit={(e) => handleSoldTicketChange(e, order.ticket.id)}>
+                  <button className="btn btn-warning" type="submit">
+                  Revert to Unsold
+                  </button>
+                  </form>
+                  </div>
+                  </div>
+                  </div>
+              );
+              })}
+              </div>):(<div className="col text-white">You have no sold tickets.</div>)}
+
+          </div>
+          </>
+  }
+
+  </div>
+</div>
+  <Footer />
+  </div>
+  </>
+)
+}
+
     export default SellerTicketList;
