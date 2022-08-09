@@ -15,14 +15,15 @@ export default function Concerts() {
     const [city, setCity] = useState('');
     const [artist, setArtist] = useState('');
     const [toggled, setToggled] = useState(false);
+    //city is false, artist is true
     const [invalid, setInvalid] = useState(false);
-    const [page, setPage] = useState(1)
-    let {user} = useContext(AuthContext)
-    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
+    const [page, setPage] = useState(1);
     let { location } = useParams();
+    let {user} = useContext(AuthContext)
+    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+
 
     useEffect( () => {
-
         const fetchConcerts = async() => {
             const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/selectconcertsforcity/${location}/&p=${page}`)
             if(concertResponse.ok) {
@@ -34,7 +35,7 @@ export default function Concerts() {
                         concertData.concerts.setlist[i].eventDate = dateObject
                     }
                     setConcerts(concertData.concerts.setlist);
-                    let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
+                    let concList = [concertData.concerts.setlist.filter(concert => ((new Date(concert.eventDate))) >= (Date.now()))]
                     if (concList[0].length === 0){
                         setConcerts(0)
                     }
@@ -42,7 +43,6 @@ export default function Concerts() {
                     setInvalid(false)
 
                 } else {
-
                     if (location !== undefined) {
                         setInvalid(true)
                         setConcerts([])
@@ -50,13 +50,14 @@ export default function Concerts() {
                 }
             }
         }
+
         fetchConcerts();
-    }, [location, page]
+    }, [page]
     );
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
-
+        const location = city.replaceAll(" ", "%20");
         const city_new = city.split(' ')
         let final_city = city_new[0]
         for (let i = 1; i < city_new.length; i++) {
@@ -72,24 +73,34 @@ export default function Concerts() {
                     const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
-                setConcerts(concertData.concerts.setlist);
-                let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
+                let concList = [concertData.concerts.setlist.filter(concert => ((new Date(concert.eventDate))) >= yesterday)]
+                let concListO = concertData.concerts.setlist.filter(concert => ((new Date(concert.eventDate))) >= yesterday)
+
                 if (concList[0].length === 0){
                     setConcerts(0)
                 }
+                else{
+                setConcerts(concListO);
+                console.log (concertData.concerts.setlist)
+                console.log(concListO)
+                }
+
                 setArtist('');
-                setInvalid(false)
+                setInvalid(false);
+                navigate(`/selectconcerts/${location}`, { replace: true });
+
 
             } else {
                 console.error('concertData:', concertResponse);
-                setInvalid(true)
-                setConcerts([])
+                setInvalid(true);
+                setConcerts([]);
             }
         }
+
     }
+
     const handleArtistSubmit = async (e) => {
         e.preventDefault();
-
         const artist_new = artist.split(' ')
         let final_artist = artist_new[0]
         for (let i = 1; i < artist_new.length; i++) {
@@ -106,7 +117,7 @@ export default function Concerts() {
                     concertData.concerts.setlist[i].eventDate = dateObject
                 }
                 setConcerts(concertData.concerts.setlist);
-                let concList = [concertData.concerts.setlist.filter(concert => ((concert.eventDate)) >= (Date.now()))]
+                let concList = [concertData.concerts.setlist.filter(concert => (( new Date(concert.eventDate))) >= (Date.now()))]
                 if (concList[0].length === 0){
                     setConcerts(0)
                 }
@@ -119,17 +130,6 @@ export default function Concerts() {
             }
         }
     }
-
-    const handleKeypress = e => {
-        //it triggers by pressing the enter key
-      if (e.keyCode === 13) {
-        if (toggled === false) {
-            handleArtistSubmit()
-        } else {
-        handleLocationSubmit();
-        }
-      }
-    };
 
     const fetchConcerttoAdd = async (concID) => {
         const concertResponse = await fetch(`${process.env.REACT_APP_BUDDY_API}/api/add/${concID}/`);
@@ -190,19 +190,22 @@ export default function Concerts() {
             <div className='entry'>
                 { toggled ?
             <form onSubmit={handleArtistSubmit}>
-            <input className="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
+            <input className="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}}/>
             </form>
             :
             <form onSubmit={handleLocationSubmit}>
-            <input className="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value)}} onKeyPress={handleKeypress}/>
+            <input className="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value); setPage(1)}} />
             </form>
             }
         <div>
         <p></p>
         </div>
+
+
     {invalid &&
         <p>Invalid Search Request</p>
     }
+
     {concerts.length > 0 &&
     (<>
     <table className="table table-dark table-striped">
@@ -215,10 +218,12 @@ export default function Concerts() {
             {user ? (<th>Wanna go?</th>) : <th>Concert Details</th>}
             {user ?
             (<th>Have a ticket to sell?</th>) : <></> }
+
         </tr>
     </thead>
         <tbody>
         {concerts.filter(concert => ((concert.eventDate)) >= (yesterday)).reverse().map((concert,idx) => (
+
                 <tr key={idx}>
                     <td>{concert.artist.name}</td>
                     <td>{concert.venue.city.name}</td>
@@ -231,6 +236,7 @@ export default function Concerts() {
                         I'm going!
                         </button>
                     </form>
+
                     </td>
                     ) : (<td>
                     <form onSubmit={(e) => handleConcertDetails(e)}>
@@ -238,6 +244,7 @@ export default function Concerts() {
                         Login to See Concert Details
                         </button>
                     </form>
+
                     </td>)}
                     {user ? (<td> <form onSubmit={(e) => handleAddConcertSubmit(e, concert.venue.name, concert.venue.city.name, concert.eventDate, concert.artist.name, concert.id, concert.venue.id, concert.artist.mbid)}>
                         <button className="btn btn-primary" type="submit">
@@ -251,25 +258,73 @@ export default function Concerts() {
         </tbody>
     </table>
 
-    <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
-        Previous Page
-    </button>
-    <button className="btn btn-success" onClick={() => setPage(page + 1)}>
-        Next Page
-    </button>
+    { toggled ?
+            (<>
+            {page > 1 &&
+                <form onSubmit={handleArtistSubmit}>
+                    <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+                        Previous Page
+                    </button>
+                </form>
+            }
+            {concerts.length === 20 &&
+            <form onSubmit={handleArtistSubmit}>
+                <button className="btn btn-success" onClick={() => setPage(page + 1)}>
+                    Next Page
+                </button>
+            </form>}
 
+            </>) : (
+            <>
+            {page > 1 &&
+
+                <form onSubmit={handleLocationSubmit}>
+                    <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+                        Previous Page
+                    </button>
+                </form>
+            }
+            {concerts.length === 20 &&
+
+                <form onSubmit={handleLocationSubmit}>
+                    <button className="btn btn-success" onClick={() => setPage(page + 1)}>
+                        Next Page
+                    </button>
+                </form>
+            }
+            </>
+            )
+    }
     </>
     )}
-    {concerts === 0 &&
+        {concerts === 0 &&
     (<>
-    <p>No concerts matching search</p>
-    <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
-        Previous Page
-    </button>
-    <button className="btn btn-success" onClick={() => setPage(page + 1)}>
-        Next Page
-    </button>
+    { toggled ?
+            (<>
 
+            <p>No concerts matching search</p>
+            {page > 1 &&
+                <form onSubmit={handleArtistSubmit}>
+                    <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+                        Previous Page
+                    </button>
+                </form>
+            }
+            </>) : (
+            <>
+            <p>No concerts matching search</p>
+            {page > 1 &&
+                <form onSubmit={handleLocationSubmit}>
+                    <button className="btn btn-primary" onClick={() => setPage(page - 1)}>
+                        Previous Page
+                    </button>
+                </form>
+            }
+
+            </>
+            )
+
+    }
     </>)
     }
     </div>
