@@ -56,7 +56,7 @@ export default function Concerts() {
         }
 
         fetchConcerts();
-    }, [location, page]
+    }, [page]
     );
 
 
