@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import AuthContext from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 
 
@@ -19,12 +19,15 @@ export default function Concerts() {
     //city is false, artist is true 
     const [invalid, setInvalid] = useState(false);
     const [page, setPage] = useState(1);
+    const [searchParams, setSearchParams] = useSearchParams();
     let { location } = useParams();
     let {user} = useContext(AuthContext)
     const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
 
 
     useEffect( () => {
+        const param = searchParams.get('q=');
+        console.log('param', param)
         const fetchConcerts = async() => {
             const concertResponse = await fetch(`http://localhost:8080/api/selectconcertsforcity/${location}/&p=${page}`)
             if(concertResponse.ok) {
@@ -53,12 +56,24 @@ export default function Concerts() {
         }
 
         fetchConcerts();
-    }, [page]
+    }, [location, page]
     );
+
+
+
+    const removeQueryParams = () => {
+        location = '';
+        const param = searchParams.get('q');
+        console.log('param', param)
+        if (param) {
+          searchParams.delete();
+          setSearchParams(searchParams);
+        }
+      };
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
-
+        const location = city.replaceAll(" ", "%20");
         const city_new = city.split(' ')
         let final_city = city_new[0]
         for (let i = 1; i < city_new.length; i++) {
@@ -88,12 +103,15 @@ export default function Concerts() {
                 }
 
                 setArtist('');
-                setInvalid(false)
+                setInvalid(false);
+                //setPage(1);
+                navigate(`/selectconcerts/${location}`, { replace: true });
+
 
             } else {
                 console.error('concertData:', concertResponse);
-                setInvalid(true)
-                setConcerts([])
+                setInvalid(true);
+                setConcerts([]);
             }
         }
         
@@ -102,7 +120,7 @@ export default function Concerts() {
     
     const handleArtistSubmit = async (e) => {
         e.preventDefault();
-
+        // setSearchParams({q: e.target.value});
         const artist_new = artist.split(' ')
         let final_artist = artist_new[0]
         for (let i = 1; i < artist_new.length; i++) {
@@ -132,20 +150,6 @@ export default function Concerts() {
             }
         }
     }
-
-    //something iffy here might not be coded right 
-    const handleKeypress = e => {
-        //it triggers by pressing the enter key
-      if (e.keyCode === 13) {
-        if (toggled === false) {
-            handleArtistSubmit()
-        } else {
-            navigate('selectconcerts')
-        handleLocationSubmit();
-        }
-      }
-    };
-
 
     const fetchConcerttoAdd = async (concID) => {
         const concertResponse = await fetch(`http://localhost:8080/api/add/${concID}/`);
@@ -196,6 +200,24 @@ export default function Concerts() {
         navigate(`/login/`)
     }
 
+    const previousButton = () => {
+        removeQueryParams(); 
+        setPage(page - 1); 
+    }
+
+    const nextButton = () => {
+        removeQueryParams(); 
+        setPage(page + 1); 
+    }
+
+
+
+
+
+
+
+
+
     return (
         <>
         <div className='selectconcerts'>
@@ -205,11 +227,13 @@ export default function Concerts() {
             <div className='entry'>
                 { toggled ?
             <form onSubmit={handleArtistSubmit}>
-            <input className="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/>
+            {/* <input className="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}} onKeyPress={handleKeypress}/> */}
+            <input className="form-control" type="text" value={artist} required onChange={(e) => {setArtist(e.target.value)}}/>
             </form>
             :
             <form onSubmit={handleLocationSubmit}>
-            <input className="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value); setPage(1)}} onKeyPress={handleKeypress}/>
+            {/* <input className="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value); setPage(1)}} onKeyPress={handleKeypress}/> */}
+            <input className="form-control" type="text" value={city} required onChange={(e) => {setCity(e.target.value); setPage(1)}} />
             </form>
             }
         <div>
@@ -228,7 +252,6 @@ export default function Concerts() {
         <tr>
             <th>Artist</th>
             <th>City</th>
-
             <th>Venue</th>
             <th>Date</th>
             {user ? (<th>Wanna go?</th>) : <th>Concert Details</th>}
@@ -314,7 +337,7 @@ export default function Concerts() {
     }
     </>
     )}
-    {concerts === 0 &&
+        {concerts === 0 &&
     (<>
     { toggled ?
             (<>
