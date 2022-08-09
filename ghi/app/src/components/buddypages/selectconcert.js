@@ -20,7 +20,7 @@ export default function Concerts() {
     const [page, setPage] = useState(1);
     let { location } = useParams();
     let {user} = useContext(AuthContext)
-    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
 
 
     useEffect( () => {
@@ -52,6 +52,7 @@ export default function Concerts() {
         }
 
         fetchConcerts();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]
     );
 
