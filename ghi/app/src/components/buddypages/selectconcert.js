@@ -56,7 +56,7 @@ export default function Concerts() {
         }
 
         fetchConcerts();
-    }, [page]
+    }, [location, page]
     );
 
 
@@ -73,7 +73,7 @@ export default function Concerts() {
 
     const handleLocationSubmit = async (e) => {
         e.preventDefault();
-        // setSearchParams({q: e.target.value});
+        const location = city.replaceAll(" ", "%20");
         const city_new = city.split(' ')
         let final_city = city_new[0]
         for (let i = 1; i < city_new.length; i++) {
@@ -95,12 +95,15 @@ export default function Concerts() {
                     setConcerts(0)
                 }
                 setArtist('');
-                setInvalid(false)
+                setInvalid(false);
+                setPage(1);
+                navigate(`/selectconcerts/${location}`, { replace: true });
+
 
             } else {
                 console.error('concertData:', concertResponse);
-                setInvalid(true)
-                setConcerts([])
+                setInvalid(true);
+                setConcerts([]);
             }
         }
     }
