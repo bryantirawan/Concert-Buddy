@@ -56,7 +56,7 @@ export default function Concerts() {
         }
 
         fetchConcerts();
-    }, [location, page]
+    }, [page]
     );
 
 
@@ -96,7 +96,6 @@ export default function Concerts() {
                 }
                 setArtist('');
                 setInvalid(false);
-                setPage(1);
                 navigate(`/selectconcerts/${location}`, { replace: true });
 
 
