@@ -37,63 +37,62 @@ useEffect( () => {
 }, []
 );
     return (
-
-    <div  style={{color: 'black' }} className="col">
-        <h3 className="display-6 fw-bold">Upcoming</h3>
-        <table  className="table table-dark table-striped table-bordered ">
-            <thead>
-                <tr>
-                <th>Date</th>
-                <th>Artist</th>
-                <th>Price</th>
-                <th>Section</th>
-                <th>Row</th>
-                <th>Seat</th>
-                </tr>
-            </thead>
-            <tbody>
-            {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) >= yesterday).map((ticket,idx) => (
-                    <tr key={idx}>
-                        <td>{new Date(ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
-                        <td>{ticket.concert.artist}</td>
-                        <td>{ticket.price}</td>
-                        <td>{ticket.section}</td>
-                        <td>{ticket.row} </td>
-                        <td>{ticket.seat} </td>
-                    </tr>
-                ))
-            }
-            </tbody>
-        </table>
-        <h3 className="display-6 fw-bold">Past</h3>
-        <table  className="table table-dark table-striped table-bordered ">
-            <thead>
-                <tr>
-                <th>Date</th>
-                <th>Artist</th>
-                <th>Price</th>
-                <th>Section</th>
-                <th>Row</th>
-                <th>Seat</th>
-                </tr>
-            </thead>
-            <tbody>
-            {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) <= yesterday).reverse().map((ticket,idx) => (
-                    <tr key={idx}>
-                        <td>{new Date(ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
-                        <td>{ticket.concert.artist}</td>
-                        <td>{ticket.price} </td>
-                        <td>{ticket.section}</td>
-                        <td>{ticket.row} </td>
-                        <td>{ticket.seat} </td>
-                    </tr>
-                ))
-            }
-            </tbody>
-        </table>
-        </div>
-    );
-  }
+            <div  style={{color: 'black' }} className="col">
+                <h3 className="display-7 fw-bold text-white">Upcoming Concerts</h3>
+                <table  className="table table-dark table-bordered text-white">
+                    <thead>
+                        <tr>
+                        <th>Date</th>
+                        <th>Artist</th>
+                        <th>Price</th>
+                        <th>Section</th>
+                        <th>Row</th>
+                        <th>Seat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) >= yesterday).map((ticket,idx) => (
+                            <tr key={idx}>
+                                <td>{new Date(ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
+                                <td>{ticket.concert.artist}</td>
+                                <td>{ticket.price}</td>
+                                <td>{ticket.section}</td>
+                                <td>{ticket.row} </td>
+                                <td>{ticket.seat} </td>
+                            </tr>
+                        ))
+                    }
+                    </tbody>
+                </table>
+                <h3 className="display-7 fw-bold text-white">Past Concerts</h3>
+                <table  className="table table-dark table-bordered text-white">
+                    <thead>
+                        <tr>
+                        <th>Date</th>
+                        <th>Artist</th>
+                        <th>Price</th>
+                        <th>Section</th>
+                        <th>Row</th>
+                        <th>Seat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {my_concerts.filter(ticket => ((Date.parse(ticket.concert.date))) <= yesterday).reverse().map((ticket,idx) => (
+                            <tr key={idx}>
+                                <td>{new Date(ticket.concert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
+                                <td>{ticket.concert.artist}</td>
+                                <td>{ticket.price} </td>
+                                <td>{ticket.section}</td>
+                                <td>{ticket.row} </td>
+                                <td>{ticket.seat} </td>
+                            </tr>
+                        ))
+                    }
+                    </tbody>
+                </table>
+                </div>
+            );
+          }
 
 function BuyerTickets() {
 
@@ -101,36 +100,46 @@ function BuyerTickets() {
 
     return (
         <>
-        <div className="tabletoavoidfooter">
 
-            <div style={{
-                backgroundColor: 'white',
-                width: 'auto',
-                height: 'auto'
-            }}>
-                <div className="my-4 container bg-light">
-                    <div className="px-4 py-4 my-4 mt-0 text-center bg-secondary">
-                    <img className="bg-black rounded shadow d-block mx-auto mb-1" alt="" width="600" />
-                    <h1 className="display-6 fw-bold">SEE WHAT'S NEW</h1>
-                    <p>Looking for something to do? See what events are coming up and book tickets.</p>
-                    <div className="col-lg-6 mx-auto">
-                        <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <div className='imagebackground'>
+        <div className="container bg-dark">
+        <div className="px-4 py-4 my-4 mt-0 text-center bg-dark">
+          <h1 className="display-6 fw-bold text-white">SEE WHAT'S NEW</h1>
+          <p className="text-white">Looking for something to do? See what events are coming up and book tickets.</p>
+          <div className="col-lg-6 mx-auto">
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <div className="col-lg-6 mx-auto">
+                      <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
                         <Link to="/selectconcerts" className="btn btn-light btn-lg px-4 gap-3">Search Events</Link>
-                        </div>
+                      </div>
                     </div>
-                    </div>
-                    <div className="container">
-                    <div className="row">
-                    {TicketColumn()}
-                    </div>
-                    </div>
-                </div>
             </div>
+          </div>
+        </div>
+        </div>
+        <div className="tabletoavoidfooter">
+            <div style={{
+        backgroundColor: 'dark',
+        width: 'auto',
+        height: 'auto'
+            }}>
+        <div className="my-4 container bg-dark">
+        <div className="container">
+          <div className="row">
+          <h1 className="text-white">Your Tickets</h1>
+          <br></br>
+          <br></br>
+          {TicketColumn()}
+          </div>
+        </div>
+        </div>
+        </div>
         </div>
         <Footer />
+        </div>
         </>
     )
-
     }
 
     export default BuyerTickets;
+

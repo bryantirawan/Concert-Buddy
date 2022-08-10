@@ -121,3 +121,26 @@
   flex-direction: column;
 }
 
+
+.imagebackground {
+  background-image: url('Images/img-13.jpg');
+  background-position: fixed;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: black;
+  /* color: white;
+  display: flex;
+  min-height: 90vh;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px; */
+}
+
+.card {
+  display:inline-block;
+}
+
+

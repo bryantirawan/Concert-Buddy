@@ -60,24 +60,35 @@ const handleRemoveConcertSubmit = async (e, concID) => {
   //POST to Concert and PUT to User all in one
   putConcertandputUser(concID)
 }
+
     return (
         <>
+        <div className='imagebackground'>
+        <div className="container bg-dark">
+        <div className="px-4 py-4 my-4 mt-0 text-center bg-dark">
+        <h1 className="display-6 fw-bold text-white">Concerts You're Attending</h1>
+        <p className="text-white">Concerts you've confirmed you're going to.</p>
+        <div className="col-lg-6 mx-auto">
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            </div>
+        </div>
+        </div>
+        </div>
         <br></br>
         <div className="tabletoavoidfooter">
         {userconcerts.length > 0 ? (
-        <div className="my-4 container bg-light">
-        <h1 align="center">Concerts You're Going To</h1>
-        <table className="table table-hover table-striped">
-        <thead>
-            <tr>
+        <div className="my-4 container bg-dark text-white">
+        <table className="table text-white">
+        <thead className="text-white">
+            <tr className="text-white">
                 <th>Artist</th>
                 <th>Venue</th>
                 <th>City</th>
                 <th>Date</th>
-                <th>Find buddies</th>
-                <th>Sell extra tickets</th>
-                <th>Buy ticket</th>
-                <th>I can no longer go</th>
+                <th>Find a Concert Buddy</th>
+                <th>Sell Extra Tickets</th>
+                <th>Buy Ticket</th>
+                <th>Remove from My Concerts</th>
             </tr>
         </thead>
             <tbody>
@@ -89,23 +100,23 @@ const handleRemoveConcertSubmit = async (e, concID) => {
                         <td>{new Date(userconcert.date).toLocaleDateString(undefined, {timeZone: "UTC"})}</td>
                             <td>
                             <Link to={`/fellowusers/${userconcert.concert_id}`} className="current"><button className="btn btn-success"type="button">
-                            Other Users Going
+                            Explore Users
                             </button></Link>
                             </td>
                             <td>
                             <button className="btn btn-primary" onClick={() => navigate(`/tickets/${userconcert.concert_id}/`)}>
-                            Sell
+                            Sell Ticket
                             </button>
                             </td>
                             <td>
                             <button className="btn btn-primary" onClick={() => navigate(`/concertdetail/${userconcert.concert_id}/`)}>
-                            Buy
+                            Buy Ticket
                             </button>
                             </td>
                             <td>
                             <form onSubmit={(e) => handleRemoveConcertSubmit(e, userconcert.concert_id)}>
                             <button className="btn btn-primary">
-                            Remove
+                            Remove Concert
                             </button>
                             </form>
                         </td>
@@ -115,22 +126,16 @@ const handleRemoveConcertSubmit = async (e, concID) => {
             </tbody>
         </table>
         </div>):(<>
-                    <div className="px-4 py-4 my-4 mt-0 text-center bg-secondary">
-                    <img className="bg-black rounded shadow d-block mx-auto mb-1" alt="" width="600" />
-                    <h1 className="display-6 fw-bold">SEE WHAT'S NEW</h1>
-                    <p>Looking for something to do? See what events are coming up and book tickets.</p>
-                    <div className="col-lg-6 mx-auto">
-                      <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                        <Link to="/selectconcerts" className="btn btn-light btn-lg px-4 gap-3">Search Events</Link>
-                      </div>
-                    </div>
-                  </div>
-        <h1 align="center">You have no concerts yet.</h1>
+        <h1 className="text-white" align="center">You have no concerts yet.</h1>
+        <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <Link to="/selectconcerts" className="btn btn-light btn-lg px-4 gap-3">Search Events</Link>
+            </div>
         </>
         )}
         </div>
         <br></br>
         <Footer />
+        </div>
         </>
   )
 }
