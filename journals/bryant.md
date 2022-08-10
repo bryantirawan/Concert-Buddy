@@ -9,7 +9,7 @@ My focus was making the MVP for the concert-buddy matching microservice. The fir
 
 ## Week 4
 
-This week was all about auth. After several tutorials, I finally found one that works using jwt2 and an access/refresh token. Erica took the lead to build the ticket purchasing microservice these past 2 weeks and we needed to connect our react container, with ticekt purchasing and concert buddy microservices. We realized that the concert microservice was not really necessary so Justin was tasked with removing it. Ben helped both Erica and me. 
+This week was all about auth and making a custom user model. After several tutorials, I finally found one that works using jwt2 and an access/refresh token. Erica took the lead to build the ticket purchasing microservice these past 2 weeks and we needed to connect our react container, with ticekt purchasing and concert buddy microservices. We realized that the concert microservice was not really necessary so Justin was tasked with removing it. Ben helped both Erica and me. 
 
 ## Week 5
 
