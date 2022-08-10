@@ -10,10 +10,11 @@
 Concert Buddy
 
 ## Team Members
-* Ben Perlman
-* Justin Pang
 * Bryant Irawan
 * Erica Dippold
+* Ben Perlman
+* Justin Pang
+
 
 ## App Summary
 Concert Buddy is a ticket sales and concert-buddy matching application. Users can select a concert they plan on going to in the next few days and find other users who also plan on going to that concert. Users can search for a concert by location or artist. Since this app is meant to encourage users to actually meet up with each other, concert queries are limited to concerts happening in the next three or so days to prevent no-shows from schedule conflicts. Users who say they plan on attending a concert can also purchase tickets selling users have listed (if available). Users can buy and sell tickets in the same account.
