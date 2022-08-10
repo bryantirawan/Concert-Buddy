@@ -23,8 +23,11 @@ function Footer() {
         </div>
         <div className='footer-link-wrapper'>
           <div className='footer-link-items'>
-            <h3>Support</h3>
-            <Link to='/'>Contact</Link>
+            <h3>Creators</h3>
+            <a target="_blank" href="https://www.linkedin.com/in/bryantirawan/">Bryant Irawan</a>
+            <a target="_blank" href="https://www.linkedin.com/in/ericadippold/">Erica Dippold</a>
+            <a target="_blank" href="https://www.linkedin.com/in/benperlman/">Ben Perlman</a>
+            <a target="_blank" href="https://www.linkedin.com/in/justinshpang/">Justin Pang</a>
           </div>
         </div>
         <div className='footer-link-wrapper'>
