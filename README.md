@@ -27,6 +27,13 @@ Our target market is anyone that enjoys going to concerts. In particular, those 
 * Connect with a concert buddy option -- the user will be able to find a concert buddy based on future concerts they are attending. They will be able to connect with other users attending the same concerts.
 *  There will be a ticket marketplace for last minute buying and selling of concert tickets
 
+# Screenshots of the App Running
+![Home](docs/home.png)
+![Find Concerts](docs/selectconcert.png)
+![Concerts Attending](docs/concertsattending.png)
+![Ticket Sales](docs/ticketssold.png)
+![User Tickets](docs/mytickets.png)
+
 ## Set-up for local development
 * Fork and clone this repo
 * Work off of 'newMain' branch
