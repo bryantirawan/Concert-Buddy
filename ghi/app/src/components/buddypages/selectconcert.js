@@ -168,6 +168,7 @@ export default function Concerts() {
         e.preventDefault();
         const concertURL = `${process.env.REACT_APP_BUDDY_API}/buddy/concert/`
         const data = {venue, city, date, artist, concert_id, venue_id, artist_id}
+        console.log(data)
         const request = {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
