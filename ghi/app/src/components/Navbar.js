@@ -49,10 +49,18 @@ function Navbar() {
                     <Dropdown.Toggle variant="dark">
                       {user.username}
                       <Dropdown.Menu>
-                        <Dropdown.Item href="/concert-buddy/mytickets/">Purchased Tickets</Dropdown.Item>
-                        <Dropdown.Item href="/concert-buddy/userconcerts/">Concerts I Am Attending</Dropdown.Item>
-                        <Dropdown.Item href="/concert-buddy/sellertickets">My Tickets for Sale</Dropdown.Item>
-                        <Dropdown.Item href="/concert-buddy/"  variant="dark" onClick={logoutUser}>Logout</Dropdown.Item>
+                        <Dropdown.Item>
+                          <Link className="dropdown-links" aria-current="page" to="/mytickets/"> Purchased Tickets</Link>
+                         </Dropdown.Item>
+                        <Dropdown.Item>
+                          <Link className="dropdown-links" aria-current="page" to="/userconcerts/">Concerts I Am Attending</Link>
+                          </Dropdown.Item>
+                        <Dropdown.Item>
+                          <Link className="dropdown-links" aria-current="page" to="/sellertickets">My Tickets for sale</Link>
+                         </Dropdown.Item>
+                        <Dropdown.Item to="/"  variant="dark" onClick={logoutUser}>
+                          <Link className="dropdown-links" aria-current="page" to="/">Logout</Link>
+                          </Dropdown.Item>
                     </Dropdown.Menu>
                     </Dropdown.Toggle>
                     </Dropdown>
