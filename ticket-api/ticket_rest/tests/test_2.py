@@ -1,30 +1,30 @@
-from django.test import TestCase, Client
-from django_fake_model import models as f
-from django.db import models
-# from ..models import ConcertVO, UserVO
-import json
+# from django.test import TestCase, Client
+# from django_fake_model import models as f
+# from django.db import models
+# # from ..models import ConcertVO, UserVO
+# import json
 # import datetime
 
 
-class FakeConcertVOModel(f.FakeModel):
-    import_href = models.CharField(max_length=200, unique=True)
-    venue = models.CharField(max_length=200)
-    city = models.CharField(max_length=100)
-    date = models.DateTimeField()
-    artist = models.CharField(max_length=100)
-    concert_id = models.CharField(max_length=100)
+# class FakeConcertVOModel(f.FakeModel):
+#     import_href = models.CharField(max_length=200, unique=True)
+#     venue = models.CharField(max_length=200)
+#     city = models.CharField(max_length=100)
+#     date = models.DateTimeField()
+#     artist = models.CharField(max_length=100)
+#     concert_id = models.CharField(max_length=100)
 
 
-class ApiTicketsTests(TestCase):
-    @classmethod
-    def setUp(self):
-        self.client = Client()
+# class ApiTicketsTests(TestCase):
+#     @classmethod
+#     def setUp(self):
+#         self.client = Client()
 
-    def test_get_tickets(self):
-        response = self.client.get("/api/tickets/")
-        content = json.loads(response.content)
-        self.assertEqual(response.status_code, 200)
-        self.assertIn("tickets", content)
+#     def test_get_tickets(self):
+#         response = self.client.get("/api/tickets/")
+#         content = json.loads(response.content)
+#         self.assertEqual(response.status_code, 200)
+#         self.assertIn("tickets", content)
 
     # @FakeConcertVOModel.fake_me
     # def test_post_tickets(self):
