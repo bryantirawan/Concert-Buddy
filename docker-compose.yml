@@ -14,9 +14,6 @@ services:
         HOST_OS: ${OS}
         NODE_ENV: development
         HOST: "0.0.0.0"
-        REACT_APP_API: http://localhost:3000
-        REACT_APP_BUDDY_API: http://localhost:8080
-        REACT_APP_TICKET_API: http://localhost:8090
     database:
       image: postgres:14.2-bullseye
       volumes:
